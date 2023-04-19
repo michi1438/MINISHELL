@@ -6,13 +6,11 @@
 #    By: mguerga <marvin@42lausanne.ch>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/24 20:18:13 by mguerga           #+#    #+#              #
-#    Updated: 2023/04/18 22:24:22 by mguerga          ###   ########.fr        #
+#    Updated: 2023/04/19 15:41:48 by mguerga          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a 
-
-PATH_TO = src/
 
 SRC_MAIN = ft_bzero.c ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 	ft_strlen.c ft_memset.c ft_memcpy.c ft_memmove.c ft_strlcpy.c ft_strlcat.c \
