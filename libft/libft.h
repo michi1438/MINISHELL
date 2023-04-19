@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   src.h                                              :+:      :+:    :+:   */
+/*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/18 22:41:35 by mguerga           #+#    #+#             */
-/*   Updated: 2023/04/19 08:48:41 by mguerga          ###   ########.fr       */
+/*   Created: 2023/04/19 15:43:32 by mguerga           #+#    #+#             */
+/*   Updated: 2023/04/19 15:43:34 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SRC_H
-# define SRC_H
+#ifndef LIBFT_H
+# define LIBFT_H
 
 # include "ft_gnl/get_next_line_bonus.h"
 # include "ft_main/libft.h"
