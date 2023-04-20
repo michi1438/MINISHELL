@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:25:53 by mguerga           #+#    #+#             */
-/*   Updated: 2023/04/20 15:26:20 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/04/20 19:39:46 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # include "libft/src_libft.h"
+# include <signal.h>
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -23,17 +24,21 @@
 
 enum e_gcstatus
 {
-	ADD_NODE,
-	DEL_ALL,
+	ADD,
+	DEL,
 };
 
-//GARBAGE_COLLECTOR
-//
-void	*gc_malloc(size_t size, int status);
-void	add_to_gc(void *ptr, int status);
-
 int		main_pipe(int ac, char *av[], char *env[]);
-void	bs_func(void);
+
+//GARBAGE_COLLECTOR
+void	*gc_malloc(size_t size, int status);
+void	ft_gc(void *ptr, int status);
+
+//SIGNALS
+void	ft_signals(void);
+void	set_act_int(struct sigaction *act_int);
+void	set_act_quit(struct sigaction *act_quit);
+void	re_prompt(int useless);
 
 // MINIPIPE
 typedef struct s_pipex
