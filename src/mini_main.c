@@ -6,24 +6,35 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:26:58 by mguerga           #+#    #+#             */
-/*   Updated: 2023/04/20 15:28:41 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/04/20 20:49:04 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+//void	ft_parse(t_minish *minish)
+//{
+//	ft_token(minish);
+//	ft_preced(minish);
+//	ft_checkpath(minish);
+//}
+
 int	main(int ac, char *av[], char *env[])
 {
-	char	*line;
+	t_minish	minish;
 
-	(void)ac;
-	(void)av;
-	(void)env;
+	(void) av;
+	if (ac != 1)
+		return (1);
+	minish.env = ft_copy_env(env);
+	if (minish.env == NULL)
+		return (1);
 	while (1)
 	{
-		line = readline(">>> ");
-		if (ft_strncmp(line, "exit", ft_strlen(line)) == 0)
-			return (0);
+		minish.line = readline("(ಠ.ಠ)¬ ");
+		add_history(minish.line);
+//		ft_parse(&minish);
+		free(minish.line);
 	}
 	return (0);
 }

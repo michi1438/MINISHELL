@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:25:53 by mguerga           #+#    #+#             */
-/*   Updated: 2023/04/20 15:26:20 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/04/20 20:48:56 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,27 @@
 # include <fcntl.h>
 # include <errno.h>
 
-enum e_gcstatus
+// MAIN
+typedef struct s_minish
 {
-	ADD_NODE,
-	DEL_ALL,
-};
+	char	**env;
+	char	*line;
+}	t_minish;
+
+// UTILS
+char	**ft_copy_env(char *env[]);
 
 //GARBAGE_COLLECTOR
-//
+enum e_gcstatus
+{
+	ADD,
+	DEL,
+};
+
 void	*gc_malloc(size_t size, int status);
 void	add_to_gc(void *ptr, int status);
 
 int		main_pipe(int ac, char *av[], char *env[]);
-void	bs_func(void);
 
 // MINIPIPE
 typedef struct s_pipex
@@ -74,6 +82,5 @@ int		ft_heredoc(t_pipex *ppx);
 void	ft_looppid(t_pipex *ppx, char **env, int idx);
 int		ft_feedppx(t_pipex *ppx, char **av, char **env);
 int		ft_initppx(t_pipex *ppx, int ac, char *av[], char **env);
-// MINIPIPE
 
 #endif
