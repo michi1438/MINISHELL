@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:43:13 by mguerga           #+#    #+#             */
-/*   Updated: 2023/04/20 10:07:27 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/04/20 11:52:57 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 # define MINISHELL_H
 
 # include "src_libft/src_libft.h"
-# include <sys/wait.h>
 # include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <sys/wait.h>
 # include <fcntl.h>
 # include <errno.h>
 
