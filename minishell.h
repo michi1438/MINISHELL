@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/19 15:43:13 by mguerga           #+#    #+#             */
-/*   Updated: 2023/04/20 12:33:27 by lzito            ###   ########.fr       */
+/*   Created: 2023/04/20 15:25:53 by mguerga           #+#    #+#             */
+/*   Updated: 2023/04/20 15:26:20 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,19 @@
 # include <fcntl.h>
 # include <errno.h>
 
+enum e_gcstatus
+{
+	ADD_NODE,
+	DEL_ALL,
+};
+
+//GARBAGE_COLLECTOR
+//
+void	*gc_malloc(size_t size, int status);
+void	add_to_gc(void *ptr, int status);
+
 int		main_pipe(int ac, char *av[], char *env[]);
+void	bs_func(void);
 
 // MINIPIPE
 typedef struct s_pipex

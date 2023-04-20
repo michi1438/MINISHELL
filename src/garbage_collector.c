@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_main.c                                        :+:      :+:    :+:   */
+/*   garbage_collector.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/20 15:26:58 by mguerga           #+#    #+#             */
-/*   Updated: 2023/04/20 15:28:41 by mguerga          ###   ########.fr       */
+/*   Created: 2023/04/20 11:09:32 by mguerga           #+#    #+#             */
+/*   Updated: 2023/04/20 15:15:35 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	main(int ac, char *av[], char *env[])
+void	*gc_malloc(size_t size, int status)
 {
-	char	*line;
+	void	*ptr;
 
-	(void)ac;
-	(void)av;
-	(void)env;
-	while (1)
+	ptr = malloc(size);
+	add_to_gc(ptr, status);
+	return (ptr);
+}
+
+void	add_to_gc(void *ptr, int status)
+{
+	static t_list	*gc_list;
+
+	if (status == ADD_NODE)
+		ft_lstadd_front(&gc_list, ptr);
+	else
 	{
-		line = readline(">>> ");
-		if (ft_strncmp(line, "exit", ft_strlen(line)) == 0)
-			return (0);
+		ft_lstclear(&gc_list, free);
+		exit(0);
 	}
-	return (0);
 }
