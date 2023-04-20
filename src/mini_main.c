@@ -6,13 +6,13 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:56:41 by mguerga           #+#    #+#             */
-/*   Updated: 2023/04/20 12:00:49 by lzito            ###   ########.fr       */
+/*   Updated: 2023/04/20 15:15:19 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	main_minish(int ac, char *av[], char* env)
+int	main(int ac, char *av[], char* env[])
 {
 	(void) ac;
 	(void) av;
@@ -21,14 +21,9 @@ int	main_minish(int ac, char *av[], char* env)
 
 	while (1)
 	{
-		line = returnline("MINISH >>>");
-		if (line == NULL)
-			printf("%s\n", line);
+		line = readline(">>> ");
+		if (ft_strncmp(line, "exit", ft_strlen(line)) == 0)
+			return (0);
 	}
-//	if (ac == 1)
-//	{
-//		write(1, "\n", 1);
-//		return (0);
-//	}
 	return (0);
 }

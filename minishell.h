@@ -6,14 +6,14 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:43:13 by mguerga           #+#    #+#             */
-/*   Updated: 2023/04/20 11:52:57 by lzito            ###   ########.fr       */
+/*   Updated: 2023/04/20 12:33:27 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "src_libft/src_libft.h"
+# include "libft/src_libft.h"
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -21,7 +21,7 @@
 # include <fcntl.h>
 # include <errno.h>
 
-int		main_minish(int ac, char **av);
+int		main_pipe(int ac, char *av[], char *env[]);
 
 // MINIPIPE
 typedef struct s_pipex

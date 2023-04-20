@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 20:19:58 by lzito             #+#    #+#             */
-/*   Updated: 2023/04/20 10:09:11 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/04/20 12:14:50 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	ft_initppx(t_pipex *ppx, int ac, char *av[], char **env)
 	return (0);
 }
 
-int	main(int ac, char *argv[], char *env[])
+int	main_pipe(int ac, char *argv[], char *env[])
 {
 	t_pipex	ppx;
 	int		i;

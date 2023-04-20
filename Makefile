@@ -6,7 +6,7 @@
 #    By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/19 15:35:52 by mguerga           #+#    #+#              #
-#    Updated: 2023/04/20 10:15:10 by mguerga          ###   ########.fr        #
+#    Updated: 2023/04/20 13:10:02 by lzito            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,8 @@ SRC_MINISH = mini_main.c ppx_checks.c ppx_free.c ppx_hd.c ppx_main.c \
 
 AR = ar rcs
 
+RL = $(READLINE)
+
 SOURCES = $(addprefix src/, $(SRC_MINISH))
 
 OBJS = $(SOURCES:c=o)
@@ -28,16 +30,16 @@ OBJS = $(SOURCES:c=o)
 all: $(NAME) 
 
 $(NAME): $(OBJS) 
-	make -C src_libft/
-	$(CC) -Lsrc_libft/ -lft $(OBJS) -o $(NAME)
+	make -C libft/
+	$(CC) -Llibft/ -lft -I. -L$(RL)/lib -lreadline -I$(RL)/include $(OBJS) -o $(NAME)
 
 clean:
 	rm -f $(OBJS) 
-	make clean -C src_libft/
+	make clean -C libft/
 
 fclean: clean
 	rm -f $(NAME)
-	rm -f src_libft/libft.a 
+	rm -f libft/libft.a 
 
 re: fclean all
 
