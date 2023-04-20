@@ -6,7 +6,7 @@
 #    By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/19 15:35:52 by mguerga           #+#    #+#              #
-#    Updated: 2023/04/20 10:15:10 by mguerga          ###   ########.fr        #
+#    Updated: 2023/04/20 12:35:21 by mguerga          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CC = gcc
 CFLAGS = -Werror -Wall -Wextra
 
 SRC_MINISH = mini_main.c ppx_checks.c ppx_free.c ppx_hd.c ppx_main.c \
-			ppx_utils.c
+			ppx_utils.c garbage_collector.c
 
 AR = ar rcs
 

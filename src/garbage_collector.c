@@ -1,37 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_main.c                                        :+:      :+:    :+:   */
+/*   garbage_collector.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/19 15:56:41 by mguerga           #+#    #+#             */
-/*   Updated: 2023/04/20 15:15:32 by mguerga          ###   ########.fr       */
+/*   Created: 2023/04/20 11:09:32 by mguerga           #+#    #+#             */
+/*   Updated: 2023/04/20 15:15:35 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	main(int ac, char **av)
+void	*gc_malloc(size_t size, int status)
 {
-	(void)av;
-	bs_func();
-	if (ac == 1)
-	{
-		write(1, "\n", 1);
-		return (0);
-	}
-	return (0);
+	void	*ptr;
+
+	ptr = malloc(size);
+	add_to_gc(ptr, status);
+	return (ptr);
 }
 
-void	bs_func(void)
+void	add_to_gc(void *ptr, int status)
 {
-	char	*test1 = NULL;
-	char	*test2 = NULL;
+	static t_list	*gc_list;
 
-	test1 = malloc(sizeof(char) * 10);
-	add_to_gc(test1, ADD_NODE);
-	test2 = gc_malloc(sizeof(char) * 10, ADD_NODE);
-	printf("   %p\n", test1);
-	printf("   %p\n", test2);
+	if (status == ADD_NODE)
+		ft_lstadd_front(&gc_list, ptr);
+	else
+	{
+		ft_lstclear(&gc_list, free);
+		exit(0);
+	}
 }
