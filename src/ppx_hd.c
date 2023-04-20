@@ -6,11 +6,10 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 20:25:58 by lzito             #+#    #+#             */
-/*   Updated: 2023/04/19 20:47:00 by lzito            ###   ########.fr       */
+/*   Updated: 2023/04/20 10:09:00 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
 #include "../minishell.h"
 
 void	ft_checkheredoc(char **av, t_pipex *ppx)

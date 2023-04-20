@@ -6,18 +6,20 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:43:13 by mguerga           #+#    #+#             */
-/*   Updated: 2023/04/19 20:47:19 by lzito            ###   ########.fr       */
+/*   Updated: 2023/04/20 10:07:27 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "libft/libft.h"
+# include "src_libft/src_libft.h"
 # include <sys/wait.h>
 # include <stdio.h>
 # include <fcntl.h>
 # include <errno.h>
+
+int		main_minish(int ac, char **av);
 
 // MINIPIPE
 typedef struct s_pipex

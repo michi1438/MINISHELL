@@ -6,7 +6,7 @@
 #    By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/19 15:35:52 by mguerga           #+#    #+#              #
-#    Updated: 2023/04/19 20:34:10 by lzito            ###   ########.fr        #
+#    Updated: 2023/04/20 10:15:10 by mguerga          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,16 +28,16 @@ OBJS = $(SOURCES:c=o)
 all: $(NAME) 
 
 $(NAME): $(OBJS) 
-	make -C libft/
-	$(CC) -lft -L./libft $(OBJS) -o $(NAME)
+	make -C src_libft/
+	$(CC) -Lsrc_libft/ -lft $(OBJS) -o $(NAME)
 
 clean:
 	rm -f $(OBJS) 
-	make clean -C libft/
+	make clean -C src_libft/
 
 fclean: clean
 	rm -f $(NAME)
-	rm -f libft/libft.a 
+	rm -f src_libft/libft.a 
 
 re: fclean all
 

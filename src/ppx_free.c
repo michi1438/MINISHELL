@@ -6,11 +6,10 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 20:23:44 by lzito             #+#    #+#             */
-/*   Updated: 2023/04/19 20:47:03 by lzito            ###   ########.fr       */
+/*   Updated: 2023/04/20 10:08:44 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
 #include "../minishell.h"
 
 void	ft_freeall(t_pipex *ppx)

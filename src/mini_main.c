@@ -6,14 +6,13 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 15:56:41 by mguerga           #+#    #+#             */
-/*   Updated: 2023/04/19 20:47:11 by lzito            ###   ########.fr       */
+/*   Updated: 2023/04/20 10:08:07 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-#include "../libft/libft.h"
 
-int	main(int ac, char **av)
+int	main_minish(int ac, char **av)
 {
 	(void)av;
 	if (ac == 1)
@@ -21,4 +20,5 @@ int	main(int ac, char **av)
 		write(1, "\n", 1);
 		return (0);
 	}
+	return (0);
 }

@@ -6,37 +6,11 @@
 /*   By: xbeheydt <xbeheydt@42lausanne.ch>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 19:05:04 by xbeheydt          #+#    #+#             */
-/*   Updated: 2023/04/18 22:47:23 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/04/20 10:05:37 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
-
-char	*ft_strjoin(const char *s1, const char *s2)
-{
-	char	*ptr;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 0;
-	ptr = ft_calloc(sizeof(char), (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (ptr == NULL)
-		return (NULL);
-	while (s1[i] != '\0')
-	{
-		ptr[i] = s1[i];
-		i++;
-	}
-	while (s2[j] != '\0')
-	{
-		ptr[i] = s2[j];
-		i++;
-		j++;
-	}
-	ptr[i] = '\0';
-	return (ptr);
-}
 
 char	*freeandreplace(char *oldstr, char *stradd, int ind)
 {

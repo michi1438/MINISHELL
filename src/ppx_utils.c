@@ -6,11 +6,10 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 20:27:24 by lzito             #+#    #+#             */
-/*   Updated: 2023/04/19 20:46:42 by lzito            ###   ########.fr       */
+/*   Updated: 2023/04/20 10:09:20 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
 #include "../minishell.h"
 
 int	ft_error(char *error, int errn)
