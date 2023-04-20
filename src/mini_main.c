@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/04/24 12:04:38 by mguerga          ###   ########.fr       */
+/*   Created: 2023/04/25 12:15:19 by lzito             #+#    #+#             */
+/*   Updated: 2023/04/25 12:15:22 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	prompter(void)
 		if (minish.line == NULL)
 			exit(0);
 		minish.line = readline("(ಠ.ಠ)¬ ");
+		if (minish.line == NULL)
+			return (0);
 		add_history(minish.line);
 //		ft_parse(minish);
 		free(minish.line);
