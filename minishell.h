@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/20 15:25:53 by mguerga           #+#    #+#             */
-/*   Updated: 2023/04/20 20:48:56 by lzito            ###   ########.fr       */
+/*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
+/*   Updated: 2023/04/20 21:01:17 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINISHELL_H
 
 # include "libft/src_libft.h"
+# include <signal.h>
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -38,10 +39,15 @@ enum e_gcstatus
 	DEL,
 };
 
+//GARBAGE_COLLECTOR
 void	*gc_malloc(size_t size, int status);
-void	add_to_gc(void *ptr, int status);
+void	ft_gc(void *ptr, int status);
 
-int		main_pipe(int ac, char *av[], char *env[]);
+//SIGNALS
+void	ft_signals(void);
+void	set_act_int(struct sigaction *act_int);
+void	set_act_quit(struct sigaction *act_quit);
+void	re_prompt(int useless);
 
 // MINIPIPE
 typedef struct s_pipex
@@ -79,6 +85,7 @@ void	ft_checkheredoc(char **av, t_pipex *ppx);
 int		ft_heredoc(t_pipex *ppx);
 
 //ppx_main.c
+int		main_pipe(int ac, char *av[], char *env[]);
 void	ft_looppid(t_pipex *ppx, char **env, int idx);
 int		ft_feedppx(t_pipex *ppx, char **av, char **env);
 int		ft_initppx(t_pipex *ppx, int ac, char *av[], char **env);

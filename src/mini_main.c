@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/20 15:26:58 by mguerga           #+#    #+#             */
-/*   Updated: 2023/04/20 20:49:04 by lzito            ###   ########.fr       */
+/*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
+/*   Updated: 2023/04/20 20:57:59 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	main(int ac, char *av[], char *env[])
 	t_minish	minish;
 
 	(void) av;
+	ft_signals();
 	if (ac != 1)
 		return (1);
 	minish.env = ft_copy_env(env);
