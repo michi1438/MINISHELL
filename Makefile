@@ -6,7 +6,7 @@
 #    By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/20 20:55:12 by mguerga           #+#    #+#              #
-#    Updated: 2023/04/20 20:56:21 by mguerga          ###   ########.fr        #
+#    Updated: 2023/04/23 11:00:19 by mguerga          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS) 
 	make -C libft/
-	$(CC) -Llibft/ -lft -I. -L$(RL)/lib -lreadline -I$(RL)/include $(OBJS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -I. -L$(RL)/lib -lreadline -I$(RL)/include -Llibft/ -lft -o $(NAME)
 
 clean:
 	rm -f $(OBJS) 
