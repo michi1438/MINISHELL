@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/04/20 20:57:59 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/04/25 14:12:21 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	main(int ac, char *av[], char *env[])
 	while (1)
 	{
 		minish.line = readline("(ಠ.ಠ)¬ ");
+		if (minish.line == NULL)
+			return(0);
 		add_history(minish.line);
 //		ft_parse(&minish);
 		free(minish.line);

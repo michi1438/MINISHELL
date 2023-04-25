@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:46:27 by mguerga           #+#    #+#             */
-/*   Updated: 2023/04/24 12:31:52 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/04/25 14:09:15 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,5 @@ void	set_act_quit(struct sigaction *act_quit)
 
 void	re_prompt(int useless)
 {
-	write(0, "\n", 1);
-	prompter();
 	(void)useless;
 }
