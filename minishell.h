@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/04/20 21:01:17 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/04/24 12:03:10 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <sys/wait.h>
 # include <fcntl.h>
 # include <errno.h>
+# include <termios.h> 
 
 // MAIN
 typedef struct s_minish
@@ -28,6 +29,8 @@ typedef struct s_minish
 	char	**env;
 	char	*line;
 }	t_minish;
+
+void	prompter(void);
 
 // UTILS
 char	**ft_copy_env(char *env[]);

@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:46:27 by mguerga           #+#    #+#             */
-/*   Updated: 2023/04/20 20:48:49 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/04/24 12:31:52 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ void	ft_signals(void)
 void	set_act_int(struct sigaction *act_int)
 {
 	sigemptyset(&act_int->sa_mask);
-	act_int->sa_flags = 0;
+	act_int->sa_flags = SA_RESTART;
 	act_int->sa_handler = re_prompt;
+	sigaddset(&act_int->sa_mask, SIGINT);
 	sigaction(SIGINT, act_int, NULL);
 }
 
@@ -41,14 +42,7 @@ void	set_act_quit(struct sigaction *act_quit)
 
 void	re_prompt(int useless)
 {
-	int		i;
-
+	write(0, "\n", 1);
+	prompter();
 	(void)useless;
-	i = 0;
-	while (i < 1000)
-	{
-		if (isatty(i) == 1)
-			printf("fd(%d)term name == %s\n", i, ttyname(i));
-		i++;
-	}		
 }
