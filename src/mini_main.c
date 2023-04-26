@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/04/26 15:56:36 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/04/26 18:38:47 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	ft_token(t_minish *minish)
 	while (minish->line[i] != '\0')
 	{
 		i = is_tokenable(minish, i);
-		i = is_not_tokenable(minish, i);
+//		i = is_not_tokenable(minish, i);
 		if (i == -1)
 			return (-1);
 		i++;
@@ -60,6 +60,12 @@ int	ft_token(t_minish *minish)
 	return (1);
 }
 
+/*
+int	is_not_tokenable(t_minish *minish, int i)
+{
+	while (tok[j] != NULL)
+		if (&minish->line[i]
+*/
 int	is_tokenable(t_minish *minish, int i)
 {
 	char	**tok;
