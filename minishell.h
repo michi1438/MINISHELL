@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/04/27 17:04:13 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/04/27 20:40:40 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,17 @@ int		not_token_size(t_minish *minish, int i, const char *tok[10]);
 char	**ft_copy_env(char *env[]);
 
 //GARBAGE_COLLECTOR
+typedef struct s_gc
+{
+	int	flush;
+}	t_gc;
+
 enum e_gcstatus
 {
 	ADD,
 	DEL,
 };
 
-//GARBAGE_COLLECTOR
 void	*gc_malloc(size_t size, int status);
 void	ft_gc(void *ptr, int status);
 

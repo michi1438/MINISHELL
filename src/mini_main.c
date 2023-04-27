@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/04/27 17:15:39 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/04/27 20:44:32 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ int	ft_token(t_minish *minish)
 	i = 0;
 	while (minish->line[i] != '\0')
 	{
-		i = is_not_tokenable(minish, i, tok);
 		i = is_tokenable(minish, i, tok);
+		i++;
+		i = is_not_tokenable(minish, i, tok);
 		if (i == -1)
 			return (-1);
-		i++;
 	}
 	return (1);
 }
