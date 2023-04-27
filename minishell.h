@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/04/27 20:40:40 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/04/27 20:58:07 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,11 @@ enum e_gcstatus
 	DEL,
 };
 
-void	*gc_malloc(size_t size, int status);
-void	ft_gc(void *ptr, int status);
+void	*gc_malloc(size_t size);
+void	gc_free(void *ptr);
+void	ft_gc(void *garb, int status);
+void	gc_lstdelone(t_list *lst, void (*del)(void*));
+void	gc_lstclear(t_list **lst, void (*del)(void*));
 
 //SIGNALS
 void	ft_signals(void);
