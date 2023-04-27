@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/04/24 12:03:10 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/04/27 10:37:33 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,20 @@
 typedef struct s_minish
 {
 	char	**env;
+	int		n_cmd;
 	char	*line;
 }	t_minish;
 
-void	prompter(void);
+// TOlKiEN
+int		ft_token(t_minish *minish);
+char	**init_token(void);
+int		search_quotes(char *line, int type, int i);
+int		deal_with_pipes(t_minish *minish, int i);
+int		deal_with_redir(char *line, int type, int i);
+int		deal_with_other(t_minish *minish, int type, int i);
+int		is_tokenable(t_minish *minish, int i, char **tok);
+int		is_not_tokenable(t_minish *minish, int i, char **tok);
+int		ft_parse(t_minish *minish);
 
 // UTILS
 char	**ft_copy_env(char *env[]);

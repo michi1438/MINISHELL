@@ -6,7 +6,7 @@
 #    By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/20 20:55:12 by mguerga           #+#    #+#              #
-#    Updated: 2023/04/23 11:00:19 by mguerga          ###   ########.fr        #
+#    Updated: 2023/04/26 20:22:50 by mguerga          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = minishell
 
 CC = gcc
 
-CFLAGS = -Werror -Wall -Wextra
+CFLAGS = -Werror -Wall -Wextra -I$(RL)/include -I.
 
 SRC_MINISH = mini_main.c ppx_checks.c ppx_free.c ppx_hd.c ppx_main.c \
 			ppx_utils.c mini_gc.c mini_sig.c mini_utils.c
@@ -31,7 +31,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS) 
 	make -C libft/
-	$(CC) $(CFLAGS) $(OBJS) -I. -L$(RL)/lib -lreadline -I$(RL)/include -Llibft/ -lft -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) -L$(RL)/lib -lreadline -lhistory -Llibft/ -lft -o $(NAME)
 
 clean:
 	rm -f $(OBJS) 
