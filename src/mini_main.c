@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/04/26 18:38:47 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/04/27 11:16:00 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,32 +46,57 @@ int	main(int ac, char *av[], char *env[])
 
 int	ft_token(t_minish *minish)
 {
-	int		i;
+	int			i;
+	const char	*tok[] = {
+		"'",
+	};
 
+	tok = ft_split("\';\";|;>>;<<;>;<;$; ", ';');
 	i = 0;
 	while (minish->line[i] != '\0')
 	{
-		i = is_tokenable(minish, i);
-//		i = is_not_tokenable(minish, i);
+		i = is_tokenable(minish, i, tok);
+		i++;
+		i = is_not_tokenable(minish, i, tok);
 		if (i == -1)
 			return (-1);
-		i++;
 	}
 	return (1);
 }
 
-/*
-int	is_not_tokenable(t_minish *minish, int i)
+int	is_not_tokenable(t_minish *minish, int i, char **tok)
 {
-	while (tok[j] != NULL)
-		if (&minish->line[i]
-*/
-int	is_tokenable(t_minish *minish, int i)
-{
-	char	**tok;
+	int		size;
 	int		j;
 
-	tok = ft_split("\';\";|;>>;<<;>;<;$; ", ';');
+	size = 0;
+	while (minish->line[i] != '\0')
+	{
+		j = 0;
+		while (tok[j] != NULL)
+		{
+			if (ft_strncmp(&minish->line[i], tok[j], ft_strlen(tok[j])) == 0)
+			{
+				printf("size =%d\n", size);
+				return (i);
+			}
+			else
+				j++;
+		}
+		if (tok[j] == NULL)
+		{
+			i++;
+			size++;
+		}
+	}
+	printf("size2 =%d\n", size);
+	return (i);
+}	
+
+int	is_tokenable(t_minish *minish, int i, char **tok)
+{
+	int		j;
+
 	j = 0;
 	while (tok[j] != NULL)
 	{
