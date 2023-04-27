@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/04/27 11:16:00 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/04/27 17:15:39 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,23 +48,34 @@ int	ft_token(t_minish *minish)
 {
 	int			i;
 	const char	*tok[] = {
-		"'",
+		"\'", "\"", "|", ">>", "<<", ">", "<", "$", NULL,
 	};
 
-	tok = ft_split("\';\";|;>>;<<;>;<;$; ", ';');
 	i = 0;
 	while (minish->line[i] != '\0')
 	{
-		i = is_tokenable(minish, i, tok);
-		i++;
 		i = is_not_tokenable(minish, i, tok);
+		i = is_tokenable(minish, i, tok);
 		if (i == -1)
 			return (-1);
+		i++;
 	}
 	return (1);
 }
 
-int	is_not_tokenable(t_minish *minish, int i, char **tok)
+int	is_not_tokenable(t_minish *minish, int i, const char *tok[10])
+{
+	int	size;
+
+	size = not_token_size(minish, i, tok);
+	if (size > 0)
+	{
+		printf("%s\n", ft_substr(&minish->line[i], 0, size));
+	}
+	return (i + size);
+}	
+
+int	not_token_size(t_minish *minish, int i, const char *tok[10])
 {
 	int		size;
 	int		j;
@@ -77,23 +88,21 @@ int	is_not_tokenable(t_minish *minish, int i, char **tok)
 		{
 			if (ft_strncmp(&minish->line[i], tok[j], ft_strlen(tok[j])) == 0)
 			{
-				printf("size =%d\n", size);
-				return (i);
+				return (size);
 			}
 			else
 				j++;
 		}
-		if (tok[j] == NULL)
+		if (tok[j] == NULL || j == 8)
 		{
-			i++;
 			size++;
+			i++;
 		}
 	}
-	printf("size2 =%d\n", size);
-	return (i);
-}	
+	return (size);
+}
 
-int	is_tokenable(t_minish *minish, int i, char **tok)
+int	is_tokenable(t_minish *minish, int i, const char *tok[10])
 {
 	int		j;
 
@@ -159,7 +168,5 @@ int	deal_with_other(t_minish *minish, int type, int i)
 	(void)minish;
 	if (type == 7)
 		printf("$\n");
-	else
-		printf("space\n");
 	return (i);
 }
