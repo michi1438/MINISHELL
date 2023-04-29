@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/04/27 21:15:01 by lzito            ###   ########.fr       */
+/*   Updated: 2023/04/29 11:50:38 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,19 @@ int	main(int ac, char *av[], char *env[])
 	while (1)
 	{
 		minish.line = readline("(ಠ.ಠ)¬ ");
+		ft_gc(minish.line, ADD);
 		if (minish.line == NULL)
+		{
+			ft_gc(NULL, DEL);
 			return (0);
+		}
 		if (minish.line[0] != '\0')
 			add_history(minish.line);
 		if (ft_parse(&minish) == -1)
+		{
+			ft_gc(NULL, DEL);
 			printf("unexpected token ERROR\n");
-		free(minish.line);
+		}
 	}
 	return (0);
 }
@@ -63,19 +69,21 @@ int	ft_token(t_minish *minish)
 	return (1);
 }
 
-int	is_not_tokenable(t_minish *minish, int i, const char *tok[10])
+int	is_not_tokenable(t_minish *minish, int i, const char *tok[])
 {
-	int	size;
+	int		size;
+	char	*str;
 
 	size = not_token_size(minish, i, tok);
 	if (size > 0)
 	{
-		printf("%s\n", ft_substr(&minish->line[i], 0, size));
+		str = ft_substr(&minish->line[i], 0, size);
+		printf("%s\n", ft_strtrim(str, " "));
 	}
 	return (i + size);
 }	
 
-int	not_token_size(t_minish *minish, int i, const char *tok[10])
+int	not_token_size(t_minish *minish, int i, const char *tok[])
 {
 	int		size;
 	int		j;
@@ -102,7 +110,7 @@ int	not_token_size(t_minish *minish, int i, const char *tok[10])
 	return (size);
 }
 
-int	is_tokenable(t_minish *minish, int i, const char *tok[10])
+int	is_tokenable(t_minish *minish, int i, const char *tok[])
 {
 	int		j;
 
@@ -118,7 +126,7 @@ int	is_tokenable(t_minish *minish, int i, const char *tok[10])
 			else if (j <= 6 && j >= 3)
 				return (deal_with_redir(minish->line, j, i));
 			else
-				return (deal_with_other(minish, j, i));
+				return (deal_with_other(minish->line, j, i));
 		}
 		j++;
 	}
@@ -163,10 +171,14 @@ int	deal_with_redir(char *line, int type, int i)
 	return (i);
 }
 
-int	deal_with_other(t_minish *minish, int type, int i)
+int	deal_with_other(char *line, int type, int i)
 {
-	(void)minish;
-	if (type == 7)
-		printf("$\n");
+	int		j;
+
+	(void)type;
+	j = i;
+	while (line[i] != ' ' && line[i] != '\0')
+		i++;
+	printf("TO EXPAND :%s\n", ft_substr(&line[j], 0, (i + 1) - j));
 	return (i);
 }

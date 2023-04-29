@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/04/27 20:58:07 by lzito            ###   ########.fr       */
+/*   Updated: 2023/04/29 11:44:52 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ char	**init_token(void);
 int		search_quotes(char *line, int type, int i);
 int		deal_with_pipes(t_minish *minish, int i);
 int		deal_with_redir(char *line, int type, int i);
-int		deal_with_other(t_minish *minish, int type, int i);
-int		is_tokenable(t_minish *minish, int i, const char *tok[10]);
-int		is_not_tokenable(t_minish *minish, int i, const char *tok[10]);
+int		is_tokenable(t_minish *minish, int i, const char *tok[]);
+int		is_not_tokenable(t_minish *minish, int i, const char *tok[]);
 int		ft_parse(t_minish *minish);
-int		not_token_size(t_minish *minish, int i, const char *tok[10]);
+int		not_token_size(t_minish *minish, int i, const char *tok[]);
+int		deal_with_other(char *line, int type, int i);
 
 // UTILS
 char	**ft_copy_env(char *env[]);
