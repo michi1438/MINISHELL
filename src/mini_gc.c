@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 11:09:32 by mguerga           #+#    #+#             */
-/*   Updated: 2023/04/27 20:58:10 by lzito            ###   ########.fr       */
+/*   Updated: 2023/04/30 17:08:14 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ void	*gc_malloc(size_t size)
 	return (garb + sizeof(t_gc));
 }
 
-void gc_free(void *ptr)
+void	gc_free(void *ptr)
 {
-	t_gc *gc = ptr - sizeof(t_gc);
+	t_gc	*gc;
 
+	gc = ptr - sizeof(t_gc);
 	gc->flush = 1;
 }
 
@@ -41,7 +42,7 @@ void	ft_gc(void *garb, int status)
 
 void	gc_lstdelone(t_list *lst, void (*del)(void*))
 {
-	t_gc *node;
+	t_gc	*node;
 
 	node = lst->content;
 	if (lst && del)
