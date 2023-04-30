@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 16:58:36 by mguerga           #+#    #+#             */
-/*   Updated: 2023/04/30 16:58:39 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/04/30 20:22:20 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,27 @@ int	is_tokenable(t_minish *minish, int i, const char *tok[])
 		if (ft_strncmp(&minish->line[i], tok[j], ft_strlen(tok[j])) == 0)
 		{
 			if (j == 0 || j == 1)
-				return (search_quotes(minish->line, j, i));
+				return (search_quotes(minish, j, i));
 			else if (j == 2)
 				return (deal_with_pipes(minish, i));
 			else if (j <= 6 && j >= 3)
-				return (deal_with_redir(minish->line, j, i));
+				return (deal_with_redir(minish, j, i));
 			else
-				return (deal_with_other(minish->line, j, i));
+				return (deal_with_other(minish, j, i));
 		}
 		j++;
 	}
 	return (i);
 }
 
-int	search_quotes(char *line, int type, int i)
+int	search_quotes(t_minish *minish, int type, int i)
 {
 	int		j;
 	char	c;
+	char	*line;
+	char	*lst_line;
 
+	line = minish->line;
 	j = i;
 	c = '"';
 	if (type == 0)
@@ -51,36 +54,48 @@ int	search_quotes(char *line, int type, int i)
 			return (-1);
 		i++;
 	}
-	printf("%s\n", ft_substr(&line[j], 0, (i + 1) - j));
+	lst_line = ft_substr(&line[j], 0, (i + 1) - j);
+	ft_lstadd_back(minish->lst_line, ft_lstnew(lst_line));
 	return (i);
 }
 
 int	deal_with_pipes(t_minish *minish, int i)
 {
+	char	*lst_line;
+
+	lst_line = "|";
 	minish->n_cmd++;
-	printf("|\n");
+	ft_lstadd_back(minish->lst_line, ft_lstnew(lst_line));
 	return (i);
 }
 
-int	deal_with_redir(char *line, int type, int i)
+int	deal_with_redir(t_minish *minish, int type, int i)
 {
-	int	j;
+	int		j;
+	char	*lst_line;
+	char	*line;
 
+	line = minish->line;
 	j = i;
 	if (type < 5)
 		i++;
-	printf("%s\n", ft_substr(&line[j], 0, (i + 1) - j));
+	lst_line = ft_substr(&line[j], 0, (i + 1) - j);
+	ft_lstadd_back(minish->lst_line, ft_lstnew(lst_line));
 	return (i);
 }
 
-int	deal_with_other(char *line, int type, int i)
+int	deal_with_other(t_minish *minish, int type, int i)
 {
 	int		j;
+	char	*line;
+	char	*lst_line;
 
+	line = minish->line;
 	(void)type;
 	j = i;
 	while (line[i] != ' ' && line[i] != '\0')
 		i++;
-	printf("TO EXPAND :%s\n", ft_substr(&line[j], 0, (i + 1) - j));
+	lst_line = ft_substr(&line[j], 0, (i + 1) - j);
+	ft_lstadd_back(minish->lst_line, ft_lstnew(lst_line));
 	return (i);
 }

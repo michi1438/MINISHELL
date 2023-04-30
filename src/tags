@@ -34,9 +34,9 @@
 !_TAG_ROLE_DESCRIPTION!C!header	local	/local header/
 !_TAG_ROLE_DESCRIPTION!C!header	system	/system header/
 !_TAG_ROLE_DESCRIPTION!C!macro	undef	/undefined/
-deal_with_other	mini_tokenable.c	/^int	deal_with_other(char *line, int type, int i)$/;"	f	typeref:typename:int
+deal_with_other	mini_tokenable.c	/^int	deal_with_other(t_minish *minish, int type, int i)$/;"	f	typeref:typename:int
 deal_with_pipes	mini_tokenable.c	/^int	deal_with_pipes(t_minish *minish, int i)$/;"	f	typeref:typename:int
-deal_with_redir	mini_tokenable.c	/^int	deal_with_redir(char *line, int type, int i)$/;"	f	typeref:typename:int
+deal_with_redir	mini_tokenable.c	/^int	deal_with_redir(t_minish *minish, int type, int i)$/;"	f	typeref:typename:int
 ft_checkenv	ppx_checks.c	/^char	**ft_checkenv(char *env[])$/;"	f	typeref:typename:char **
 ft_checkexe	ppx_checks.c	/^char	*ft_checkexe(char **paths, char *cmd)$/;"	f	typeref:typename:char *
 ft_checkheredoc	ppx_hd.c	/^void	ft_checkheredoc(char **av, t_pipex *ppx)$/;"	f	typeref:typename:void
@@ -65,7 +65,8 @@ is_tokenable	mini_tokenable.c	/^int	is_tokenable(t_minish *minish, int i, const 
 main	mini_main.c	/^int	main(int ac, char *av[], char *env[])$/;"	f	typeref:typename:int
 main_pipe	ppx_main.c	/^int	main_pipe(int ac, char *argv[], char *env[])$/;"	f	typeref:typename:int
 not_token_size	mini_not_tokenable.c	/^int	not_token_size(t_minish *minish, int i, const char *tok[])$/;"	f	typeref:typename:int
+print_lst_line	mini_main.c	/^void	print_lst_line(t_minish minish)$/;"	f	typeref:typename:void
 re_prompt	mini_sig.c	/^void	re_prompt(int useless)$/;"	f	typeref:typename:void
-search_quotes	mini_tokenable.c	/^int	search_quotes(char *line, int type, int i)$/;"	f	typeref:typename:int
+search_quotes	mini_tokenable.c	/^int	search_quotes(t_minish *minish, int type, int i)$/;"	f	typeref:typename:int
 set_act_int	mini_sig.c	/^void	set_act_int(struct sigaction *act_int)$/;"	f	typeref:typename:void
 set_act_quit	mini_sig.c	/^void	set_act_quit(struct sigaction *act_quit)$/;"	f	typeref:typename:void

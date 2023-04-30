@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:46:27 by mguerga           #+#    #+#             */
-/*   Updated: 2023/04/27 20:59:15 by lzito            ###   ########.fr       */
+/*   Updated: 2023/04/30 21:04:44 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	re_prompt(int useless)
 {
 	write(0, "\n", 1);
 	rl_on_new_line();
-	rl_clear_history();
+	rl_replace_line("", 0);
 	rl_redisplay();
 	(void)useless;
 }

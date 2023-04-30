@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 16:57:22 by mguerga           #+#    #+#             */
-/*   Updated: 2023/04/30 16:58:07 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/04/30 21:07:05 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	is_not_tokenable(t_minish *minish, int i, const char *tok[])
 	if (size > 0)
 	{
 		str = ft_substr(&minish->line[i], 0, size);
-		printf("%s\n", ft_strtrim(str, " "));
+		ft_lstadd_back(minish->lst_line, ft_lstnew(ft_strtrim(str, " ")));
 	}
 	return (i + size);
 }	
