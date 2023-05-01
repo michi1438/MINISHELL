@@ -60,6 +60,7 @@ gc_free	mini_gc.c	/^void	gc_free(void *ptr)$/;"	f	typeref:typename:void
 gc_lstclear	mini_gc.c	/^void	gc_lstclear(t_list **lst, void (*del)(void*))$/;"	f	typeref:typename:void
 gc_lstdelone	mini_gc.c	/^void	gc_lstdelone(t_list *lst, void (*del)(void*))$/;"	f	typeref:typename:void
 gc_malloc	mini_gc.c	/^void	*gc_malloc(size_t size)$/;"	f	typeref:typename:void *
+is_all_space	mini_not_tokenable.c	/^int	is_all_space(char *str)$/;"	f	typeref:typename:int
 is_not_tokenable	mini_not_tokenable.c	/^int	is_not_tokenable(t_minish *minish, int i, const char *tok[])$/;"	f	typeref:typename:int
 is_tokenable	mini_tokenable.c	/^int	is_tokenable(t_minish *minish, int i, const char *tok[])$/;"	f	typeref:typename:int
 main	mini_main.c	/^int	main(int ac, char *av[], char *env[])$/;"	f	typeref:typename:int

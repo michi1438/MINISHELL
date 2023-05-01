@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/04/30 20:29:01 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/01 11:02:04 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int		is_tokenable(t_minish *minish, int i, const char *tok[]);
 int		is_not_tokenable(t_minish *minish, int i, const char *tok[]);
 int		not_token_size(t_minish *minish, int i, const char *tok[]);
 int		deal_with_other(t_minish *minish, int type, int i);
+int		is_all_space(char *str);
 
 // UTILS
 char	**ft_copy_env(char *env[]);
