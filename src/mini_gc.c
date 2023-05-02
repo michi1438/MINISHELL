@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 11:09:32 by mguerga           #+#    #+#             */
-/*   Updated: 2023/04/30 17:08:14 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/02 15:02:59 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,22 @@ void	gc_free(void *ptr)
 	gc->flush = 1;
 }
 
-void	ft_gc(void *garb, int status)
+void	*ft_gc(void *garb, int status)
 {
 	static t_list	*gc_list;
+	void			*temp;
 
 	if (status == ADD)
 		ft_lstadd_front(&gc_list, ft_lstnew(garb));
+	else if (status == EXT)
+	{
+		temp = gc_malloc(sizeof(garb));
+		free(garb);
+		return (temp);
+	}
 	else
 		gc_lstclear(&gc_list, free);
+	return (NULL);	
 }
 
 void	gc_lstdelone(t_list *lst, void (*del)(void*))

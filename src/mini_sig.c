@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:46:27 by mguerga           #+#    #+#             */
-/*   Updated: 2023/04/30 21:04:44 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/02 14:37:00 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ void	ft_signals(void)
 	struct sigaction	*act_int;
 	struct sigaction	*act_quit;
 
-	act_int = gc_malloc(sizeof(sigaction));
-	act_quit = gc_malloc(sizeof(sigaction));
+	act_int = malloc(sizeof(sigaction));
+	ft_gc(act_int, EXT);
+	act_quit = malloc(sizeof(sigaction));
+	ft_gc(act_quit, EXT);
 	set_act_int(act_int);
 	set_act_quit(act_quit);
 }

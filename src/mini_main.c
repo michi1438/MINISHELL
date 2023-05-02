@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/04/30 21:06:25 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/02 14:40:36 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	ft_token(t_minish *minish)
 		"\'", "\"", "|", ">>", "<<", ">", "<", "$", NULL,
 	};
 
-	minish->lst_line = malloc(sizeof(t_list));
+	minish->lst_line = gc_malloc(sizeof(t_list));
 	*minish->lst_line = NULL;
 	i = 0;
 	while (minish->line[i] != '\0')
