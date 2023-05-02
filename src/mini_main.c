@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/02 14:40:36 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/02 19:49:04 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,21 @@ int	main(int ac, char *av[], char *env[])
 	ft_signals();
 	if (ac != 1)
 		return (1);
+	minish.lst_line = NULL;
 	minish.env = ft_copy_env(env);
 	if (minish.env == NULL)
 		return (1);
 	while (1)
 	{
 		minish.line = readline("(ಠ.ಠ)¬ ");
-		ft_gc(minish.line, ADD);
 		if (minish.line == NULL)
-		{
-			ft_gc(NULL, DEL);
 			return (0);
-		}
 		if (minish.line[0] != '\0')
 			add_history(minish.line);
 		if (ft_token(&minish) == -1)
 			printf("unexpected token ERROR\n");
 		print_lst_line(minish);
+		ft_lstclear(&minish.lst_line, free);
 	}
 	return (0);
 }
@@ -48,8 +46,6 @@ int	ft_token(t_minish *minish)
 		"\'", "\"", "|", ">>", "<<", ">", "<", "$", NULL,
 	};
 
-	minish->lst_line = gc_malloc(sizeof(t_list));
-	*minish->lst_line = NULL;
 	i = 0;
 	while (minish->line[i] != '\0')
 	{
@@ -57,16 +53,17 @@ int	ft_token(t_minish *minish)
 		i = is_tokenable(minish, i, tok);
 		if (i == -1)
 			return (-1);
-		i++;
+		if (minish->line[i] != '\0')
+			i++;
 	}
-	return (1);
+	return (0);
 }
 
 void	print_lst_line(t_minish minish)
 {
 	t_list	*lst;
 
-	lst = *minish.lst_line;
+	lst = minish.lst_line;
 	while (lst != NULL)
 	{
 		printf("%s\n", (char *)lst->content);

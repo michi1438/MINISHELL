@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 11:09:32 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/02 15:02:59 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/02 17:14:23 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	*ft_gc(void *garb, int status)
 	else if (status == EXT)
 	{
 		temp = gc_malloc(sizeof(garb));
+		ft_memcpy(temp, garb, sizeof(garb));
 		free(garb);
 		return (temp);
 	}

@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 16:58:36 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/02 14:56:29 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/02 19:46:30 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,21 @@ int	search_quotes(t_minish *minish, int type, int i)
 		i++;
 	}
 	lst_line = ft_substr(&line[j], 0, (i + 1) - j);
-	ft_lstadd_back(minish->lst_line, ft_lstnew(lst_line));
+	ft_lstadd_back(&minish->lst_line, ft_lstnew(lst_line));
 	return (i);
 }
 
 int	deal_with_pipes(t_minish *minish, int i)
 {
+	int		j;
 	char	*lst_line;
+	char	*line;
 
-	lst_line = "|";
+	line = minish->line;
+	j = i;
+	lst_line = ft_substr(&line[j], 0, (i + 1) - j);
 	minish->n_cmd++;
-	ft_lstadd_back(minish->lst_line, ft_lstnew(lst_line));
+	ft_lstadd_back(&minish->lst_line, ft_lstnew(lst_line));
 	return (i);
 }
 
@@ -80,7 +84,7 @@ int	deal_with_redir(t_minish *minish, int type, int i)
 	if (type < 5)
 		i++;
 	lst_line = ft_substr(&line[j], 0, (i + 1) - j);
-	ft_lstadd_back(minish->lst_line, ft_lstnew(lst_line));
+	ft_lstadd_back(&minish->lst_line, ft_lstnew(lst_line));
 	return (i);
 }
 
@@ -96,6 +100,6 @@ int	deal_with_other(t_minish *minish, int type, int i)
 	while (line[i] != ' ' && line[i] != '\0')
 		i++;
 	lst_line = ft_substr(&line[j], 0, (i + 1) - j);
-	ft_lstadd_back(minish->lst_line, ft_lstnew(lst_line));
+	ft_lstadd_back(&minish->lst_line, ft_lstnew(lst_line));
 	return (i);
 }

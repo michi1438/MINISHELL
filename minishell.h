@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/02 15:01:53 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/02 21:44:29 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ typedef struct s_minish
 {
 	char	**env;
 	int		n_cmd;
+	int		is_hd;
 	char	*line;
-	t_list	**lst_line;
+	t_list	*lst_line;
 }	t_minish;
 
 //TESTING

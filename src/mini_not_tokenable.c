@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 16:57:22 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/02 16:02:15 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/02 17:43:52 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,10 @@ int	is_not_tokenable(t_minish *minish, int i, const char *tok[])
 	if (size > 0)
 	{
 		str = ft_substr(&minish->line[i], 0, size);
-		ft_gc(str, EXT);
 		if (is_all_space(str) == 1)
 		{
 			trim = ft_strtrim(str, " ");
-			ft_lstadd_back(minish->lst_line, ft_lstnew(trim));
-			trim = ft_gc(trim, EXT);
+			ft_lstadd_back(&minish->lst_line, ft_lstnew(trim));
 		}
 	}
 	return (i + size);
