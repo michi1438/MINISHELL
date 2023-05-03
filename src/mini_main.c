@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/03 11:32:07 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/03 13:11:46 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 
 int	main(int ac, char *av[], char *env[])
 {
-	t_minish	minish;
+	t_minish			minish;
+	struct termios		termi;
 
 	(void) av;
 	ft_signals();
+	tcgetattr(0, &termi);
+	termi.c_lflag = ECHO;
+	tcsetattr(STDIN_FILENO, TCSAFLUSH, &termi);
 	if (ac != 1)
 		return (1);
 	if (init_minish(&minish, env) != 0)

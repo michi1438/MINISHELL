@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:46:27 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/03 11:37:23 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/03 13:11:58 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,6 @@ void	set_act_quit(struct sigaction *act_quit)
 
 void	re_prompt(int useless)
 {
-	struct termios		*termi;
-
-	termi = malloc(sizeof(struct termios));
-	tcgetattr(0, termi);
-	printf("%lu\n", (unsigned long)termi->c_iflag);
-	printf("%lu\n", (unsigned long)termi->c_oflag);
 	write(0, "\n", 1);
 	rl_on_new_line();
 	rl_replace_line("", 0);
