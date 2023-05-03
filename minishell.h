@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/03 18:53:07 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/03 20:14:36 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,24 +46,25 @@ typedef struct s_minish
 	char	*line;
 	char	**cmds;
 	t_list	*lst_line;
-	t_pipex ppx;
+	t_pipex	ppx;
 }	t_minish;
 
-int		init_minish(t_minish *minish, char *env[]);
+int			init_minish(t_minish *minish, char *env[]);
 
 //TESTING
-void	print_lst_line(t_minish minish);
+void		print_lst_line(t_minish minish);
+void		add_cmds(t_minish *minish);
 
 // TOlKiEN
-int		ft_token(t_minish *minish);
-int		search_quotes(t_minish *minish, int type, int i);
-int		deal_with_pipes(t_minish *minish, int i);
-int		deal_with_redir(t_minish *minish, int type, int i);
-int		is_tokenable(t_minish *minish, int i, const char *tok[]);
-int		is_not_tokenable(t_minish *minish, int i, const char *tok[]);
-int		not_token_size(t_minish *minish, int i, const char *tok[]);
-int		deal_with_other(t_minish *minish, int type, int i);
-int		is_all_space(char *str);
+int			ft_token(t_minish *minish);
+int			search_quotes(t_minish *minish, int type, int i);
+int			deal_with_pipes(t_minish *minish, int i);
+int			deal_with_redir(t_minish *minish, int type, int i);
+int			is_tokenable(t_minish *minish, int i, const char *tok[]);
+int			is_not_tokenable(t_minish *minish, int i, const char *tok[]);
+int			not_token_size(t_minish *minish, int i, const char *tok[]);
+int			deal_with_other(t_minish *minish, int type, int i);
+int			is_all_space(char *str);
 
 typedef struct s_content
 {
@@ -85,9 +86,9 @@ enum e_tolkien
 };
 
 // UTILS
-char	**ft_copy_env(char *env[]);
-void	mini_lstdelone(t_list *node, void (*del)(void*));
-void	mini_lstclear(t_list **lst, void (*del)(void*));
+char		**ft_copy_env(char *env[]);
+void		mini_lstdelone(t_list *node, void (*del)(void*));
+void		mini_lstclear(t_list **lst, void (*del)(void*));
 
 //GARBAGE_COLLECTOR
 typedef struct s_gc
@@ -102,44 +103,44 @@ enum e_gcstatus
 	EXT,
 };
 
-void	*gc_malloc(size_t size);
-void	gc_free(void *ptr);
-void	*ft_gc(void *garb, int status);
-void	gc_lstdelone(t_list *lst, void (*del)(void*));
-void	gc_lstclear(t_list **lst, void (*del)(void*));
+void		*gc_malloc(size_t size);
+void		gc_free(void *ptr);
+void		*ft_gc(void *garb, int status);
+void		gc_lstdelone(t_list *lst, void (*del)(void*));
+void		gc_lstclear(t_list **lst, void (*del)(void*));
 
 //SIGNALS
-void	ft_signals(void);
-void	set_act_int(struct sigaction *act_int);
-void	set_act_quit(struct sigaction *act_quit);
-void	re_prompt(int useless);
+void		ft_signals(void);
+void		set_act_int(struct sigaction *act_int);
+void		set_act_quit(struct sigaction *act_quit);
+void		re_prompt(int useless);
 
 // MINIPIPE
 //ppx_checks.c
-char	*ft_checkexe(char **paths, char *cmd);
-char	**ft_checkenv(char *env[]);
-char	*ft_checkpath(char *env[], char *cmd);
+char		*ft_checkexe(char **paths, char *cmd);
+char		**ft_checkenv(char *env[]);
+char		*ft_checkpath(char *env[], char *cmd);
 
 //ppx_free.c
-void	ft_freeall(t_pipex *ppx);
-void	ft_free(char **av);
-int		ft_waitnclose(t_pipex *ppx);
-void	ft_close_fds(t_pipex *ppx);
+void		ft_freeall(t_pipex *ppx);
+void		ft_free(char **av);
+int			ft_waitnclose(t_pipex *ppx);
+void		ft_close_fds(t_pipex *ppx);
 
 //ppx_utils.c
-int		ft_error(char *error, int errn);
-void	ft_dup(int in, int out);
-int		ft_stralnum(char *str);
+int			ft_error(char *error, int errn);
+void		ft_dup(int in, int out);
+int			ft_stralnum(char *str);
 
 //ppx_hd.c
-void	ft_checkheredoc(char **av, t_pipex *ppx);
-int		ft_heredoc(t_pipex *ppx);
+void		ft_checkheredoc(char **av, t_pipex *ppx);
+int			ft_heredoc(t_pipex *ppx);
 
 //ppx_main.c
-int		main_pipe(t_minish *minish, t_pipex *ppx);
-void	ft_looppid(t_pipex *ppx, char **env, int idx);
-int		ft_feedppx(t_pipex *ppx, char **av, char **env);
-int		ft_initppx(t_pipex *ppx, t_minish *minish);
+int			main_pipe(t_minish *minish, t_pipex *ppx);
+void		ft_looppid(t_pipex *ppx, char **env, int idx);
+int			ft_feedppx(t_pipex *ppx, char **av, char **env);
+int			ft_initppx(t_pipex *ppx, t_minish *minish);
 
 //RL respecified proto for norminette 
 //(not actually used because of the -I in Makefile CFLAGS)
