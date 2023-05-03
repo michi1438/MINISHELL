@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 16:58:36 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/02 19:46:30 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/03 14:43:00 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,21 @@ int	is_tokenable(t_minish *minish, int i, const char *tok[])
 
 int	search_quotes(t_minish *minish, int type, int i)
 {
-	int		j;
-	char	c;
-	char	*line;
-	char	*lst_line;
+	int			j;
+	char		c;
+	char		*line;
+	t_content	*node;
 
+	node = malloc(sizeof(struct s_content));
 	line = minish->line;
 	j = i;
 	c = '"';
+	node->type = DBLQUOTE;
 	if (type == 0)
+	{
+		node->type = QUOTE;
 		c = '\'';
+	}		
 	i++;
 	while (line[i] != c)
 	{
@@ -54,37 +59,46 @@ int	search_quotes(t_minish *minish, int type, int i)
 			return (-1);
 		i++;
 	}
-	lst_line = ft_substr(&line[j], 0, (i + 1) - j);
-	ft_lstadd_back(&minish->lst_line, ft_lstnew(lst_line));
+	node->str = ft_substr(&line[j], 0, (i + 1) - j);
+	ft_lstadd_back(&minish->lst_line, ft_lstnew(node));
 	return (i);
 }
 
 int	deal_with_pipes(t_minish *minish, int i)
 {
-	int		j;
-	char	*lst_line;
-	char	*line;
+	int			j;
+	char		*line;
+	t_content	*node;
 
+	node = malloc(sizeof(struct s_content));
 	line = minish->line;
 	j = i;
-	lst_line = ft_substr(&line[j], 0, (i + 1) - j);
 	minish->n_cmd++;
-	ft_lstadd_back(&minish->lst_line, ft_lstnew(lst_line));
+	node->str = ft_substr(&line[j], 0, (i + 1) - j);
+	node->type = PIPE;
+	ft_lstadd_back(&minish->lst_line, ft_lstnew(node));
 	return (i);
 }
 
 int	deal_with_redir(t_minish *minish, int type, int i)
 {
-	int		j;
-	char	*lst_line;
-	char	*line;
+	int			j;
+	char		*line;
+	t_content	*node;
 
+	node = malloc(sizeof(struct s_content));
 	line = minish->line;
 	j = i;
-	if (type < 5)
-		i++;
-	lst_line = ft_substr(&line[j], 0, (i + 1) - j);
-	ft_lstadd_back(&minish->lst_line, ft_lstnew(lst_line));
+	if (type == 3 && ++i)
+		node->type = APP_OUT;
+	else if (type == 4 && ++i)
+		node->type = HERE_DOC;
+	else if (type == 5)
+		node->type = REDIR_OUT;
+	else
+		node->type = REDIR_IN;
+	node->str = ft_substr(&line[j], 0, (i + 1) - j);
+	ft_lstadd_back(&minish->lst_line, ft_lstnew(node));
 	return (i);
 }
 
@@ -92,14 +106,16 @@ int	deal_with_other(t_minish *minish, int type, int i)
 {
 	int		j;
 	char	*line;
-	char	*lst_line;
+	t_content	*node;
 
+	node = malloc(sizeof(struct s_content));
 	line = minish->line;
 	(void)type;
 	j = i;
 	while (line[i] != ' ' && line[i] != '\0')
 		i++;
-	lst_line = ft_substr(&line[j], 0, (i + 1) - j);
-	ft_lstadd_back(&minish->lst_line, ft_lstnew(lst_line));
+	node->str = ft_substr(&line[j], 0, (i + 1) - j);
+	node->type = ENV_VAR;
+	ft_lstadd_back(&minish->lst_line, ft_lstnew(node));
 	return (i);
 }

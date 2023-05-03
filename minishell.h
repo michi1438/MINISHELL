@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/03 15:35:00 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/03 15:39:02 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,12 @@ int		not_token_size(t_minish *minish, int i, const char *tok[]);
 int		deal_with_other(t_minish *minish, int type, int i);
 int		is_all_space(char *str);
 
+typedef struct s_content
+{
+	char	*str;
+	int		type;
+}	t_content;
+
 enum e_tolkien
 {
 	QUOTE,
@@ -59,6 +65,7 @@ enum e_tolkien
 	REDIR_OUT,
 	REDIR_IN,
 	ENV_VAR,
+	OTHER,
 };
 
 // UTILS
