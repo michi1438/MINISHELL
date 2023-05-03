@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:29:12 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/03 18:04:34 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/03 18:46:58 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ int	ft_initppx(t_pipex *ppx, t_minish *minish)
 //	ppx->f_out = open(av[ac - 1], O_CREAT | O_WRONLY | O_TRUNC, 00644);
 //	if (ppx->f_out == -1)
 //		return (ft_error(av[ac - 1], -2));
-//	ppx->n_cmd = minish->n_pipe + 1;
-	ppx->n_cmd = 2;
+	ppx->n_cmd = minish->n_pipe + 1;
+//ppx->n_cmd = 2;
 	ppx->hd_on = minish->is_hd;
 	ppx->f_in = 0;
 	ppx->f_out = 1;

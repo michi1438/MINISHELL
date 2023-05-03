@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/03 16:56:03 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/03 18:40:43 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int		init_minish(t_minish *minish, char *env[]);
 
 //TESTING
 void	print_lst_line(t_minish minish);
+void	add_cmds(t_minish *minish);
 
 // TOlKiEN
 int		ft_token(t_minish *minish);
