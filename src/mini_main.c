@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/03 20:15:55 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/03 21:35:00 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,15 @@ int	main(int ac, char *av[], char *env[])
 		minish.line = readline("(ಠ.ಠ)¬ ");
 		if (minish.line == NULL)
 			return (0);
-		if (minish.line[0] != '\0')
+		if (minish.line[0] != '\0' && is_all_space(minish.line) == 1)
+		{
 			add_history(minish.line);
-		if (ft_token(&minish) == -1)
-			printf("unexpected token ERROR\n");
-		add_cmds(&minish);
-		main_pipe(&minish, &minish.ppx);
-		mini_lstclear(&minish.lst_line, free);
+			if (ft_token(&minish) == -1)
+				printf("unexpected token ERROR\n");
+			add_cmds(&minish);
+			main_pipe(&minish, &minish.ppx);
+			mini_lstclear(&minish.lst_line, free);
+		}
 	}
 	return (0);
 }
@@ -52,7 +54,7 @@ void	add_cmds(t_minish *minish)
 	int			i;
 
 	lst = minish->lst_line;
-	minish->cmds = malloc(sizeof(char *) * (minish->n_pipe + 1));
+	minish->cmds = malloc(sizeof(char *) * (minish->ppx.n_cmd));
 	i = 0;
 	while (lst != NULL)
 	{
@@ -103,8 +105,12 @@ void	print_lst_line(t_minish minish)
 
 int	init_minish(t_minish *minish, char *env[])
 {
-	minish->n_pipe = 0;
 	minish->ppx.hd_on = 0;
+	minish->ppx.app_on = 0;
+	minish->ppx.f_in = 0;
+	minish->ppx.f_out = 1;
+	minish->ppx.n_cmd = 1;
+	minish->n_pipe = 0;
 	minish->lst_line = NULL;
 //	minish->env = ft_copy_env(env);
 	minish->env = env;

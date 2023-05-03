@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 20:23:44 by lzito             #+#    #+#             */
-/*   Updated: 2023/04/20 10:08:44 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/03 20:35:50 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ int	ft_waitnclose(t_pipex *ppx)
 
 	i = 0;
 	statuscode = 0;
-	close(ppx->f_in);
-	close(ppx->f_out);
+//	close(ppx->f_in);
+//	close(ppx->f_out);
 	close(ppx->fd_hd[0]);
 	while (i < ppx->n_cmd)
 	{

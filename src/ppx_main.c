@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:29:12 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/03 20:16:54 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/03 21:52:26 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ void	ft_looppid(t_pipex *ppx, char **env, int idx)
 		exit(1);
 	if (ppx->pid[idx] == 0)
 	{
-		if (idx == 0)
+		if (ppx->n_cmd == 1)
+			ft_dup(ppx->f_in, ppx->f_out);
+		else if (idx == 0)
 		{
 			if (ppx->hd_on == 0)
 				ft_dup(ppx->f_in, ppx->fd[idx][1]);
@@ -68,16 +70,13 @@ int	ft_feedppx(t_pipex *ppx, char **av, char **env)
 
 int	ft_initppx(t_pipex *ppx, t_minish *minish)
 {
-//	ppx->f_out = open(av[ac - 1], O_CREAT | O_WRONLY | O_TRUNC, 00644);
+//	ppx->f_out = open(fileout, O_CREAT | O_WRONLY | O_TRUNC, 00644);
 //	if (ppx->f_out == -1)
 //		return (ft_error(av[ac - 1], -2));
-	ppx->n_cmd = minish->n_pipe + 1;
-//ppx->n_cmd = 2;
-	ppx->f_in = 0;
-	ppx->f_out = 1;
+	//ppx->n_cmd = minish->n_pipe + 1;
 //	if (ppx->hd_on == 0)
 //	{
-//		ppx->f_in = open(av[1], O_RDONLY);
+//		ppx->f_in = open(filein, O_RDONLY);
 //		if (ppx->f_in == -1)
 //			return (ft_error(av[1], -2));
 //	}
