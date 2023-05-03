@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/02 19:49:04 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/03 11:32:07 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@ int	main(int ac, char *av[], char *env[])
 	ft_signals();
 	if (ac != 1)
 		return (1);
-	minish.lst_line = NULL;
-	minish.env = ft_copy_env(env);
-	if (minish.env == NULL)
-		return (1);
+	if (init_minish(&minish, env) != 0)
+	{
+		printf("init_failed ERROR\n");
+		exit(1);
+	}
 	while (1)
 	{
 		minish.line = readline("(ಠ.ಠ)¬ ");
@@ -69,4 +70,13 @@ void	print_lst_line(t_minish minish)
 		printf("%s\n", (char *)lst->content);
 		lst = lst->next;
 	}
+}
+
+int	init_minish(t_minish *minish, char *env[])
+{
+	minish->lst_line = NULL;
+	minish->env = ft_copy_env(env);
+	if (minish->env == NULL)
+		return (1);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/02 21:44:29 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/03 11:39:11 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef struct s_minish
 	t_list	*lst_line;
 }	t_minish;
 
+int		init_minish(t_minish *minish, char *env[]);
+
 //TESTING
 void	print_lst_line(t_minish minish);
 
@@ -46,6 +48,18 @@ int		is_not_tokenable(t_minish *minish, int i, const char *tok[]);
 int		not_token_size(t_minish *minish, int i, const char *tok[]);
 int		deal_with_other(t_minish *minish, int type, int i);
 int		is_all_space(char *str);
+
+enum e_tolkien
+{
+	QUOTE,
+	DBLQUOTE,
+	PIPE,
+	APP_OUT,
+	HERE_DOC,
+	REDIR_OUT,
+	REDIR_IN,
+	ENV_VAR,
+};
 
 // UTILS
 char	**ft_copy_env(char *env[]);
@@ -113,7 +127,11 @@ int		ft_heredoc(t_pipex *ppx);
 //ppx_main.c
 int		main_pipe(int ac, char *av[], char *env[]);
 void	ft_looppid(t_pipex *ppx, char **env, int idx);
-int		ft_feedppx(t_pipex *ppx, char **av, char **env);
-int		ft_initppx(t_pipex *ppx, int ac, char *av[], char **env);
+int			ft_feedppx(t_pipex *ppx, char **av, char **env);
+int			ft_initppx(t_pipex *ppx, int ac, char *av[], char **env);
+
+//RL respecified proto for norminette 
+//(not actually used because of the -I in Makefile CFLAGS)
+extern void	rl_replace_line(const char *s, int i);
 
 #endif
