@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/03 18:04:03 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/03 18:56:33 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	main(int ac, char *av[], char *env[])
 		if (ft_token(&minish) == -1)
 			printf("unexpected token ERROR\n");
 		print_lst_line(minish);
-		main_pipe(&minish);
+		main_pipe(&minish, &minish.ppx);
 		mini_lstclear(&minish.lst_line, free);
 	}
 	return (0);
@@ -84,11 +84,11 @@ int	init_minish(t_minish *minish, char *env[])
 {
 	minish->cmds = malloc(sizeof(char *) * 2);
 	minish->cmds[0] = malloc(sizeof(char) * 8);
-	minish->cmds[0] = "echo blo";
+	minish->cmds[0] = "echo bla";
 	minish->cmds[1] = malloc(sizeof(char) * 6);
 	minish->cmds[1] = "grep a";
 	minish->n_pipe = 0;
-	minish->is_hd = 0;
+	minish->ppx.hd_on = 0;
 	minish->lst_line = NULL;
 //	minish->env = ft_copy_env(env);
 	minish->env = env;

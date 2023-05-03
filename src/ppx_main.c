@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:29:12 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/03 18:04:34 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/03 18:56:17 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	ft_initppx(t_pipex *ppx, t_minish *minish)
 //		return (ft_error(av[ac - 1], -2));
 //	ppx->n_cmd = minish->n_pipe + 1;
 	ppx->n_cmd = 2;
-	ppx->hd_on = minish->is_hd;
+	ppx->hd_on = 0;
 	ppx->f_in = 0;
 	ppx->f_out = 1;
 //	if (ppx->hd_on == 0)
@@ -99,26 +99,24 @@ int	ft_initppx(t_pipex *ppx, t_minish *minish)
 	return (0);
 }
 
-int	main_pipe(t_minish *minish)
+int	main_pipe(t_minish *minish, t_pipex *ppx)
 {
-	t_pipex	ppx;
 	int		i;
 	int		initstatus;
 
 	i = 0;
 //	ft_checkheredoc(argv, &ppx);
-	initstatus = ft_initppx(&ppx, minish);
+	initstatus = ft_initppx(ppx, minish);
 	if (initstatus < 0)
 	{
 		if (initstatus == -1)
-			ft_freeall(&ppx);
+			ft_freeall(ppx);
 		return (1);
 	}
-	while (i < ppx.n_cmd)
+	while (i < ppx->n_cmd)
 	{
-//		printf("%d\n", ppx.n_cmd);
-		ft_looppid(&ppx, minish->env, i);
+		ft_looppid(ppx, minish->env, i);
 		i++;
 	}
-	return (ft_waitnclose(&ppx));
+	return (ft_waitnclose(ppx));
 }

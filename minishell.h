@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/03 16:56:03 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/03 18:53:07 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,30 @@
 # include <errno.h>
 # include <termios.h> 
 
+typedef struct s_pipex
+{
+	int		**fd;
+	int		fd_hd[2];
+	int		hd_on;
+	int		app_on;
+	char	*limiter;
+	int		*pid;
+	char	***cmd;
+	int		f_in;
+	int		f_out;
+	char	**path;
+	int		n_cmd;
+}	t_pipex;
+
 // MAIN
 typedef struct s_minish
 {
 	char	**env;
 	int		n_pipe;
-	int		is_hd;
 	char	*line;
 	char	**cmds;
 	t_list	*lst_line;
+	t_pipex ppx;
 }	t_minish;
 
 int		init_minish(t_minish *minish, char *env[]);
@@ -100,20 +115,6 @@ void	set_act_quit(struct sigaction *act_quit);
 void	re_prompt(int useless);
 
 // MINIPIPE
-typedef struct s_pipex
-{
-	int		**fd;
-	int		fd_hd[2];
-	int		hd_on;
-	char	*limiter;
-	int		*pid;
-	char	***cmd;
-	int		f_in;
-	int		f_out;
-	char	**path;
-	int		n_cmd;
-}	t_pipex;
-
 //ppx_checks.c
 char	*ft_checkexe(char **paths, char *cmd);
 char	**ft_checkenv(char *env[]);
@@ -135,7 +136,7 @@ void	ft_checkheredoc(char **av, t_pipex *ppx);
 int		ft_heredoc(t_pipex *ppx);
 
 //ppx_main.c
-int		main_pipe(t_minish *minish);
+int		main_pipe(t_minish *minish, t_pipex *ppx);
 void	ft_looppid(t_pipex *ppx, char **env, int idx);
 int		ft_feedppx(t_pipex *ppx, char **av, char **env);
 int		ft_initppx(t_pipex *ppx, t_minish *minish);
