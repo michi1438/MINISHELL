@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/03 15:39:02 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/03 16:56:03 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,10 @@
 typedef struct s_minish
 {
 	char	**env;
-	int		n_cmd;
+	int		n_pipe;
 	int		is_hd;
 	char	*line;
+	char	**cmds;
 	t_list	*lst_line;
 }	t_minish;
 
@@ -134,10 +135,10 @@ void	ft_checkheredoc(char **av, t_pipex *ppx);
 int		ft_heredoc(t_pipex *ppx);
 
 //ppx_main.c
-int		main_pipe(int ac, char *av[], char *env[]);
+int		main_pipe(t_minish *minish);
 void	ft_looppid(t_pipex *ppx, char **env, int idx);
-int			ft_feedppx(t_pipex *ppx, char **av, char **env);
-int			ft_initppx(t_pipex *ppx, int ac, char *av[], char **env);
+int		ft_feedppx(t_pipex *ppx, char **av, char **env);
+int		ft_initppx(t_pipex *ppx, t_minish *minish);
 
 //RL respecified proto for norminette 
 //(not actually used because of the -I in Makefile CFLAGS)
