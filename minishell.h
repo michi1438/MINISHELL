@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/03 11:39:11 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/03 15:35:00 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ enum e_tolkien
 
 // UTILS
 char	**ft_copy_env(char *env[]);
+void	mini_lstdelone(t_list *node, void (*del)(void*));
+void	mini_lstclear(t_list **lst, void (*del)(void*));
 
 //GARBAGE_COLLECTOR
 typedef struct s_gc

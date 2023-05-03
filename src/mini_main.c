@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/03 11:32:07 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/03 15:35:44 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int ac, char *av[], char *env[])
 		if (ft_token(&minish) == -1)
 			printf("unexpected token ERROR\n");
 		print_lst_line(minish);
-		ft_lstclear(&minish.lst_line, free);
+		mini_lstclear(&minish.lst_line, free);
 	}
 	return (0);
 }
