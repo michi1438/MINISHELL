@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/03 13:11:46 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/03 14:43:43 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	main(int ac, char *av[], char *env[])
 			add_history(minish.line);
 		if (ft_token(&minish) == -1)
 			printf("unexpected token ERROR\n");
-		print_lst_line(minish);
+//		print_lst_line(minish);
 		ft_lstclear(&minish.lst_line, free);
 	}
 	return (0);
@@ -66,12 +66,15 @@ int	ft_token(t_minish *minish)
 
 void	print_lst_line(t_minish minish)
 {
-	t_list	*lst;
+	t_list		*lst;
+	t_content	*cont;
 
 	lst = minish.lst_line;
 	while (lst != NULL)
 	{
-		printf("%s\n", (char *)lst->content);
+		cont = lst->content;
+		printf("%s\n", cont->str);
+		printf("%d\n", cont->type);
 		lst = lst->next;
 	}
 }
