@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:46:25 by lzito             #+#    #+#             */
-/*   Updated: 2023/05/03 15:46:00 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/04 11:58:14 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ char	**ft_copy_env(char *env[])
 	while (env[i])
 	{
 		cpy_env[i] = ft_strdup(env[i]);
-		printf("%s\n", cpy_env[i]);
 		i++;
 	}
 	return (cpy_env);

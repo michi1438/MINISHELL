@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/03 20:14:36 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/04 11:51:06 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_pipex
 typedef struct s_minish
 {
 	char	**env;
-	int		n_pipe;
+	int		n_pipe; //are we using it
 	char	*line;
 	char	**cmds;
 	t_list	*lst_line;
@@ -65,6 +65,7 @@ int			is_not_tokenable(t_minish *minish, int i, const char *tok[]);
 int			not_token_size(t_minish *minish, int i, const char *tok[]);
 int			deal_with_other(t_minish *minish, int type, int i);
 int			is_all_space(char *str);
+int			ft_err_handling(t_minish *minish);
 
 typedef struct s_content
 {

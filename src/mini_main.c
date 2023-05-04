@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/03 21:35:00 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/04 11:58:38 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,27 @@ int	main(int ac, char *av[], char *env[])
 	tcsetattr(STDIN_FILENO, TCSAFLUSH, &termi);
 	if (ac != 1)
 		return (1);
-	if (init_minish(&minish, env) != 0)
-	{
-		printf("init_failed ERROR\n");
-		exit(1);
-	}
 	while (1)
 	{
+		if (init_minish(&minish, env) != 0)
+		{
+			printf("init_failed ERROR\n");
+			exit(1);
+		}
 		minish.line = readline("(ಠ.ಠ)¬ ");
 		if (minish.line == NULL)
 			return (0);
 		if (minish.line[0] != '\0' && is_all_space(minish.line) == 1)
 		{
 			add_history(minish.line);
-			if (ft_token(&minish) == -1)
+			if (ft_token(&minish) != -1)
+			{
+				add_cmds(&minish);
+				main_pipe(&minish, &minish.ppx);
+				mini_lstclear(&minish.lst_line, free);
+			}
+			else
 				printf("unexpected token ERROR\n");
-			add_cmds(&minish);
-			main_pipe(&minish, &minish.ppx);
-			mini_lstclear(&minish.lst_line, free);
 		}
 	}
 	return (0);
@@ -85,6 +88,26 @@ int	ft_token(t_minish *minish)
 		if (minish->line[i] != '\0')
 			i++;
 	}
+	return (ft_err_handling(minish));
+}
+
+int	ft_err_handling(t_minish *minish)
+{
+	int			i;
+	t_list		*lst;
+	t_content	*cont;
+
+	i = 0;
+	lst = minish->lst_line;
+	while (lst != NULL)
+	{
+		cont = lst->content;
+		if (cont->type == 8)
+			i++;
+		lst = lst->next;
+	}
+	if (i != minish->ppx.n_cmd || i == 0)
+		return (-1);
 	return (0);
 }
 
@@ -112,8 +135,7 @@ int	init_minish(t_minish *minish, char *env[])
 	minish->ppx.n_cmd = 1;
 	minish->n_pipe = 0;
 	minish->lst_line = NULL;
-//	minish->env = ft_copy_env(env);
-	minish->env = env;
+	minish->env = ft_copy_env(env);
 	if (minish->env == NULL)
 		return (1);
 	return (0);
