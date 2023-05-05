@@ -6,17 +6,21 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:46:27 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/03 13:11:58 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/05 09:55:27 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_signals(void)
+void	ft_signals_n_attr(void)
 {
 	struct sigaction	*act_int;
 	struct sigaction	*act_quit;
+	struct termios		termi;
 
+	tcgetattr(0, &termi);
+	termi.c_lflag = ECHO;
+	tcsetattr(STDIN_FILENO, TCSAFLUSH, &termi);
 	act_int = malloc(sizeof(struct sigaction));
 	act_quit = malloc(sizeof(struct sigaction));
 	set_act_int(act_int);

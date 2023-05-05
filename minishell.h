@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/04 11:51:06 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/05 10:14:30 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ typedef struct s_pipex
 typedef struct s_minish
 {
 	char	**env;
-	int		n_pipe; //are we using it
 	char	*line;
 	char	**cmds;
 	t_list	*lst_line;
 	t_pipex	ppx;
 }	t_minish;
 
-int			init_minish(t_minish *minish, char *env[]);
+int			init_minish(t_minish *minish);
+void		treating_line(t_minish *minish);
 
 //TESTING
 void		print_lst_line(t_minish minish);
@@ -110,8 +110,8 @@ void		*ft_gc(void *garb, int status);
 void		gc_lstdelone(t_list *lst, void (*del)(void*));
 void		gc_lstclear(t_list **lst, void (*del)(void*));
 
-//SIGNALS
-void		ft_signals(void);
+//SIGNALS and ATTRIBUTES
+void		ft_signals_n_attr(void);
 void		set_act_int(struct sigaction *act_int);
 void		set_act_quit(struct sigaction *act_quit);
 void		re_prompt(int useless);

@@ -45,7 +45,7 @@ ft_checkpath	ppx_checks.c	/^char	*ft_checkpath(char *env[], char *cmd)$/;"	f	typ
 ft_close_fds	ppx_free.c	/^void	ft_close_fds(t_pipex *ppx)$/;"	f	typeref:typename:void
 ft_copy_env	mini_utils.c	/^char	**ft_copy_env(char *env[])$/;"	f	typeref:typename:char **
 ft_dup	ppx_utils.c	/^void	ft_dup(int in, int out)$/;"	f	typeref:typename:void
-ft_err_handling	mini_main.c	/^int	ft_err_handling(t_minish *minish)$/;"	f	typeref:typename:int
+ft_err_handling	mini_errors.c	/^int	ft_err_handling(t_minish *minish)$/;"	f	typeref:typename:int
 ft_error	ppx_utils.c	/^int	ft_error(char *error, int errn)$/;"	f	typeref:typename:int
 ft_feedppx	ppx_main.c	/^int	ft_feedppx(t_pipex *ppx, char **av, char **env)$/;"	f	typeref:typename:int
 ft_free	ppx_free.c	/^void	ft_free(char **av)$/;"	f	typeref:typename:void
@@ -54,7 +54,7 @@ ft_gc	mini_gc.c	/^void	*ft_gc(void *garb, int status)$/;"	f	typeref:typename:voi
 ft_heredoc	ppx_hd.c	/^int	ft_heredoc(t_pipex *ppx)$/;"	f	typeref:typename:int
 ft_initppx	ppx_main.c	/^int	ft_initppx(t_pipex *ppx, t_minish *minish)$/;"	f	typeref:typename:int
 ft_looppid	ppx_main.c	/^void	ft_looppid(t_pipex *ppx, char **env, int idx)$/;"	f	typeref:typename:void
-ft_signals	mini_sig.c	/^void	ft_signals(void)$/;"	f	typeref:typename:void
+ft_signals_n_attr	mini_sig.c	/^void	ft_signals_n_attr(void)$/;"	f	typeref:typename:void
 ft_stralnum	ppx_utils.c	/^int	ft_stralnum(char *str)$/;"	f	typeref:typename:int
 ft_token	mini_main.c	/^int	ft_token(t_minish *minish)$/;"	f	typeref:typename:int
 ft_waitnclose	ppx_free.c	/^int	ft_waitnclose(t_pipex *ppx)$/;"	f	typeref:typename:int
@@ -62,7 +62,7 @@ gc_free	mini_gc.c	/^void	gc_free(void *ptr)$/;"	f	typeref:typename:void
 gc_lstclear	mini_gc.c	/^void	gc_lstclear(t_list **lst, void (*del)(void*))$/;"	f	typeref:typename:void
 gc_lstdelone	mini_gc.c	/^void	gc_lstdelone(t_list *lst, void (*del)(void*))$/;"	f	typeref:typename:void
 gc_malloc	mini_gc.c	/^void	*gc_malloc(size_t size)$/;"	f	typeref:typename:void *
-init_minish	mini_main.c	/^int	init_minish(t_minish *minish, char *env[])$/;"	f	typeref:typename:int
+init_minish	mini_main.c	/^int	init_minish(t_minish *minish)$/;"	f	typeref:typename:int
 is_all_space	mini_not_tokenable.c	/^int	is_all_space(char *str)$/;"	f	typeref:typename:int
 is_not_tokenable	mini_not_tokenable.c	/^int	is_not_tokenable(t_minish *minish, int i, const char *tok[])$/;"	f	typeref:typename:int
 is_tokenable	mini_tokenable.c	/^int	is_tokenable(t_minish *minish, int i, const char *tok[])$/;"	f	typeref:typename:int
@@ -71,8 +71,9 @@ main_pipe	ppx_main.c	/^int	main_pipe(t_minish *minish, t_pipex *ppx)$/;"	f	typer
 mini_lstclear	mini_utils.c	/^void	mini_lstclear(t_list **lst, void (*del)(void*))$/;"	f	typeref:typename:void
 mini_lstdelone	mini_utils.c	/^void	mini_lstdelone(t_list *node, void (*del)(void*))$/;"	f	typeref:typename:void
 not_token_size	mini_not_tokenable.c	/^int	not_token_size(t_minish *minish, int i, const char *tok[])$/;"	f	typeref:typename:int
-print_lst_line	mini_main.c	/^void	print_lst_line(t_minish minish)$/;"	f	typeref:typename:void
+print_lst_line	For_testing_only.c	/^void	print_lst_line(t_minish minish)$/;"	f	typeref:typename:void
 re_prompt	mini_sig.c	/^void	re_prompt(int useless)$/;"	f	typeref:typename:void
 search_quotes	mini_tokenable.c	/^int	search_quotes(t_minish *minish, int type, int i)$/;"	f	typeref:typename:int
 set_act_int	mini_sig.c	/^void	set_act_int(struct sigaction *act_int)$/;"	f	typeref:typename:void
 set_act_quit	mini_sig.c	/^void	set_act_quit(struct sigaction *act_quit)$/;"	f	typeref:typename:void
+treating_line	mini_main.c	/^void	treating_line(t_minish *minish)$/;"	f	typeref:typename:void

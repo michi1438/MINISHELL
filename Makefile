@@ -6,7 +6,7 @@
 #    By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/20 20:55:12 by mguerga           #+#    #+#              #
-#    Updated: 2023/05/04 10:57:09 by mguerga          ###   ########.fr        #
+#    Updated: 2023/05/05 10:27:13 by mguerga          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CFLAGS = -Werror -Wall -Wextra -I$(RL)/include -I. #-g -fsanitize=address
 
 SRC_MINISH = mini_main.c ppx_checks.c ppx_free.c ppx_hd.c ppx_main.c \
 			ppx_utils.c mini_gc.c mini_sig.c mini_utils.c mini_tokenable.c \
-			mini_not_tokenable.c
+			mini_not_tokenable.c mini_errors.c For_testing_only.c
 
 AR = ar rcs
 
