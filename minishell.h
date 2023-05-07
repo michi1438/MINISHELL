@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/05 10:14:30 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/07 09:16:18 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ enum e_tolkien
 };
 
 // UTILS
+char		*trim_n_add(t_content *cont, char *cmd);
 char		**ft_copy_env(char *env[]);
 void		mini_lstdelone(t_list *node, void (*del)(void*));
 void		mini_lstclear(t_list **lst, void (*del)(void*));

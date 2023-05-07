@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:25:55 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/05 10:26:38 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/07 08:31:47 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ int	ft_err_handling(t_minish *minish)
 	while (lst != NULL)
 	{
 		cont = lst->content;
-		if (cont->type == 8)
+		if (cont->type == 8 || cont->type < 2)
 			i++;
 		lst = lst->next;
 	}
-	if (i != minish->ppx.n_cmd || i == 0)
-		return (-1);
+//	if (i != minish->ppx.n_cmd || i == 0)
+//		return (-1);
 	return (0);
 }
