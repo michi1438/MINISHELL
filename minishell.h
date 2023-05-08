@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/07 10:22:43 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/08 10:50:28 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void		treating_line(t_minish *minish);
 
 //TESTING
 void		print_lst_line(t_minish minish);
-void		add_cmds(t_minish *minish);
 
 // TOlKiEN
 int			ft_token(t_minish *minish);
@@ -85,6 +84,10 @@ enum e_tolkien
 	ENV_VAR,
 	OTHER,
 };
+
+// LINKING TOlKiEN TO PIPES
+void		add_cmds(t_minish *minish);
+void		append_or_start(t_minish *minish, char *strseg, char *tok_delimiter, int i);
 
 // UTILS
 char		**ft_copy_env(char *env[]);

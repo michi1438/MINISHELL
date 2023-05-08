@@ -35,6 +35,7 @@
 !_TAG_ROLE_DESCRIPTION!C!header	system	/system header/
 !_TAG_ROLE_DESCRIPTION!C!macro	undef	/undefined/
 add_cmds	mini_main.c	/^void	add_cmds(t_minish *minish)$/;"	f	typeref:typename:void
+append_or_start	mini_main.c	/^void	append_or_start(t_minish *minish, char *strseg, char *tok_delimiter, int i)$/;"	f	typeref:typename:void
 deal_with_other	mini_tokenable.c	/^int	deal_with_other(t_minish *minish, int type, int i)$/;"	f	typeref:typename:int
 deal_with_pipes	mini_tokenable.c	/^int	deal_with_pipes(t_minish *minish, int i)$/;"	f	typeref:typename:int
 deal_with_redir	mini_tokenable.c	/^int	deal_with_redir(t_minish *minish, int type, int i)$/;"	f	typeref:typename:int

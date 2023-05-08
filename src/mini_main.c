@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/07 10:00:45 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/08 12:07:12 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,36 +86,44 @@ void	add_cmds(t_minish *minish)
 	lst = minish->lst_line;
 	minish->cmds = malloc(sizeof(char *) * (minish->ppx.n_cmd));
 	i = 0;
-	minish->cmds[i] = NULL;
+	while (i < minish->ppx.n_cmd)
+		minish->cmds[i++] = NULL;
+	i = 0;
 	while (lst != NULL)
 	{
 		cont = lst->content;
 		if (cont->type == OTHER)
-		{
-			minish->cmds[i] = cont->str;
-		}  
+			append_or_start(minish, cont->str, NULL, i);
 		else if (cont->type == QUOTE)
-		{
-			if (minish->cmds[i] == NULL)
-				minish->cmds[i] = ft_strtrim(cont->str, "'");
-			else 
-			{
-				minish->cmds[i] = ft_strjoin(minish->cmds[i], " ");
-				minish->cmds[i] = ft_strjoin(minish->cmds[i], ft_strtrim(cont->str, "\'"));
-			}
-		}
+			append_or_start(minish, cont->str, "'", i);
 		else if (cont->type == DBLQUOTE)
-		{
-			if (minish->cmds[i] == NULL)
-				minish->cmds[i] = ft_strtrim(cont->str, "\"");
-			else 
-			{
-				minish->cmds[i] = ft_strjoin(minish->cmds[i], " ");
-				minish->cmds[i] = ft_strjoin(minish->cmds[i], ft_strtrim(cont->str, "\""));
-			}
-		}
+			append_or_start(minish, cont->str, "\"", i);
 		else 
 			i++;
 		lst = lst->next;
+	}
+}
+
+void	append_or_start(t_minish *minish, char *strseg, char *tok_delimiter, int i)
+{
+	if (minish->cmds[i] == NULL)
+	{
+		if (tok_delimiter == NULL) 
+			minish->cmds[i] = strseg;
+		else
+			minish->cmds[i] = ft_strtrim(strseg, tok_delimiter);
+	}
+	else
+	{
+		if (tok_delimiter == NULL) 
+		{
+			minish->cmds[i] = ft_strjoin(minish->cmds[i], " ");
+			minish->cmds[i] = ft_strjoin(minish->cmds[i], strseg);
+		}
+		else
+		{
+			minish->cmds[i] = ft_strjoin(minish->cmds[i], " ");
+			minish->cmds[i] = ft_strjoin(minish->cmds[i], ft_strtrim(strseg, tok_delimiter));
+		}
 	}
 }
