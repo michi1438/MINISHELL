@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/09 16:17:51 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/09 17:28:31 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ void	add_cmds(t_minish *minish)
 		}
 		else 
 			i++;
-		printf("passed\n");
 		lst = lst->next;
 	}
 }
@@ -120,30 +119,28 @@ char	*expand_variables(char *quote, t_minish *minish)
 	i = 0;
 	e = 0;
 	ret = malloc(new_size(quote, minish));
-	while (quote[j] != '\0')
+	while (quote[j - e] != '\0')
 	{
-		if (quote[j] == '$')
+		if (quote[j - e] == '$')
 		{
 			j++;
 			i = j;
-			while (quote[j] <= 'Z' && quote[j] >= 'A')
+			while (quote[j - e] <= 'Z' && quote[j - e] >= 'A')
 				j++;	
 			var = ft_substr(&quote[i], 0, j - i);
 			if (ft_strlen(var) > 0) 
-				e += ft_strlen(var) + 1;
+				e += ft_strlen(var);
 			var = ft_strjoin(var, "=");
 			var = check_env_var(minish->env, var);
 			j = i;
 			i = 0;
+			j--;
 			while (var[i] != '\0')
-			{
-				ret[j] = var[i];		
-				j++;
-				i++;
-			}
+				ret[j++] = var[i++];		
 		}
 		else
 		{
+			//printf("ret = %s\n", ret);
 			ret[j] = quote[j - e]; 
 			j++;
 		}
