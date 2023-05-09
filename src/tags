@@ -36,9 +36,11 @@
 !_TAG_ROLE_DESCRIPTION!C!macro	undef	/undefined/
 add_cmds	mini_main.c	/^void	add_cmds(t_minish *minish)$/;"	f	typeref:typename:void
 append_or_start	mini_main.c	/^void	append_or_start(t_minish *minish, char *strseg, char *tok_delimiter, int i)$/;"	f	typeref:typename:void
+check_env_var	mini_main.c	/^int	check_env_var(char **env, char *var)$/;"	f	typeref:typename:int
 deal_with_other	mini_tokenable.c	/^int	deal_with_other(t_minish *minish, int type, int i)$/;"	f	typeref:typename:int
 deal_with_pipes	mini_tokenable.c	/^int	deal_with_pipes(t_minish *minish, int i)$/;"	f	typeref:typename:int
 deal_with_redir	mini_tokenable.c	/^int	deal_with_redir(t_minish *minish, int type, int i)$/;"	f	typeref:typename:int
+expand_variables	mini_main.c	/^char	*expand_variables(char *quote, t_minish *minish)$/;"	f	typeref:typename:char *
 ft_checkenv	ppx_checks.c	/^char	**ft_checkenv(char *env[])$/;"	f	typeref:typename:char **
 ft_checkexe	ppx_checks.c	/^char	*ft_checkexe(char **paths, char *cmd)$/;"	f	typeref:typename:char *
 ft_checkheredoc	ppx_hd.c	/^void	ft_checkheredoc(char **av, t_pipex *ppx)$/;"	f	typeref:typename:void
@@ -71,6 +73,7 @@ main	mini_main.c	/^int	main(int ac, char *av[], char *env[])$/;"	f	typeref:typen
 main_pipe	ppx_main.c	/^int	main_pipe(t_minish *minish, t_pipex *ppx)$/;"	f	typeref:typename:int
 mini_lstclear	mini_utils.c	/^void	mini_lstclear(t_list **lst, void (*del)(void*))$/;"	f	typeref:typename:void
 mini_lstdelone	mini_utils.c	/^void	mini_lstdelone(t_list *node, void (*del)(void*))$/;"	f	typeref:typename:void
+new_size	mini_main.c	/^int	new_size(char *quote, t_minish *minish)$/;"	f	typeref:typename:int
 not_token_size	mini_not_tokenable.c	/^int	not_token_size(t_minish *minish, int i, const char *tok[])$/;"	f	typeref:typename:int
 print_lst_line	For_testing_only.c	/^void	print_lst_line(t_minish minish)$/;"	f	typeref:typename:void
 re_prompt	mini_sig.c	/^void	re_prompt(int useless)$/;"	f	typeref:typename:void

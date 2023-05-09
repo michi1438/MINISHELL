@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:29:12 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/03 21:52:26 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/09 16:18:53 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,5 +116,6 @@ int	main_pipe(t_minish *minish, t_pipex *ppx)
 		ft_looppid(ppx, minish->env, i);
 		i++;
 	}
+	printf("passed\n");
 	return (ft_waitnclose(ppx));
 }
