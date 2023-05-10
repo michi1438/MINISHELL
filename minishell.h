@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/09 12:48:41 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/10 20:33:37 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,13 @@ enum e_tolkien
 // LINKING TOlKiEN TO PIPES
 void		add_cmds(t_minish *minish);
 void		append_or_start(t_minish *minish, char *strseg, char *tok_delimiter, int i);
+char		*get_var(char *quote, int j, t_minish *minish);
+
+// MINI_EXPAND.C
+void		treating_expand(char *quote, t_minish *minish, int *j, char *ret);
 char		*expand_variables(char *dblquote, t_minish *minish);
 char		*check_env_var(char **env, char *var);
 int			new_size(char *quote, t_minish *minish);
-char		*get_var(char *quote, int j, t_minish *minish);
 
 // UTILS
 char		**ft_copy_env(char *env[]);

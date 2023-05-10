@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/10 15:20:11 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/10 20:34:37 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,10 @@ void	add_cmds(t_minish *minish)
 	{
 		cont = lst->content;
 		if (cont->type == OTHER)
+		{
+			cont->str = expand_variables(cont->str, minish);
 			append_or_start(minish, cont->str, NULL, i);
+		}
 		else if (cont->type == QUOTE)
 			append_or_start(minish, cont->str, "'", i);
 		else if (cont->type == DBLQUOTE)
@@ -102,97 +105,6 @@ void	add_cmds(t_minish *minish)
 			i++;
 		lst = lst->next;
 	}
-}
-
-char	*expand_variables(char *quote, t_minish *minish)
-{
-	int		i;
-	int		j;
-	int		e;
-	char	*ret;
-	char	*var;
-
-	j = 0; 
-	i = 0;
-	e = 0;
-	ret = malloc((new_size(quote, minish) + 1) * sizeof(char));
-	while (quote[j - e] != '\0')
-	{
-		printf("PASSSS\n");
-		if (quote[j - e] == '$')
-		{
-			j++;
-			i = j;
-			while (quote[j - e] <= 'Z' && quote[j - e] >= 'A')
-				j++;	
-			var = ft_substr(&quote[i], 0, j - i);
-			if (ft_strlen(var) > 0) 
-				e += ft_strlen(var);
-			var = ft_strjoin(var, "=");
-			var = check_env_var(minish->env, var);
-			j = i;
-			i = 0;
-			j--;
-			while (var[i] != '\0')
-				ret[j++] = var[i++];		
-		}
-		else
-		{
-			//printf("ret = %s\n", ret);
-			ret[j] = quote[j - e]; 
-			j++;
-		}
-	}
-	ret[j] = '\0';
-	return (ret);
-}
-
-int	new_size(char *quote, t_minish *minish)
-{
-	int		i;
-	int		j;
-	int		tot_size_var;
-	int		tot_size_before;
-	char	*var;
-
-	j = 0; 
-	tot_size_var = 0;
-	tot_size_before = 0;
-	while (quote[j] != '\0')
-	{
-		if (quote[j] == '$')
-		{
-			j++;
-			i = j;
-			while (quote[j] <= 'Z' && quote[j] >= 'A')
-				j++;	
-			var = ft_substr(&quote[i], 0, j - (i));
-			tot_size_var += ft_strlen(check_env_var(minish->env, ft_strjoin(var, "=")));
-		}
-		else
-		{
-			j++;
-			tot_size_before++;
-		}
-	}
-	return (tot_size_before + tot_size_var);
-}
-
-char	*check_env_var(char **env, char *var)
-{
-	int		i;	
-	char	*envline;
-	
-	i = 0;
-	envline = NULL;
-	while (env[i] != NULL)
-	{
-		envline = ft_strnstr(env[i], var, ft_strlen(var));
-		if (envline != NULL)
-			return (&envline[ft_strlen(var)]);
-		i++;
-	}
-	return (NULL);
 }
 
 void	append_or_start(t_minish *minish, char *strseg, char *tok_delimiter, int i)
