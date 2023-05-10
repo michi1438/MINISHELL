@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:46:25 by lzito             #+#    #+#             */
-/*   Updated: 2023/05/04 11:58:14 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/10 15:01:11 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	**ft_copy_env(char *env[])
 	i = 0;
 	while (env[i])
 		i++;
-	cpy_env = malloc(i * sizeof(char *));
+	cpy_env = malloc((i + 2) * sizeof(char *));
 	if (cpy_env == NULL)
 		return (NULL);
 	i = 0;
@@ -29,6 +29,7 @@ char	**ft_copy_env(char *env[])
 		cpy_env[i] = ft_strdup(env[i]);
 		i++;
 	}
+	cpy_env[i] = NULL;
 	return (cpy_env);
 }
 

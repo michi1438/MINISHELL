@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/09 17:28:31 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/10 15:20:11 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,7 @@ void	add_cmds(t_minish *minish)
 	int			i;
 
 	lst = minish->lst_line;
-	minish->cmds = malloc(sizeof(char *) * (minish->ppx.n_cmd));
-	i = 0;
-	while (i < minish->ppx.n_cmd)
-		minish->cmds[i++] = NULL;
+	minish->cmds = ft_calloc(minish->ppx.n_cmd, sizeof(char *));
 	i = 0;
 	while (lst != NULL)
 	{
@@ -118,9 +115,10 @@ char	*expand_variables(char *quote, t_minish *minish)
 	j = 0; 
 	i = 0;
 	e = 0;
-	ret = malloc(new_size(quote, minish));
+	ret = malloc((new_size(quote, minish) + 1) * sizeof(char));
 	while (quote[j - e] != '\0')
 	{
+		printf("PASSSS\n");
 		if (quote[j - e] == '$')
 		{
 			j++;
