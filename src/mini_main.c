@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/10 20:34:37 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/10 20:52:31 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@ int	main(int ac, char *av[], char *env[])
 	t_minish			minish;
 
 	(void) av;
-	ft_signals_n_attr();
-	minish.env = ft_copy_env(env);
-	if (ac != 1 || minish.env == NULL)
+	if (ac != 1 || ft_initmain(&minish, env) == 1)
 		return (1);
 	while (1)
 	{
@@ -30,6 +28,15 @@ int	main(int ac, char *av[], char *env[])
 		if (minish.line[0] != '\0' && is_all_space(minish.line) == 1)
 			treating_line(&minish);
 	}
+	return (0);
+}
+
+int ft_initmain(t_minish *minish, char **env)
+{
+	ft_signals_n_attr();
+	minish->env = ft_copy_env(env);
+	if (minish->env == NULL)
+		return (1);
 	return (0);
 }
 

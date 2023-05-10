@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/10 20:33:37 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/10 20:51:24 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_minish
 }	t_minish;
 
 int			init_minish(t_minish *minish);
+int			ft_initmain(t_minish *minish, char **env);
 void		treating_line(t_minish *minish);
 
 //TESTING
