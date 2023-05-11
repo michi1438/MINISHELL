@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/10 20:51:24 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/11 19:11:47 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ typedef struct s_pipex
 	int		n_cmd;
 }	t_pipex;
 
-// MAIN
 typedef struct s_minish
 {
 	char	**env;
@@ -47,25 +46,6 @@ typedef struct s_minish
 	t_list	*lst_line;
 	t_pipex	ppx;
 }	t_minish;
-
-int			init_minish(t_minish *minish);
-int			ft_initmain(t_minish *minish, char **env);
-void		treating_line(t_minish *minish);
-
-//TESTING
-void		print_lst_line(t_minish minish);
-
-// TOlKiEN
-int			ft_token(t_minish *minish);
-int			search_quotes(t_minish *minish, int type, int i);
-int			deal_with_pipes(t_minish *minish, int i);
-int			deal_with_redir(t_minish *minish, int type, int i);
-int			is_tokenable(t_minish *minish, int i, const char *tok[]);
-int			is_not_tokenable(t_minish *minish, int i, const char *tok[]);
-int			not_token_size(t_minish *minish, int i, const char *tok[]);
-int			deal_with_other(t_minish *minish, int type, int i);
-int			is_all_space(char *str);
-int			ft_err_handling(t_minish *minish);
 
 typedef struct s_content
 {
@@ -86,23 +66,6 @@ enum e_tolkien
 	OTHER,
 };
 
-// LINKING TOlKiEN TO PIPES
-void		add_cmds(t_minish *minish);
-void		append_or_start(t_minish *minish, char *strseg, char *tok_delimiter, int i);
-char		*get_var(char *quote, int j, t_minish *minish);
-
-// MINI_EXPAND.C
-void		treating_expand(char *quote, t_minish *minish, int *j, char *ret);
-char		*expand_variables(char *dblquote, t_minish *minish);
-char		*check_env_var(char **env, char *var);
-int			new_size(char *quote, t_minish *minish);
-
-// UTILS
-char		**ft_copy_env(char *env[]);
-void		mini_lstdelone(t_list *node, void (*del)(void*));
-void		mini_lstclear(t_list **lst, void (*del)(void*));
-
-//GARBAGE_COLLECTOR
 typedef struct s_gc
 {
 	int	flush;
@@ -115,13 +78,52 @@ enum e_gcstatus
 	EXT,
 };
 
+// MINI_MAIN.C
+int			init_minish(t_minish *minish);
+int			ft_initmain(t_minish *minish, char **env);
+int			ft_token(t_minish *minish);
+void		treating_line(t_minish *minish);
+
+//FOR_TESTING_ONLY.C
+void		print_lst_line(t_minish minish);
+
+// MINI_TOKENABLE.C
+int			is_tokenable(t_minish *minish, int i, const char *tok[]);
+int			search_quotes(t_minish *minish, int type, int i);
+int			deal_with_pipes(t_minish *minish, int i);
+int			deal_with_redir(t_minish *minish, int type, int i);
+
+// MINI_NOT_TOKENABLE.C
+int			is_not_tokenable(t_minish *minish, int i, const char *tok[]);
+int			not_token_size(t_minish *minish, int i, const char *tok[]);
+int			is_all_space(char *str);
+
+// MINI_TOK_TO_PIPES.C
+void		add_cmds(t_minish *minish);
+void		append_or_start(t_minish *minish, char *strseg, char *tok_delimiter, int i);
+
+// MINI_EXPAND.C
+char		*expand_variables(char *dblquote, t_minish *minish);
+void		treating_expand(char *quote, t_minish *minish, int *j, char *ret);
+int			new_size(char *quote, t_minish *minish);
+char		*check_env_var(char **env, char *var);
+
+// MINI_UTILS.C
+char		**ft_copy_env(char *env[]);
+void		mini_lstdelone(t_list *node, void (*del)(void*));
+void		mini_lstclear(t_list **lst, void (*del)(void*));
+
+// MINI_ERRORS.C
+int			ft_err_handling(t_minish *minish);
+
+// MINI_GC.C
 void		*gc_malloc(size_t size);
 void		gc_free(void *ptr);
 void		*ft_gc(void *garb, int status);
 void		gc_lstdelone(t_list *lst, void (*del)(void*));
 void		gc_lstclear(t_list **lst, void (*del)(void*));
 
-//SIGNALS and ATTRIBUTES
+// MINI_SIG_N_ATTR.C
 void		ft_signals_n_attr(void);
 void		set_act_int(struct sigaction *act_int);
 void		set_act_quit(struct sigaction *act_quit);

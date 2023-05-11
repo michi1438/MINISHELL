@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 11:09:32 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/02 17:14:23 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/11 19:06:07 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	*ft_gc(void *garb, int status)
 	}
 	else
 		gc_lstclear(&gc_list, free);
-	return (NULL);	
+	return (NULL);
 }
 
 void	gc_lstdelone(t_list *lst, void (*del)(void*))

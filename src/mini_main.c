@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/10 20:52:31 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/11 18:36:44 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int ac, char *av[], char *env[])
 	return (0);
 }
 
-int ft_initmain(t_minish *minish, char **env)
+int	ft_initmain(t_minish *minish, char **env)
 {
 	ft_signals_n_attr();
 	minish->env = ft_copy_env(env);
@@ -51,26 +51,6 @@ int	init_minish(t_minish *minish)
 	return (0);
 }
 
-int	ft_token(t_minish *minish)
-{
-	int			i;
-	const char	*tok[] = {
-		"\'", "\"", "|", ">>", "<<", ">", "<", "$", NULL,
-	};
-
-	i = 0;
-	while (minish->line[i] != '\0')
-	{
-		i = is_not_tokenable(minish, i, tok);
-		i = is_tokenable(minish, i, tok);
-		if (i == -1)
-			return (-1);
-		if (minish->line[i] != '\0')
-			i++;
-	}
-	return (ft_err_handling(minish));
-}
-
 void	treating_line(t_minish *minish)
 {
 	add_history(minish->line);
@@ -84,56 +64,22 @@ void	treating_line(t_minish *minish)
 		printf("unexpected token ERROR\n");
 }
 
-void	add_cmds(t_minish *minish)
+int	ft_token(t_minish *minish)
 {
-	t_list		*lst;
-	t_content	*cont;
 	int			i;
+	const char	*tok[] = {
+		"\'", "\"", "|", ">>", "<<", ">", "<", NULL,
+	};
 
-	lst = minish->lst_line;
-	minish->cmds = ft_calloc(minish->ppx.n_cmd, sizeof(char *));
 	i = 0;
-	while (lst != NULL)
+	while (minish->line[i] != '\0')
 	{
-		cont = lst->content;
-		if (cont->type == OTHER)
-		{
-			cont->str = expand_variables(cont->str, minish);
-			append_or_start(minish, cont->str, NULL, i);
-		}
-		else if (cont->type == QUOTE)
-			append_or_start(minish, cont->str, "'", i);
-		else if (cont->type == DBLQUOTE)
-		{
-			cont->str = expand_variables(cont->str, minish);
-			append_or_start(minish, cont->str, "\"", i);
-		}
-		else 
+		i = is_not_tokenable(minish, i, tok);
+		i = is_tokenable(minish, i, tok);
+		if (i == -1)
+			return (-1);
+		if (minish->line[i] != '\0')
 			i++;
-		lst = lst->next;
 	}
-}
-
-void	append_or_start(t_minish *minish, char *strseg, char *tok_delimiter, int i)
-{
-	if (minish->cmds[i] == NULL)
-	{
-		if (tok_delimiter == NULL) 
-			minish->cmds[i] = strseg;
-		else
-			minish->cmds[i] = ft_strtrim(strseg, tok_delimiter);
-	}
-	else
-	{
-		if (tok_delimiter == NULL) 
-		{
-			minish->cmds[i] = ft_strjoin(minish->cmds[i], " ");
-			minish->cmds[i] = ft_strjoin(minish->cmds[i], strseg);
-		}
-		else
-		{
-			minish->cmds[i] = ft_strjoin(minish->cmds[i], " ");
-			minish->cmds[i] = ft_strjoin(minish->cmds[i], ft_strtrim(strseg, tok_delimiter));
-		}
-	}
+	return (ft_err_handling(minish));
 }

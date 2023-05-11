@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 16:57:22 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/03 14:16:29 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/11 19:10:14 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,6 @@ int	is_not_tokenable(t_minish *minish, int i, const char *tok[])
 	return (i + size);
 }	
 
-int	is_all_space(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] != ' ')
-			return (1);
-		i++;
-	}	
-	return (0);
-}
-
 int	not_token_size(t_minish *minish, int i, const char *tok[])
 {
 	int		size;
@@ -72,4 +58,18 @@ int	not_token_size(t_minish *minish, int i, const char *tok[])
 		}
 	}
 	return (size);
+}
+
+int	is_all_space(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] != ' ')
+			return (1);
+		i++;
+	}	
+	return (0);
 }
