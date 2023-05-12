@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/12 15:28:13 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/12 18:45:52 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	main(int ac, char *av[], char *env[])
 int	ft_initmain(t_minish *minish, char **env)
 {
 	ft_signals_n_attr(minish);
+	minish->prev_line = NULL;
 	minish->env = ft_copy_env(env);
 	if (minish->env == NULL)
 		return (1);
@@ -51,9 +52,32 @@ int	init_minish(t_minish *minish)
 	return (0);
 }
 
+void	ft_add_history(t_minish *minish)
+{
+	size_t		l_line;
+
+	l_line = ft_strlen(minish->line);
+	if (minish->prev_line != NULL)
+	{
+		if (ft_strlen(minish->prev_line) > ft_strlen(minish->line))
+		{
+			l_line = ft_strlen(minish->prev_line);
+			free(minish->prev_line);
+		}
+	}
+	if (minish->prev_line == NULL || ft_strncmp(minish->line,
+			minish->prev_line, l_line) != 0)
+	{
+		add_history(minish->line);
+		minish->prev_line = ft_strdup(minish->line);
+		if (minish->prev_line == NULL)
+			return ;
+	}
+}
+
 void	treating_line(t_minish *minish)
 {
-	add_history(minish->line);
+	ft_add_history(minish);
 	if (ft_token(minish) != -1)
 	{
 		add_cmds(minish);
