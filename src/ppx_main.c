@@ -6,13 +6,13 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:29:12 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/10 19:44:33 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/12 16:19:57 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_looppid(t_pipex *ppx, char **env, int idx)
+void	ft_looppid(t_pipex *ppx, t_minish *minish, int idx)
 {
 	ppx->pid[idx] = fork();
 	if (ppx->pid[idx] < 0)
@@ -33,7 +33,8 @@ void	ft_looppid(t_pipex *ppx, char **env, int idx)
 		else
 			ft_dup(ppx->fd[idx - 1][0], ppx->fd[idx][1]);
 		ft_close_fds(ppx);
-		execve(ppx->path[idx], ppx->cmd[idx], env);
+		check_for_builtin(ppx->cmd[idx], minish, idx);
+		execve(ppx->path[idx], ppx->cmd[idx], minish->env);
 		perror(ppx->cmd[idx][0]);
 		if (errno == ENOENT || ppx->cmd[idx][0] == NULL)
 			exit(127);
@@ -113,7 +114,7 @@ int	main_pipe(t_minish *minish, t_pipex *ppx)
 	}
 	while (i < ppx->n_cmd)
 	{
-		ft_looppid(ppx, minish->env, i);
+		ft_looppid(ppx, minish, i);
 		i++;
 	}
 	return (ft_waitnclose(ppx));

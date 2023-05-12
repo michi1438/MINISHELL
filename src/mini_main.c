@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/12 10:30:03 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/12 15:28:13 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,8 @@ void	treating_line(t_minish *minish)
 	if (ft_token(minish) != -1)
 	{
 		add_cmds(minish);
-		if (check_for_builtin(minish) == 1)
-		{
-			main_pipe(minish, &minish->ppx);
-			mini_lstclear(&minish->lst_line, free);
-		}
+		main_pipe(minish, &minish->ppx);
+		mini_lstclear(&minish->lst_line, free);
 	}
 	else
 		printf("unexpected token ERROR\n");

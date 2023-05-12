@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/12 10:28:29 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/12 16:36:03 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ int			ft_token(t_minish *minish);
 void		treating_line(t_minish *minish);
 
 // MINI_BUILTINS.C
-int			check_for_builtin(t_minish *minish);
-void		builtin_echo(char *cmd);
+void		check_for_builtin(char **cmd);
+void		builtin_echo(char **cmd);
 
 //FOR_TESTING_ONLY.C
 void		print_lst_line(t_minish minish);
@@ -157,7 +157,7 @@ int			ft_heredoc(t_pipex *ppx);
 
 //ppx_main.c
 int			main_pipe(t_minish *minish, t_pipex *ppx);
-void		ft_looppid(t_pipex *ppx, char **env, int idx);
+void		ft_looppid(t_pipex *ppx, t_minish *minish, int idx);
 int			ft_feedppx(t_pipex *ppx, char **av, char **env);
 int			ft_initppx(t_pipex *ppx, t_minish *minish);
 
