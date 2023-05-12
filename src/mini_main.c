@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/11 18:36:44 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/12 10:30:03 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int ac, char *av[], char *env[])
 
 int	ft_initmain(t_minish *minish, char **env)
 {
-	ft_signals_n_attr();
+	ft_signals_n_attr(minish);
 	minish->env = ft_copy_env(env);
 	if (minish->env == NULL)
 		return (1);
@@ -57,8 +57,11 @@ void	treating_line(t_minish *minish)
 	if (ft_token(minish) != -1)
 	{
 		add_cmds(minish);
-		main_pipe(minish, &minish->ppx);
-		mini_lstclear(&minish->lst_line, free);
+		if (check_for_builtin(minish) == 1)
+		{
+			main_pipe(minish, &minish->ppx);
+			mini_lstclear(&minish->lst_line, free);
+		}
 	}
 	else
 		printf("unexpected token ERROR\n");

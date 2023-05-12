@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/11 19:11:47 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/12 10:28:29 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,12 @@ typedef struct s_pipex
 
 typedef struct s_minish
 {
-	char	**env;
-	char	*line;
-	char	**cmds;
-	t_list	*lst_line;
-	t_pipex	ppx;
+	char			**env;
+	char			*line;
+	char			**cmds;
+	struct termios	oldtermi;
+	t_list			*lst_line;
+	t_pipex			ppx;
 }	t_minish;
 
 typedef struct s_content
@@ -83,6 +84,10 @@ int			init_minish(t_minish *minish);
 int			ft_initmain(t_minish *minish, char **env);
 int			ft_token(t_minish *minish);
 void		treating_line(t_minish *minish);
+
+// MINI_BUILTINS.C
+int			check_for_builtin(t_minish *minish);
+void		builtin_echo(char *cmd);
 
 //FOR_TESTING_ONLY.C
 void		print_lst_line(t_minish minish);
@@ -124,7 +129,7 @@ void		gc_lstdelone(t_list *lst, void (*del)(void*));
 void		gc_lstclear(t_list **lst, void (*del)(void*));
 
 // MINI_SIG_N_ATTR.C
-void		ft_signals_n_attr(void);
+void		ft_signals_n_attr(t_minish *minish);
 void		set_act_int(struct sigaction *act_int);
 void		set_act_quit(struct sigaction *act_quit);
 void		re_prompt(int useless);
