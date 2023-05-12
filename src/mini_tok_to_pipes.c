@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 18:33:23 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/11 18:35:25 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/12 21:20:05 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	add_cmds(t_minish *minish)
 			i++;
 		lst = lst->next;
 	}
+	printf("minish->cmds = %s\n", minish->cmds[0]);
 }
 
 void	append_or_start(t_minish *minish, char *strseg, char *tok_delimiter, int i)
@@ -47,7 +48,10 @@ void	append_or_start(t_minish *minish, char *strseg, char *tok_delimiter, int i)
 	if (minish->cmds[i] == NULL)
 	{
 		if (tok_delimiter == NULL)
+		{
+			strseg = search_n_replace(strseg, ' ', ';');
 			minish->cmds[i] = strseg;
+		}
 		else
 			minish->cmds[i] = ft_strtrim(strseg, tok_delimiter);
 	}
@@ -55,13 +59,28 @@ void	append_or_start(t_minish *minish, char *strseg, char *tok_delimiter, int i)
 	{
 		if (tok_delimiter == NULL)
 		{
-			minish->cmds[i] = ft_strjoin(minish->cmds[i], " ");
+			strseg = search_n_replace(strseg, ' ', ';');
+			minish->cmds[i] = ft_strjoin(minish->cmds[i], ";");
 			minish->cmds[i] = ft_strjoin(minish->cmds[i], strseg);
 		}
 		else
 		{
-			minish->cmds[i] = ft_strjoin(minish->cmds[i], " ");
+			minish->cmds[i] = ft_strjoin(minish->cmds[i], ";");
 			minish->cmds[i] = ft_strjoin(minish->cmds[i], ft_strtrim(strseg, tok_delimiter));
 		}
 	}
+}
+
+char	*search_n_replace(char *str, char srch, char rplc)
+{
+	int		i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == srch)
+			str[i] = rplc;
+		i++;
+	}
+	return (str);
 }

@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 16:58:36 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/11 19:10:46 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/12 22:22:05 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,15 @@ int	search_quotes(t_minish *minish, int type, int i)
 		c = '\'';
 	}		
 	i++;
-	while (line[i] != c)
+	//while(line[i + 1] != c || flg == 0)
+	while (line[i] != c || line[(i++) + 1] == c)
 	{
 		if (line[i] == '\0')
 			return (-1);
 		i++;
 	}
 	node->str = ft_substr(&line[j], 0, (i + 1) - j);
+	printf("str = %s\n", node->str);
 	ft_lstadd_back(&minish->lst_line, ft_lstnew(node));
 	return (i);
 }
