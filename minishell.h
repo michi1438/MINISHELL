@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/12 16:36:03 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/12 19:36:09 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ int			is_all_space(char *str);
 // MINI_TOK_TO_PIPES.C
 void		add_cmds(t_minish *minish);
 void		append_or_start(t_minish *minish, char *strseg, char *tok_delimiter, int i);
+char		*search_n_replace(char *str, char srch, char rplc);
 
 // MINI_EXPAND.C
 char		*expand_variables(char *dblquote, t_minish *minish);

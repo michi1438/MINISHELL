@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:29:12 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/12 16:19:57 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/12 19:55:41 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_looppid(t_pipex *ppx, t_minish *minish, int idx)
 		else
 			ft_dup(ppx->fd[idx - 1][0], ppx->fd[idx][1]);
 		ft_close_fds(ppx);
-		check_for_builtin(ppx->cmd[idx], minish, idx);
+		check_for_builtin(ppx->cmd[idx]);
 		execve(ppx->path[idx], ppx->cmd[idx], minish->env);
 		perror(ppx->cmd[idx][0]);
 		if (errno == ENOENT || ppx->cmd[idx][0] == NULL)
@@ -55,7 +55,7 @@ int	ft_feedppx(t_pipex *ppx, char **av, char **env)
 //	}
 	while (i < ppx->n_cmd)
 	{
-		ppx->cmd[i] = ft_split(av[i], ' ');
+		ppx->cmd[i] = ft_split(av[i], ';');
 		if (ppx->cmd[i] == NULL)
 			return (ft_error(av[0], -1));
 		ppx->path[i] = ft_checkpath(env, ppx->cmd[i][0]);
