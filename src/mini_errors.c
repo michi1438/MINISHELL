@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:25:55 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/11 19:06:28 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/16 15:45:42 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int	ft_err_handling(t_minish *minish)
 	while (lst != NULL)
 	{
 		cont = lst->content;
-		if (cont->type == 8 || cont->type < 2)
+		if (cont->type >= 7 || cont->type < 2)
 		{
-			while (cont->type == 8 || cont->type < 2)
+			while (cont->type >= 7 || cont->type < 2)
 			{	
 				lst = lst->next;
 				if (lst == NULL)

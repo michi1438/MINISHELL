@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/12 22:25:56 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/16 15:40:31 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ enum e_tolkien
 	HERE_DOC,
 	REDIR_OUT,
 	REDIR_IN,
-	ENV_VAR,
+	SPCE,
 	OTHER,
 };
 
@@ -99,6 +99,7 @@ int			is_tokenable(t_minish *minish, int i, const char *tok[]);
 int			search_quotes(t_minish *minish, int type, int i);
 int			deal_with_pipes(t_minish *minish, int i);
 int			deal_with_redir(t_minish *minish, int type, int i);
+int			deal_with_spaces(t_minish *minish, int i);
 
 // MINI_NOT_TOKENABLE.C
 int			is_not_tokenable(t_minish *minish, int i, const char *tok[]);
@@ -108,7 +109,6 @@ int			is_all_space(char *str);
 // MINI_TOK_TO_PIPES.C
 void		add_cmds(t_minish *minish);
 void		append_or_start(t_minish *minish, char *strseg, char *tok_delimiter, int i);
-char		*search_n_replace(char *str, char srch, char rplc);
 
 // MINI_EXPAND.C
 char		*expand_variables(char *dblquote, t_minish *minish);
