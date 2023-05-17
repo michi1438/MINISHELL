@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/16 16:37:33 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/17 21:53:54 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	main(int ac, char *av[], char *env[])
 
 int	ft_initmain(t_minish *minish, char **env)
 {
-	ft_signals_n_attr(minish);
 	minish->prev_line = NULL;
 	minish->env = ft_copy_env(env);
 	if (minish->env == NULL)
@@ -43,6 +42,7 @@ int	ft_initmain(t_minish *minish, char **env)
 
 int	init_minish(t_minish *minish)
 {
+	ft_signals_n_attr(SET);
 	minish->ppx.hd_on = 0;
 	minish->ppx.app_on = 0;
 	minish->ppx.f_in = 0;
@@ -80,6 +80,7 @@ void	treating_line(t_minish *minish)
 	ft_add_history(minish);
 	if (ft_token(minish) != -1)
 	{
+		ft_signals_n_attr(UNSET);
 		add_cmds(minish);
 		main_pipe(minish, &minish->ppx);
 		mini_lstclear(&minish->lst_line, free);

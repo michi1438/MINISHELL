@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 20:27:56 by lzito             #+#    #+#             */
-/*   Updated: 2023/05/11 19:08:25 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/17 18:12:39 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,15 @@ char	*expand_variables(char *quote, t_minish *minish)
 	char	*ret;
 
 	j = 0;
-	ret = ft_calloc((new_size(quote, minish) + 1), sizeof(char));
+	ret = ft_calloc(new_size(quote, minish) + 1, sizeof(char));
 	while (quote[j] != '\0')
 	{
-		if (quote[j] == '$')
+		if (quote[j] == '$' && quote[0] != '\'')
 			treating_expand(quote, minish, &j, ret);
 		else
 			ret[ft_strlen(ret)] = quote[j++];
 	}
+	ret = escape_spaces(ret);
 	return (ret);
 }
 
@@ -39,7 +40,7 @@ void	treating_expand(char *quote, t_minish *minish, int *j, char *ret)
 	lendllr = 0;
 	(*j)++;
 	i = *j;
-	while (quote[*j] != ' ' && quote[*j] != '\"' && quote[*j] != '\0')
+	while (is_dol_end(quote, *j))
 		(*j)++;
 	var = ft_substr(&quote[i], 0, *j - i);
 	lendllr = ft_strlen(var) + 1;
@@ -58,6 +59,16 @@ void	treating_expand(char *quote, t_minish *minish, int *j, char *ret)
 	*j = (*j - i) + lendllr;
 }
 
+int	is_dol_end(char *quote, int j)
+{
+	if (ft_isdigit(quote[j - 1]) && quote[j - 2] == '$')
+		return (0);
+	if (quote[j] != ' ' && quote[j] != '\"' && quote[j] != '\0'
+		&& quote[j] != '$')
+		return (1);
+	return (0);
+}
+
 int	new_size(char *quote, t_minish *minish)
 {
 	int		i;
@@ -70,10 +81,10 @@ int	new_size(char *quote, t_minish *minish)
 	tot_size = 0;
 	while (quote[j] != '\0')
 	{
-		if (quote[j++] == '$')
+		if (quote[j++] == '$' && quote[0] != '\'')
 		{
 			i = j;
-			while (quote[j] != ' ' && quote[j] != '\"' && quote[j] != '\0')
+			while (is_dol_end(quote, j))
 				j++;
 			var = ft_substr(&quote[i], 0, j - (i));
 			value = check_env_var(minish->env, ft_strjoin(var, "="));
@@ -101,4 +112,40 @@ char	*check_env_var(char **env, char *var)
 		i++;
 	}
 	return (NULL);
+}
+
+int	escaped_size(char *ret)
+{
+	int		j;
+	int		tot_size;
+
+	j = 0;
+	tot_size = 0;
+	while (ret[j] != '\0')
+	{
+		if (ret[j++] == ' ')
+			tot_size += 2;
+		else
+			tot_size++;
+	}
+	return (tot_size);
+}
+
+char	*escape_spaces(char *ret)
+{
+	int		i;
+	int		j;
+	char	*newret;
+
+	j = 0;
+	i = 0;
+	newret = ft_calloc((escaped_size(ret) + 1), sizeof(char));
+	while (ret[j] != '\0')
+	{
+		if (ret[j] == ' ')
+			newret[i++] = '\\';
+		newret[i++] = ret[j++];
+	}
+	newret[i] = '\0';
+	return (newret);
 }

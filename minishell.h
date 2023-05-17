@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/16 15:40:31 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/17 21:53:11 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ typedef struct s_minish
 	char			*line;
 	char			*prev_line;
 	char			**cmds;
-	struct termios	oldtermi;
 	t_list			*lst_line;
 	t_pipex			ppx;
 }	t_minish;
@@ -80,12 +79,24 @@ enum e_gcstatus
 	EXT,
 };
 
+enum e_signal
+{
+	SET,
+	UNSET,
+};
+
 // MINI_MAIN.C
 int			init_minish(t_minish *minish);
 int			ft_initmain(t_minish *minish, char **env);
 int			ft_token(t_minish *minish);
 void		treating_line(t_minish *minish);
 void		ft_add_history(t_minish *minish);
+
+// MINI_MOD_SPLIT.C
+char		**ft_mod_split(char const *s, char c);
+int			mini_counter(char const *s, char c);
+void		*mini_implfing(char const *s, char c, char **ptrptr, int *i);
+int			mini_clear_fing(char **ptrptr, int j);
 
 // MINI_BUILTINS.C
 void		check_for_builtin(char **cmd);
@@ -115,6 +126,9 @@ char		*expand_variables(char *dblquote, t_minish *minish);
 void		treating_expand(char *quote, t_minish *minish, int *j, char *ret);
 int			new_size(char *quote, t_minish *minish);
 char		*check_env_var(char **env, char *var);
+char		*escape_spaces(char *ret);
+int			escaped_size(char *ret);
+int			is_dol_end(char *quote, int j);
 
 // MINI_UTILS.C
 char		**ft_copy_env(char *env[]);
@@ -132,9 +146,9 @@ void		gc_lstdelone(t_list *lst, void (*del)(void*));
 void		gc_lstclear(t_list **lst, void (*del)(void*));
 
 // MINI_SIG_N_ATTR.C
-void		ft_signals_n_attr(t_minish *minish);
-void		set_act_int(struct sigaction *act_int);
-void		set_act_quit(struct sigaction *act_quit);
+void		ft_signals_n_attr(int toggle);
+void		set_act_int(struct sigaction *act_int, int toggle);
+void		set_act_quit(struct sigaction *act_quit, int toggle);
 void		re_prompt(int useless);
 
 // MINIPIPE
@@ -163,6 +177,7 @@ int			main_pipe(t_minish *minish, t_pipex *ppx);
 void		ft_looppid(t_pipex *ppx, t_minish *minish, int idx);
 int			ft_feedppx(t_pipex *ppx, char **av, char **env);
 int			ft_initppx(t_pipex *ppx, t_minish *minish);
+char		*get_quote_spaces(char ***cmd);
 
 //RL respecified proto for norminette 
 //(not actually used because of the -I in Makefile CFLAGS)

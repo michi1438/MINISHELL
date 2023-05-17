@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 18:33:23 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/16 17:54:24 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/17 13:25:46 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ void	add_cmds(t_minish *minish)
 			append_or_start(minish, cont->str, NULL, i);
 		}
 		else if (cont->type == QUOTE)
+		{
+			cont->str = expand_variables(cont->str, minish);
 			append_or_start(minish, cont->str, "'", i);
+		}
 		else if (cont->type == DBLQUOTE)
 		{
 			cont->str = expand_variables(cont->str, minish);

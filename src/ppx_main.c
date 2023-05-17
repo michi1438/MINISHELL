@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:29:12 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/16 17:54:07 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/17 14:26:24 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	ft_feedppx(t_pipex *ppx, char **av, char **env)
 //	}
 	while (i < ppx->n_cmd)
 	{
-		ppx->cmd[i] = ft_split(av[i], ' ');
+		ppx->cmd[i] = ft_mod_split(av[i], ' ');
 		if (ppx->cmd[i] == NULL)
 			return (ft_error(av[0], -1));
 		ppx->path[i] = ft_checkpath(env, ppx->cmd[i][0]);
@@ -66,6 +66,7 @@ int	ft_feedppx(t_pipex *ppx, char **av, char **env)
 			return (ft_error(av[0], -3));
 		i++;
 	}
+//	ppx->cmd[i][0] = get_quote_spaces(ppx->cmd);
 	return (0);
 }
 
@@ -119,3 +120,33 @@ int	main_pipe(t_minish *minish, t_pipex *ppx)
 	}
 	return (ft_waitnclose(ppx));
 }
+
+char	*get_quote_spaces(char ***cmd)
+{
+	int		i;
+	int		e;
+	char	*str;
+
+	i = 0;
+	e = 0;
+	while (cmd[0][0][i] != '\0')
+	{
+		if (cmd[0][0][i] == '\\' && cmd[0][0][i++ + 1] == ' ')
+			e++;
+	}
+	str = ft_calloc(e + i, sizeof(char));
+	i = 0;
+	e = 0;
+	while (cmd[0][0][i] != '\0')
+	{
+		if (ft_strncmp(&cmd[0][0][i], "\\ ", 2))
+		{
+			str[e++] = ' ';
+			i += 2;
+		}					
+		else
+			str[e++] = cmd[0][0][i++];
+	}
+	printf("%s\n", str);
+	return (str);
+}	
