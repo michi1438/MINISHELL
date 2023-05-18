@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 18:42:02 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/17 21:58:24 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/18 14:53:35 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ void	ft_signals_n_attr(int toggle)
 
 	if (toggle == SET)
 	{
-		tcgetattr(0, &termi);
+		tcgetattr(STDIN_FILENO, &termi);
 		oldtermi = termi;
 		termi.c_lflag = ECHO;
 		tcsetattr(STDIN_FILENO, TCSAFLUSH, &termi);
-		set_act_int(&act_int, toggle);
-		set_act_quit(&act_quit, toggle);
 	}
 	else
-		tcsetattr(STDIN_FILENO, TCSANOW, &oldtermi);
+		tcsetattr(STDIN_FILENO, TCSAFLUSH, &oldtermi);
+	set_act_quit(&act_quit, toggle);
+	set_act_int(&act_int, toggle);
 }
 
 void	set_act_int(struct sigaction *act_int, int toggle)
@@ -38,16 +38,19 @@ void	set_act_int(struct sigaction *act_int, int toggle)
 
 	if (toggle == SET)
 	{	
+		sigaction(SIGINT, NULL, &old_int);
+	}
+	else if (toggle == RESET)
+	{
 		sigemptyset(&act_int->sa_mask);
 		act_int->sa_flags = SA_RESTART;
 		act_int->sa_handler = re_prompt;
 		sigaddset(&act_int->sa_mask, SIGINT);
-		sigaction(SIGINT, act_int, &old_int);
+		sigaction(SIGINT, act_int, NULL);
 	}
 	else
 	{
-		sigemptyset(&act_int->sa_mask);
-		sigaction(SIGQUIT, &old_int, NULL);
+		sigaction(SIGINT, &old_int, NULL);
 	}
 }
 
@@ -57,16 +60,17 @@ void	set_act_quit(struct sigaction *act_quit, int toggle)
 
 	if (toggle == SET)
 	{	
+		sigaction(SIGQUIT, NULL, &old_quit);
+	}
+	else if (toggle == RESET)
+	{	
 		sigemptyset(&act_quit->sa_mask);
 		act_quit->sa_flags = 0;
 		act_quit->sa_handler = SIG_IGN;
-		sigaction(SIGQUIT, act_quit, &old_quit);
-		printf("%p\n", &old_quit);
-		printf("%p\n", &act_quit);
+		sigaction(SIGQUIT, act_quit, NULL);
 	}
 	else
 	{
-		sigemptyset(&act_quit->sa_mask);
 		sigaction(SIGQUIT, &old_quit, NULL);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:29:12 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/17 14:26:24 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/18 14:06:23 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	ft_looppid(t_pipex *ppx, t_minish *minish, int idx)
 		else
 			ft_dup(ppx->fd[idx - 1][0], ppx->fd[idx][1]);
 		ft_close_fds(ppx);
+		ft_signals_n_attr(UNSET);
 		check_for_builtin(ppx->cmd[idx]);
 		execve(ppx->path[idx], ppx->cmd[idx], minish->env);
 		perror(ppx->cmd[idx][0]);
@@ -120,33 +121,3 @@ int	main_pipe(t_minish *minish, t_pipex *ppx)
 	}
 	return (ft_waitnclose(ppx));
 }
-
-char	*get_quote_spaces(char ***cmd)
-{
-	int		i;
-	int		e;
-	char	*str;
-
-	i = 0;
-	e = 0;
-	while (cmd[0][0][i] != '\0')
-	{
-		if (cmd[0][0][i] == '\\' && cmd[0][0][i++ + 1] == ' ')
-			e++;
-	}
-	str = ft_calloc(e + i, sizeof(char));
-	i = 0;
-	e = 0;
-	while (cmd[0][0][i] != '\0')
-	{
-		if (ft_strncmp(&cmd[0][0][i], "\\ ", 2))
-		{
-			str[e++] = ' ';
-			i += 2;
-		}					
-		else
-			str[e++] = cmd[0][0][i++];
-	}
-	printf("%s\n", str);
-	return (str);
-}	

@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/17 21:53:11 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/18 14:40:38 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ enum e_gcstatus
 enum e_signal
 {
 	SET,
+	RESET,
 	UNSET,
 };
 
@@ -177,7 +178,6 @@ int			main_pipe(t_minish *minish, t_pipex *ppx);
 void		ft_looppid(t_pipex *ppx, t_minish *minish, int idx);
 int			ft_feedppx(t_pipex *ppx, char **av, char **env);
 int			ft_initppx(t_pipex *ppx, t_minish *minish);
-char		*get_quote_spaces(char ***cmd);
 
 //RL respecified proto for norminette 
 //(not actually used because of the -I in Makefile CFLAGS)
