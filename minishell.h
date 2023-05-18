@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/18 14:40:38 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/18 16:20:09 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ void		ft_dup(int in, int out);
 int			ft_stralnum(char *str);
 
 //ppx_hd.c
-void		ft_checkheredoc(char **av, t_pipex *ppx);
+void		ft_checkheredoc(t_minish *minish);
 int			ft_heredoc(t_pipex *ppx);
 
 //ppx_main.c

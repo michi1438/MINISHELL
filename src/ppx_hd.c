@@ -6,26 +6,37 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 20:25:58 by lzito             #+#    #+#             */
-/*   Updated: 2023/04/20 10:09:00 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/18 17:28:40 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_checkheredoc(char **av, t_pipex *ppx)
+void	ft_checkheredoc(t_minish *minish)
 {
-	if (ft_strncmp(av[1], "here_doc", 8) == 0)
+	t_list		*node;
+	t_content	*cont;
+
+	node = minish->lst_line;
+	while (node != NULL)
 	{
-		ppx->hd_on = 1;
-		ppx->limiter = av[2];
-		if (pipe(ppx->fd_hd) == -1)
-		{
-			ft_error(av[0], -3);
-			exit(EXIT_FAILURE);
-		}
+		cont = node->content;
+//		if (cont->type == HERE_DOC)
+//			printf("str is = %s\n", cont->str);
+		node = node->next;
 	}
-	else
-		ppx->hd_on = 0;
+//	if (ft_strncmp(av[1], "here_doc", 8) == 0)
+//	{
+//		ppx->hd_on = 1;
+//		ppx->limiter = av[2];
+//		if (pipe(ppx->fd_hd) == -1)
+//		{
+//			ft_error(av[0], -3);
+//			exit(EXIT_FAILURE);
+//		}
+//	}
+//	else
+//		ppx->hd_on = 0;
 }
 
 int	ft_heredoc(t_pipex *ppx)

@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 16:58:36 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/16 15:45:10 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/18 20:21:20 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_tokenable(t_minish *minish, int i, const char *tok[])
 {
-	int		j;
+	int	j;
 
 	j = 0;
 	while (tok[j] != NULL)
@@ -80,6 +80,17 @@ int	deal_with_pipes(t_minish *minish, int i)
 	return (i);
 }
 
+int	find_heredoc(int start, char *line)
+{
+	int	i;
+
+	i = 0;
+	// LIMITERS ENTRE QUOTES A PRENDRE EN COMPTE AUSSI : << "test   bla"
+	while (line[start + i] != '\0' && line[start + i] != ' ')
+		i++;
+	return (start + i);
+}
+
 int	deal_with_redir(t_minish *minish, int type, int i)
 {
 	int			j;
@@ -92,12 +103,18 @@ int	deal_with_redir(t_minish *minish, int type, int i)
 	if (type == 3 && ++i)
 		node->type = APP_OUT;
 	else if (type == 4 && ++i)
+	{
+		while (line[j] == ' ' || line[j] == '<')
+			j++;
+		i = find_heredoc(j, line) - 1;
 		node->type = HERE_DOC;
+	}
 	else if (type == 5)
 		node->type = REDIR_OUT;
 	else
 		node->type = REDIR_IN;
 	node->str = ft_substr(&line[j], 0, (i + 1) - j);
+	printf("LINE = %s$\n", node->str);
 	ft_lstadd_back(&minish->lst_line, ft_lstnew(node));
 	return (i);
 }
