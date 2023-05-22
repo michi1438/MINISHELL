@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:29:12 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/18 14:06:23 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/22 13:20:42 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,8 @@ int	main_pipe(t_minish *minish, t_pipex *ppx)
 	}
 	while (i < ppx->n_cmd)
 	{
-		ft_looppid(ppx, minish, i);
+		if (pre_fork_builtin(ppx->cmd[i], minish) == 0)
+			ft_looppid(ppx, minish, i);
 		i++;
 	}
 	return (ft_waitnclose(ppx));

@@ -78,7 +78,6 @@ CFLAGS	Makefile	/^CFLAGS = -Werror -Wall -Wextra -I$(RL)\/include -I. #-g -fsani
 CFLAGS	libft/Makefile	/^CFLAGS = -Werror -Wall -Wextra$/;"	m
 DBLQUOTE	minishell.h	/^	DBLQUOTE,$/;"	e	enum:e_tolkien
 DEL	minishell.h	/^	DEL,$/;"	e	enum:e_gcstatus
-ENV_VAR	minishell.h	/^	ENV_VAR,$/;"	e	enum:e_tolkien
 EXT	minishell.h	/^	EXT,$/;"	e	enum:e_gcstatus
 GET_NEXT_LINE_BONUS_H	libft/ft_gnl/get_next_line_bonus.h	/^# define GET_NEXT_LINE_BONUS_H$/;"	d
 HERE_DOC	minishell.h	/^	HERE_DOC,$/;"	e	enum:e_tolkien
@@ -94,32 +93,40 @@ PRINTF_H	libft/ft_printf/printf.h	/^# define PRINTF_H$/;"	d
 QUOTE	minishell.h	/^	QUOTE,$/;"	e	enum:e_tolkien
 REDIR_IN	minishell.h	/^	REDIR_IN,$/;"	e	enum:e_tolkien
 REDIR_OUT	minishell.h	/^	REDIR_OUT,$/;"	e	enum:e_tolkien
+RESET	minishell.h	/^	RESET,$/;"	e	enum:e_signal
 RL	Makefile	/^RL = $(READLINE)$/;"	m
+SET	minishell.h	/^	SET,$/;"	e	enum:e_signal
 SOURCES	Makefile	/^SOURCES = $(addprefix src\/, $(SRC_MINISH))$/;"	m
 SOURCES	libft/Makefile	/^SOURCES = $(addprefix ft_main\/, $(SRC_MAIN)) \\$/;"	m
+SPCE	minishell.h	/^	SPCE,$/;"	e	enum:e_tolkien
 SRC_GNL	libft/Makefile	/^SRC_GNL = get_next_line_utils_bonus.c get_next_line_bonus.c$/;"	m
 SRC_LIBFT_H	libft/src_libft.h	/^# define SRC_LIBFT_H$/;"	d
 SRC_MAIN	libft/Makefile	/^SRC_MAIN = ft_bzero.c ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \\$/;"	m
 SRC_MINISH	Makefile	/^SRC_MINISH = mini_main.c ppx_checks.c ppx_free.c ppx_hd.c ppx_main.c \\$/;"	m
 SRC_PRINTF	libft/Makefile	/^SRC_PRINTF = optionctrl.c optionctrl_supl.c print_toconv.c print_toconv_supl.c \\$/;"	m
-add_cmds	src/mini_main.c	/^void	add_cmds(t_minish *minish)$/;"	f	typeref:typename:void
+UNSET	minishell.h	/^	UNSET,$/;"	e	enum:e_signal
+add_cmds	src/mini_tok_to_pipes.c	/^void	add_cmds(t_minish *minish)$/;"	f	typeref:typename:void
 all	Makefile	/^all: $(NAME) $/;"	t
 all	libft/Makefile	/^all: $(NAME) $/;"	t
 app_on	minishell.h	/^	int		app_on;$/;"	m	struct:s_pipex	typeref:typename:int
-append_or_start	src/mini_main.c	/^void	append_or_start(t_minish *minish, char *strseg, char *tok_delimiter, int i)$/;"	f	typeref:typename:void
+append_or_start	src/mini_tok_to_pipes.c	/^void	append_or_start(t_minish *minish, char *strseg, char *tok_delimiter, int i)$/;"	f	typeref:typename:void
 apply_width	libft/ft_printf/optionctrl.c	/^void	apply_width(int size, int width, t_toggler *flg)$/;"	f	typeref:typename:void
 appwidspe	libft/ft_printf/optionctrl.c	/^void	appwidspe(int size, int width, t_toggler *flg, t_conv *cvut)$/;"	f	typeref:typename:void
 argintprt	libft/ft_printf/print_toconv.c	/^void	argintprt(t_toggler *flg, t_conv *cvut, int toconv)$/;"	f	typeref:typename:void
 btrim	libft/ft_main/ft_strtrim.c	/^int	btrim(char const *s1, char const *set)$/;"	f	typeref:typename:int
 buf	libft/ft_gnl/get_next_line_bonus.h	/^	char	*buf;$/;"	m	struct:sct1	typeref:typename:char *
+builtin_cd	src/mini_builtins.c	/^void	builtin_cd(char **cmd, t_minish *minish)$/;"	f	typeref:typename:void
+builtin_echo	src/mini_builtins.c	/^void	builtin_echo(char **cmd)$/;"	f	typeref:typename:void
+builtin_pwd	src/mini_builtins.c	/^void	builtin_pwd(void)$/;"	f	typeref:typename:void
 calc	libft/ft_main/ft_atoi.c	/^int	calc(int i, const char *nptr)$/;"	f	typeref:typename:int
-check_env_var	src/mini_main.c	/^char	*check_env_var(char **env, char *var)$/;"	f	typeref:typename:char *
+check_env_var	src/mini_expand.c	/^char	*check_env_var(char **env, char *var)$/;"	f	typeref:typename:char *
+check_for_builtin	src/mini_builtins.c	/^void	check_for_builtin(char **cmd)$/;"	f	typeref:typename:void
 clean	Makefile	/^clean:$/;"	t
 clean	libft/Makefile	/^clean:$/;"	t
 cleaner	libft/ft_printf/printfer.c	/^void	cleaner(t_conv *cvut)$/;"	f	typeref:typename:void
 clear_fing	libft/ft_main/ft_split.c	/^int	clear_fing(char **ptrptr, int j)$/;"	f	typeref:typename:int
 cmd	minishell.h	/^	char	***cmd;$/;"	m	struct:s_pipex	typeref:typename:char ***
-cmds	minishell.h	/^	char	**cmds;$/;"	m	struct:s_minish	typeref:typename:char **
+cmds	minishell.h	/^	char			**cmds;$/;"	m	struct:s_minish	typeref:typename:char **
 content	libft/ft_main/libft.h	/^	void			*content;$/;"	m	struct:s_list	typeref:typename:void *
 conv_flags	libft/ft_printf/printf.h	/^	char	*conv_flags;$/;"	m	struct:sct	typeref:typename:char *
 copy	libft/ft_main/ft_strtrim.c	/^char	*copy(char *ptr, char const *s1, int bt, int ft)$/;"	f	typeref:typename:char *
@@ -127,17 +134,20 @@ counter	libft/ft_main/ft_split.c	/^int	counter(char const *s, char c)$/;"	f	type
 create_cvut	libft/ft_printf/printfer_supl.c	/^void	*create_cvut(const char *str, int i, t_conv *cvut)$/;"	f	typeref:typename:void *
 cvut_lenpoint	libft/ft_printf/print_toconv.c	/^void	cvut_lenpoint(t_toggler *flg, t_conv *cvut, int toconv)$/;"	f	typeref:typename:void
 cvutlenstr	libft/ft_printf/print_toconv_suplll.c	/^void	cvutlenstr(t_conv *cvut, const char *toconv)$/;"	f	typeref:typename:void
-deal_with_other	src/mini_tokenable.c	/^int	deal_with_other(t_minish *minish, int type, int i)$/;"	f	typeref:typename:int
 deal_with_pipes	src/mini_tokenable.c	/^int	deal_with_pipes(t_minish *minish, int i)$/;"	f	typeref:typename:int
 deal_with_redir	src/mini_tokenable.c	/^int	deal_with_redir(t_minish *minish, int type, int i)$/;"	f	typeref:typename:int
+deal_with_spaces	src/mini_tokenable.c	/^int	deal_with_spaces(t_minish *minish, int i)$/;"	f	typeref:typename:int
 dealwithplneg	libft/ft_printf/print_toconv_supllll.c	/^void	dealwithplneg(t_toggler *flg, t_conv *cvut, int toconv)$/;"	f	typeref:typename:void
 dealwithplus	libft/ft_printf/print_toconv_supllll.c	/^void	dealwithplus(t_toggler *flg, t_conv *cvut, int toconv)$/;"	f	typeref:typename:void
 dealwithpoints	libft/ft_printf/print_toconv_suplll.c	/^void	dealwithpoints(t_toggler *flg, int toconv, t_conv *cvut)$/;"	f	typeref:typename:void
 dealwithpospoints	libft/ft_printf/print_toconv_suplll.c	/^void	dealwithpospoints(t_toggler *flg, t_conv *cvut, int toconv)$/;"	f	typeref:typename:void
 e_gcstatus	minishell.h	/^enum e_gcstatus$/;"	g
+e_signal	minishell.h	/^enum e_signal$/;"	g
 e_tolkien	minishell.h	/^enum e_tolkien$/;"	g
-env	minishell.h	/^	char	**env;$/;"	m	struct:s_minish	typeref:typename:char **
-expand_variables	src/mini_main.c	/^char	*expand_variables(char *quote, t_minish *minish)$/;"	f	typeref:typename:char *
+env	minishell.h	/^	char			**env;$/;"	m	struct:s_minish	typeref:typename:char **
+escape_spaces	src/mini_expand.c	/^char	*escape_spaces(char *ret)$/;"	f	typeref:typename:char *
+escaped_size	src/mini_expand.c	/^int	escaped_size(char *ret)$/;"	f	typeref:typename:int
+expand_variables	src/mini_expand.c	/^char	*expand_variables(char *quote, t_minish *minish)$/;"	f	typeref:typename:char *
 f_in	minishell.h	/^	int		f_in;$/;"	m	struct:s_pipex	typeref:typename:int
 f_out	minishell.h	/^	int		f_out;$/;"	m	struct:s_pipex	typeref:typename:int
 fclean	Makefile	/^fclean: clean$/;"	t
@@ -148,6 +158,7 @@ flag_parser	libft/ft_printf/printparser.c	/^char	*flag_parser(const char *str, i
 flglying	libft/ft_printf/optionctrl.c	/^void	*flglying(char *flag, t_toggler *flg)$/;"	f	typeref:typename:void *
 flush	minishell.h	/^	int	flush;$/;"	m	struct:s_gc	typeref:typename:int
 freeandreplace	libft/ft_gnl/get_next_line_utils_bonus.c	/^char	*freeandreplace(char *oldstr, char *stradd, int ind)$/;"	f	typeref:typename:char *
+ft_add_history	src/mini_main.c	/^void	ft_add_history(t_minish *minish)$/;"	f	typeref:typename:void
 ft_atoi	libft/ft_main/ft_atoi.c	/^int	ft_atoi(const char *nptr)$/;"	f	typeref:typename:int
 ft_bzero	libft/ft_main/ft_bzero.c	/^void	ft_bzero(void *s, int n)$/;"	f	typeref:typename:void
 ft_calloc	libft/ft_main/ft_calloc.c	/^void	*ft_calloc(size_t nmemb, size_t size)$/;"	f	typeref:typename:void *
@@ -165,6 +176,7 @@ ft_free	src/ppx_free.c	/^void	ft_free(char **av)$/;"	f	typeref:typename:void
 ft_freeall	src/ppx_free.c	/^void	ft_freeall(t_pipex *ppx)$/;"	f	typeref:typename:void
 ft_gc	src/mini_gc.c	/^void	*ft_gc(void *garb, int status)$/;"	f	typeref:typename:void *
 ft_heredoc	src/ppx_hd.c	/^int	ft_heredoc(t_pipex *ppx)$/;"	f	typeref:typename:int
+ft_initmain	src/mini_main.c	/^int	ft_initmain(t_minish *minish, char **env)$/;"	f	typeref:typename:int
 ft_initppx	src/ppx_main.c	/^int	ft_initppx(t_pipex *ppx, t_minish *minish)$/;"	f	typeref:typename:int
 ft_isalnum	libft/ft_main/ft_isalnum.c	/^int	ft_isalnum(int c)$/;"	f	typeref:typename:int
 ft_isalpha	libft/ft_main/ft_isalpha.c	/^int	ft_isalpha(int c)$/;"	f	typeref:typename:int
@@ -172,7 +184,7 @@ ft_isascii	libft/ft_main/ft_isascii.c	/^int	ft_isascii(int c)$/;"	f	typeref:type
 ft_isdigit	libft/ft_main/ft_isdigit.c	/^int	ft_isdigit(int c)$/;"	f	typeref:typename:int
 ft_isprint	libft/ft_main/ft_isprint.c	/^int	ft_isprint(int c)$/;"	f	typeref:typename:int
 ft_itoa	libft/ft_main/ft_itoa.c	/^char	*ft_itoa(int n)$/;"	f	typeref:typename:char *
-ft_looppid	src/ppx_main.c	/^void	ft_looppid(t_pipex *ppx, char **env, int idx)$/;"	f	typeref:typename:void
+ft_looppid	src/ppx_main.c	/^void	ft_looppid(t_pipex *ppx, t_minish *minish, int idx)$/;"	f	typeref:typename:void
 ft_lstadd_back	libft/ft_main/ft_lstadd_back.c	/^void	ft_lstadd_back(t_list **lst, t_list *new)$/;"	f	typeref:typename:void
 ft_lstadd_front	libft/ft_main/ft_lstadd_front.c	/^void	ft_lstadd_front(t_list **lst, t_list *new)$/;"	f	typeref:typename:void
 ft_lstclear	libft/ft_main/ft_lstclear.c	/^void	ft_lstclear(t_list **lst, void (*del)(void *))$/;"	f	typeref:typename:void
@@ -187,6 +199,7 @@ ft_memcmp	libft/ft_main/ft_memcmp.c	/^int	ft_memcmp(const void *s1, const void *
 ft_memcpy	libft/ft_main/ft_memcpy.c	/^void	*ft_memcpy(void *dst, const void *src, size_t n)$/;"	f	typeref:typename:void *
 ft_memmove	libft/ft_main/ft_memmove.c	/^void	*ft_memmove(void *dst, const void *src, size_t len)$/;"	f	typeref:typename:void *
 ft_memset	libft/ft_main/ft_memset.c	/^void	*ft_memset(void *b, int c, size_t len)$/;"	f	typeref:typename:void *
+ft_mod_split	src/mini_mod_split.c	/^char	**ft_mod_split(char const *s, char c)$/;"	f	typeref:typename:char **
 ft_printf	libft/ft_printf/printfer.c	/^int	ft_printf(const char *str, ...)$/;"	f	typeref:typename:int
 ft_putchar_fd	libft/ft_main/ft_putchar_fd.c	/^void	ft_putchar_fd(char c, int fd)$/;"	f	typeref:typename:void
 ft_putendl_fd	libft/ft_main/ft_putendl_fd.c	/^void	ft_putendl_fd(char *s, int fd)$/;"	f	typeref:typename:void
@@ -194,7 +207,7 @@ ft_puthex_fd	libft/ft_printf/optionctrl_supl.c	/^void	ft_puthex_fd(unsigned long
 ft_putnbr_fd	libft/ft_main/ft_putnbr_fd.c	/^void	ft_putnbr_fd(int n, int fd)$/;"	f	typeref:typename:void
 ft_putstr_fd	libft/ft_main/ft_putstr_fd.c	/^void	ft_putstr_fd(char *s, int fd)$/;"	f	typeref:typename:void
 ft_putuns_fd	libft/ft_printf/optionctrl_supl.c	/^void	ft_putuns_fd(unsigned int ln, int fd, t_conv *cvut)$/;"	f	typeref:typename:void
-ft_signals_n_attr	src/mini_sig.c	/^void	ft_signals_n_attr(void)$/;"	f	typeref:typename:void
+ft_signals_n_attr	src/mini_sig_n_attr.c	/^void	ft_signals_n_attr(int toggle)$/;"	f	typeref:typename:void
 ft_split	libft/ft_main/ft_split.c	/^char	**ft_split(char const *s, char c)$/;"	f	typeref:typename:char **
 ft_stralnum	src/ppx_utils.c	/^int	ft_stralnum(char *str)$/;"	f	typeref:typename:int
 ft_strchr	libft/ft_main/ft_strchr.c	/^char	*ft_strchr(const char *s, int c)$/;"	f	typeref:typename:char *
@@ -229,6 +242,7 @@ ifstatret	libft/ft_gnl/get_next_line_bonus.c	/^char	*ifstatret(t_strs *strings, 
 implfing	libft/ft_main/ft_split.c	/^void	*implfing(char const *s, char c, char **ptrptr, int *i)$/;"	f	typeref:typename:void *
 init_minish	src/mini_main.c	/^int	init_minish(t_minish *minish)$/;"	f	typeref:typename:int
 is_all_space	src/mini_not_tokenable.c	/^int	is_all_space(char *str)$/;"	f	typeref:typename:int
+is_dol_end	src/mini_expand.c	/^int	is_dol_end(char *quote, int j)$/;"	f	typeref:typename:int
 is_not_tokenable	src/mini_not_tokenable.c	/^int	is_not_tokenable(t_minish *minish, int i, const char *tok[])$/;"	f	typeref:typename:int
 is_tokenable	src/mini_tokenable.c	/^int	is_tokenable(t_minish *minish, int i, const char *tok[])$/;"	f	typeref:typename:int
 len	libft/ft_printf/printf.h	/^	int		len;$/;"	m	struct:sct	typeref:typename:int
@@ -238,16 +252,19 @@ lengthprehex	libft/ft_printf/print_toconv_supl.c	/^int	lengthprehex(unsigned int
 lengthpreint	libft/ft_printf/print_toconv_supl.c	/^int	lengthpreint(int toconv, t_conv *cvut)$/;"	f	typeref:typename:int
 limiter	minishell.h	/^	char	*limiter;$/;"	m	struct:s_pipex	typeref:typename:char *
 line	libft/ft_gnl/get_next_line_bonus.h	/^	char	*line;$/;"	m	struct:sct1	typeref:typename:char *
-line	minishell.h	/^	char	*line;$/;"	m	struct:s_minish	typeref:typename:char *
-lst_line	minishell.h	/^	t_list	*lst_line;$/;"	m	struct:s_minish	typeref:typename:t_list *
+line	minishell.h	/^	char			*line;$/;"	m	struct:s_minish	typeref:typename:char *
+lst_line	minishell.h	/^	t_list			*lst_line;$/;"	m	struct:s_minish	typeref:typename:t_list *
 main	src/mini_main.c	/^int	main(int ac, char *av[], char *env[])$/;"	f	typeref:typename:int
 main_pipe	src/ppx_main.c	/^int	main_pipe(t_minish *minish, t_pipex *ppx)$/;"	f	typeref:typename:int
 mainwhile	libft/ft_gnl/get_next_line_bonus.c	/^char	*mainwhile(int fd, t_strs *strings, char **statline, int *red)$/;"	f	typeref:typename:char *
+mini_clear_fing	src/mini_mod_split.c	/^int	mini_clear_fing(char **ptrptr, int j)$/;"	f	typeref:typename:int
+mini_counter	src/mini_mod_split.c	/^int	mini_counter(char const *s, char c)$/;"	f	typeref:typename:int
+mini_implfing	src/mini_mod_split.c	/^void	*mini_implfing(char const *s, char c, char **ptrptr, int *i)$/;"	f	typeref:typename:void *
 mini_lstclear	src/mini_utils.c	/^void	mini_lstclear(t_list **lst, void (*del)(void*))$/;"	f	typeref:typename:void
 mini_lstdelone	src/mini_utils.c	/^void	mini_lstdelone(t_list *node, void (*del)(void*))$/;"	f	typeref:typename:void
 n_cmd	minishell.h	/^	int		n_cmd;$/;"	m	struct:s_pipex	typeref:typename:int
 neg	libft/ft_printf/printf.h	/^	int	neg;$/;"	m	struct:sctone	typeref:typename:int
-new_size	src/mini_main.c	/^int	new_size(char *quote, t_minish *minish)$/;"	f	typeref:typename:int
+new_size	src/mini_expand.c	/^int	new_size(char *quote, t_minish *minish)$/;"	f	typeref:typename:int
 next	libft/ft_main/libft.h	/^	struct s_list	*next;$/;"	m	struct:s_list	typeref:struct:s_list *
 no_dupl	libft/ft_printf/printparser.c	/^int	no_dupl(char *retstr, char ch, int e, const char *str)$/;"	f	typeref:typename:int
 not_token_size	src/mini_not_tokenable.c	/^int	not_token_size(t_minish *minish, int i, const char *tok[])$/;"	f	typeref:typename:int
@@ -260,9 +277,11 @@ pid	minishell.h	/^	int		*pid;$/;"	m	struct:s_pipex	typeref:typename:int *
 placeva	libft/ft_printf/printfer.c	/^int	placeva(int *ret, t_conv *cvut, int i, va_list perc)$/;"	f	typeref:typename:int
 plus	libft/ft_printf/printf.h	/^	int	plus;$/;"	m	struct:sctone	typeref:typename:int
 point	libft/ft_printf/printf.h	/^	int	point;$/;"	m	struct:sctone	typeref:typename:int
-ppx	minishell.h	/^	t_pipex	ppx;$/;"	m	struct:s_minish	typeref:typename:t_pipex
+ppx	minishell.h	/^	t_pipex			ppx;$/;"	m	struct:s_minish	typeref:typename:t_pipex
+pre_fork_builtin	src/mini_builtins.c	/^int	pre_fork_builtin(char **cmd, t_minish *minish)$/;"	f	typeref:typename:int
 precis	libft/ft_printf/printf.h	/^	int		precis;$/;"	m	struct:sct	typeref:typename:int
 precision_counter	libft/ft_printf/printparser.c	/^int	precision_counter(const char *str, int i)$/;"	f	typeref:typename:int
+prev_line	minishell.h	/^	char			*prev_line;$/;"	m	struct:s_minish	typeref:typename:char *
 print_lst_line	src/For_testing_only.c	/^void	print_lst_line(t_minish minish)$/;"	f	typeref:typename:void
 printargcha	libft/ft_printf/print_toconv_supll.c	/^int	printargcha(int toconv, t_conv *cvut)$/;"	f	typeref:typename:int
 printarghex	libft/ft_printf/print_toconv_supll.c	/^int	printarghex(unsigned int toconv, t_conv *cvut)$/;"	f	typeref:typename:int
@@ -272,7 +291,7 @@ prx_len	libft/ft_printf/printf.h	/^	int		prx_len;$/;"	m	struct:sct	typeref:typen
 ptrtypes	libft/ft_printf/printfer.c	/^int	ptrtypes(t_conv *cvut, void *toconv, int i)$/;"	f	typeref:typename:int
 re	Makefile	/^re: fclean all$/;"	t
 re	libft/Makefile	/^re: fclean all$/;"	t
-re_prompt	src/mini_sig.c	/^void	re_prompt(int useless)$/;"	f	typeref:typename:void
+re_prompt	src/mini_sig_n_attr.c	/^void	re_prompt(int useless)$/;"	f	typeref:typename:void
 readforterm	libft/ft_gnl/get_next_line_utils_bonus.c	/^int	readforterm(char *buf, int toggle)$/;"	f	typeref:typename:int
 s_content	minishell.h	/^typedef struct s_content$/;"	s
 s_gc	minishell.h	/^typedef struct s_gc$/;"	s
@@ -283,8 +302,8 @@ sct	libft/ft_printf/printf.h	/^typedef struct sct {$/;"	s
 sct1	libft/ft_gnl/get_next_line_bonus.h	/^typedef struct sct1 {$/;"	s
 sctone	libft/ft_printf/printf.h	/^typedef struct sctone {$/;"	s
 search_quotes	src/mini_tokenable.c	/^int	search_quotes(t_minish *minish, int type, int i)$/;"	f	typeref:typename:int
-set_act_int	src/mini_sig.c	/^void	set_act_int(struct sigaction *act_int)$/;"	f	typeref:typename:void
-set_act_quit	src/mini_sig.c	/^void	set_act_quit(struct sigaction *act_quit)$/;"	f	typeref:typename:void
+set_act_int	src/mini_sig_n_attr.c	/^void	set_act_int(struct sigaction *act_int, int toggle)$/;"	f	typeref:typename:void
+set_act_quit	src/mini_sig_n_attr.c	/^void	set_act_quit(struct sigaction *act_quit, int toggle)$/;"	f	typeref:typename:void
 set_flags	libft/ft_printf/optionctrl.c	/^void	*set_flags(t_toggler *flg)$/;"	f	typeref:typename:void *
 simple_cvutlen	libft/ft_printf/print_toconv.c	/^void	simple_cvutlen(t_toggler *flg, t_conv *cvut, int toconv)$/;"	f	typeref:typename:void
 space	libft/ft_printf/printf.h	/^	int	space;$/;"	m	struct:sctone	typeref:typename:int
@@ -306,6 +325,7 @@ testprintargint	libft/ft_printf/print_toconv_supllll.c	/^int	testprintargint(int
 testprintargstr	libft/ft_printf/print_toconv_supll.c	/^int	testprintargstr(const char *toconv, t_conv *cvut)$/;"	f	typeref:typename:int
 testprintarguns	libft/ft_printf/print_toconv.c	/^int	testprintarguns(unsigned int toconv, t_conv *cvut)$/;"	f	typeref:typename:int
 trans	libft/ft_main/ft_itoa.c	/^char	*trans(int i, long buf, int *neg)$/;"	f	typeref:typename:char *
+treating_expand	src/mini_expand.c	/^void	treating_expand(char *quote, t_minish *minish, int *j, char *ret)$/;"	f	typeref:typename:void
 treating_line	src/mini_main.c	/^void	treating_line(t_minish *minish)$/;"	f	typeref:typename:void
 trimatoi	libft/ft_main/ft_atoi.c	/^int	trimatoi(const char *nptr, int *neg)$/;"	f	typeref:typename:int
 type	libft/ft_printf/printf.h	/^	char	type;$/;"	m	struct:sct	typeref:typename:char
