@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/18 16:20:09 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/22 16:29:20 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,13 @@ typedef struct s_pipex
 	int		fd_hd[2];
 	int		hd_on;
 	int		app_on;
-	char	*limiter;
 	int		*pid;
 	char	***cmd;
 	int		f_in;
 	int		f_out;
+	char	*limiter;
+	char	*filein;
+	char	*fileout;
 	char	**path;
 	int		n_cmd;
 }	t_pipex;

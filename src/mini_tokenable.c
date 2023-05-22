@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 16:58:36 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/18 20:21:20 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/22 19:21:21 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,46 +77,72 @@ int	deal_with_pipes(t_minish *minish, int i)
 	node->str = ft_substr(&line[j], 0, (i + 1) - j);
 	node->type = PIPE;
 	ft_lstadd_back(&minish->lst_line, ft_lstnew(node));
+	printf("PIPE i = %d\n", i);
 	return (i);
 }
 
-int	find_heredoc(int start, char *line)
+int	redir_quotes(int i, char *line)
 {
-	int	i;
-
-	i = 0;
-	// LIMITERS ENTRE QUOTES A PRENDRE EN COMPTE AUSSI : << "test   bla"
-	while (line[start + i] != '\0' && line[start + i] != ' ')
+	if (line[i] == '\'')
+	{
 		i++;
-	return (start + i);
+		while (line[i] != '\'')
+		{
+			if (line[i] == '\0')
+				return (-1);
+			i++;
+		}
+	}
+	else if (line[i] == '"')
+	{
+		i++;
+		while (line[i] != '"')
+		{
+			if (line[i] == '\0')
+				return (-1);
+			i++;
+		}
+	}
+	else
+	{
+		while (line[i] != '\0' && line[i] != ' ')
+			i++;
+	}
+	return (i);
 }
 
 int	deal_with_redir(t_minish *minish, int type, int i)
 {
-	int			j;
-	char		*line;
-	t_content	*node;
+	int		j;
+	char	*line;
+	char	*res;
 
-	node = malloc(sizeof(struct s_content));
 	line = minish->line;
+	while (line[i] == ' ' || line[i] == '<' || line[i] == '>')
+		i++;
 	j = i;
-	if (type == 3 && ++i)
-		node->type = APP_OUT;
-	else if (type == 4 && ++i)
+	if (line[i] == '\'' || line[i] == '"')
+		j++;
+	i = redir_quotes(i, line);
+	if (i == -1)
+		res = "exit";
+	res = ft_substr(&line[j], 0, i - j);
+	if (type == APP_OUT || type == REDIR_OUT)
 	{
-		while (line[j] == ' ' || line[j] == '<')
-			j++;
-		i = find_heredoc(j, line) - 1;
-		node->type = HERE_DOC;
+		minish->ppx.fileout = res;
+		if (type == APP_OUT)
+			minish->ppx.app_on = 1;
 	}
-	else if (type == 5)
-		node->type = REDIR_OUT;
+	else if (type == HERE_DOC)
+	{
+		minish->ppx.limiter = res;
+		minish->ppx.hd_on = 1;
+	}
 	else
-		node->type = REDIR_IN;
-	node->str = ft_substr(&line[j], 0, (i + 1) - j);
-	printf("LINE = %s$\n", node->str);
-	ft_lstadd_back(&minish->lst_line, ft_lstnew(node));
-	return (i);
+		minish->ppx.filein = res;
+	printf("RES = %s$\n", res);
+	printf("REDIR i = %d\n", i + 1);
+	return (i + 1);
 }
 
 int	deal_with_spaces(t_minish *minish, int i)
