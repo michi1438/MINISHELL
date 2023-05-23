@@ -6,11 +6,12 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:29:12 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/22 13:20:42 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/23 16:20:06 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+#include <stdio.h>
 
 void	ft_looppid(t_pipex *ppx, t_minish *minish, int idx)
 {
@@ -49,11 +50,16 @@ int	ft_feedppx(t_pipex *ppx, char **av, char **env)
 	int	i;
 
 	i = 0;
-//	if (ppx->hd_on == 1)
-//	{
-//		if (ft_heredoc(ppx) == -1)
-//			return (ft_error(av[0], -1));
-//	}
+	if (ppx->hd_on == 1)
+	{
+		if (pipe(ppx->fd_hd) == -1)
+		{
+			ft_error(av[0], -3);
+			exit(EXIT_FAILURE);
+		}
+		if (ft_heredoc(ppx) == -1)
+			return (ft_error(av[0], -1));
+	}
 	while (i < ppx->n_cmd)
 	{
 		ppx->cmd[i] = ft_mod_split(av[i], ' ');
@@ -67,22 +73,33 @@ int	ft_feedppx(t_pipex *ppx, char **av, char **env)
 			return (ft_error(av[0], -3));
 		i++;
 	}
-//	ppx->cmd[i][0] = get_quote_spaces(ppx->cmd);
+	return (0);
+}
+
+int	ft_initppx_io(t_pipex *ppx, t_minish *minish)
+{
+	if (ppx->fileout != NULL)
+	{
+		if (ppx->app_on == 0)
+			ppx->f_out = open(ppx->fileout, O_CREAT | O_WRONLY | O_TRUNC, 00644);
+		else
+			ppx->f_out = open(ppx->fileout, O_CREAT | O_APPEND | O_WRONLY, 00644);
+		if (ppx->f_out == -1)
+			return (ft_error(minish->cmds[0], -2));
+	}
+	if (ppx->hd_on == 0 && ppx->filein != NULL)
+	{
+		ppx->f_in = open(ppx->filein, O_RDONLY);
+		if (ppx->f_in == -1)
+			return (ft_error(minish->cmds[0], -2));
+	}
 	return (0);
 }
 
 int	ft_initppx(t_pipex *ppx, t_minish *minish)
 {
-//	ppx->f_out = open(fileout, O_CREAT | O_WRONLY | O_TRUNC, 00644);
-//	if (ppx->f_out == -1)
-//		return (ft_error(av[ac - 1], -2));
-	//ppx->n_cmd = minish->n_pipe + 1;
-//	if (ppx->hd_on == 0)
-//	{
-//		ppx->f_in = open(filein, O_RDONLY);
-//		if (ppx->f_in == -1)
-//			return (ft_error(av[1], -2));
-//	}
+	if (ft_initppx_io(ppx, minish) == -2)
+		return (-2);
 	ppx->pid = ft_calloc(ppx->n_cmd, sizeof(int));
 	if (ppx->pid == NULL)
 		return (ft_error(minish->cmds[0], -1));
@@ -106,7 +123,6 @@ int	main_pipe(t_minish *minish, t_pipex *ppx)
 	int		initstatus;
 
 	i = 0;
-//	ft_checkheredoc(argv, &ppx);
 	initstatus = ft_initppx(ppx, minish);
 	if (initstatus < 0)
 	{
