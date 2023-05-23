@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:29:12 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/23 15:41:26 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/23 15:58:43 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	ft_initppx_io(t_pipex *ppx, t_minish *minish)
 		if (ppx->app_on == 0)
 			ppx->f_out = open(ppx->fileout, O_CREAT | O_WRONLY | O_TRUNC, 00644);
 		else
-			ppx->f_out = open(ppx->fileout, O_APPEND);
+			ppx->f_out = open(ppx->fileout, O_CREAT | O_APPEND | O_WRONLY, 00644);
 		if (ppx->f_out == -1)
 			return (ft_error(minish->cmds[0], -2));
 	}
