@@ -149,6 +149,7 @@ env	minishell.h	/^	char			**env;$/;"	m	struct:s_minish	typeref:typename:char **
 escape_spaces	src/mini_expand.c	/^char	*escape_spaces(char *ret)$/;"	f	typeref:typename:char *
 escaped_size	src/mini_expand.c	/^int	escaped_size(char *ret)$/;"	f	typeref:typename:int
 expand_variables	src/mini_expand.c	/^char	*expand_variables(char *quote, t_minish *minish)$/;"	f	typeref:typename:char *
+export_noarg	src/mini_builtins.c	/^void	export_noarg(t_minish *minish)$/;"	f	typeref:typename:void
 f_in	minishell.h	/^	int		f_in;$/;"	m	struct:s_pipex	typeref:typename:int
 f_out	minishell.h	/^	int		f_out;$/;"	m	struct:s_pipex	typeref:typename:int
 fclean	Makefile	/^fclean: clean$/;"	t

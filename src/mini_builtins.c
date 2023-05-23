@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 10:00:56 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/23 11:38:18 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/23 14:38:55 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,54 @@ void	check_for_builtin(char **cmd)
 
 int	pre_fork_builtin(char **cmd, t_minish *minish)
 {
-	if (minish->ppx.n_cmd == 1)
+	if (ft_strncmp(cmd[0], "cd\0", 3) == 0)
 	{
-		if (ft_strncmp(cmd[0], "cd\0", 3) == 0)
-		{
+		if (minish->ppx.n_cmd == 1)
 			builtin_cd(cmd, minish);
-			return (1);
-		}
-		else if (ft_strncmp(cmd[0], "export\0", 3) == 0)
+		return (1);
+	}
+	else if (ft_strncmp(cmd[0], "export\0", 3) == 0)
+	{
+		if (minish->ppx.n_cmd == 1)
 		{
-			minish->env = builtin_export(cmd, minish);
-			return (1);
+			if (cmd[1] == NULL)
+				export_noarg(minish);
+			else
+				minish->env = builtin_export(cmd, minish);
 		}
-		else
-			return (0);
+		return (1);
 	}
 	else
 		return (0);
 }
+
+void	export_noarg(t_minish *minish)
+{
+	int		i;
+	int		flg;
+	int		j;
+	
+	i = 0;
+	while (minish->env[i] != NULL)
+	{
+		j = 0;
+		flg = 0;
+		ft_putstr_fd("declare -x ", STDOUT_FILENO);	
+		while (minish->env[i][j] != '\0')
+		{
+			ft_putchar_fd(minish->env[i][j], STDOUT_FILENO);	
+			if (minish->env[i][j++] == '=' && flg == 0)
+			{
+				flg = 1;
+				ft_putchar_fd('"', STDOUT_FILENO);	
+			}
+		}
+		ft_putchar_fd('"', STDOUT_FILENO);	
+		ft_putchar_fd('\n', STDOUT_FILENO);	
+		i++;
+	}
+}
+				
 	
 char	**builtin_export(char **cmd, t_minish *minish)
 {
@@ -52,8 +82,7 @@ char	**builtin_export(char **cmd, t_minish *minish)
 		i++;
 	if (cmd[1][i] == '\0')
 		return (minish->env);
-	i++;
-	var = ft_substr(cmd[1], 0, i);
+	var = ft_substr(cmd[1], 0, ++i);
 	if (check_env_var(minish->env, var) != NULL)
 		new_env = ft_calloc(num_of_line(minish->env), sizeof(char *));
 	else
