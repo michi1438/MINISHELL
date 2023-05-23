@@ -6,12 +6,11 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:29:12 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/23 16:20:06 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/23 21:45:16 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-#include <stdio.h>
 
 void	ft_looppid(t_pipex *ppx, t_minish *minish, int idx)
 {
@@ -20,7 +19,7 @@ void	ft_looppid(t_pipex *ppx, t_minish *minish, int idx)
 		exit(1);
 	if (ppx->pid[idx] == 0)
 	{
-		if (ppx->n_cmd == 1)
+		if (ppx->n_cmd == 1 && ppx->hd_on == 0)
 			ft_dup(ppx->f_in, ppx->f_out);
 		else if (idx == 0)
 		{
