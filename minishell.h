@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/22 16:29:20 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/23 15:48:29 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,12 @@ int			deal_with_pipes(t_minish *minish, int i);
 int			deal_with_redir(t_minish *minish, int type, int i);
 int			deal_with_spaces(t_minish *minish, int i);
 
+// MINI_REDIR.C
+int			ft_heredoc(t_pipex *ppx);
+int			redir_quotes(int i, char *line);
+void		redir_fill(t_minish *minish, int type, char *res);
+int			deal_with_redir(t_minish *minish, int type, int i);
+
 // MINI_NOT_TOKENABLE.C
 int			is_not_tokenable(t_minish *minish, int i, const char *tok[]);
 int			not_token_size(t_minish *minish, int i, const char *tok[]);
@@ -170,10 +176,6 @@ void		ft_close_fds(t_pipex *ppx);
 int			ft_error(char *error, int errn);
 void		ft_dup(int in, int out);
 int			ft_stralnum(char *str);
-
-//ppx_hd.c
-void		ft_checkheredoc(t_minish *minish);
-int			ft_heredoc(t_pipex *ppx);
 
 //ppx_main.c
 int			main_pipe(t_minish *minish, t_pipex *ppx);

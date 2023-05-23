@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 16:58:36 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/22 19:21:21 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/23 15:46:21 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,72 +77,7 @@ int	deal_with_pipes(t_minish *minish, int i)
 	node->str = ft_substr(&line[j], 0, (i + 1) - j);
 	node->type = PIPE;
 	ft_lstadd_back(&minish->lst_line, ft_lstnew(node));
-	printf("PIPE i = %d\n", i);
 	return (i);
-}
-
-int	redir_quotes(int i, char *line)
-{
-	if (line[i] == '\'')
-	{
-		i++;
-		while (line[i] != '\'')
-		{
-			if (line[i] == '\0')
-				return (-1);
-			i++;
-		}
-	}
-	else if (line[i] == '"')
-	{
-		i++;
-		while (line[i] != '"')
-		{
-			if (line[i] == '\0')
-				return (-1);
-			i++;
-		}
-	}
-	else
-	{
-		while (line[i] != '\0' && line[i] != ' ')
-			i++;
-	}
-	return (i);
-}
-
-int	deal_with_redir(t_minish *minish, int type, int i)
-{
-	int		j;
-	char	*line;
-	char	*res;
-
-	line = minish->line;
-	while (line[i] == ' ' || line[i] == '<' || line[i] == '>')
-		i++;
-	j = i;
-	if (line[i] == '\'' || line[i] == '"')
-		j++;
-	i = redir_quotes(i, line);
-	if (i == -1)
-		res = "exit";
-	res = ft_substr(&line[j], 0, i - j);
-	if (type == APP_OUT || type == REDIR_OUT)
-	{
-		minish->ppx.fileout = res;
-		if (type == APP_OUT)
-			minish->ppx.app_on = 1;
-	}
-	else if (type == HERE_DOC)
-	{
-		minish->ppx.limiter = res;
-		minish->ppx.hd_on = 1;
-	}
-	else
-		minish->ppx.filein = res;
-	printf("RES = %s$\n", res);
-	printf("REDIR i = %d\n", i + 1);
-	return (i + 1);
 }
 
 int	deal_with_spaces(t_minish *minish, int i)

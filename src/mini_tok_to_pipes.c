@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 18:33:23 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/17 13:25:46 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/23 15:27:18 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	add_cmds(t_minish *minish)
 			i++;
 		lst = lst->next;
 	}
-	printf("minish->cmds = %s\n", minish->cmds[0]);
+//	printf("minish->cmds = %s\n", minish->cmds[0]);
 }
 
 void	append_or_start(t_minish *minish, char *strseg, char *tok_delimiter, int i)
