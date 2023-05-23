@@ -117,6 +117,7 @@ btrim	libft/ft_main/ft_strtrim.c	/^int	btrim(char const *s1, char const *set)$/;
 buf	libft/ft_gnl/get_next_line_bonus.h	/^	char	*buf;$/;"	m	struct:sct1	typeref:typename:char *
 builtin_cd	src/mini_builtins.c	/^void	builtin_cd(char **cmd, t_minish *minish)$/;"	f	typeref:typename:void
 builtin_echo	src/mini_builtins.c	/^void	builtin_echo(char **cmd)$/;"	f	typeref:typename:void
+builtin_export	src/mini_builtins.c	/^char	**builtin_export(char **cmd, t_minish *minish)$/;"	f	typeref:typename:char **
 builtin_pwd	src/mini_builtins.c	/^void	builtin_pwd(void)$/;"	f	typeref:typename:void
 calc	libft/ft_main/ft_atoi.c	/^int	calc(int i, const char *nptr)$/;"	f	typeref:typename:int
 check_env_var	src/mini_expand.c	/^char	*check_env_var(char **env, char *var)$/;"	f	typeref:typename:char *
@@ -268,6 +269,7 @@ new_size	src/mini_expand.c	/^int	new_size(char *quote, t_minish *minish)$/;"	f	t
 next	libft/ft_main/libft.h	/^	struct s_list	*next;$/;"	m	struct:s_list	typeref:struct:s_list *
 no_dupl	libft/ft_printf/printparser.c	/^int	no_dupl(char *retstr, char ch, int e, const char *str)$/;"	f	typeref:typename:int
 not_token_size	src/mini_not_tokenable.c	/^int	not_token_size(t_minish *minish, int i, const char *tok[])$/;"	f	typeref:typename:int
+num_of_line	src/mini_builtins.c	/^int	num_of_line(char **env)$/;"	f	typeref:typename:int
 numbertypes	libft/ft_printf/printfer_supl.c	/^int	numbertypes(t_conv *cvut, long long toconv, int i)$/;"	f	typeref:typename:int
 numlen	libft/ft_printf/optionctrl_supl.c	/^int	numlen(unsigned long ln, t_conv *cvut)$/;"	f	typeref:typename:int
 numlenneg	libft/ft_printf/optionctrl.c	/^int	numlenneg(long long ln, t_conv *cvut)$/;"	f	typeref:typename:int
