@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/23 16:21:43 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/23 16:26:51 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void		builtin_pwd(void);
 void		builtin_cd(char **cmd, t_minish *minish);
 char		**builtin_export(char **cmd, t_minish *minish);
 int			num_of_line(char **env);
+void		export_noarg(t_minish *minish);
 
 //FOR_TESTING_ONLY.C
 void		print_lst_line(t_minish minish);
