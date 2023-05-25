@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:29:12 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/25 00:36:54 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/25 16:27:09 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ void	ft_looppid(t_pipex *ppx, t_minish *minish, int idx)
 			if (ppx->hd_on == 0)
 				ft_dup(ppx->f_in, ppx->fd[idx][1]);
 			else
+			{
+				printf("n_cmd = %d\n", ppx->n_cmd);
 				ft_dup(ppx->fd_hd[0], ppx->fd[idx][1]);
+			}
 		}
 		else if (idx == ppx->n_cmd - 1)
 			ft_dup(ppx->fd[idx - 1][0], ppx->f_out);
@@ -61,6 +64,7 @@ int	ft_feedppx(t_pipex *ppx, char **av, char **env)
 	}
 	while (i < ppx->n_cmd)
 	{
+//		printf("av[i] = %s\n", av[i]);
 		ppx->cmd[i] = ft_mod_split(av[i], ' ');
 		if (ppx->cmd[i] == NULL)
 			return (ft_error(av[0], -1));
@@ -129,7 +133,7 @@ int	main_pipe(t_minish *minish, t_pipex *ppx)
 			ft_freeall(ppx);
 		return (1);
 	}
-	printf("n_cmd = %d\n", ppx->n_cmd);
+//	printf("n_cmd = %d\n", ppx->n_cmd);
 	while (i < ppx->n_cmd)
 	{
 		if (pre_fork_builtin(ppx->cmd[i], minish) == 0)

@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:44:21 by lzito             #+#    #+#             */
-/*   Updated: 2023/05/24 14:26:50 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/25 13:39:07 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	redir_fill(t_minish *minish, int type, char *res)
 	{
 		minish->ppx.limiter = res;
 		minish->ppx.hd_on = 1;
+		minish->ppx.n_cmd--;
 	}
 	else
 		minish->ppx.filein = res;

@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 16:58:36 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/24 14:28:36 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/25 14:24:09 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ int	deal_with_pipes(t_minish *minish, int i)
 	node = malloc(sizeof(struct s_content));
 	line = minish->line;
 	j = i;
-//	if (minish->ppx.hd_on == 0)
 	minish->ppx.n_cmd++;
 	node->str = ft_substr(&line[j], 0, (i + 1) - j);
 	node->type = PIPE;
