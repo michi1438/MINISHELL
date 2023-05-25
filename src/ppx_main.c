@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:29:12 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/25 16:27:09 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/25 22:34:35 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,14 @@ void	ft_looppid(t_pipex *ppx, t_minish *minish, int idx)
 	{
 		if (ppx->n_cmd == 1 && ppx->hd_on == 0)
 			ft_dup(ppx->f_in, ppx->f_out);
+		else if (ppx->n_cmd == 1 && ppx->hd_on == 1)
+			ft_dup(ppx->fd_hd[0], ppx->f_out);
 		else if (idx == 0)
 		{
 			if (ppx->hd_on == 0)
 				ft_dup(ppx->f_in, ppx->fd[idx][1]);
 			else
-			{
-				printf("n_cmd = %d\n", ppx->n_cmd);
 				ft_dup(ppx->fd_hd[0], ppx->fd[idx][1]);
-			}
 		}
 		else if (idx == ppx->n_cmd - 1)
 			ft_dup(ppx->fd[idx - 1][0], ppx->f_out);
@@ -81,6 +80,7 @@ int	ft_feedppx(t_pipex *ppx, char **av, char **env)
 
 int	ft_initppx_io(t_pipex *ppx, t_minish *minish)
 {
+	(void) minish;
 	if (ppx->fileout != NULL)
 	{
 		if (ppx->app_on == 0)
@@ -88,13 +88,13 @@ int	ft_initppx_io(t_pipex *ppx, t_minish *minish)
 		else
 			ppx->f_out = open(ppx->fileout, O_CREAT | O_APPEND | O_WRONLY, 00644);
 		if (ppx->f_out == -1)
-			return (ft_error(minish->cmds[0], -2));
+			return (ft_error(ppx->fileout, -2));
 	}
 	if (ppx->hd_on == 0 && ppx->filein != NULL)
 	{
 		ppx->f_in = open(ppx->filein, O_RDONLY);
 		if (ppx->f_in == -1)
-			return (ft_error(minish->cmds[0], -2));
+			return (ft_error(ppx->filein, -2));
 	}
 	return (0);
 }
