@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:46:16 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/23 15:47:45 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/25 16:26:15 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,29 +40,28 @@ void	export_noarg(t_minish *minish)
 	int		i;
 	int		flg;
 	int		j;
-	
+
 	i = 0;
 	while (minish->env[i] != NULL)
 	{
 		j = 0;
 		flg = 0;
-		ft_putstr_fd("declare -x ", STDOUT_FILENO);	
+		ft_putstr_fd("declare -x ", STDOUT_FILENO);
 		while (minish->env[i][j] != '\0')
 		{
-			ft_putchar_fd(minish->env[i][j], STDOUT_FILENO);	
+			ft_putchar_fd(minish->env[i][j], STDOUT_FILENO);
 			if (minish->env[i][j++] == '=' && flg == 0)
 			{
 				flg = 1;
-				ft_putchar_fd('"', STDOUT_FILENO);	
+				ft_putchar_fd('"', STDOUT_FILENO);
 			}
 		}
-		ft_putchar_fd('"', STDOUT_FILENO);	
-		ft_putchar_fd('\n', STDOUT_FILENO);	
+		ft_putchar_fd('"', STDOUT_FILENO);
+		ft_putchar_fd('\n', STDOUT_FILENO);
 		i++;
 	}
 }
-				
-	
+
 char	**builtin_export(char **cmd, t_minish *minish)
 {
 	char	**new_env;
@@ -96,7 +95,7 @@ char	**builtin_export(char **cmd, t_minish *minish)
 int	num_of_line(char **env)
 {
 	int	i;
-	
+
 	i = 0;
 	while (env[i] != NULL)
 		i++;
@@ -107,10 +106,9 @@ void	builtin_cd(char **cmd, t_minish *minish)
 {
 	if (cmd[1] != NULL)
 	{
-		chdir(cmd[1]);
 		if (chdir(cmd[1]) == -1)
 			perror(cmd[1]);
 	}
-	else 
+	else
 		chdir(check_env_var(minish->env, "HOME="));
 }
