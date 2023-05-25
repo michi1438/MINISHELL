@@ -6,12 +6,11 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:29:12 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/23 16:20:06 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/25 22:34:35 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-#include <stdio.h>
 
 void	ft_looppid(t_pipex *ppx, t_minish *minish, int idx)
 {
@@ -20,8 +19,10 @@ void	ft_looppid(t_pipex *ppx, t_minish *minish, int idx)
 		exit(1);
 	if (ppx->pid[idx] == 0)
 	{
-		if (ppx->n_cmd == 1)
+		if (ppx->n_cmd == 1 && ppx->hd_on == 0)
 			ft_dup(ppx->f_in, ppx->f_out);
+		else if (ppx->n_cmd == 1 && ppx->hd_on == 1)
+			ft_dup(ppx->fd_hd[0], ppx->f_out);
 		else if (idx == 0)
 		{
 			if (ppx->hd_on == 0)
@@ -62,6 +63,7 @@ int	ft_feedppx(t_pipex *ppx, char **av, char **env)
 	}
 	while (i < ppx->n_cmd)
 	{
+//		printf("av[i] = %s\n", av[i]);
 		ppx->cmd[i] = ft_mod_split(av[i], ' ');
 		if (ppx->cmd[i] == NULL)
 			return (ft_error(av[0], -1));
@@ -78,6 +80,7 @@ int	ft_feedppx(t_pipex *ppx, char **av, char **env)
 
 int	ft_initppx_io(t_pipex *ppx, t_minish *minish)
 {
+	(void) minish;
 	if (ppx->fileout != NULL)
 	{
 		if (ppx->app_on == 0)
@@ -85,13 +88,13 @@ int	ft_initppx_io(t_pipex *ppx, t_minish *minish)
 		else
 			ppx->f_out = open(ppx->fileout, O_CREAT | O_APPEND | O_WRONLY, 00644);
 		if (ppx->f_out == -1)
-			return (ft_error(minish->cmds[0], -2));
+			return (ft_error(ppx->fileout, -2));
 	}
 	if (ppx->hd_on == 0 && ppx->filein != NULL)
 	{
 		ppx->f_in = open(ppx->filein, O_RDONLY);
 		if (ppx->f_in == -1)
-			return (ft_error(minish->cmds[0], -2));
+			return (ft_error(ppx->filein, -2));
 	}
 	return (0);
 }
@@ -130,6 +133,7 @@ int	main_pipe(t_minish *minish, t_pipex *ppx)
 			ft_freeall(ppx);
 		return (1);
 	}
+//	printf("n_cmd = %d\n", ppx->n_cmd);
 	while (i < ppx->n_cmd)
 	{
 		if (pre_fork_builtin(ppx->cmd[i], minish) == 0)

@@ -6,11 +6,12 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:44:21 by lzito             #+#    #+#             */
-/*   Updated: 2023/05/23 15:46:58 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/25 13:39:07 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+#include <stdio.h>
 
 int	ft_heredoc(t_pipex *ppx)
 {
@@ -24,9 +25,11 @@ int	ft_heredoc(t_pipex *ppx)
 		return (-1);
 	}
 	limit_len = ft_strlen(ppx->limiter);
+	write(1, "> ", 2);
 	input = get_next_line(0);
 	while (input && ft_strncmp(input, ppx->limiter, limit_len) != 0)
 	{
+		write(1, "> ", 2);
 		write(ppx->fd_hd[1], input, ft_strlen(input));
 		free(input);
 		input = get_next_line(0);
@@ -77,6 +80,7 @@ void	redir_fill(t_minish *minish, int type, char *res)
 	{
 		minish->ppx.limiter = res;
 		minish->ppx.hd_on = 1;
+		minish->ppx.n_cmd--;
 	}
 	else
 		minish->ppx.filein = res;

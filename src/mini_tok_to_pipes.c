@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 18:33:23 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/23 16:18:54 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/25 18:06:56 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,11 @@ void	add_cmds(t_minish *minish)
 		}
 		else if (cont->type == SPCE)
 			append_or_start(minish, cont->str, NULL, i);
-		else
+		else if (cont->type == PIPE && minish->cmds[i] != NULL)
 			i++;
 		lst = lst->next;
+//		printf("cmd = %s$ i = %d\n", minish->cmds[i], i);
+//		printf("cont->str = %s$\n", cont->str);
 	}
 }
 
