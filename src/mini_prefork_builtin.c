@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:46:16 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/25 22:43:03 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/26 20:35:59 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,13 @@ int	pre_fork_builtin(char **cmd, t_minish *minish)
 				minish->env = builtin_export(cmd, minish);
 		}
 		return (1);
+	}
+	else if (ft_strncmp(cmd[0], "exit\0", 5) == 0)
+	{
+		printf("exit\n");
+		if (cmd[1] == NULL)
+			exit (0); // exit value of the last command executed...
+		exit (ft_atoi(cmd[1]));
 	}
 	else
 		return (0);
