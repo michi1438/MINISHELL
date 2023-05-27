@@ -124,6 +124,7 @@ btrim	libft/ft_main/ft_strtrim.c	/^int	btrim(char const *s1, char const *set)$/;
 buf	libft/ft_gnl/get_next_line_bonus.h	/^	char	*buf;$/;"	m	struct:sct1	typeref:typename:char *
 builtin_cd	src/mini_prefork_builtin.c	/^void	builtin_cd(char **cmd, t_minish *minish)$/;"	f	typeref:typename:void
 builtin_echo	src/mini_builtins.c	/^void	builtin_echo(char **cmd)$/;"	f	typeref:typename:void
+builtin_exit	src/mini_prefork_builtin.c	/^int	builtin_exit(char **cmd, t_minish *minish)$/;"	f	typeref:typename:int
 builtin_export	src/mini_prefork_builtin.c	/^char	**builtin_export(char **cmd, t_minish *minish)$/;"	f	typeref:typename:char **
 builtin_pwd	src/mini_builtins.c	/^void	builtin_pwd(void)$/;"	f	typeref:typename:void
 calc	libft/ft_main/ft_atoi.c	/^int	calc(int i, const char *nptr)$/;"	f	typeref:typename:int
@@ -254,6 +255,7 @@ ifstatret	libft/ft_gnl/get_next_line_bonus.c	/^char	*ifstatret(t_strs *strings, 
 implfing	libft/ft_main/ft_split.c	/^void	*implfing(char const *s, char c, char **ptrptr, int *i)$/;"	f	typeref:typename:void *
 init_minish	src/mini_main.c	/^int	init_minish(t_minish *minish)$/;"	f	typeref:typename:int
 is_all_space	src/mini_not_tokenable.c	/^int	is_all_space(char *str)$/;"	f	typeref:typename:int
+is_builtin	src/mini_exit_status.c	/^int	is_builtin(char *cmd)$/;"	f	typeref:typename:int
 is_dol_end	src/mini_expand.c	/^int	is_dol_end(char *quote, int j)$/;"	f	typeref:typename:int
 is_not_tokenable	src/mini_not_tokenable.c	/^int	is_not_tokenable(t_minish *minish, int i, const char *tok[])$/;"	f	typeref:typename:int
 is_tokenable	src/mini_tokenable.c	/^int	is_tokenable(t_minish *minish, int i, const char *tok[])$/;"	f	typeref:typename:int

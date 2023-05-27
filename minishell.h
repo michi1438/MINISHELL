@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/27 11:53:02 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/27 16:07:20 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,13 +104,16 @@ int			mini_clear_fing(char **ptrptr, int j);
 
 // MINI_BUILTINS.C
 void		check_for_builtin(char **cmd);
-int			pre_fork_builtin(char **cmd, t_minish *minish);
 void		builtin_echo(char **cmd);
 void		builtin_pwd(void);
-void		builtin_cd(char **cmd, t_minish *minish);
+
+// MINI_PREFORK_BUILTIN.C
+int			pre_fork_builtin(char **cmd, t_minish *minish);
 char		**builtin_export(char **cmd, t_minish *minish);
 int			num_of_line(char **env);
 void		export_noarg(t_minish *minish);
+int			builtin_exit(char **cmd, t_minish *minish);
+void		builtin_cd(char **cmd, t_minish *minish);
 
 //FOR_TESTING_ONLY.C
 void		print_lst_line(t_minish minish);
@@ -167,12 +170,15 @@ void		set_act_int(struct sigaction *act_int, int toggle);
 void		set_act_quit(struct sigaction *act_quit, int toggle);
 void		re_prompt(int useless);
 
+// MINI_EXIT_STATUS.C
+void		update_exit_stat(char *fullpath, t_pipex *ppx, char *cmd);
+int			is_builtin(char *cmd);
+
 // MINIPIPE
 //ppx_checks.c
 char		*ft_checkexe(char **paths, char *cmd, t_pipex *ppx);
 char		**ft_checkenv(char *env[]);
 char		*ft_checkpath(char *env[], char *cmd, t_pipex *ppx);
-void		update_exit_stat(char *fullpath, t_pipex *ppx, char *cmd);
 
 //ppx_free.c
 void		ft_freeall(t_pipex *ppx);

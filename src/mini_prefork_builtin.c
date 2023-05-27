@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:46:16 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/27 10:51:04 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/27 16:16:57 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,41 @@ int	pre_fork_builtin(char **cmd, t_minish *minish)
 	}
 	else if (ft_strncmp(cmd[0], "exit\0", 5) == 0)
 	{
-		printf("exit\n");
-		if (cmd[1] == NULL)
-			exit (minish->ppx.last_exit_status); // exit value of the last command executed...
-		exit (ft_atoi(cmd[1]));
+		minish->ppx.last_exit_status = builtin_exit(cmd, minish);
+		return (1);
 	}
 	else
 		return (0);
+}
+
+int	builtin_exit(char **cmd, t_minish *minish)
+{
+	int i;
+
+	i = 0;
+	if (cmd[1] != NULL)
+	{
+		if (cmd[2] != NULL) 
+		{
+			printf("%s: too many arguments\n", cmd[0]);
+			return (1);
+		}
+		while (cmd[1][i] != '\0')
+		{
+			if (!(ft_isdigit(cmd[1][i++])))
+			{
+				printf("%s: numeric argument required\n", cmd[1]);
+				return (2);
+			}
+		}
+		printf("exit\n");
+		exit (ft_atoi(cmd[1]));
+	}
+	else
+	{
+		printf("exit\n");
+		exit (minish->ppx.last_exit_status); // exit value of the last command executed...
+	}
 }
 
 void	export_noarg(t_minish *minish)
