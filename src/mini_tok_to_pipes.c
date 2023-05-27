@@ -6,11 +6,23 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 18:33:23 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/25 18:06:56 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/27 21:59:41 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int	init_cmds(t_minish *minish)
+{
+	// CALLOC A PROTEGER !!!
+	minish->cmds = ft_calloc(minish->ppx.n_cmd, sizeof(char *));
+	minish->ppx.limiter = ft_calloc(minish->ppx.n_cmd, sizeof(char *));
+	minish->ppx.filein = ft_calloc(minish->ppx.n_cmd, sizeof(char *));
+	minish->ppx.fileout = ft_calloc(minish->ppx.n_cmd, sizeof(char *));
+	minish->ppx.app_on = ft_calloc(minish->ppx.n_cmd, sizeof(int));
+	minish->ppx.hd_on = ft_calloc(minish->ppx.n_cmd, sizeof(int));
+	return (0);
+}
 
 void	add_cmds(t_minish *minish)
 {
@@ -19,7 +31,7 @@ void	add_cmds(t_minish *minish)
 	int			i;
 
 	lst = minish->lst_line;
-	minish->cmds = ft_calloc(minish->ppx.n_cmd, sizeof(char *));
+	init_cmds(minish);
 	i = 0;
 	while (lst != NULL)
 	{
@@ -39,13 +51,15 @@ void	add_cmds(t_minish *minish)
 			cont->str = expand_variables(cont->str, minish);
 			append_or_start(minish, cont->str, "\"", i);
 		}
+		else if (cont->type >= APP_OUT && cont->type <= REDIR_IN)
+			redir_fill(minish, cont->type, cont->str, i); 	
 		else if (cont->type == SPCE)
 			append_or_start(minish, cont->str, NULL, i);
 		else if (cont->type == PIPE && minish->cmds[i] != NULL)
 			i++;
 		lst = lst->next;
-//		printf("cmd = %s$ i = %d\n", minish->cmds[i], i);
 //		printf("cont->str = %s$\n", cont->str);
+//		printf("cmd = %s$ i = %d\n", minish->cmds[i], i);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/25 14:13:56 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/27 17:10:22 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,7 @@ int	ft_initmain(t_minish *minish, char **env)
 int	init_minish(t_minish *minish)
 {
 	ft_signals_n_attr(RESET);
-	minish->ppx.hd_on = 0;
-	minish->ppx.app_on = 0;
-	minish->ppx.f_in = 0;
-	minish->ppx.f_out = 1;
 	minish->ppx.n_cmd = 1;
-	minish->ppx.limiter = NULL;
-	minish->ppx.filein = NULL;
-	minish->ppx.fileout = NULL;
 	minish->lst_line = NULL;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:29:12 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/25 22:34:35 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/28 01:05:51 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,14 @@ void	ft_looppid(t_pipex *ppx, t_minish *minish, int idx)
 		exit(1);
 	if (ppx->pid[idx] == 0)
 	{
-		if (ppx->n_cmd == 1 && ppx->hd_on == 0)
-			ft_dup(ppx->f_in, ppx->f_out);
-		else if (ppx->n_cmd == 1 && ppx->hd_on == 1)
-			ft_dup(ppx->fd_hd[0], ppx->f_out);
+		if (ppx->n_cmd == 1)
+			ft_redir_only_cmd(ppx, idx);
 		else if (idx == 0)
-		{
-			if (ppx->hd_on == 0)
-				ft_dup(ppx->f_in, ppx->fd[idx][1]);
-			else
-				ft_dup(ppx->fd_hd[0], ppx->fd[idx][1]);
-		}
+			ft_redir_first_cmd(ppx, idx);
 		else if (idx == ppx->n_cmd - 1)
-			ft_dup(ppx->fd[idx - 1][0], ppx->f_out);
+			ft_redir_last_cmd(ppx, idx);
 		else
-			ft_dup(ppx->fd[idx - 1][0], ppx->fd[idx][1]);
+			ft_redir_mid_cmd(ppx, idx);
 		ft_close_fds(ppx);
 		ft_signals_n_attr(UNSET);
 		check_for_builtin(ppx->cmd[idx]);
@@ -51,18 +44,18 @@ int	ft_feedppx(t_pipex *ppx, char **av, char **env)
 	int	i;
 
 	i = 0;
-	if (ppx->hd_on == 1)
-	{
-		if (pipe(ppx->fd_hd) == -1)
-		{
-			ft_error(av[0], -3);
-			exit(EXIT_FAILURE);
-		}
-		if (ft_heredoc(ppx) == -1)
-			return (ft_error(av[0], -1));
-	}
 	while (i < ppx->n_cmd)
 	{
+		if (ppx->hd_on[i] == 1)
+		{
+			if (pipe(ppx->fd_hd[i]) == -1)
+			{
+				ft_error(av[0], -3);
+				exit(EXIT_FAILURE);
+			}
+			if (ft_heredoc(ppx, i) == -1)
+				return (ft_error(av[0], -1));
+		}
 //		printf("av[i] = %s\n", av[i]);
 		ppx->cmd[i] = ft_mod_split(av[i], ' ');
 		if (ppx->cmd[i] == NULL)
@@ -80,29 +73,38 @@ int	ft_feedppx(t_pipex *ppx, char **av, char **env)
 
 int	ft_initppx_io(t_pipex *ppx, t_minish *minish)
 {
+	int	i;
+
 	(void) minish;
-	if (ppx->fileout != NULL)
+	i = 0;
+	while (i < ppx->n_cmd)
 	{
-		if (ppx->app_on == 0)
-			ppx->f_out = open(ppx->fileout, O_CREAT | O_WRONLY | O_TRUNC, 00644);
-		else
-			ppx->f_out = open(ppx->fileout, O_CREAT | O_APPEND | O_WRONLY, 00644);
-		if (ppx->f_out == -1)
-			return (ft_error(ppx->fileout, -2));
-	}
-	if (ppx->hd_on == 0 && ppx->filein != NULL)
-	{
-		ppx->f_in = open(ppx->filein, O_RDONLY);
-		if (ppx->f_in == -1)
-			return (ft_error(ppx->filein, -2));
+		if (ppx->filein[i] == NULL)
+			ppx->f_in[i] = 0;
+		if (ppx->fileout[i] == NULL)
+			ppx->f_out[i] = 1;
+		if (ppx->fileout[i] != NULL)
+		{
+			if (ppx->app_on[i] == 0)
+				ppx->f_out[i] = open(ppx->fileout[i], O_CREAT | O_WRONLY | O_TRUNC, 00644);
+			else
+				ppx->f_out[i] = open(ppx->fileout[i], O_CREAT | O_APPEND | O_WRONLY, 00644);
+			if (ppx->f_out[i] == -1)
+				return (ft_error(ppx->fileout[i], -2));
+		}
+		if (ppx->hd_on[i] == 0 && ppx->filein[i] != NULL)
+		{
+			ppx->f_in[i] = open(ppx->filein[i], O_RDONLY);
+			if (ppx->f_in[i] == -1)
+				return (ft_error(ppx->filein[i], -2));
+		}
+		i++;
 	}
 	return (0);
 }
 
 int	ft_initppx(t_pipex *ppx, t_minish *minish)
 {
-	if (ft_initppx_io(ppx, minish) == -2)
-		return (-2);
 	ppx->pid = ft_calloc(ppx->n_cmd, sizeof(int));
 	if (ppx->pid == NULL)
 		return (ft_error(minish->cmds[0], -1));
@@ -115,6 +117,14 @@ int	ft_initppx(t_pipex *ppx, t_minish *minish)
 	ppx->fd = ft_calloc(ppx->n_cmd, sizeof(int *));
 	if (ppx->fd == NULL)
 		return (ft_error(minish->cmds[0], -1));
+	ppx->f_in = ft_calloc(ppx->n_cmd, sizeof(int));
+	if (ppx->f_in == NULL)
+		return (ft_error(minish->cmds[0], -1));
+	ppx->f_out = ft_calloc(ppx->n_cmd, sizeof(int));
+	if (ppx->f_out == NULL)
+		return (ft_error(minish->cmds[0], -1));
+	if (ft_initppx_io(ppx, minish) == -2)
+		return (-2);
 	if (ft_feedppx(ppx, minish->cmds, minish->env) == -1)
 		return (-1);
 	return (0);
@@ -136,7 +146,7 @@ int	main_pipe(t_minish *minish, t_pipex *ppx)
 //	printf("n_cmd = %d\n", ppx->n_cmd);
 	while (i < ppx->n_cmd)
 	{
-		if (pre_fork_builtin(ppx->cmd[i], minish) == 0)
+		if (pre_fork_builtin(ppx->cmd[i], minish, i) == 0)
 			ft_looppid(ppx, minish, i);
 		i++;
 	}
