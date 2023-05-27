@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/23 16:26:51 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/27 11:53:02 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 
 typedef struct s_pipex
 {
+	int		last_exit_status;
 	int		**fd;
 	int		fd_hd[2];
 	int		hd_on;
@@ -168,9 +169,10 @@ void		re_prompt(int useless);
 
 // MINIPIPE
 //ppx_checks.c
-char		*ft_checkexe(char **paths, char *cmd);
+char		*ft_checkexe(char **paths, char *cmd, t_pipex *ppx);
 char		**ft_checkenv(char *env[]);
-char		*ft_checkpath(char *env[], char *cmd);
+char		*ft_checkpath(char *env[], char *cmd, t_pipex *ppx);
+void		update_exit_stat(char *fullpath, t_pipex *ppx, char *cmd);
 
 //ppx_free.c
 void		ft_freeall(t_pipex *ppx);

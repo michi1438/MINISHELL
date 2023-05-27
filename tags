@@ -174,8 +174,8 @@ ft_atoi	libft/ft_main/ft_atoi.c	/^int	ft_atoi(const char *nptr)$/;"	f	typeref:ty
 ft_bzero	libft/ft_main/ft_bzero.c	/^void	ft_bzero(void *s, int n)$/;"	f	typeref:typename:void
 ft_calloc	libft/ft_main/ft_calloc.c	/^void	*ft_calloc(size_t nmemb, size_t size)$/;"	f	typeref:typename:void *
 ft_checkenv	src/ppx_checks.c	/^char	**ft_checkenv(char *env[])$/;"	f	typeref:typename:char **
-ft_checkexe	src/ppx_checks.c	/^char	*ft_checkexe(char **paths, char *cmd)$/;"	f	typeref:typename:char *
-ft_checkpath	src/ppx_checks.c	/^char	*ft_checkpath(char *env[], char *cmd)$/;"	f	typeref:typename:char *
+ft_checkexe	src/ppx_checks.c	/^char		*ft_checkexe(char **paths, char *cmd, t_pipex *ppx)$/;"	f	typeref:typename:char *
+ft_checkpath	src/ppx_checks.c	/^char		*ft_checkpath(char *env[], char *cmd,t_pipex *ppx)$/;"	f	typeref:typename:char *
 ft_close_fds	src/ppx_free.c	/^void	ft_close_fds(t_pipex *ppx)$/;"	f	typeref:typename:void
 ft_copy_env	src/mini_utils.c	/^char	**ft_copy_env(char *env[])$/;"	f	typeref:typename:char **
 ft_dup	src/ppx_utils.c	/^void	ft_dup(int in, int out)$/;"	f	typeref:typename:void
@@ -257,6 +257,7 @@ is_all_space	src/mini_not_tokenable.c	/^int	is_all_space(char *str)$/;"	f	typere
 is_dol_end	src/mini_expand.c	/^int	is_dol_end(char *quote, int j)$/;"	f	typeref:typename:int
 is_not_tokenable	src/mini_not_tokenable.c	/^int	is_not_tokenable(t_minish *minish, int i, const char *tok[])$/;"	f	typeref:typename:int
 is_tokenable	src/mini_tokenable.c	/^int	is_tokenable(t_minish *minish, int i, const char *tok[])$/;"	f	typeref:typename:int
+last_exit_status	minishell.h	/^	int		last_exit_status;$/;"	m	struct:s_pipex	typeref:typename:int
 len	libft/ft_printf/printf.h	/^	int		len;$/;"	m	struct:sct	typeref:typename:int
 lengthhex	libft/ft_printf/print_toconv_supl.c	/^int	lengthhex(unsigned int toconv, t_conv *cvut, t_toggler *flg)$/;"	f	typeref:typename:int
 lengthint	libft/ft_printf/print_toconv_supl.c	/^int	lengthint(int toconv, t_conv *cvut, t_toggler *flg)$/;"	f	typeref:typename:int
@@ -346,6 +347,7 @@ trimatoi	libft/ft_main/ft_atoi.c	/^int	trimatoi(const char *nptr, int *neg)$/;"	
 type	libft/ft_printf/printf.h	/^	char	type;$/;"	m	struct:sct	typeref:typename:char
 type	minishell.h	/^	int		type;$/;"	m	struct:s_content	typeref:typename:int
 type_reader	libft/ft_printf/printparser.c	/^char	type_reader(const char *str, int i)$/;"	f	typeref:typename:char
+update_exit_stat	src/mini_exit_status.c	/^void	update_exit_stat(char *fullpath, t_pipex *ppx, char *cmd)$/;"	f	typeref:typename:void
 wid	libft/ft_printf/printf.h	/^	int		wid;$/;"	m	struct:sct	typeref:typename:int
 width_counter	libft/ft_printf/printparser.c	/^int	width_counter(const char *str, int i)$/;"	f	typeref:typename:int
 yo	tester.sh	/^\/bin\/bash << yo $/;"	h

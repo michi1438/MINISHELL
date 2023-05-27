@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:46:16 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/26 20:35:59 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/27 10:51:04 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	pre_fork_builtin(char **cmd, t_minish *minish)
 	{
 		printf("exit\n");
 		if (cmd[1] == NULL)
-			exit (0); // exit value of the last command executed...
+			exit (minish->ppx.last_exit_status); // exit value of the last command executed...
 		exit (ft_atoi(cmd[1]));
 	}
 	else

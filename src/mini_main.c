@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/25 14:13:56 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/27 10:54:34 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	main(int ac, char *av[], char *env[])
 int	ft_initmain(t_minish *minish, char **env)
 {
 	ft_signals_n_attr(SET);
+	minish->ppx.last_exit_status = 0;
 	minish->prev_line = NULL;
 	minish->env = ft_copy_env(env);
 	if (minish->env == NULL)
