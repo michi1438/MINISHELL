@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:46:16 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/27 16:16:57 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/27 16:28:19 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	builtin_exit(char **cmd, t_minish *minish)
 	else
 	{
 		printf("exit\n");
-		exit (minish->ppx.last_exit_status); // exit value of the last command executed...
+		exit (minish->ppx.last_exit_status);
 	}
 }
 

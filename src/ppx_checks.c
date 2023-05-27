@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 20:21:48 by lzito             #+#    #+#             */
-/*   Updated: 2023/05/27 15:31:35 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/27 16:38:27 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ char		*ft_checkpath(char *env[], char *cmd,t_pipex *ppx)
 	if (ft_strchr(cmd, '/'))
 	{
 		cmd_cpy = ft_strdup(cmd);
+		update_exit_stat(cmd_cpy, ppx, cmd_cpy);
 		return (cmd_cpy);
 	}
 	paths = ft_checkenv(env);

@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 11:57:57 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/27 15:34:04 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/27 16:31:27 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	is_builtin(char *cmd)
 {
 	int			i;
 	const char	*builtin[] = {
-		"echo", "exit", "cd", "pwd", "export", "env", NULL,
+		"echo", "exit", "cd", "pwd", "export", "env", "unset",  NULL,
 	};
 
 	i = 0;
