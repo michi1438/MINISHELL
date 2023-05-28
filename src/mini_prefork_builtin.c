@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:46:16 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/27 16:28:19 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/28 19:28:52 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,10 @@ void	builtin_cd(char **cmd, t_minish *minish)
 	if (cmd[1] != NULL)
 	{
 		if (chdir(cmd[1]) == -1)
+		{
+			minish->ppx.last_exit_status = 1;
 			perror(cmd[1]);
+		}
 	}
 	else
 		chdir(check_env_var(minish->env, "HOME="));
