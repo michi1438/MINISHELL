@@ -6,21 +6,22 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 18:33:23 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/27 21:59:41 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/29 01:30:05 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+#include <stdio.h>
 
 int	init_cmds(t_minish *minish)
 {
 	// CALLOC A PROTEGER !!!
 	minish->cmds = ft_calloc(minish->ppx.n_cmd, sizeof(char *));
 	minish->ppx.limiter = ft_calloc(minish->ppx.n_cmd, sizeof(char *));
+	minish->ppx.hd_on = ft_calloc(minish->ppx.n_cmd, sizeof(int));
 	minish->ppx.filein = ft_calloc(minish->ppx.n_cmd, sizeof(char *));
 	minish->ppx.fileout = ft_calloc(minish->ppx.n_cmd, sizeof(char *));
 	minish->ppx.app_on = ft_calloc(minish->ppx.n_cmd, sizeof(int));
-	minish->ppx.hd_on = ft_calloc(minish->ppx.n_cmd, sizeof(int));
 	return (0);
 }
 
@@ -52,7 +53,7 @@ void	add_cmds(t_minish *minish)
 			append_or_start(minish, cont->str, "\"", i);
 		}
 		else if (cont->type >= APP_OUT && cont->type <= REDIR_IN)
-			redir_fill(minish, cont->type, cont->str, i); 	
+			redir_fill(minish, cont->type, cont->str, i);
 		else if (cont->type == SPCE)
 			append_or_start(minish, cont->str, NULL, i);
 		else if (cont->type == PIPE && minish->cmds[i] != NULL)

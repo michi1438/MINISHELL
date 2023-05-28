@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:44:21 by lzito             #+#    #+#             */
-/*   Updated: 2023/05/28 01:04:29 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/29 01:31:13 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,6 @@ int	ft_heredoc(t_pipex *ppx, int i)
 	char	*input;
 	size_t	limit_len;
 
-	if (!ppx->limiter[i])
-	{
-		close(ppx->fd_hd[i][0]);
-		close(ppx->fd_hd[i][1]);
-		return (-1);
-	}
 	limit_len = ft_strlen(ppx->limiter[i]);
 	write(1, "> ", 2);
 	input = get_next_line(0);
@@ -34,7 +28,7 @@ int	ft_heredoc(t_pipex *ppx, int i)
 		free(input);
 		input = get_next_line(0);
 	}
-	free(ppx->limiter[i]);
+//	free(ppx->limiter[i]);
 	free(input);
 	close(ppx->fd_hd[i][1]);
 	return (0);
@@ -73,7 +67,6 @@ void	redir_fill(t_minish *minish, int type, char *res, int i)
 	if (type == APP_OUT || type == REDIR_OUT)
 	{
 		minish->ppx.fileout[i] = res;
-//		printf("file out n%d = %s\n", i,  minish->ppx.fileout[i]);
 		if (type == APP_OUT)
 			minish->ppx.app_on[i] = 1;
 	}
@@ -81,21 +74,15 @@ void	redir_fill(t_minish *minish, int type, char *res, int i)
 	{
 		minish->ppx.limiter[i] = res;
 		minish->ppx.hd_on[i] = 1;
-		printf("limiter n%d = %s\n", i,  minish->ppx.limiter[i]);
-		minish->ppx.n_cmd--;
 	}
 	else
-	{
 		minish->ppx.filein[i] = res;
-//		printf("file in n%d = %s\n", i,  minish->ppx.filein[i]);
-	}
 }
 
 int	deal_with_redir(t_minish *minish, int type, int i)
 {
 	int			j;
 	char		*line;
-	char		*res;
 	t_content	*node;
 
 	node = malloc(sizeof(struct s_content));
@@ -109,8 +96,7 @@ int	deal_with_redir(t_minish *minish, int type, int i)
 	i = redir_quotes(i, line);
 	if (i == -1)
 		return (i);
-	res = ft_substr(&line[j], 0, i - j);
-	node->str = res;
+	node->str = ft_substr(&line[j], 0, i - j);
 	ft_lstadd_back(&minish->lst_line, ft_lstnew(node));
 	return (i);
 }

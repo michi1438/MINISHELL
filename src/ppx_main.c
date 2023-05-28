@@ -6,11 +6,12 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:29:12 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/28 01:05:51 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/28 23:27:18 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+#include <stdio.h>
 
 void	ft_looppid(t_pipex *ppx, t_minish *minish, int idx)
 {
@@ -48,15 +49,14 @@ int	ft_feedppx(t_pipex *ppx, char **av, char **env)
 	{
 		if (ppx->hd_on[i] == 1)
 		{
+			ppx->fd_hd[i] = ft_calloc(2, sizeof(int));
+			if (ppx->fd_hd[i] == NULL)
+				return (ft_error(av[0], -1));
 			if (pipe(ppx->fd_hd[i]) == -1)
-			{
 				ft_error(av[0], -3);
-				exit(EXIT_FAILURE);
-			}
 			if (ft_heredoc(ppx, i) == -1)
 				return (ft_error(av[0], -1));
 		}
-//		printf("av[i] = %s\n", av[i]);
 		ppx->cmd[i] = ft_mod_split(av[i], ' ');
 		if (ppx->cmd[i] == NULL)
 			return (ft_error(av[0], -1));
@@ -117,6 +117,9 @@ int	ft_initppx(t_pipex *ppx, t_minish *minish)
 	ppx->fd = ft_calloc(ppx->n_cmd, sizeof(int *));
 	if (ppx->fd == NULL)
 		return (ft_error(minish->cmds[0], -1));
+	ppx->fd_hd = ft_calloc(ppx->n_cmd, sizeof(int *));
+	if (ppx->fd_hd == NULL)
+		return (ft_error(minish->cmds[0], -1));
 	ppx->f_in = ft_calloc(ppx->n_cmd, sizeof(int));
 	if (ppx->f_in == NULL)
 		return (ft_error(minish->cmds[0], -1));
@@ -143,7 +146,6 @@ int	main_pipe(t_minish *minish, t_pipex *ppx)
 			ft_freeall(ppx);
 		return (1);
 	}
-//	printf("n_cmd = %d\n", ppx->n_cmd);
 	while (i < ppx->n_cmd)
 	{
 		if (pre_fork_builtin(ppx->cmd[i], minish, i) == 0)

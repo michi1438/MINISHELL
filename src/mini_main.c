@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/27 17:10:22 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/29 01:15:40 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(int ac, char *av[], char *env[])
 {
-	t_minish			minish;
+	t_minish	minish;
 
 	(void) av;
 	if (ac != 1 || ft_initmain(&minish, env) == 1)
@@ -51,7 +51,7 @@ int	init_minish(t_minish *minish)
 
 void	ft_add_history(t_minish *minish)
 {
-	size_t		l_line;
+	size_t	l_line;
 
 	l_line = ft_strlen(minish->line);
 	if (minish->prev_line != NULL)
