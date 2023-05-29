@@ -31,28 +31,28 @@ yo
 
 
 TEST=test_bash
-/bin/bash << yo > $TEST
-echo bla 
-echo bla bla  
-echo -n bla bla
-echo -nn bla bla
-echo -nn -nn   -n --n bla
-echo -n 'bla'
-echo 'bla'
-echo '\$shell' "\$shell"
-echo \$shell\$path
-echo 'bla "  " bla' "  bla"'bal'"bla   "
-echo "\$nhenth"
-echo \$pwd
-echo \$1 bla
-echo \$1bla
-echo \$19blo
-echo '\$?'
-echo \$?
-tnoeuheontu 
-echo \$?
-echo \$?
-exit
+/bin/bash << yo
+echo bla > $TEST 
+echo bla bla >> $TEST  
+echo -n bla bla >> $TEST
+echo -nn bla bla >> $TEST
+echo -nn -nn   -n --n bla >> $TEST
+echo -n 'bla' >> $TEST
+echo 'bla' >> $TEST
+echo '\$SHELL' "\$SHELL" >> $TEST
+echo \$SHELL\$PATH >> $TEST
+echo 'bla "  " bla' "  bla"'bal'"bla   " >> $TEST
+echo "\$NHENTH" >> $TEST
+echo \$PWD >> $TEST
+echo \$1 bla >> $TEST
+echo \$1bla >> $TEST
+echo \$19BLO >> $TEST
+echo '\$?' >> $TEST
+echo \$? >> $TEST
+tnoeuheontu $TEST
+echo \$? >> $TEST
+echo \$? >> $TEST
+exit >> $TEST
 yo
 
 echo
