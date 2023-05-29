@@ -136,4 +136,4 @@ diff -s test_minishell test_bash
 
 #diff -s test test2
 
-#rm -rf test_minishell test_bash
+rm -rf test_minishell test_bash
