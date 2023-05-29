@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:46:16 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/28 19:28:52 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/29 12:37:42 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	pre_fork_builtin(char **cmd, t_minish *minish)
 			if (cmd[1] == NULL)
 				export_noarg(minish);
 			else
-				minish->env = builtin_export(cmd, minish);
+				builtin_export(cmd, minish);
 		}
 		return (1);
 	}
@@ -99,18 +99,41 @@ void	export_noarg(t_minish *minish)
 	}
 }
 
-char	**builtin_export(char **cmd, t_minish *minish)
+void	builtin_export(char **cmd, t_minish *minish)
 {
-	char	**new_env;
+	int		j;
+	int		flg;
+
+	flg = 0;
+	j = 1;
+	while (cmd[j] != NULL)
+	{
+		if (ft_isdigit(cmd[j][0]))
+		{
+			printf("%s: not a valid identifier.\n", cmd[j]);	
+			minish->ppx.last_exit_status = 1;	
+			flg = 1;
+		}
+		else
+		{
+			minish->env = new_env_maker(cmd, minish, j);
+			if (flg == 0)
+				minish->ppx.last_exit_status = 0;
+		}
+		j++;
+	}
+}
+
+char	**new_env_maker(char **cmd, t_minish *minish, int j)
+{
 	int		i;
+	char	**new_env;
 	char	*var;
 
 	i = 0;
-	while (cmd[1][i] && cmd[1][i] != '=')
+	while (cmd[j][i] && cmd[j][i] != '=')
 		i++;
-	if (cmd[1][i] == '\0')
-		return (minish->env);
-	var = ft_substr(cmd[1], 0, ++i);
+	var = ft_substr(cmd[j], 0, ++i);
 	i = 0;
 	if (check_env_var(minish->env, var) != NULL)
 		new_env = ft_calloc(num_of_line(minish->env), sizeof(char *));
@@ -119,13 +142,13 @@ char	**builtin_export(char **cmd, t_minish *minish)
 	while (minish->env[i] != NULL)
 	{
 		if (ft_strncmp(minish->env[i], var, ft_strlen(var)) == 0)
-			new_env[i] = ft_strdup(cmd[1]);
+			new_env[i] = ft_strdup(cmd[j]);
 		else
 			new_env[i] = minish->env[i];
 		i++;
 	}
 	if (check_env_var(minish->env, var) == NULL)
-		new_env[i] = ft_strdup(cmd[1]);
+		new_env[i] = ft_strdup(cmd[j]);
 	return (new_env);
 }
 

@@ -23,6 +23,9 @@ echo \$1bla >> $TEST
 echo \$19BLO >> $TEST
 echo '\$?' >> $TEST
 echo \$? >> $TEST
+tnoeuheontu $TEST
+echo \$? >> $TEST
+echo \$? >> $TEST
 exit >> $TEST
 yo
 
@@ -36,15 +39,18 @@ echo -nn bla bla
 echo -nn -nn   -n --n bla
 echo -n 'bla'
 echo 'bla'
-echo '\$SHELL' "\$SHELL"
-echo \$SHELL\$PATH
+echo '\$shell' "\$shell"
+echo \$shell\$path
 echo 'bla "  " bla' "  bla"'bal'"bla   "
-echo "\$NHENTH"
-echo \$PWD
+echo "\$nhenth"
+echo \$pwd
 echo \$1 bla
 echo \$1bla
-echo \$19BLO
+echo \$19blo
 echo '\$?'
+echo \$?
+tnoeuheontu 
+echo \$?
 echo \$?
 exit
 yo

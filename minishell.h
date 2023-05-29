@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/27 16:07:20 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/29 12:27:52 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,13 +103,14 @@ void		*mini_implfing(char const *s, char c, char **ptrptr, int *i);
 int			mini_clear_fing(char **ptrptr, int j);
 
 // MINI_BUILTINS.C
-void		check_for_builtin(char **cmd);
-void		builtin_echo(char **cmd);
+void		check_for_builtin(char **cmd, t_minish *minish);
+void		builtin_echo(char **cmd, t_minish *minish);
 void		builtin_pwd(void);
 
 // MINI_PREFORK_BUILTIN.C
 int			pre_fork_builtin(char **cmd, t_minish *minish);
-char		**builtin_export(char **cmd, t_minish *minish);
+void		builtin_export(char **cmd, t_minish *minish);
+char		**new_env_maker(char **cmd, t_minish *minish, int j);
 int			num_of_line(char **env);
 void		export_noarg(t_minish *minish);
 int			builtin_exit(char **cmd, t_minish *minish);

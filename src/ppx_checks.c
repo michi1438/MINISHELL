@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 20:21:48 by lzito             #+#    #+#             */
-/*   Updated: 2023/05/27 16:38:27 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/29 11:42:12 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ char		*ft_checkexe(char **paths, char *cmd, t_pipex *ppx)
 		if (access(fullpath, F_OK) == 0 && access(fullpath, X_OK) == 0)
 		{
 			free(newpath);
+			update_exit_stat(fullpath, ppx, cmd);
 			return (fullpath);
 		}
 		free(newpath);

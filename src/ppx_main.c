@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:29:12 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/27 11:40:06 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/29 10:05:45 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_looppid(t_pipex *ppx, t_minish *minish, int idx)
 			ft_dup(ppx->fd[idx - 1][0], ppx->fd[idx][1]);
 		ft_close_fds(ppx);
 		ft_signals_n_attr(UNSET);
-		check_for_builtin(ppx->cmd[idx]);
+		check_for_builtin(ppx->cmd[idx], minish);
 		execve(ppx->path[idx], ppx->cmd[idx], minish->env);
 		perror(ppx->cmd[idx][0]);
 		if (errno == ENOENT || ppx->cmd[idx][0] == NULL)

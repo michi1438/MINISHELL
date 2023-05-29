@@ -6,20 +6,19 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 10:00:56 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/23 15:47:35 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/29 11:31:39 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	check_for_builtin(char **cmd)
+void	check_for_builtin(char **cmd, t_minish *minish)
 {
 	if (ft_strncmp(cmd[0], "echo\0", 5) == 0)
-		builtin_echo(cmd);
+		builtin_echo(cmd, minish);
 	else if (ft_strncmp(cmd[0], "pwd\0", 4) == 0)
 		builtin_pwd();
 }
-
 
 void	builtin_pwd(void)
 {
@@ -28,13 +27,14 @@ void	builtin_pwd(void)
 	exit (0);
 }
 
-void	builtin_echo(char **cmd)
+void	builtin_echo(char **cmd, t_minish *minish)
 {
 	int		i;
 	int		flg;
 
 	i = 1;
 	flg = 0;
+	(void)minish;
 	while (cmd[i] != NULL)
 	{
 		if (ft_strncmp(cmd[i], "-n", 2) == 0)

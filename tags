@@ -123,13 +123,13 @@ argintprt	libft/ft_printf/print_toconv.c	/^void	argintprt(t_toggler *flg, t_conv
 btrim	libft/ft_main/ft_strtrim.c	/^int	btrim(char const *s1, char const *set)$/;"	f	typeref:typename:int
 buf	libft/ft_gnl/get_next_line_bonus.h	/^	char	*buf;$/;"	m	struct:sct1	typeref:typename:char *
 builtin_cd	src/mini_prefork_builtin.c	/^void	builtin_cd(char **cmd, t_minish *minish)$/;"	f	typeref:typename:void
-builtin_echo	src/mini_builtins.c	/^void	builtin_echo(char **cmd)$/;"	f	typeref:typename:void
+builtin_echo	src/mini_builtins.c	/^void	builtin_echo(char **cmd, t_minish *minish)$/;"	f	typeref:typename:void
 builtin_exit	src/mini_prefork_builtin.c	/^int	builtin_exit(char **cmd, t_minish *minish)$/;"	f	typeref:typename:int
-builtin_export	src/mini_prefork_builtin.c	/^char	**builtin_export(char **cmd, t_minish *minish)$/;"	f	typeref:typename:char **
+builtin_export	src/mini_prefork_builtin.c	/^void	builtin_export(char **cmd, t_minish *minish)$/;"	f	typeref:typename:void
 builtin_pwd	src/mini_builtins.c	/^void	builtin_pwd(void)$/;"	f	typeref:typename:void
 calc	libft/ft_main/ft_atoi.c	/^int	calc(int i, const char *nptr)$/;"	f	typeref:typename:int
 check_env_var	src/mini_expand.c	/^char	*check_env_var(char **env, char *var)$/;"	f	typeref:typename:char *
-check_for_builtin	src/mini_builtins.c	/^void	check_for_builtin(char **cmd)$/;"	f	typeref:typename:void
+check_for_builtin	src/mini_builtins.c	/^void	check_for_builtin(char **cmd, t_minish *minish)$/;"	f	typeref:typename:void
 clean	Makefile	/^clean:$/;"	t
 clean	libft/Makefile	/^clean:$/;"	t
 cleaner	libft/ft_printf/printfer.c	/^void	cleaner(t_conv *cvut)$/;"	f	typeref:typename:void
@@ -279,6 +279,7 @@ mini_lstclear	src/mini_utils.c	/^void	mini_lstclear(t_list **lst, void (*del)(vo
 mini_lstdelone	src/mini_utils.c	/^void	mini_lstdelone(t_list *node, void (*del)(void*))$/;"	f	typeref:typename:void
 n_cmd	minishell.h	/^	int		n_cmd;$/;"	m	struct:s_pipex	typeref:typename:int
 neg	libft/ft_printf/printf.h	/^	int	neg;$/;"	m	struct:sctone	typeref:typename:int
+new_env_maker	src/mini_prefork_builtin.c	/^char	**new_env_maker(char **cmd, t_minish *minish, int j)$/;"	f	typeref:typename:char **
 new_size	src/mini_expand.c	/^int	new_size(char *quote, t_minish *minish)$/;"	f	typeref:typename:int
 next	libft/ft_main/libft.h	/^	struct s_list	*next;$/;"	m	struct:s_list	typeref:struct:s_list *
 no_dupl	libft/ft_printf/printparser.c	/^int	no_dupl(char *retstr, char ch, int e, const char *str)$/;"	f	typeref:typename:int
@@ -352,6 +353,6 @@ type_reader	libft/ft_printf/printparser.c	/^char	type_reader(const char *str, in
 update_exit_stat	src/mini_exit_status.c	/^void	update_exit_stat(char *fullpath, t_pipex *ppx, char *cmd)$/;"	f	typeref:typename:void
 wid	libft/ft_printf/printf.h	/^	int		wid;$/;"	m	struct:sct	typeref:typename:int
 width_counter	libft/ft_printf/printparser.c	/^int	width_counter(const char *str, int i)$/;"	f	typeref:typename:int
-yo	tester.sh	/^\/bin\/bash << yo $/;"	h
+yo	tester.sh	/^\/bin\/bash << yo > $TEST$/;"	h
 yo	tester.sh	/^~\/MINISHELL\/minishell << yo$/;"	h
 zero	libft/ft_printf/printf.h	/^	int	zero;$/;"	m	struct:sctone	typeref:typename:int
