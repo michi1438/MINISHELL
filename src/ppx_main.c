@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:29:12 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/28 23:27:18 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/29 15:24:55 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,13 @@ int	ft_initppx_io(t_pipex *ppx, t_minish *minish)
 			else
 				ppx->f_out[i] = open(ppx->fileout[i], O_CREAT | O_APPEND | O_WRONLY, 00644);
 			if (ppx->f_out[i] == -1)
-				return (ft_error(ppx->fileout[i], -2));
+				return (ft_error(ppx->fileout[i], -1));
 		}
 		if (ppx->hd_on[i] == 0 && ppx->filein[i] != NULL)
 		{
 			ppx->f_in[i] = open(ppx->filein[i], O_RDONLY);
 			if (ppx->f_in[i] == -1)
-				return (ft_error(ppx->filein[i], -2));
+				return (ft_error(ppx->filein[i], -1));
 		}
 		i++;
 	}
@@ -126,8 +126,8 @@ int	ft_initppx(t_pipex *ppx, t_minish *minish)
 	ppx->f_out = ft_calloc(ppx->n_cmd, sizeof(int));
 	if (ppx->f_out == NULL)
 		return (ft_error(minish->cmds[0], -1));
-	if (ft_initppx_io(ppx, minish) == -2)
-		return (-2);
+	if (ft_initppx_io(ppx, minish) == -1)
+		return (-1);
 	if (ft_feedppx(ppx, minish->cmds, minish->env) == -1)
 		return (-1);
 	return (0);

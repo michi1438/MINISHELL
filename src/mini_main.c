@@ -6,11 +6,12 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/29 01:15:40 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/29 14:39:01 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+#include <stdio.h>
 
 int	main(int ac, char *av[], char *env[])
 {
@@ -46,6 +47,7 @@ int	init_minish(t_minish *minish)
 	ft_signals_n_attr(RESET);
 	minish->ppx.n_cmd = 1;
 	minish->lst_line = NULL;
+	minish->exit_stat = 0;
 	return (0);
 }
 
@@ -78,11 +80,15 @@ void	treating_line(t_minish *minish)
 	if (ft_token(minish) != -1)
 	{
 		add_cmds(minish);
-		main_pipe(minish, &minish->ppx);
+		minish->exit_stat = main_pipe(minish, &minish->ppx);
 		mini_lstclear(&minish->lst_line, free);
 	}
 	else
+	{
 		printf("unexpected token ERROR\n");
+		minish->exit_stat = 1;
+	}
+	printf("exit status = %d\n", minish->exit_stat);
 }
 
 int	ft_token(t_minish *minish)

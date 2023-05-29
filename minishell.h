@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/28 19:50:17 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/29 14:37:43 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_minish
 	char		*line;
 	char		*prev_line;
 	char		**cmds;
+	int			exit_stat;
 	t_list		*lst_line;
 	t_pipex		ppx;
 }	t_minish;

@@ -6,11 +6,12 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 20:23:44 by lzito             #+#    #+#             */
-/*   Updated: 2023/05/28 20:27:24 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/29 14:31:35 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+#include <stdio.h>
 
 void	ft_freeall(t_pipex *ppx)
 {
