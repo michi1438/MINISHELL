@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mini_prefork_export.c                              :+:      :+:    :+:   */
+/*   mini_prefork_export_unset.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 18:51:00 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/30 18:54:10 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/30 19:33:22 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,56 @@ char	**new_env_maker(char **cmd, t_minish *minish, int j)
 	if (check_env_var(minish->env, var) == NULL)
 		new_env[i] = ft_strdup(cmd[j]);
 	return (new_env);
+}
+
+char	**builtin_unset(char **cmd, t_minish *minish)
+{
+	int		j;
+	int		i;
+	int		e;
+	char	*var;
+	char	**new_env;
+
+	new_env = ft_calloc(new_env_size(cmd, minish), sizeof(char *));
+	e = 0;
+	j = 0;
+	while (minish->env[j] != NULL)
+	{
+		i = 0;
+		while (cmd[++i] != NULL)
+		{
+			var = ft_strjoin(cmd[i], "=");
+			if (ft_strncmp(var, minish->env[j], ft_strlen(var)) == 0)
+			{
+				j++;
+				break ;
+			}
+		}
+		if (cmd[i] == NULL)
+			new_env[e++] = ft_strdup(minish->env[j++]);
+	}
+	return (new_env);
+}
+
+int	new_env_size(char **cmd, t_minish *minish)
+{
+	int		j;
+	int		i;
+	int		e;
+	char	*var;
+
+	j = 1;
+	e = 0;
+	while (cmd[j] != NULL)
+	{
+		i = 0;
+		while (minish->env[i] != NULL)
+		{
+			var = ft_strjoin(cmd[j], "=");
+			if (ft_strncmp(var, minish->env[i++], ft_strlen(var)) == 0)
+				e++;	
+		}
+		j++;
+	}
+	return (num_of_line(minish->env) - e);
 }

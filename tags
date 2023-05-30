@@ -125,9 +125,10 @@ buf	libft/ft_gnl/get_next_line_bonus.h	/^	char	*buf;$/;"	m	struct:sct1	typeref:t
 builtin_cd	src/mini_prefork_builtin.c	/^void	builtin_cd(char **cmd, t_minish *minish)$/;"	f	typeref:typename:void
 builtin_echo	src/mini_builtins.c	/^void	builtin_echo(char **cmd, t_minish *minish)$/;"	f	typeref:typename:void
 builtin_exit	src/mini_prefork_builtin.c	/^int	builtin_exit(char **cmd, t_minish *minish)$/;"	f	typeref:typename:int
-builtin_export	src/mini_prefork_export.c	/^void	builtin_export(char **cmd, t_minish *minish)$/;"	f	typeref:typename:void
+builtin_exit_err	src/mini_prefork_builtin.c	/^int builtin_exit_err(char **cmd, int err_type)$/;"	f	typeref:typename:int
+builtin_export	src/mini_prefork_export_unset.c	/^void	builtin_export(char **cmd, t_minish *minish)$/;"	f	typeref:typename:void
 builtin_pwd	src/mini_builtins.c	/^void	builtin_pwd(void)$/;"	f	typeref:typename:void
-builtin_unset	src/mini_prefork_builtin.c	/^char	**builtin_unset(char **cmd, t_minish *minish)$/;"	f	typeref:typename:char **
+builtin_unset	src/mini_prefork_export_unset.c	/^char	**builtin_unset(char **cmd, t_minish *minish)$/;"	f	typeref:typename:char **
 calc	libft/ft_main/ft_atoi.c	/^int	calc(int i, const char *nptr)$/;"	f	typeref:typename:int
 check_env_var	src/mini_expand.c	/^char	*check_env_var(char **env, char *var)$/;"	f	typeref:typename:char *
 check_for_builtin	src/mini_builtins.c	/^void	check_for_builtin(char **cmd, t_minish *minish)$/;"	f	typeref:typename:void
@@ -285,8 +286,8 @@ mini_lstclear	src/mini_utils.c	/^void	mini_lstclear(t_list **lst, void (*del)(vo
 mini_lstdelone	src/mini_utils.c	/^void	mini_lstdelone(t_list *node, void (*del)(void*))$/;"	f	typeref:typename:void
 n_cmd	minishell.h	/^	int		n_cmd;$/;"	m	struct:s_pipex	typeref:typename:int
 neg	libft/ft_printf/printf.h	/^	int	neg;$/;"	m	struct:sctone	typeref:typename:int
-new_env_maker	src/mini_prefork_export.c	/^char	**new_env_maker(char **cmd, t_minish *minish, int j)$/;"	f	typeref:typename:char **
-new_env_size	src/mini_prefork_builtin.c	/^int	new_env_size(char **cmd, t_minish *minish)$/;"	f	typeref:typename:int
+new_env_maker	src/mini_prefork_export_unset.c	/^char	**new_env_maker(char **cmd, t_minish *minish, int j)$/;"	f	typeref:typename:char **
+new_env_size	src/mini_prefork_export_unset.c	/^int	new_env_size(char **cmd, t_minish *minish)$/;"	f	typeref:typename:int
 new_size	src/mini_expand.c	/^int	new_size(char *quote, t_minish *minish)$/;"	f	typeref:typename:int
 next	libft/ft_main/libft.h	/^	struct s_list	*next;$/;"	m	struct:s_list	typeref:struct:s_list *
 no_dupl	libft/ft_printf/printparser.c	/^int	no_dupl(char *retstr, char ch, int e, const char *str)$/;"	f	typeref:typename:int

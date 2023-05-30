@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:46:16 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/30 19:13:18 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/30 19:40:47 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,56 +39,6 @@ int	pre_fork_builtin(char **cmd, t_minish *minish)
 	return (1);
 }
 
-char	**builtin_unset(char **cmd, t_minish *minish)
-{
-	int		j;
-	int		i;
-	int		e;
-	char	*var;
-	char	**new_env;
-
-	new_env = ft_calloc(new_env_size(cmd, minish), sizeof(char *));
-	e = 0;
-	j = 0;
-	while (minish->env[j] != NULL)
-	{
-		i = 1;
-		while (cmd[i] != NULL)
-		{
-			var = ft_strjoin(cmd[i], "=");
-			if (ft_strncmp(var, minish->env[j++], ft_strlen(var)) == 0)
-				break ;
-			i++;
-		}
-		if (cmd[i] == NULL)
-			new_env[e++] = ft_strdup(minish->env[j++]);
-	}
-	return (new_env);
-}
-
-int	new_env_size(char **cmd, t_minish *minish)
-{
-	int		j;
-	int		i;
-	int		e;
-	char	*var;
-
-	j = 1;
-	e = 0;
-	while (cmd[j] != NULL)
-	{
-		i = 0;
-		while (minish->env[i] != NULL)
-		{
-			var = ft_strjoin(cmd[j], "=");
-			if (ft_strncmp(var, minish->env[i++], ft_strlen(var)) == 0)
-				e++;	
-		}
-		j++;
-	}
-	return (num_of_line(minish->env) - e);
-}
-
 int	builtin_exit(char **cmd, t_minish *minish)
 {
 	int i;
@@ -97,17 +47,11 @@ int	builtin_exit(char **cmd, t_minish *minish)
 	if (cmd[1] != NULL)
 	{
 		if (cmd[2] != NULL) 
-		{
-			printf("%s: too many arguments\n", cmd[0]);
-			return (1);
-		}
+			return (builtin_exit_err(cmd, 1));
 		while (cmd[1][i] != '\0')
 		{
 			if (!(ft_isdigit(cmd[1][i++])))
-			{
-				printf("%s: numeric argument required\n", cmd[1]);
-				return (2);
-			}
+				return (builtin_exit_err(cmd, 2));
 		}
 		printf("exit\n");
 		exit (ft_atoi(cmd[1]));
@@ -117,6 +61,21 @@ int	builtin_exit(char **cmd, t_minish *minish)
 		printf("exit\n");
 		exit (minish->ppx.exit_status);
 	}
+}
+
+int builtin_exit_err(char **cmd, int err_type)
+{
+	if (err_type == 1)
+	{
+		printf("%s: too many arguments\n", cmd[0]);
+		return (1);
+	}
+	else if (err_type == 2)
+	{
+		printf("%s: numeric argument required\n", cmd[1]);
+		return (2);
+	}
+	return (0);
 }
 
 void	builtin_cd(char **cmd, t_minish *minish)
