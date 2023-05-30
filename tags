@@ -127,6 +127,7 @@ builtin_echo	src/mini_builtins.c	/^void	builtin_echo(char **cmd, t_minish *minis
 builtin_exit	src/mini_prefork_builtin.c	/^int	builtin_exit(char **cmd, t_minish *minish)$/;"	f	typeref:typename:int
 builtin_export	src/mini_prefork_builtin.c	/^void	builtin_export(char **cmd, t_minish *minish)$/;"	f	typeref:typename:void
 builtin_pwd	src/mini_builtins.c	/^void	builtin_pwd(void)$/;"	f	typeref:typename:void
+builtin_unset	src/mini_prefork_builtin.c	/^char	**builtin_unset(char **cmd, t_minish *minish)$/;"	f	typeref:typename:char **
 calc	libft/ft_main/ft_atoi.c	/^int	calc(int i, const char *nptr)$/;"	f	typeref:typename:int
 check_env_var	src/mini_expand.c	/^char	*check_env_var(char **env, char *var)$/;"	f	typeref:typename:char *
 check_for_builtin	src/mini_builtins.c	/^void	check_for_builtin(char **cmd, t_minish *minish)$/;"	f	typeref:typename:void
@@ -354,5 +355,8 @@ update_exit_stat	src/mini_exit_status.c	/^void	update_exit_stat(char *fullpath, 
 wid	libft/ft_printf/printf.h	/^	int		wid;$/;"	m	struct:sct	typeref:typename:int
 width_counter	libft/ft_printf/printparser.c	/^int	width_counter(const char *str, int i)$/;"	f	typeref:typename:int
 yo	tester.sh	/^\/bin\/bash << yo > $TEST$/;"	h
+yo	tester.sh	/^\/bin\/bash << yo$/;"	h
 yo	tester.sh	/^~\/MINISHELL\/minishell << yo$/;"	h
+yoy	tester.sh	/^~\/MINISHELL\/minishell << yoy$/;"	h
+yoyoy	tester.sh	/^\/bin\/bash << yoyoy$/;"	h
 zero	libft/ft_printf/printf.h	/^	int	zero;$/;"	m	struct:sctone	typeref:typename:int

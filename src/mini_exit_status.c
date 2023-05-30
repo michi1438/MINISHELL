@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 11:57:57 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/29 11:56:07 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/30 11:01:27 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	update_exit_stat(char *fullpath, t_pipex *ppx, char *cmd)
 		else if (access(fullpath, X_OK) == -1)
 			ppx->last_exit_status = 126;
 	}
-	else if (ft_strncmp(cmd, "export", 7))
+	else
 		ppx->last_exit_status = 0;
 }
 

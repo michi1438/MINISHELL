@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:46:16 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/29 12:37:42 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/30 10:57:00 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	pre_fork_builtin(char **cmd, t_minish *minish)
 			builtin_cd(cmd, minish);
 		return (1);
 	}
-	else if (ft_strncmp(cmd[0], "export\0", 3) == 0)
+	else if (ft_strncmp(cmd[0], "export\0", 7) == 0)
 	{
 		if (minish->ppx.n_cmd == 1)
 		{
@@ -33,6 +33,11 @@ int	pre_fork_builtin(char **cmd, t_minish *minish)
 		}
 		return (1);
 	}
+	else if (ft_strncmp(cmd[0], "unset\0", 6) == 0)
+	{
+		minish->env = builtin_unset(cmd, minish);
+		return (1);
+	}
 	else if (ft_strncmp(cmd[0], "exit\0", 5) == 0)
 	{
 		minish->ppx.last_exit_status = builtin_exit(cmd, minish);
@@ -41,6 +46,53 @@ int	pre_fork_builtin(char **cmd, t_minish *minish)
 	else
 		return (0);
 }
+
+char	**builtin_unset(char **cmd, t_minish *minish)
+{
+	int		j;
+	int		i;
+	int		e;
+	char	*var;
+	char	**new_env;
+
+	j = 1;
+	e = 0;
+	while (cmd[j] != NULL)
+	{
+		i = 0;
+		while (minish->env[i] != NULL)
+		{
+			var = ft_strjoin(cmd[j], "=");
+			if (ft_strncmp(var, minish->env[i], ft_strlen(var)) == 0)
+				e++;	
+			i++;
+		}
+		j++;
+	}
+	new_env = ft_calloc(num_of_line(minish->env) - e, sizeof(char *));
+	e = 0;
+	j = 0;
+	while (minish->env[j] != NULL)
+	{
+		i = 1;
+		while (cmd[i] != NULL)
+		{
+			var = ft_strjoin(cmd[i], "=");
+			if (ft_strncmp(var, minish->env[j], ft_strlen(var)) == 0)
+			{
+				j++;
+				break ;
+			}
+			i++;
+		}
+		if (cmd[i] == NULL)
+			new_env[e++] = ft_strdup(minish->env[j++]);
+	}
+	return (new_env);
+}
+
+
+
 
 int	builtin_exit(char **cmd, t_minish *minish)
 {
