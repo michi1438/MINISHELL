@@ -6,17 +6,23 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 10:00:56 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/30 13:18:29 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/31 00:28:41 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <stdio.h>
 
-void	check_for_builtin(char **cmd, t_minish *minish)
+void	check_for_builtin(char **cmd, t_minish *minish, int i)
 {
 	if (cmd[0] == NULL)
+	{
+		if (minish->ppx.limiter[i] != NULL
+			|| minish->ppx.filein[i] != NULL
+			|| minish->ppx.fileout[i] != NULL)
+			exit (0);
 		return ;
+	}
 	if (ft_strncmp(cmd[0], "echo\0", 5) == 0)
 		builtin_echo(cmd, minish);
 	else if (ft_strncmp(cmd[0], "pwd\0", 4) == 0)

@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 16:57:22 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/27 15:31:50 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/30 20:42:26 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,13 @@ int	is_all_space(char *str)
 	int	i;
 
 	i = 0;
+	if (str[i] == '\0')
+		return (1);
 	while (str[i] != '\0')
 	{
 		if (str[i] != ' ')
 			return (1);
 		i++;
-	}	
+	}
 	return (0);
 }

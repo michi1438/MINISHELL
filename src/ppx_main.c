@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:29:12 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/30 12:14:57 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/31 00:29:58 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	ft_looppid(t_pipex *ppx, t_minish *minish, int idx)
 			ft_redir_mid_cmd(ppx, idx);
 		ft_close_fds(ppx);
 		ft_signals_n_attr(UNSET);
-		check_for_builtin(ppx->cmd[idx], minish);
+		check_for_builtin(ppx->cmd[idx], minish, idx);
+//		printf("cmd[%d] = %s$ limiter = %s$\n", idx, ppx->cmd[idx][0], ppx->limiter[idx]);
 		execve(ppx->path[idx], ppx->cmd[idx], minish->env);
 		perror(ppx->cmd[idx][0]);
 		if (errno == ENOENT || ppx->cmd[idx][0] == NULL)
@@ -60,7 +61,7 @@ int	ft_feedppx(t_pipex *ppx, char **av, char **env)
 		ppx->cmd[i] = ft_mod_split(av[i], ' ');
 		if (ppx->cmd[i] == NULL)
 			return (ft_error(av[0], -1));
-		ppx->path[i] = ft_checkpath(env, ppx->cmd[i][0], ppx);
+		ppx->path[i] = ft_checkpath(env, ppx->cmd[i][0]);
 		ppx->fd[i] = ft_calloc(2, sizeof(int));
 		if (ppx->fd[i] == NULL)
 			return (ft_error(av[0], -1));
