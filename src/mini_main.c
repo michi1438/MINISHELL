@@ -6,12 +6,11 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/29 14:39:01 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/30 02:47:59 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-#include <stdio.h>
 
 int	main(int ac, char *av[], char *env[])
 {
@@ -86,7 +85,7 @@ void	treating_line(t_minish *minish)
 	else
 	{
 		printf("unexpected token ERROR\n");
-		minish->exit_stat = 1;
+		minish->exit_stat = 2;
 	}
 	printf("exit status = %d\n", minish->exit_stat);
 }
