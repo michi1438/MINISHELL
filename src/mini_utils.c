@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:46:25 by lzito             #+#    #+#             */
-/*   Updated: 2023/05/11 19:07:41 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/30 16:08:17 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,33 @@ void	mini_lstclear(t_list **lst, void (*del)(void*))
 			*lst = temp;
 		}
 	}
+}
+
+int	is_prefork_builtin(char **cmd)
+{
+	int			i;
+	const char	*builtin[] = {
+		"exit", "env", "unset",  NULL,
+	};
+
+	i = 0;
+	while (builtin[i] != NULL)
+	{
+		if (ft_strncmp(cmd[0], builtin[i], ft_strlen(builtin[i])) == 0)
+			return (0);
+		else if (ft_strncmp(cmd[0], "export\0", 7) == 0 && cmd[1] != NULL)
+			return (0);
+		i++;
+	}
+	return (-1);
+}
+
+int	num_of_line(char **env)
+{
+	int	i;
+
+	i = 0;
+	while (env[i] != NULL)
+		i++;
+	return (i + 2);
 }

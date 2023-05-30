@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/30 13:18:47 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/30 19:11:48 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,17 +106,18 @@ int			mini_clear_fing(char **ptrptr, int j);
 void		check_for_builtin(char **cmd, t_minish *minish);
 void		builtin_echo(char **cmd, t_minish *minish);
 void		builtin_pwd(void);
-int			is_prefork_builtin(char *cmd);
+void		export_noarg(t_minish *minish);
 
 // MINI_PREFORK_BUILTIN.C
 int			pre_fork_builtin(char **cmd, t_minish *minish);
-void		builtin_export(char **cmd, t_minish *minish);
-char		**new_env_maker(char **cmd, t_minish *minish, int j);
-int			num_of_line(char **env);
-void		export_noarg(t_minish *minish);
 int			builtin_exit(char **cmd, t_minish *minish);
 void		builtin_cd(char **cmd, t_minish *minish);
 char		**builtin_unset(char **cmd, t_minish *minish);
+int			new_env_size(char **cmd, t_minish *minish);
+
+// MINI_PREFORK_EXPORT.C
+void		builtin_export(char **cmd, t_minish *minish);
+char		**new_env_maker(char **cmd, t_minish *minish, int j);
 
 //FOR_TESTING_ONLY.C
 void		print_lst_line(t_minish minish);
@@ -162,6 +163,8 @@ int			is_dol_end(char *quote, int j);
 char		**ft_copy_env(char *env[]);
 void		mini_lstdelone(t_list *node, void (*del)(void*));
 void		mini_lstclear(t_list **lst, void (*del)(void*));
+int			is_prefork_builtin(char **cmd);
+int			num_of_line(char **env);
 
 // MINI_ERRORS.C
 int			ft_err_handling(t_minish *minish);

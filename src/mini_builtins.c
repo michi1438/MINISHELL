@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 10:00:56 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/30 13:18:29 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/30 16:06:35 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,36 @@ void	check_for_builtin(char **cmd, t_minish *minish)
 		builtin_echo(cmd, minish);
 	else if (ft_strncmp(cmd[0], "pwd\0", 4) == 0)
 		builtin_pwd();
+	else if (ft_strncmp(cmd[0], "export\0", 7) == 0 && cmd[1] == NULL)
+		export_noarg(minish);
+}
+
+void	export_noarg(t_minish *minish)
+{
+	int		i;
+	int		flg;
+	int		j;
+
+	i = 0;
+	while (minish->env[i] != NULL)
+	{
+		j = 0;
+		flg = 0;
+		ft_putstr_fd("declare -x ", STDOUT_FILENO);
+		while (minish->env[i][j] != '\0')
+		{
+			ft_putchar_fd(minish->env[i][j], STDOUT_FILENO);
+			if (minish->env[i][j++] == '=' && flg == 0)
+			{
+				flg = 1;
+				ft_putchar_fd('"', STDOUT_FILENO);
+			}
+		}
+		ft_putchar_fd('"', STDOUT_FILENO);
+		ft_putchar_fd('\n', STDOUT_FILENO);
+		i++;
+	}
+	exit (0);
 }
 
 void	builtin_pwd(void)
@@ -55,21 +85,4 @@ void	builtin_echo(char **cmd, t_minish *minish)
 	if (flg == 0)
 		ft_putchar_fd('\n', STDOUT_FILENO);
 	exit (0);
-}
-
-int	is_prefork_builtin(char *cmd)
-{
-	int			i;
-	const char	*builtin[] = {
-		"exit", "export", "env", "unset",  NULL,
-	};
-
-	i = 0;
-	while (builtin[i] != NULL)
-	{
-		if (ft_strncmp(cmd, builtin[i], ft_strlen(builtin[i])) == 0)
-			return (0);
-		i++;
-	}
-	return (-1);
 }

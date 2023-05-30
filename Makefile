@@ -6,7 +6,7 @@
 #    By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/20 20:55:12 by mguerga           #+#    #+#              #
-#    Updated: 2023/05/30 13:19:28 by lzito            ###   ########.fr        #
+#    Updated: 2023/05/30 18:53:04 by mguerga          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ SRC_MINISH = mini_main.c ppx_checks.c ppx_free.c ppx_main.c ppx_utils.c\
 			mini_gc.c mini_sig_n_attr.c mini_utils.c mini_tokenable.c \
 			mini_not_tokenable.c mini_errors.c mini_expand.c For_testing_only.c \
 			mini_tok_to_pipes.c mini_builtins.c mini_mod_split.c mini_redir.c \
-			mini_prefork_builtin.c mini_redir_cmds.c
+			mini_prefork_builtin.c mini_prefork_export.c mini_redir_cmds.c
 
 AR = ar rcs
 
