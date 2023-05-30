@@ -111,35 +111,47 @@ ls -la | grep a | wc
 exit
 yo
 
+echo
 diff -s test_minishell test_bash
-#echo '---------TESTING EXIT--------'
-#TEST=test
-#~/MINISHELL/minishell << yoy
-#~/MINISHELL/minishell << yo
-#exit 5
-#yo
-#echo \$? > $TEST
-#~/MINISHELL/minishell << yo
-#exit 109
-#yo
-#echo \$? >> $TEST
-#exit
-#yoy
 
+echo
+echo ---------TESTING EXIT STATUS--------
+echo
+TEST=test_minishell
+~/MINISHELL/minishell << yoy
+echo \$? > $TEST
+echo bla >>	$TEST
+echo \$? >> $TEST
+nteouh >> $TEST
+echo \$? >> $TEST
+../monitoring.sh >> $TEST
+echo \$? >> $TEST 
+nteouh >> $TEST
+echo >> $TEST
+echo \$? >> $TEST 
+exit 11
+yoy
 
-#TEST=test2
-#/bin/bash << yoyoy
-#~/MINISHELL/minishell << yo
-#exit 5
-#yo
-#echo \$? > $TEST
-#~/MINISHELL/minishell << yo
-#exit 109
-#yo
-#echo \$? >> $TEST
-#exit
-#yoyoy
+echo \$? >> $TEST
 
-#diff -s test test2
+TEST=test_bash
+/bin/bash << yoyoy
+echo \$? > $TEST
+echo bla >>	$TEST
+echo \$? >> $TEST
+nteouh >> $TEST
+echo \$? >> $TEST
+../monitoring.sh >> $TEST
+echo \$? >> $TEST 
+nteouh >> $TEST
+echo >> $TEST
+echo \$? >> $TEST 
+exit 11
+yoyoy
+
+echo \$? >> $TEST
+
+echo
+diff -s test_minishell test_bash
 
 rm -rf test_minishell test_bash
