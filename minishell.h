@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/29 12:27:52 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/30 12:08:12 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,28 +27,29 @@ typedef struct s_pipex
 {
 	int		last_exit_status;
 	int		**fd;
-	int		fd_hd[2];
-	int		hd_on;
-	int		app_on;
+	int		**fd_hd;
+	int		*hd_on;
+	int		*app_on;
 	int		*pid;
 	char	***cmd;
-	int		f_in;
-	int		f_out;
-	char	*limiter;
-	char	*filein;
-	char	*fileout;
+	char	**limiter;
+	char	**filein;
+	char	**fileout;
+	int		*f_in;
+	int		*f_out;
 	char	**path;
 	int		n_cmd;
 }	t_pipex;
 
 typedef struct s_minish
 {
-	char			**env;
-	char			*line;
-	char			*prev_line;
-	char			**cmds;
-	t_list			*lst_line;
-	t_pipex			ppx;
+	char		**env;
+	char		*line;
+	char		*prev_line;
+	char		**cmds;
+	int			exit_stat;
+	t_list		*lst_line;
+	t_pipex		ppx;
 }	t_minish;
 
 typedef struct s_content
@@ -123,14 +124,19 @@ void		print_lst_line(t_minish minish);
 int			is_tokenable(t_minish *minish, int i, const char *tok[]);
 int			search_quotes(t_minish *minish, int type, int i);
 int			deal_with_pipes(t_minish *minish, int i);
-int			deal_with_redir(t_minish *minish, int type, int i);
 int			deal_with_spaces(t_minish *minish, int i);
 
 // MINI_REDIR.C
-int			ft_heredoc(t_pipex *ppx);
+int			ft_heredoc(t_pipex *ppx, int i);
 int			redir_quotes(int i, char *line);
-void		redir_fill(t_minish *minish, int type, char *res);
+void		redir_fill(t_minish *minish, int type, char *res, int i);
 int			deal_with_redir(t_minish *minish, int type, int i);
+
+// MINI_REDIR.C
+void		ft_redir_only_cmd(t_pipex *ppx, int idx);
+void		ft_redir_first_cmd(t_pipex *ppx, int idx);
+void		ft_redir_mid_cmd(t_pipex *ppx, int idx);
+void		ft_redir_last_cmd(t_pipex *ppx, int idx);
 
 // MINI_NOT_TOKENABLE.C
 int			is_not_tokenable(t_minish *minish, int i, const char *tok[]);
@@ -138,6 +144,7 @@ int			not_token_size(t_minish *minish, int i, const char *tok[]);
 int			is_all_space(char *str);
 
 // MINI_TOK_TO_PIPES.C
+int			init_cmds(t_minish *minish);
 void		add_cmds(t_minish *minish);
 void		append_or_start(t_minish *minish, char *strseg, char *tok_delimiter, int i);
 

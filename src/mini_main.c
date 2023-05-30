@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/27 10:54:34 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/30 12:11:04 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(int ac, char *av[], char *env[])
 {
-	t_minish			minish;
+	t_minish	minish;
 
 	(void) av;
 	if (ac != 1 || ft_initmain(&minish, env) == 1)
@@ -45,21 +45,15 @@ int	ft_initmain(t_minish *minish, char **env)
 int	init_minish(t_minish *minish)
 {
 	ft_signals_n_attr(RESET);
-	minish->ppx.hd_on = 0;
-	minish->ppx.app_on = 0;
-	minish->ppx.f_in = 0;
-	minish->ppx.f_out = 1;
 	minish->ppx.n_cmd = 1;
-	minish->ppx.limiter = NULL;
-	minish->ppx.filein = NULL;
-	minish->ppx.fileout = NULL;
 	minish->lst_line = NULL;
+	minish->exit_stat = 0;
 	return (0);
 }
 
 void	ft_add_history(t_minish *minish)
 {
-	size_t		l_line;
+	size_t	l_line;
 
 	l_line = ft_strlen(minish->line);
 	if (minish->prev_line != NULL)
@@ -86,11 +80,15 @@ void	treating_line(t_minish *minish)
 	if (ft_token(minish) != -1)
 	{
 		add_cmds(minish);
-		main_pipe(minish, &minish->ppx);
+		minish->exit_stat = main_pipe(minish, &minish->ppx);
 		mini_lstclear(&minish->lst_line, free);
 	}
 	else
+	{
 		printf("unexpected token ERROR\n");
+		minish->exit_stat = 2;
+	}
+	printf("exit status = %d\n", minish->exit_stat);
 }
 
 int	ft_token(t_minish *minish)

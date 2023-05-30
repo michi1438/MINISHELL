@@ -6,37 +6,31 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:44:21 by lzito             #+#    #+#             */
-/*   Updated: 2023/05/25 13:39:07 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/29 01:31:13 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include <stdio.h>
 
-int	ft_heredoc(t_pipex *ppx)
+int	ft_heredoc(t_pipex *ppx, int i)
 {
 	char	*input;
 	size_t	limit_len;
 
-	if (!ppx->limiter)
-	{
-		close(ppx->fd_hd[0]);
-		close(ppx->fd_hd[1]);
-		return (-1);
-	}
-	limit_len = ft_strlen(ppx->limiter);
+	limit_len = ft_strlen(ppx->limiter[i]);
 	write(1, "> ", 2);
 	input = get_next_line(0);
-	while (input && ft_strncmp(input, ppx->limiter, limit_len) != 0)
+	while (input && ft_strncmp(input, ppx->limiter[i], limit_len) != 0)
 	{
 		write(1, "> ", 2);
-		write(ppx->fd_hd[1], input, ft_strlen(input));
+		write(ppx->fd_hd[i][1], input, ft_strlen(input));
 		free(input);
 		input = get_next_line(0);
 	}
-	free(ppx->limiter);
+//	free(ppx->limiter[i]);
 	free(input);
-	close(ppx->fd_hd[1]);
+	close(ppx->fd_hd[i][1]);
 	return (0);
 }
 
@@ -68,31 +62,32 @@ int	redir_quotes(int i, char *line)
 	return (i);
 }
 
-void	redir_fill(t_minish *minish, int type, char *res)
+void	redir_fill(t_minish *minish, int type, char *res, int i)
 {
 	if (type == APP_OUT || type == REDIR_OUT)
 	{
-		minish->ppx.fileout = res;
+		minish->ppx.fileout[i] = res;
 		if (type == APP_OUT)
-			minish->ppx.app_on = 1;
+			minish->ppx.app_on[i] = 1;
 	}
 	else if (type == HERE_DOC)
 	{
-		minish->ppx.limiter = res;
-		minish->ppx.hd_on = 1;
-		minish->ppx.n_cmd--;
+		minish->ppx.limiter[i] = res;
+		minish->ppx.hd_on[i] = 1;
 	}
 	else
-		minish->ppx.filein = res;
+		minish->ppx.filein[i] = res;
 }
 
 int	deal_with_redir(t_minish *minish, int type, int i)
 {
-	int		j;
-	char	*line;
-	char	*res;
+	int			j;
+	char		*line;
+	t_content	*node;
 
+	node = malloc(sizeof(struct s_content));
 	line = minish->line;
+	node->type = type;
 	while (line[i] == ' ' || line[i] == '<' || line[i] == '>')
 		i++;
 	j = i;
@@ -101,7 +96,7 @@ int	deal_with_redir(t_minish *minish, int type, int i)
 	i = redir_quotes(i, line);
 	if (i == -1)
 		return (i);
-	res = ft_substr(&line[j], 0, i - j);
-	redir_fill(minish, type, res);
+	node->str = ft_substr(&line[j], 0, i - j);
+	ft_lstadd_back(&minish->lst_line, ft_lstnew(node));
 	return (i);
 }

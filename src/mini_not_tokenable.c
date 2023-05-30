@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 16:57:22 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/11 19:10:14 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/27 15:31:50 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	is_not_tokenable(t_minish *minish, int i, const char *tok[])
 		}
 	}
 	return (i + size);
-}	
+}
 
 int	not_token_size(t_minish *minish, int i, const char *tok[])
 {
@@ -51,7 +51,7 @@ int	not_token_size(t_minish *minish, int i, const char *tok[])
 			else
 				j++;
 		}
-		if (tok[j] == NULL || j == 8)
+		if (tok[j] == NULL || j == OTHER)
 		{
 			size++;
 			i++;

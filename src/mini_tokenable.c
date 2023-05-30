@@ -6,11 +6,12 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 16:58:36 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/25 14:24:09 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/27 16:16:44 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+#include <stdio.h>
 
 int	is_tokenable(t_minish *minish, int i, const char *tok[])
 {

@@ -6,14 +6,17 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 10:00:56 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/29 11:31:39 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/30 12:09:34 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+#include <stdio.h>
 
 void	check_for_builtin(char **cmd, t_minish *minish)
 {
+	if (cmd[0] == NULL)
+		return ;
 	if (ft_strncmp(cmd[0], "echo\0", 5) == 0)
 		builtin_echo(cmd, minish);
 	else if (ft_strncmp(cmd[0], "pwd\0", 4) == 0)

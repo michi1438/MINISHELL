@@ -6,11 +6,12 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 20:23:44 by lzito             #+#    #+#             */
-/*   Updated: 2023/05/25 17:53:55 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/29 14:31:35 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+#include <stdio.h>
 
 void	ft_freeall(t_pipex *ppx)
 {
@@ -25,6 +26,8 @@ void	ft_freeall(t_pipex *ppx)
 			free(ppx->path[i]);
 		if (ppx->fd != NULL && ppx->fd[i] != NULL)
 			free(ppx->fd[i]);
+		if (ppx->fd_hd != NULL && ppx->fd_hd[i] != NULL)
+			free(ppx->fd_hd[i]);
 		i++;
 	}
 	if (ppx->cmd != NULL)
@@ -35,6 +38,8 @@ void	ft_freeall(t_pipex *ppx)
 		free(ppx->pid);
 	if (ppx->fd != NULL)
 		free(ppx->fd);
+	if (ppx->fd_hd != NULL)
+		free(ppx->fd_hd);
 }
 
 void	ft_free(char **av)
@@ -61,13 +66,16 @@ int	ft_waitnclose(t_pipex *ppx)
 
 	i = 0;
 	statuscode = 0;
-//	close(ppx->f_in);
-//	close(ppx->f_out);
-//	close(ppx->fd_hd[0]); (this also makes my computer fail to repromt)
 	while (i < ppx->n_cmd)
 	{
 		close(ppx->fd[i][0]);
 		close(ppx->fd[i][1]);
+		if (ppx->filein[i] != NULL)
+			close(ppx->f_in[i]);
+		if (ppx->fileout[i] != NULL)
+			close(ppx->f_out[i]);
+		if (ppx->hd_on[i] == 1)
+			close(ppx->fd_hd[i][0]);
 		waitpid(ppx->pid[i], &wstatus, 0);
 		if (WIFEXITED(wstatus))
 			statuscode = WEXITSTATUS(wstatus);
@@ -86,6 +94,12 @@ void	ft_close_fds(t_pipex *ppx)
 	{
 		close(ppx->fd[i][0]);
 		close(ppx->fd[i][1]);
+		if (ppx->filein[i] != NULL)
+			close(ppx->f_in[i]);
+		if (ppx->fileout[i] != NULL)
+			close(ppx->f_out[i]);
+		if (ppx->hd_on[i] == 1)
+			close(ppx->fd_hd[i][0]);
 		i++;
 	}
 }
