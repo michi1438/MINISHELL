@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:25:55 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/29 00:54:01 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/30 12:31:26 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int	ft_err_handling(t_minish *minish)
 	while (lst != NULL)
 	{
 		cont = lst->content;
-		printf("cont = %s$\n", cont->str);
-		printf("type = %d$\n", cont->type);
+//		printf("cont = %s$\n", cont->str);
+//		printf("type = %d$\n", cont->type);
 		if (cont->type > SPCE || cont->type < PIPE)
 		{
 			while (cont->type >= SPCE || cont->type < PIPE)
@@ -49,7 +49,7 @@ int	ft_err_handling(t_minish *minish)
 		if (lst != NULL)
 			lst = lst->next;
 	}
-	printf("i = %d n_cmd = %d\n", i, minish->ppx.n_cmd);
+//	printf("i = %d n_cmd = %d\n", i, minish->ppx.n_cmd);
 	if (i != minish->ppx.n_cmd)
 		return (-1);
 	return (0);

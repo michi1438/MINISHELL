@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 20:21:48 by lzito             #+#    #+#             */
-/*   Updated: 2023/05/29 11:42:12 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/30 12:53:16 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ char		*ft_checkexe(char **paths, char *cmd, t_pipex *ppx)
 	char	*newpath;
 	char	*fullpath;
 
+	(void) ppx; // TO BE REMOVED
 	i = 0;
 	while (paths[i])
 	{
@@ -28,14 +29,12 @@ char		*ft_checkexe(char **paths, char *cmd, t_pipex *ppx)
 		if (access(fullpath, F_OK) == 0 && access(fullpath, X_OK) == 0)
 		{
 			free(newpath);
-			update_exit_stat(fullpath, ppx, cmd);
 			return (fullpath);
 		}
 		free(newpath);
 		free(fullpath);
 		i++;
 	}
-	update_exit_stat(fullpath, ppx, cmd);
 	newpath = ft_strjoin(paths[0], "/");
 	fullpath = ft_strjoin(newpath, cmd);
 	//printf("cmd=%s\n", fullpath);
@@ -65,7 +64,7 @@ char	**ft_checkenv(char *env[])
 	return (paths);
 }
 
-char		*ft_checkpath(char *env[], char *cmd,t_pipex *ppx)
+char		*ft_checkpath(char *env[], char *cmd, t_pipex *ppx)
 {
 	char	**paths;
 	char	*fullpath;
@@ -76,7 +75,6 @@ char		*ft_checkpath(char *env[], char *cmd,t_pipex *ppx)
 	if (ft_strchr(cmd, '/'))
 	{
 		cmd_cpy = ft_strdup(cmd);
-		update_exit_stat(cmd_cpy, ppx, cmd_cpy);
 		return (cmd_cpy);
 	}
 	paths = ft_checkenv(env);

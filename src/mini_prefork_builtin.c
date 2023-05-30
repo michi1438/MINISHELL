@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:46:16 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/30 12:21:13 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/30 12:56:47 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	pre_fork_builtin(char **cmd, t_minish *minish)
 	}
 	else if (ft_strncmp(cmd[0], "exit\0", 5) == 0)
 	{
-		minish->ppx.last_exit_status = builtin_exit(cmd, minish);
+		minish->ppx.exit_status = builtin_exit(cmd, minish);
 		return (1);
 	}
 	else
@@ -93,9 +93,6 @@ char	**builtin_unset(char **cmd, t_minish *minish)
 	return (new_env);
 }
 
-
-
-
 int	builtin_exit(char **cmd, t_minish *minish)
 {
 	int i;
@@ -122,7 +119,7 @@ int	builtin_exit(char **cmd, t_minish *minish)
 	else
 	{
 		printf("exit\n");
-		exit (minish->ppx.last_exit_status);
+		exit (minish->ppx.exit_status);
 	}
 }
 
@@ -165,14 +162,14 @@ void	builtin_export(char **cmd, t_minish *minish)
 		if (ft_isdigit(cmd[j][0]))
 		{
 			printf("%s: not a valid identifier.\n", cmd[j]);	
-			minish->ppx.last_exit_status = 1;	
+			minish->ppx.exit_status = 1;	
 			flg = 1;
 		}
 		else
 		{
 			minish->env = new_env_maker(cmd, minish, j);
 			if (flg == 0)
-				minish->ppx.last_exit_status = 0;
+				minish->ppx.exit_status = 0;
 		}
 		j++;
 	}
@@ -222,7 +219,7 @@ void	builtin_cd(char **cmd, t_minish *minish)
 	{
 		if (chdir(cmd[1]) == -1)
 		{
-			minish->ppx.last_exit_status = 1;
+			minish->ppx.exit_status = 1;
 			perror(cmd[1]);
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/30 12:11:04 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/30 13:17:20 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main(int ac, char *av[], char *env[])
 int	ft_initmain(t_minish *minish, char **env)
 {
 	ft_signals_n_attr(SET);
-	minish->ppx.last_exit_status = 0;
+	minish->ppx.exit_status = 0;
 	minish->prev_line = NULL;
 	minish->env = ft_copy_env(env);
 	if (minish->env == NULL)
@@ -47,7 +47,6 @@ int	init_minish(t_minish *minish)
 	ft_signals_n_attr(RESET);
 	minish->ppx.n_cmd = 1;
 	minish->lst_line = NULL;
-	minish->exit_stat = 0;
 	return (0);
 }
 
@@ -80,15 +79,15 @@ void	treating_line(t_minish *minish)
 	if (ft_token(minish) != -1)
 	{
 		add_cmds(minish);
-		minish->exit_stat = main_pipe(minish, &minish->ppx);
+		minish->ppx.exit_status = main_pipe(minish, &minish->ppx);
 		mini_lstclear(&minish->lst_line, free);
 	}
 	else
 	{
 		printf("unexpected token ERROR\n");
-		minish->exit_stat = 2;
+		minish->ppx.exit_status = 2;
 	}
-	printf("exit status = %d\n", minish->exit_stat);
+//	printf("exit status = %d\n", minish->ppx.exit_status);
 }
 
 int	ft_token(t_minish *minish)

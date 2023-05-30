@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 10:00:56 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/30 12:09:34 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/30 13:18:29 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,21 @@ void	builtin_echo(char **cmd, t_minish *minish)
 	if (flg == 0)
 		ft_putchar_fd('\n', STDOUT_FILENO);
 	exit (0);
+}
+
+int	is_prefork_builtin(char *cmd)
+{
+	int			i;
+	const char	*builtin[] = {
+		"exit", "export", "env", "unset",  NULL,
+	};
+
+	i = 0;
+	while (builtin[i] != NULL)
+	{
+		if (ft_strncmp(cmd, builtin[i], ft_strlen(builtin[i])) == 0)
+			return (0);
+		i++;
+	}
+	return (-1);
 }

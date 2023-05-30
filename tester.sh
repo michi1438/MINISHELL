@@ -132,7 +132,7 @@ echo \$? >> $TEST
 exit 11
 yoy
 
-echo \$? >> $TEST
+echo $? >> $TEST
 
 TEST=test_bash
 /bin/bash << yoyoy
@@ -149,7 +149,7 @@ echo \$? >> $TEST
 exit 11
 yoyoy
 
-echo \$? >> $TEST
+echo $? >> $TEST
 
 echo
 diff -s test_minishell test_bash

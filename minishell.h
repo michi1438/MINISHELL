@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/30 12:20:52 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/30 13:18:47 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 
 typedef struct s_pipex
 {
-	int		last_exit_status;
+	int		exit_status;
 	int		**fd;
 	int		**fd_hd;
 	int		*hd_on;
@@ -47,7 +47,6 @@ typedef struct s_minish
 	char		*line;
 	char		*prev_line;
 	char		**cmds;
-	int			exit_stat;
 	t_list		*lst_line;
 	t_pipex		ppx;
 }	t_minish;
@@ -107,6 +106,7 @@ int			mini_clear_fing(char **ptrptr, int j);
 void		check_for_builtin(char **cmd, t_minish *minish);
 void		builtin_echo(char **cmd, t_minish *minish);
 void		builtin_pwd(void);
+int			is_prefork_builtin(char *cmd);
 
 // MINI_PREFORK_BUILTIN.C
 int			pre_fork_builtin(char **cmd, t_minish *minish);
@@ -181,7 +181,6 @@ void		re_prompt(int useless);
 
 // MINI_EXIT_STATUS.C
 void		update_exit_stat(char *fullpath, t_pipex *ppx, char *cmd);
-int			is_builtin(char *cmd);
 
 // MINIPIPE
 //ppx_checks.c

@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 20:27:56 by lzito             #+#    #+#             */
-/*   Updated: 2023/05/29 09:47:22 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/30 12:42:52 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	treating_expand(char *quote, t_minish *minish, int *j, char *ret)
 	var = ft_substr(&quote[i], 0, *j - i);
 	lendllr = ft_strlen(var) + 1;
 	if (ft_strncmp(var, "?", 2) == 0)
-		var = ft_itoa(minish->ppx.last_exit_status);
+		var = ft_itoa(minish->ppx.exit_status);
 	else
 	{
 		var = ft_strjoin(var, "=");
@@ -93,7 +93,7 @@ int	new_size(char *quote, t_minish *minish)
 				j++;
 			var = ft_substr(&quote[i], 0, j - (i));
 			if (ft_strncmp(var, "?", 2) == 0)
-				tot_size += ft_strlen(ft_itoa(minish->ppx.last_exit_status));
+				tot_size += ft_strlen(ft_itoa(minish->ppx.exit_status));
 			else
 			{	
 				value = check_env_var(minish->env, ft_strjoin(var, "="));
