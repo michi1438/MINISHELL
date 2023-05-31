@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 18:33:23 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/31 01:26:15 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/31 14:14:59 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	init_cmds(t_minish *minish)
 {
-	// CALLOC A PROTEGER !!!
+	//TODO CALLOC A PROTEGER !!!
 	minish->cmds = ft_calloc(minish->ppx.n_cmd, sizeof(char *));
 	minish->ppx.limiter = ft_calloc(minish->ppx.n_cmd, sizeof(char *));
 	minish->ppx.hd_on = ft_calloc(minish->ppx.n_cmd, sizeof(int));
