@@ -6,12 +6,11 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 20:23:44 by lzito             #+#    #+#             */
-/*   Updated: 2023/05/30 15:54:05 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/31 14:25:10 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-#include <stdio.h>
 
 void	ft_freeall(t_pipex *ppx)
 {
@@ -77,7 +76,7 @@ int	ft_waitnclose(t_pipex *ppx)
 		if (ppx->hd_on[i] == 1)
 			close(ppx->fd_hd[i][0]);
 		waitpid(ppx->pid[i], &wstatus, 0);
-		if (is_prefork_builtin(ppx->cmd[i]) == 0)
+		if (ppx->cmd[i][0] != NULL && is_prefork_builtin(ppx->cmd[i]) == 0)
 			statuscode = ppx->exit_status;
 		else if (WIFEXITED(wstatus))
 			statuscode = WEXITSTATUS(wstatus);

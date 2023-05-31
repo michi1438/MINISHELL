@@ -6,12 +6,11 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:44:21 by lzito             #+#    #+#             */
-/*   Updated: 2023/05/29 01:31:13 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/31 02:02:53 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-#include <stdio.h>
 
 int	ft_heredoc(t_pipex *ppx, int i)
 {

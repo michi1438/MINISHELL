@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/30 13:17:20 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/31 01:01:22 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ void	treating_line(t_minish *minish)
 	ft_add_history(minish);
 	if (ft_token(minish) != -1)
 	{
-		add_cmds(minish);
 		minish->ppx.exit_status = main_pipe(minish, &minish->ppx);
 		mini_lstclear(&minish->lst_line, free);
 	}
@@ -107,5 +106,6 @@ int	ft_token(t_minish *minish)
 		if (minish->line[i] != '\0')
 			i++;
 	}
+	add_cmds(minish);
 	return (ft_err_handling(minish));
 }

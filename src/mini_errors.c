@@ -6,19 +6,11 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:25:55 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/30 12:31:26 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/31 01:58:57 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-int	ft_err_check_hd(t_minish *minish, t_content *cont, int i)
-{
-	i++;
-	if (cont->str != NULL && minish->ppx.n_cmd == i - 1)
-		minish->ppx.n_cmd++;
-	return (i);
-}
 
 int	ft_err_handling(t_minish *minish)
 {
@@ -33,19 +25,20 @@ int	ft_err_handling(t_minish *minish)
 		cont = lst->content;
 //		printf("cont = %s$\n", cont->str);
 //		printf("type = %d$\n", cont->type);
-		if (cont->type > SPCE || cont->type < PIPE)
+		if (cont->type != SPCE && cont->type != PIPE)
 		{
-			while (cont->type >= SPCE || cont->type < PIPE)
+			while (cont->type != PIPE)
 			{	
+				if (cont->type >= APP_OUT && cont->type <= REDIR_IN
+					&& cont->str == NULL)
+					i--;
 				lst = lst->next;
 				if (lst == NULL)
 					break ;
 				cont = lst->content;
 			}
-			i = ft_err_check_hd(minish, cont, i);
+			i++;
 		}
-		if (cont->type == HERE_DOC && ft_strncmp(cont->str, "\0", 1) != 0)
-			minish->ppx.n_cmd--;
 		if (lst != NULL)
 			lst = lst->next;
 	}

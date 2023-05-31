@@ -6,16 +6,15 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 18:33:23 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/29 15:07:17 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/31 14:14:59 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-#include <stdio.h>
 
 int	init_cmds(t_minish *minish)
 {
-	// CALLOC A PROTEGER !!!
+	//TODO CALLOC A PROTEGER !!!
 	minish->cmds = ft_calloc(minish->ppx.n_cmd, sizeof(char *));
 	minish->ppx.limiter = ft_calloc(minish->ppx.n_cmd, sizeof(char *));
 	minish->ppx.hd_on = ft_calloc(minish->ppx.n_cmd, sizeof(int));
@@ -53,14 +52,23 @@ void	add_cmds(t_minish *minish)
 			append_or_start(minish, cont->str, "\"", i);
 		}
 		else if (cont->type >= APP_OUT && cont->type <= REDIR_IN)
-			redir_fill(minish, cont->type, cont->str, i);
+		{
+			if (ft_strncmp(cont->str, "", 1) != 0)
+			{
+				redir_fill(minish, cont->type, cont->str, i);
+				cont->str = ft_strdup("");
+				append_or_start(minish, cont->str, NULL, i);
+			}
+			else
+				cont->str = NULL;
+		}
 		else if (cont->type == SPCE)
 			append_or_start(minish, cont->str, NULL, i);
 		else if (cont->type == PIPE && minish->cmds[i] != NULL)
 			i++;
-		lst = lst->next;
 //		printf("cont->str = %s$\n", cont->str);
 //		printf("cmd = %s$ i = %d\n", minish->cmds[i], i);
+		lst = lst->next;
 	}
 }
 

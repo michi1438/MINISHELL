@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/31 09:16:54 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/31 14:20:51 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void		*mini_implfing(char const *s, char c, char **ptrptr, int *i);
 int			mini_clear_fing(char **ptrptr, int j);
 
 // MINI_BUILTINS.C
-void		check_for_builtin(char **cmd, t_minish *minish);
+void		check_for_builtin(char **cmd, t_minish *minish, int i);
 void		builtin_echo(char **cmd, t_minish *minish);
 void		builtin_pwd(void);
 void		export_noarg(t_minish *minish);
@@ -136,7 +136,7 @@ int			redir_quotes(int i, char *line);
 void		redir_fill(t_minish *minish, int type, char *res, int i);
 int			deal_with_redir(t_minish *minish, int type, int i);
 
-// MINI_REDIR.C
+// MINI_REDIR_CMDS.C
 void		ft_redir_only_cmd(t_pipex *ppx, int idx);
 void		ft_redir_first_cmd(t_pipex *ppx, int idx);
 void		ft_redir_mid_cmd(t_pipex *ppx, int idx);
@@ -190,9 +190,9 @@ void		update_exit_stat(char *fullpath, t_pipex *ppx, char *cmd);
 
 // MINIPIPE
 //ppx_checks.c
-char		*ft_checkexe(char **paths, char *cmd, t_pipex *ppx);
+char		*ft_checkexe(char **paths, char *cmd);
 char		**ft_checkenv(char *env[]);
-char		*ft_checkpath(char *env[], char *cmd, t_pipex *ppx);
+char		*ft_checkpath(char *env[], char *cmd);
 
 //ppx_free.c
 void		ft_freeall(t_pipex *ppx);

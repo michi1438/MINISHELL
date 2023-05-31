@@ -6,19 +6,18 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 20:21:48 by lzito             #+#    #+#             */
-/*   Updated: 2023/05/30 12:53:16 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/31 14:16:42 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char		*ft_checkexe(char **paths, char *cmd, t_pipex *ppx)
+char		*ft_checkexe(char **paths, char *cmd)
 {
 	int		i;
 	char	*newpath;
 	char	*fullpath;
 
-	(void) ppx; // TO BE REMOVED
 	i = 0;
 	while (paths[i])
 	{
@@ -37,7 +36,6 @@ char		*ft_checkexe(char **paths, char *cmd, t_pipex *ppx)
 	}
 	newpath = ft_strjoin(paths[0], "/");
 	fullpath = ft_strjoin(newpath, cmd);
-	//printf("cmd=%s\n", fullpath);
 	free(newpath);
 	return (fullpath);
 }
@@ -51,7 +49,7 @@ char	**ft_checkenv(char *env[])
 
 	i = 0;
 	paths = NULL;
-	defpath = "/usr/bin/:/bin/";
+	defpath = "/";
 	while (env[i])
 	{
 		envline = ft_strnstr(env[i], "PATH=", 5);
@@ -64,7 +62,7 @@ char	**ft_checkenv(char *env[])
 	return (paths);
 }
 
-char		*ft_checkpath(char *env[], char *cmd, t_pipex *ppx)
+char		*ft_checkpath(char *env[], char *cmd)
 {
 	char	**paths;
 	char	*fullpath;
@@ -78,7 +76,7 @@ char		*ft_checkpath(char *env[], char *cmd, t_pipex *ppx)
 		return (cmd_cpy);
 	}
 	paths = ft_checkenv(env);
-	fullpath = ft_checkexe(paths, cmd, ppx);
+	fullpath = ft_checkexe(paths, cmd);
 	ft_free(paths);
 	return (fullpath);
 }
