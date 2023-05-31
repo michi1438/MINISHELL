@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 10:00:56 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/31 14:22:39 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/31 18:27:00 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	check_for_builtin(char **cmd, t_minish *minish, int i)
 		return ;
 	}
 	if (ft_strncmp(cmd[0], "echo\0", 5) == 0)
-		builtin_echo(cmd, minish);
+		builtin_echo(cmd);
 	else if (ft_strncmp(cmd[0], "pwd\0", 4) == 0)
 		builtin_pwd();
 	else if (ft_strncmp(cmd[0], "export\0", 7) == 0 && cmd[1] == NULL)
@@ -65,29 +65,41 @@ void	builtin_pwd(void)
 	exit (0);
 }
 
-void	builtin_echo(char **cmd, t_minish *minish)
+void	builtin_echo(char **cmd)
 {
 	int		i;
 	int		flg;
 
 	i = 1;
 	flg = 0;
-	(void)minish;
 	while (cmd[i] != NULL)
 	{
-		if (ft_strncmp(cmd[i], "-n", 2) == 0)
-		{
-			i++;
-			flg = 1;
-		}
-		else
-		{
-			ft_putstr_fd(cmd[i], STDOUT_FILENO);
-			if (cmd[(i++) + 1] != NULL)
-				ft_putchar_fd(' ', STDOUT_FILENO);
-		}
+		if (ft_strncmp(cmd[i], "-n", 2) == 0 && flg == 0 && i == 1)
+			echo_option(cmd, &i, &flg);
+		ft_putstr_fd(cmd[i], STDOUT_FILENO);
+		if (cmd[(i++) + 1] != NULL)
+			ft_putchar_fd(' ', STDOUT_FILENO);
 	}
 	if (flg == 0)
 		ft_putchar_fd('\n', STDOUT_FILENO);
 	exit (0);
+}
+
+void	echo_option(char **cmd, int *i, int *flg)
+{
+	int	j;
+
+	while (ft_strncmp(cmd[*i], "-n", 2) == 0)
+	{
+		j = 2;
+		while (cmd[*i][j] == 'n')
+			j++;
+		if (cmd[*i][j] == '\0')
+		{
+			(*flg) = 1;
+			(*i)++;
+		}
+		else
+			break ;
+	}
 }

@@ -12,6 +12,12 @@ echo -n bla bla >> $TEST
 echo -nn bla bla >> $TEST
 echo -nn -nn   -n --n bla >> $TEST
 echo -n 'bla' >> $TEST
+echo bla -n >> $TEST
+echo -n-n-n bla -n >> $TEST
+echo -nnn-nnn bla >> $TEST
+echo -n -nnn- bla >> $TEST
+echo --n >> $TEST
+echo -n --n ---n >> $TEST
 echo 'bla' >> $TEST
 echo '\$SHELL' "\$SHELL" >> $TEST
 echo \$SHELL\$PATH >> $TEST
@@ -26,7 +32,6 @@ echo \$? >> $TEST
 tnoeuheontu $TEST
 echo \$? >> $TEST
 echo \$? >> $TEST
-echo bla -n
 exit >> $TEST
 yo
 
@@ -39,6 +44,12 @@ echo -n bla bla >> $TEST
 echo -nn bla bla >> $TEST
 echo -nn -nn   -n --n bla >> $TEST
 echo -n 'bla' >> $TEST
+echo bla -n >> $TEST
+echo -n-n-n bla -n >> $TEST
+echo -nnn-nnn bla >> $TEST
+echo -n -nnn- bla >> $TEST
+echo --n >> $TEST
+echo -n --n ---n >> $TEST
 echo 'bla' >> $TEST
 echo '\$SHELL' "\$SHELL" >> $TEST
 echo \$SHELL\$PATH >> $TEST
@@ -66,12 +77,13 @@ TEST=test_minishell
 ~/MINISHELL/minishell << yo
 cd .. > $TEST
 cd MINISHELL/ >> $TEST
-cd ...
+cd ... >> $TEST
 pwd >> $TEST
+#export >> $TEST
 export SHELL=blabla BLO=blablibloup >> $TEST
-export BLO= bloblo
-export BLO =bloblo
-export =
+export BLO= bloblo >> $TEST
+export BLO =bloblo >> $TEST
+export = = = >> $TEST
 env >> $TEST #TODO
 unset SHELL PATH nhtueo>> $TEST
 exit >> $TEST
@@ -79,15 +91,19 @@ yo
 
 
 TEST=test_bash
-/bin/bash << yo > $TEST
-cd ..
-cd MINISHELL/ 
-pwd 
-export SHELL=blabla BLO=blablibloup
-env
-unset
-unset SHELL PATH nhtueo
-exit
+/bin/bash << yo
+cd .. > $TEST
+cd MINISHELL/ >> $TEST
+cd ... >> $TEST
+pwd >> $TEST
+#export >> $TEST
+export SHELL=blabla BLO=blablibloup >> $TEST
+export BLO= bloblo >> $TEST
+export BLO =bloblo >> $TEST
+export = = = >> $TEST
+env >> $TEST #TODO
+unset SHELL PATH nhtueo>> $TEST
+exit >> $TEST
 yo
 
 echo
@@ -108,13 +124,13 @@ yo
 
 
 TEST=test_bash
-/bin/bash << yo > $TEST
-echo bla | wc 
-echo blanetuoh | wc -c  
-echo -n bla bla | grep b | wc
-ls -la | grep a | wc 
-"echo" 'bla''bla' | wc -l 
-exit
+/bin/bash << yo
+echo bla | wc > $TEST 
+echo blanetuoh | wc -c >> $TEST  
+echo -n bla bla | grep b | wc >> $TEST
+ls -la | grep a | wc >> $TEST 
+"echo" 'bla''bla' | wc -l >> $TEST 
+exit >> $TEST
 yo
 
 echo
@@ -124,7 +140,7 @@ echo
 echo ---------TESTING EXIT STATUS--------
 echo
 TEST=test_minishell
-~/MINISHELL/minishell << yoy
+~/MINISHELL/minishell << yo
 echo \$? > $TEST
 echo bla >>	$TEST
 echo \$? >> $TEST
@@ -136,12 +152,12 @@ nteouh >> $TEST
 echo >> $TEST
 echo \$? >> $TEST 
 exit 11
-yoy
+yo
 
 echo $? >> $TEST
 
 TEST=test_bash
-/bin/bash << yoyoy
+/bin/bash << yo
 echo \$? > $TEST
 echo bla >>	$TEST
 echo \$? >> $TEST
@@ -153,7 +169,7 @@ nteouh >> $TEST
 echo >> $TEST
 echo \$? >> $TEST 
 exit 11
-yoyoy
+yo
 
 echo $? >> $TEST
 
@@ -165,17 +181,31 @@ echo ---------TESTING REDIR---------
 echo 
 TEST=test_minishell
 ~/MINISHELL/minishell << yo
+cat < Makefile > $TEST
+echo bla > file | echo blaoubla > file >> $TEST
+cat file >> $TEST
+echo bla >> file | echo blaoubla >> file >> $TEST
+echo bla >> file | echo blaoubla >> file >> $TEST
+echo bla >> file | echo blaoubla >> file >> $TEST
+cat file >> $TEST
 exit >> $TEST
 yo
 
+echo $? >> $TEST
 
 TEST=test_bash
-/bin/bash << yo > $TEST
-echo bla >> file | echo blaoubla >> file
-echo bla >> file | echo blaoubla >> file
-echo bla >> file | echo blaoubla >> file
-exit
+/bin/bash << yo
+cat < Makefile > $TEST
+echo bla > file | echo blaoubla > file >> $TEST
+cat file >> $TEST
+echo bla >> file | echo blaoubla >> file >> $TEST
+echo bla >> file | echo blaoubla >> file >> $TEST
+echo bla >> file | echo blaoubla >> file >> $TEST
+cat file >> $TEST
+exit >> $TEST
 yo
+
+echo $? >> $TEST
 
 echo
 diff -s test_minishell test_bash
@@ -185,15 +215,19 @@ echo ---------TESTING MISC---------
 echo 
 TEST=test_minishell
 ~/MINISHELL/minishell << yo
-exit >> $TEST
+cat | cat | ls > $TEST
+exit nt >> $TEST
 yo
 
+echo $? >> $TEST
 
 TEST=test_bash
-/bin/bash << yo > $TEST
-cat | cat | ls
-exit
+/bin/bash << yo
+cat | cat | ls > $TEST
+exit nt >> $TEST
 yo
+
+echo $? >> $TEST
 
 echo
 diff -s test_minishell test_bash

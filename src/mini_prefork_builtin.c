@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:46:16 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/31 08:38:02 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/31 14:36:01 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ int	builtin_exit_err(char **cmd, int err_type)
 	else if (err_type == 2)
 	{
 		printf("%s: numeric argument required\n", cmd[1]);
-		return (2);
+		exit (2);
+		// return (2); TODO
 	}
 	return (0);
 }
