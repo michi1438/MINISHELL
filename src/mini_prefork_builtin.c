@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:46:16 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/30 19:40:47 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/31 08:38:02 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ int	pre_fork_builtin(char **cmd, t_minish *minish)
 	}
 	else if (ft_strncmp(cmd[0], "export\0", 7) == 0)
 	{
-			if (cmd[1] == NULL)
-				return (0);
-			else if (minish->ppx.n_cmd == 1)
-				builtin_export(cmd, minish);
+		if (cmd[1] == NULL)
+			return (0);
+		else if (minish->ppx.n_cmd == 1)
+			builtin_export(cmd, minish);
 	}
 	else if (ft_strncmp(cmd[0], "unset\0", 6) == 0)
 		minish->env = builtin_unset(cmd, minish);
@@ -41,12 +41,12 @@ int	pre_fork_builtin(char **cmd, t_minish *minish)
 
 int	builtin_exit(char **cmd, t_minish *minish)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (cmd[1] != NULL)
 	{
-		if (cmd[2] != NULL) 
+		if (cmd[2] != NULL)
 			return (builtin_exit_err(cmd, 1));
 		while (cmd[1][i] != '\0')
 		{
@@ -63,7 +63,7 @@ int	builtin_exit(char **cmd, t_minish *minish)
 	}
 }
 
-int builtin_exit_err(char **cmd, int err_type)
+int	builtin_exit_err(char **cmd, int err_type)
 {
 	if (err_type == 1)
 	{

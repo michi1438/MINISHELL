@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 18:51:00 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/30 19:33:22 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/31 08:40:03 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	builtin_export(char **cmd, t_minish *minish)
 	{
 		if (ft_isdigit(cmd[j][0]))
 		{
-			printf("%s: not a valid identifier.\n", cmd[j]);	
-			minish->ppx.exit_status = 1;	
+			printf("%s: not a valid identifier.\n", cmd[j]);
+			minish->ppx.exit_status = 1;
 			flg = 1;
 		}
 		else
@@ -57,12 +57,23 @@ char	**new_env_maker(char **cmd, t_minish *minish, int j)
 		if (ft_strncmp(minish->env[i], var, ft_strlen(var)) == 0)
 			new_env[i] = ft_strdup(cmd[j]);
 		else
-			new_env[i] = minish->env[i];
+			new_env[i] = ft_strdup(minish->env[i]);
 		i++;
 	}
 	if (check_env_var(minish->env, var) == NULL)
 		new_env[i] = ft_strdup(cmd[j]);
+	free_double(minish->env);
 	return (new_env);
+}
+
+void	free_double(char **env)
+{
+	int	i;
+
+	i = 0;
+	while (env[i] != NULL)
+		free(env[i++]);
+	free (env);
 }
 
 char	**builtin_unset(char **cmd, t_minish *minish)
@@ -82,15 +93,14 @@ char	**builtin_unset(char **cmd, t_minish *minish)
 		while (cmd[++i] != NULL)
 		{
 			var = ft_strjoin(cmd[i], "=");
-			if (ft_strncmp(var, minish->env[j], ft_strlen(var)) == 0)
-			{
-				j++;
+			if (ft_strncmp(var, minish->env[j], ft_strlen(var)) == 0 && j++)
 				break ;
-			}
+			free (var);
 		}
 		if (cmd[i] == NULL)
 			new_env[e++] = ft_strdup(minish->env[j++]);
 	}
+	free_double(minish->env);
 	return (new_env);
 }
 
@@ -110,7 +120,8 @@ int	new_env_size(char **cmd, t_minish *minish)
 		{
 			var = ft_strjoin(cmd[j], "=");
 			if (ft_strncmp(var, minish->env[i++], ft_strlen(var)) == 0)
-				e++;	
+				e++;
+			free (var);
 		}
 		j++;
 	}

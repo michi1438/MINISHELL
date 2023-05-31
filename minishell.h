@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/30 19:42:37 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/31 09:16:54 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ void		builtin_export(char **cmd, t_minish *minish);
 char		**new_env_maker(char **cmd, t_minish *minish, int j);
 char		**builtin_unset(char **cmd, t_minish *minish);
 int			new_env_size(char **cmd, t_minish *minish);
+void		free_double(char **env);
 
 //FOR_TESTING_ONLY.C
 void		print_lst_line(t_minish minish);
@@ -166,6 +167,7 @@ void		mini_lstdelone(t_list *node, void (*del)(void*));
 void		mini_lstclear(t_list **lst, void (*del)(void*));
 int			is_prefork_builtin(char **cmd);
 int			num_of_line(char **env);
+char		*ft_strjoin_n_free(char *s1, char *s2);
 
 // MINI_ERRORS.C
 int			ft_err_handling(t_minish *minish);

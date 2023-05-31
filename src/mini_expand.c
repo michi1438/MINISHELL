@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 20:27:56 by lzito             #+#    #+#             */
-/*   Updated: 2023/05/30 12:42:52 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/31 09:21:51 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ char	*expand_variables(char *quote, t_minish *minish)
 		else
 			ret[ft_strlen(ret)] = quote[j++];
 	}
+	free (quote);
 	ret = escape_spaces(ret);
 	return (ret);
 }
@@ -48,8 +49,8 @@ void	treating_expand(char *quote, t_minish *minish, int *j, char *ret)
 		var = ft_itoa(minish->ppx.exit_status);
 	else
 	{
-		var = ft_strjoin(var, "=");
-		var = check_env_var(minish->env, var);
+		var = ft_strjoin_n_free(var, "=");
+		var = check_env_var(minish->env, var); // TODO var, is going to cause leaks
 	}
 	*j = i - 1;
 	i = 0;
@@ -96,7 +97,7 @@ int	new_size(char *quote, t_minish *minish)
 				tot_size += ft_strlen(ft_itoa(minish->ppx.exit_status));
 			else
 			{	
-				value = check_env_var(minish->env, ft_strjoin(var, "="));
+				value = check_env_var(minish->env, ft_strjoin(var, "=")); // TODO, var is going to cause leaks
 				if (value != NULL)
 					tot_size += ft_strlen(value);
 			}
@@ -150,6 +151,11 @@ char	*escape_spaces(char *ret)
 	j = 0;
 	i = 0;
 	newret = ft_calloc((escaped_size(ret) + 1), sizeof(char));
+	if (newret == NULL)
+	{
+		printf("alloc failed\n");
+		exit (100); // TODO protect, and bring it back up
+	}
 	while (ret[j] != '\0')
 	{
 		if (ret[j] == ' ')
@@ -157,5 +163,6 @@ char	*escape_spaces(char *ret)
 		newret[i++] = ret[j++];
 	}
 	newret[i] = '\0';
+	free (ret);
 	return (newret);
 }

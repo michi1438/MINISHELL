@@ -81,7 +81,7 @@ AR	libft/Makefile	/^AR = ar rc$/;"	m
 BUFFER_SIZE	libft/ft_gnl/get_next_line_bonus.h	/^#  define BUFFER_SIZE /;"	d
 CC	Makefile	/^CC = gcc$/;"	m
 CC	libft/Makefile	/^CC = gcc$/;"	m
-CFLAGS	Makefile	/^CFLAGS = -Werror -Wall -Wextra -I$(RL)\/include -I. #-g -fsanitize=address$/;"	m
+CFLAGS	Makefile	/^CFLAGS = -Werror -Wall -Wextra -I$(RL)\/include -I. #-g -fsanitize=leak$/;"	m
 CFLAGS	libft/Makefile	/^CFLAGS = -Werror -Wall -Wextra$/;"	m
 DBLQUOTE	minishell.h	/^	DBLQUOTE,$/;"	e	enum:e_tolkien
 DEL	minishell.h	/^	DEL,$/;"	e	enum:e_gcstatus
@@ -125,7 +125,7 @@ buf	libft/ft_gnl/get_next_line_bonus.h	/^	char	*buf;$/;"	m	struct:sct1	typeref:t
 builtin_cd	src/mini_prefork_builtin.c	/^void	builtin_cd(char **cmd, t_minish *minish)$/;"	f	typeref:typename:void
 builtin_echo	src/mini_builtins.c	/^void	builtin_echo(char **cmd, t_minish *minish)$/;"	f	typeref:typename:void
 builtin_exit	src/mini_prefork_builtin.c	/^int	builtin_exit(char **cmd, t_minish *minish)$/;"	f	typeref:typename:int
-builtin_exit_err	src/mini_prefork_builtin.c	/^int builtin_exit_err(char **cmd, int err_type)$/;"	f	typeref:typename:int
+builtin_exit_err	src/mini_prefork_builtin.c	/^int	builtin_exit_err(char **cmd, int err_type)$/;"	f	typeref:typename:int
 builtin_export	src/mini_prefork_export_unset.c	/^void	builtin_export(char **cmd, t_minish *minish)$/;"	f	typeref:typename:void
 builtin_pwd	src/mini_builtins.c	/^void	builtin_pwd(void)$/;"	f	typeref:typename:void
 builtin_unset	src/mini_prefork_export_unset.c	/^char	**builtin_unset(char **cmd, t_minish *minish)$/;"	f	typeref:typename:char **
@@ -172,6 +172,7 @@ fileout	minishell.h	/^	char	**fileout;$/;"	m	struct:s_pipex	typeref:typename:cha
 flag_parser	libft/ft_printf/printparser.c	/^char	*flag_parser(const char *str, int i)$/;"	f	typeref:typename:char *
 flglying	libft/ft_printf/optionctrl.c	/^void	*flglying(char *flag, t_toggler *flg)$/;"	f	typeref:typename:void *
 flush	minishell.h	/^	int	flush;$/;"	m	struct:s_gc	typeref:typename:int
+free_double	src/mini_prefork_export_unset.c	/^void	free_double(char **env)$/;"	f	typeref:typename:void
 freeandreplace	libft/ft_gnl/get_next_line_utils_bonus.c	/^char	*freeandreplace(char *oldstr, char *stradd, int ind)$/;"	f	typeref:typename:char *
 ft_add_history	src/mini_main.c	/^void	ft_add_history(t_minish *minish)$/;"	f	typeref:typename:void
 ft_atoi	libft/ft_main/ft_atoi.c	/^int	ft_atoi(const char *nptr)$/;"	f	typeref:typename:int
@@ -234,6 +235,7 @@ ft_strchr	libft/ft_main/ft_strchr.c	/^char	*ft_strchr(const char *s, int c)$/;"	
 ft_strdup	libft/ft_main/ft_strdup.c	/^char	*ft_strdup(const char *s)$/;"	f	typeref:typename:char *
 ft_striteri	libft/ft_main/ft_striteri.c	/^void	ft_striteri(char *s, void (*f)(unsigned int, char*))$/;"	f	typeref:typename:void
 ft_strjoin	libft/ft_main/ft_strjoin.c	/^char	*ft_strjoin(char const *s1, char const *s2)$/;"	f	typeref:typename:char *
+ft_strjoin_n_free	src/mini_utils.c	/^char	*ft_strjoin_n_free(char *s1, char *s2)$/;"	f	typeref:typename:char *
 ft_strlcat	libft/ft_main/ft_strlcat.c	/^size_t	ft_strlcat(char *dst, const char *src, size_t size)$/;"	f	typeref:typename:size_t
 ft_strlcpy	libft/ft_main/ft_strlcpy.c	/^size_t	ft_strlcpy(char *dst, const char *src, size_t size)$/;"	f	typeref:typename:size_t
 ft_strlen	libft/ft_main/ft_strlen.c	/^size_t	ft_strlen(const char *s)$/;"	f	typeref:typename:size_t

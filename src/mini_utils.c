@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:46:25 by lzito             #+#    #+#             */
-/*   Updated: 2023/05/30 16:08:17 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/31 09:19:41 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	is_prefork_builtin(char **cmd)
 {
 	int			i;
 	const char	*builtin[] = {
-		"exit", "env", "unset",  NULL,
+		"exit", "env", "unset", NULL,
 	};
 
 	i = 0;
@@ -89,4 +89,31 @@ int	num_of_line(char **env)
 	while (env[i] != NULL)
 		i++;
 	return (i + 2);
+}
+
+char	*ft_strjoin_n_free(char *s1, char *s2)
+{
+	char	*ptr;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	ptr = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (ptr == NULL)
+		return (NULL);
+	while (s1[i] != '\0')
+	{
+		ptr[i] = s1[i];
+		i++;
+	}
+	while (s2[j] != '\0')
+	{
+		ptr[i] = s2[j];
+		i++;
+		j++;
+	}
+	ptr[i] = '\0';
+	free (s1);
+	return (ptr);
 }

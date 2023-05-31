@@ -26,6 +26,7 @@ echo \$? >> $TEST
 tnoeuheontu $TEST
 echo \$? >> $TEST
 echo \$? >> $TEST
+echo bla -n
 exit >> $TEST
 yo
 
@@ -65,10 +66,14 @@ TEST=test_minishell
 ~/MINISHELL/minishell << yo
 cd .. > $TEST
 cd MINISHELL/ >> $TEST
+cd ...
 pwd >> $TEST
-export SHELL=blabla >> $TEST
+export SHELL=blabla BLO=blablibloup >> $TEST
+export BLO= bloblo
+export BLO =bloblo
+export =
 env >> $TEST
-##unset >> $TEST
+unset SHELL PATH nhtueo>> $TEST
 exit >> $TEST
 yo
 
@@ -78,9 +83,10 @@ TEST=test_bash
 cd ..
 cd MINISHELL/ 
 pwd 
-export SHELL=blabla
+export SHELL=blabla BLO=blablibloup
 env
-##unset
+unset
+unset SHELL PATH nhtueo
 exit
 yo
 
