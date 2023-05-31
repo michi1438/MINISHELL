@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 20:23:44 by lzito             #+#    #+#             */
-/*   Updated: 2023/05/31 14:25:10 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/31 16:30:05 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,7 @@ int	ft_waitnclose(t_pipex *ppx)
 	statuscode = 0;
 	while (i < ppx->n_cmd)
 	{
-		close(ppx->fd[i][0]);
-		close(ppx->fd[i][1]);
-		if (ppx->filein[i] != NULL)
-			close(ppx->f_in[i]);
-		if (ppx->fileout[i] != NULL)
-			close(ppx->f_out[i]);
-		if (ppx->hd_on[i] == 1)
-			close(ppx->fd_hd[i][0]);
+		ft_close_fds(ppx);
 		waitpid(ppx->pid[i], &wstatus, 0);
 		if (ppx->cmd[i][0] != NULL && is_prefork_builtin(ppx->cmd[i]) == 0)
 			statuscode = ppx->exit_status;
