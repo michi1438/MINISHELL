@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 20:21:48 by lzito             #+#    #+#             */
-/*   Updated: 2023/05/30 23:27:41 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/31 13:04:59 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	**ft_checkenv(char *env[])
 
 	i = 0;
 	paths = NULL;
-	defpath = "/usr/bin/:/bin/";
+	defpath = "/";
 	while (env[i])
 	{
 		envline = ft_strnstr(env[i], "PATH=", 5);
