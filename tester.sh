@@ -72,7 +72,7 @@ export SHELL=blabla BLO=blablibloup >> $TEST
 export BLO= bloblo
 export BLO =bloblo
 export =
-env >> $TEST
+env >> $TEST #TODO
 unset SHELL PATH nhtueo>> $TEST
 exit >> $TEST
 yo
@@ -156,6 +156,44 @@ exit 11
 yoyoy
 
 echo $? >> $TEST
+
+echo
+diff -s test_minishell test_bash
+
+echo
+echo ---------TESTING REDIR---------
+echo 
+TEST=test_minishell
+~/MINISHELL/minishell << yo
+exit >> $TEST
+yo
+
+
+TEST=test_bash
+/bin/bash << yo > $TEST
+echo bla >> file | echo blaoubla >> file
+echo bla >> file | echo blaoubla >> file
+echo bla >> file | echo blaoubla >> file
+exit
+yo
+
+echo
+diff -s test_minishell test_bash
+
+echo
+echo ---------TESTING MISC---------
+echo 
+TEST=test_minishell
+~/MINISHELL/minishell << yo
+exit >> $TEST
+yo
+
+
+TEST=test_bash
+/bin/bash << yo > $TEST
+cat | cat | ls
+exit
+yo
 
 echo
 diff -s test_minishell test_bash

@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 18:51:00 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/31 08:40:03 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/05/31 13:51:31 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	builtin_export(char **cmd, t_minish *minish)
 	j = 1;
 	while (cmd[j] != NULL)
 	{
-		if (ft_isdigit(cmd[j][0]))
+		if (ft_isdigit(cmd[j][0]) || cmd[j][0] == '=')
 		{
 			printf("%s: not a valid identifier.\n", cmd[j]);
 			minish->ppx.exit_status = 1;
