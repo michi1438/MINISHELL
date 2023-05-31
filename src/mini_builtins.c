@@ -6,12 +6,11 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 10:00:56 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/31 00:28:41 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/31 02:02:53 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-#include <stdio.h>
 
 void	check_for_builtin(char **cmd, t_minish *minish, int i)
 {

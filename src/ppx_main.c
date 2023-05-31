@@ -6,12 +6,11 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:29:12 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/31 00:29:58 by lzito            ###   ########.fr       */
+/*   Updated: 2023/05/31 02:02:54 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-#include <stdio.h>
 
 void	ft_looppid(t_pipex *ppx, t_minish *minish, int idx)
 {
