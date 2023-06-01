@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:46:16 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/01 12:20:37 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/01 13:30:11 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ int	pre_fork_builtin(char **cmd, t_minish *minish)
 {
 	if (cmd[0] == NULL)
 		return (0);
-//	if (minish->ppx.hd_on[i] == 1 && cmd[0] == NULL)
-//		return (0);
 	if (ft_strncmp(cmd[0], "cd\0", 3) == 0)
 	{
 		if (minish->ppx.n_cmd == 1)
