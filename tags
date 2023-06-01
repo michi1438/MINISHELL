@@ -92,6 +92,7 @@ LIBFT_H	libft/ft_main/libft.h	/^# define LIBFT_H$/;"	d
 MINISHELL_H	minishell.h	/^# define MINISHELL_H$/;"	d
 NAME	Makefile	/^NAME = minishell$/;"	m
 NAME	libft/Makefile	/^NAME = libft.a $/;"	m
+NO_REPROMPT	minishell.h	/^	NO_REPROMPT,$/;"	e	enum:e_signal
 OBJS	Makefile	/^OBJS = $(SOURCES:c=o)$/;"	m
 OBJS	libft/Makefile	/^OBJS = $(SOURCES:c=o)$/;"	m
 OTHER	minishell.h	/^	OTHER,$/;"	e	enum:e_tolkien
@@ -294,6 +295,7 @@ new_env_size	src/mini_prefork_export_unset.c	/^int	new_env_size(char **cmd, t_mi
 new_size	src/mini_expand.c	/^int	new_size(char *quote, t_minish *minish)$/;"	f	typeref:typename:int
 next	libft/ft_main/libft.h	/^	struct s_list	*next;$/;"	m	struct:s_list	typeref:struct:s_list *
 no_dupl	libft/ft_printf/printparser.c	/^int	no_dupl(char *retstr, char ch, int e, const char *str)$/;"	f	typeref:typename:int
+no_re_prompt	src/mini_sig_n_attr.c	/^void	no_re_prompt(int useless)$/;"	f	typeref:typename:void
 not_token_size	src/mini_not_tokenable.c	/^int	not_token_size(t_minish *minish, int i, const char *tok[])$/;"	f	typeref:typename:int
 num_of_line	src/mini_utils.c	/^int	num_of_line(char **env)$/;"	f	typeref:typename:int
 numbertypes	libft/ft_printf/printfer_supl.c	/^int	numbertypes(t_conv *cvut, long long toconv, int i)$/;"	f	typeref:typename:int

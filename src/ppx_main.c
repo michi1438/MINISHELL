@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:29:12 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/31 02:02:54 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/01 10:53:14 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	ft_looppid(t_pipex *ppx, t_minish *minish, int idx)
 {
+	ft_signals_n_attr(NO_REPROMPT);
 	ppx->pid[idx] = fork();
 	if (ppx->pid[idx] < 0)
 		exit(1);

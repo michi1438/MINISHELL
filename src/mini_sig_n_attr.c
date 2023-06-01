@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 18:42:02 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/18 14:53:35 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/01 10:59:00 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,13 @@ void	set_act_int(struct sigaction *act_int, int toggle)
 		sigaddset(&act_int->sa_mask, SIGINT);
 		sigaction(SIGINT, act_int, NULL);
 	}
+	else if (toggle == NO_REPROMPT)
+	{
+		sigemptyset(&act_int->sa_mask);
+		act_int->sa_handler = no_re_prompt;
+		sigaddset(&act_int->sa_mask, SIGINT);
+		sigaction(SIGINT, act_int, NULL);
+	}
 	else
 	{
 		sigaction(SIGINT, &old_int, NULL);
@@ -62,17 +69,25 @@ void	set_act_quit(struct sigaction *act_quit, int toggle)
 	{	
 		sigaction(SIGQUIT, NULL, &old_quit);
 	}
-	else if (toggle == RESET)
+	else if (toggle == UNSET)
+	{
+		sigaction(SIGQUIT, &old_quit, NULL);
+	}
+	else
 	{	
 		sigemptyset(&act_quit->sa_mask);
 		act_quit->sa_flags = 0;
 		act_quit->sa_handler = SIG_IGN;
 		sigaction(SIGQUIT, act_quit, NULL);
 	}
-	else
-	{
-		sigaction(SIGQUIT, &old_quit, NULL);
-	}
+}
+
+void	no_re_prompt(int useless)
+{
+	write(0, "\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	(void)useless;
 }
 
 void	re_prompt(int useless)
