@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 18:51:00 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/31 16:34:13 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/01 11:51:52 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ char	**builtin_unset(char **cmd, t_minish *minish)
 				break ;
 			free (var);
 		}
-		if (cmd[i] == NULL)
+		if (cmd[i] == NULL && new_env_size(cmd, minish) > 2)
 			new_env[e++] = ft_strdup(minish->env[j++]);
 	}
 	free_double(minish->env);

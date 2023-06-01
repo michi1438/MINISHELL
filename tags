@@ -366,5 +366,7 @@ type_reader	libft/ft_printf/printparser.c	/^char	type_reader(const char *str, in
 wid	libft/ft_printf/printf.h	/^	int		wid;$/;"	m	struct:sct	typeref:typename:int
 width_counter	libft/ft_printf/printparser.c	/^int	width_counter(const char *str, int i)$/;"	f	typeref:typename:int
 yo	tester.sh	/^\/bin\/bash << yo$/;"	h
+yo	tester.sh	/^env -i \/bin\/bash << yo$/;"	h
+yo	tester.sh	/^env -i ~\/MINISHELL\/minishell << yo$/;"	h
 yo	tester.sh	/^~\/MINISHELL\/minishell << yo$/;"	h
 zero	libft/ft_printf/printf.h	/^	int	zero;$/;"	m	struct:sctone	typeref:typename:int
