@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:46:16 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/01 13:30:11 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/01 14:23:05 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ int	pre_fork_builtin(char **cmd, t_minish *minish)
 	else if (ft_strncmp(cmd[0], "unset\0", 6) == 0)
 		minish->env = builtin_unset(cmd, minish);
 	else if (ft_strncmp(cmd[0], "exit\0", 5) == 0)
-		minish->ppx.exit_status = builtin_exit(cmd, minish);
+		g_exit_status = builtin_exit(cmd);
 	else
 		return (0);
 	return (1);
 }
 
-int	builtin_exit(char **cmd, t_minish *minish)
+int	builtin_exit(char **cmd)
 {
 	int	i;
 
@@ -57,7 +57,7 @@ int	builtin_exit(char **cmd, t_minish *minish)
 	else
 	{
 		printf("exit\n");
-		exit (minish->ppx.exit_status);
+		exit (g_exit_status);
 	}
 }
 
@@ -82,7 +82,7 @@ void	builtin_cd(char **cmd, t_minish *minish)
 	{
 		if (chdir(cmd[1]) == -1)
 		{
-			minish->ppx.exit_status = 1;
+			g_exit_status = 1;
 		//	printf("%s: No such file or directory\n", cmd[1]);
 			perror(cmd[1]);// TODO is it right to use perror here ?
 		}

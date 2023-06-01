@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:44:21 by lzito             #+#    #+#             */
-/*   Updated: 2023/05/31 02:02:53 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/01 18:37:32 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,24 @@ int	ft_heredoc(t_pipex *ppx, int i)
 	char	*input;
 	size_t	limit_len;
 
+	ft_signals_n_attr(HD);
 	limit_len = ft_strlen(ppx->limiter[i]);
 	write(1, "> ", 2);
 	input = get_next_line(0);
-	while (input && ft_strncmp(input, ppx->limiter[i], limit_len) != 0)
+	if (!input && g_exit_status != 130)
+		write(1, "\n", 1);
+	while (g_exit_status != 130 && input 
+		&& ft_strncmp(input, ppx->limiter[i], limit_len) != 0)
 	{
 		write(1, "> ", 2);
 		write(ppx->fd_hd[i][1], input, ft_strlen(input));
 		free(input);
 		input = get_next_line(0);
+		if (!input && g_exit_status != 130)
+			write(1, "\n", 1);
 	}
-//	free(ppx->limiter[i]);
+	ft_signals_n_attr(RESET);
+	//TODO	free(ppx->limiter[i]);
 	free(input);
 	close(ppx->fd_hd[i][1]);
 	return (0);

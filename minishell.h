@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/01 10:57:15 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/01 18:17:13 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@
 # include <errno.h>
 # include <termios.h> 
 
+int	g_exit_status;
+
 typedef struct s_pipex
 {
-	int		exit_status;
 	int		**fd;
 	int		**fd_hd;
 	int		*hd_on;
@@ -88,6 +89,7 @@ enum e_signal
 	RESET,
 	NO_REPROMPT,
 	UNSET,
+	HD,
 };
 
 // MINI_MAIN.C
@@ -113,11 +115,11 @@ void		echo_option(char **cmd, int *i, int *flg);
 
 // MINI_PREFORK_BUILTIN.C
 int			pre_fork_builtin(char **cmd, t_minish *minish);
-int			builtin_exit(char **cmd, t_minish *minish);
+int			builtin_exit(char **cmd);
 int			builtin_exit_err(char **cmd, int err_type);
 void		builtin_cd(char **cmd, t_minish *minish);
 
-// MINI_PREFORK_EXPORT.C
+// MINI_PREFORK_EXPORT_UNSET.C
 void		builtin_export(char **cmd, t_minish *minish);
 char		**new_env_maker(char **cmd, t_minish *minish, int j);
 char		**builtin_unset(char **cmd, t_minish *minish);
@@ -186,6 +188,7 @@ void		gc_lstclear(t_list **lst, void (*del)(void*));
 void		ft_signals_n_attr(int toggle);
 void		set_act_int(struct sigaction *act_int, int toggle);
 void		set_act_quit(struct sigaction *act_quit, int toggle);
+void		no_re_prompt_bs(int useless);
 void		no_re_prompt(int useless);
 void		re_prompt(int useless);
 

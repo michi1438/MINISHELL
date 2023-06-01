@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 20:23:44 by lzito             #+#    #+#             */
-/*   Updated: 2023/05/31 16:30:05 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/01 16:07:47 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,10 @@ int	ft_waitnclose(t_pipex *ppx)
 	{
 		ft_close_fds(ppx);
 		waitpid(ppx->pid[i], &wstatus, 0);
-		if (ppx->cmd[i][0] != NULL && is_prefork_builtin(ppx->cmd[i]) == 0)
-			statuscode = ppx->exit_status;
-		else if (WIFEXITED(wstatus))
+		if ((ppx->cmd[i][0] != NULL && is_prefork_builtin(ppx->cmd[i]) == 0)
+			|| (g_exit_status == 131 || g_exit_status == 130))
+			statuscode = g_exit_status;
+		if (WIFEXITED(wstatus))
 			statuscode = WEXITSTATUS(wstatus);
 		i++;
 	}

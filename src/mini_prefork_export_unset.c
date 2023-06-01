@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 18:51:00 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/01 11:51:52 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/01 14:19:04 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	builtin_export(char **cmd, t_minish *minish)
 		if (!(ft_isalpha(cmd[j][0])))
 		{
 			printf("%s: not a valid identifier.\n", cmd[j]);
-			minish->ppx.exit_status = 1;
+			g_exit_status = 1;
 			flg = 1;
 		}
 		else
@@ -36,7 +36,7 @@ void	builtin_export(char **cmd, t_minish *minish)
 				free_double(minish->env);
 				minish->env = temp;
 			}
-			minish->ppx.exit_status = flg;
+			g_exit_status = flg;
 		}
 	}
 }

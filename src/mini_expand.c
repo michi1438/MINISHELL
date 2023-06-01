@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 20:27:56 by lzito             #+#    #+#             */
-/*   Updated: 2023/06/01 12:20:36 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/01 14:18:12 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	treating_expand(char *quote, t_minish *minish, int *j, char *ret)
 	var = ft_substr(&quote[i], 0, *j - i);
 	lendllr = ft_strlen(var) + 1;
 	if (ft_strncmp(var, "?", 2) == 0)
-		var = ft_itoa(minish->ppx.exit_status);
+		var = ft_itoa(g_exit_status);
 	else
 	{
 		var = ft_strjoin_n_free(var, "=");
@@ -94,7 +94,7 @@ int	new_size(char *quote, t_minish *minish)
 				j++;
 			var = ft_substr(&quote[i], 0, j - (i));
 			if (ft_strncmp(var, "?", 2) == 0)
-				tot_size += ft_strlen(ft_itoa(minish->ppx.exit_status));
+				tot_size += ft_strlen(ft_itoa(g_exit_status));
 			else
 			{	
 				value = check_env_var(minish->env, ft_strjoin(var, "=")); // TODO, var is going to cause leaks

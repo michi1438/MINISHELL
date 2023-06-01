@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 18:42:02 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/01 10:59:00 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/01 18:20:17 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,7 @@ void	set_act_int(struct sigaction *act_int, int toggle)
 	static struct sigaction	old_int;
 
 	if (toggle == SET)
-	{	
 		sigaction(SIGINT, NULL, &old_int);
-	}
 	else if (toggle == RESET)
 	{
 		sigemptyset(&act_int->sa_mask);
@@ -48,16 +46,14 @@ void	set_act_int(struct sigaction *act_int, int toggle)
 		sigaddset(&act_int->sa_mask, SIGINT);
 		sigaction(SIGINT, act_int, NULL);
 	}
-	else if (toggle == NO_REPROMPT)
+	else if (toggle == UNSET)
+		sigaction(SIGINT, &old_int, NULL);
+	else
 	{
 		sigemptyset(&act_int->sa_mask);
 		act_int->sa_handler = no_re_prompt;
 		sigaddset(&act_int->sa_mask, SIGINT);
 		sigaction(SIGINT, act_int, NULL);
-	}
-	else
-	{
-		sigaction(SIGINT, &old_int, NULL);
 	}
 }
 
@@ -66,12 +62,15 @@ void	set_act_quit(struct sigaction *act_quit, int toggle)
 	static struct sigaction	old_quit;
 
 	if (toggle == SET)
-	{	
 		sigaction(SIGQUIT, NULL, &old_quit);
-	}
 	else if (toggle == UNSET)
-	{
 		sigaction(SIGQUIT, &old_quit, NULL);
+	else if (toggle == NO_REPROMPT) 
+	{
+		sigemptyset(&act_quit->sa_mask);
+		act_quit->sa_flags = 0;
+		act_quit->sa_handler = no_re_prompt_bs;
+		sigaction(SIGQUIT, act_quit, NULL);
 	}
 	else
 	{	
@@ -82,9 +81,19 @@ void	set_act_quit(struct sigaction *act_quit, int toggle)
 	}
 }
 
+void	no_re_prompt_bs(int useless)
+{
+	write(0, "Quit", 4);
+	write(0, "\n", 1);
+	g_exit_status = 131;
+	rl_on_new_line();
+	(void)useless;
+}
+
 void	no_re_prompt(int useless)
 {
 	write(0, "\n", 1);
+	g_exit_status = 130;
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	(void)useless;
@@ -93,6 +102,7 @@ void	no_re_prompt(int useless)
 void	re_prompt(int useless)
 {
 	write(0, "\n", 1);
+	g_exit_status = 130;
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
