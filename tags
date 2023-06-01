@@ -124,6 +124,7 @@ btrim	libft/ft_main/ft_strtrim.c	/^int	btrim(char const *s1, char const *set)$/;
 buf	libft/ft_gnl/get_next_line_bonus.h	/^	char	*buf;$/;"	m	struct:sct1	typeref:typename:char *
 builtin_cd	src/mini_prefork_builtin.c	/^void	builtin_cd(char **cmd, t_minish *minish)$/;"	f	typeref:typename:void
 builtin_echo	src/mini_builtins.c	/^void	builtin_echo(char **cmd)$/;"	f	typeref:typename:void
+builtin_env	src/mini_builtins.c	/^void	builtin_env(t_minish *minish, char **cmd)$/;"	f	typeref:typename:void
 builtin_exit	src/mini_prefork_builtin.c	/^int	builtin_exit(char **cmd, t_minish *minish)$/;"	f	typeref:typename:int
 builtin_exit_err	src/mini_prefork_builtin.c	/^int	builtin_exit_err(char **cmd, int err_type)$/;"	f	typeref:typename:int
 builtin_export	src/mini_prefork_export_unset.c	/^void	builtin_export(char **cmd, t_minish *minish)$/;"	f	typeref:typename:void

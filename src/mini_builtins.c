@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 10:00:56 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/31 18:27:00 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/01 09:55:24 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,29 @@ void	check_for_builtin(char **cmd, t_minish *minish, int i)
 		builtin_echo(cmd);
 	else if (ft_strncmp(cmd[0], "pwd\0", 4) == 0)
 		builtin_pwd();
+	else if (ft_strncmp(cmd[0], "env\0", 4) == 0)
+		builtin_env(minish, cmd);
 	else if (ft_strncmp(cmd[0], "export\0", 7) == 0 && cmd[1] == NULL)
 		export_noarg(minish);
+}
+
+void	builtin_env(t_minish *minish, char **cmd)
+{
+	int	i;
+
+	i = 0;
+	if (cmd[1] != NULL)
+	{
+		perror(cmd[1]);// TODO perror or not ?
+		//printf("%s: No such file or directory\n", cmd[1]);
+		exit(127);
+	}
+	else
+	{
+		while (minish->env[i] != NULL)
+			printf("%s\n", minish->env[i++]);
+	}
+	exit (0);
 }
 
 void	export_noarg(t_minish *minish)

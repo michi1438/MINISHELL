@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:46:25 by lzito             #+#    #+#             */
-/*   Updated: 2023/05/31 09:19:41 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/01 08:48:00 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	is_prefork_builtin(char **cmd)
 {
 	int			i;
 	const char	*builtin[] = {
-		"exit", "env", "unset", NULL,
+		"exit", "cd", "unset", NULL,
 	};
 
 	i = 0;

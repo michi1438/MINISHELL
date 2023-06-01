@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/31 18:15:27 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/01 08:29:34 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ int			mini_clear_fing(char **ptrptr, int j);
 
 // MINI_BUILTINS.C
 void		check_for_builtin(char **cmd, t_minish *minish, int i);
+void		builtin_env(t_minish *minish, char **cmd);
 void		builtin_pwd(void);
 void		export_noarg(t_minish *minish);
 void		builtin_echo(char **cmd);

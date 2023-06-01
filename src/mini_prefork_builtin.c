@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:46:16 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/31 14:36:01 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/01 09:50:39 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ int	builtin_exit_err(char **cmd, int err_type)
 	{
 		printf("%s: numeric argument required\n", cmd[1]);
 		exit (2);
-		// return (2); TODO
 	}
 	return (0);
 }
@@ -86,7 +85,8 @@ void	builtin_cd(char **cmd, t_minish *minish)
 		if (chdir(cmd[1]) == -1)
 		{
 			minish->ppx.exit_status = 1;
-			perror(cmd[1]);
+		//	printf("%s: No such file or directory\n", cmd[1]);
+			perror(cmd[1]);// TODO is it right to use perror here ?
 		}
 	}
 	else

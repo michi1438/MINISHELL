@@ -75,34 +75,68 @@ echo ---------TESTING OTHER BUILTIN--------
 echo 
 TEST=test_minishell
 ~/MINISHELL/minishell << yo
-cd .. > $TEST
-cd MINISHELL/ >> $TEST
+echo BLABLA > $TEST
+cd .. >> $TEST
+echo \$? 0 >> $TEST
 cd ... >> $TEST
+echo \$? 1 >> $TEST
+cd MINISHELL/ >> $TEST
+echo \$? 2 >> $TEST
 pwd >> $TEST
-#export >> $TEST
+echo \$? 3 >> $TEST
+eexport >> $TEST
+echo \$? 4 >> $TEST
+echo \$SHELL >> $TEST
 export SHELL=blabla BLO=blablibloup >> $TEST
+echo \$SHELL >> $TEST
+echo \$? >> $TEST
 export BLO= bloblo >> $TEST
+echo \$BLO >> $TEST
+echo \$? >> $TEST
 export BLO =bloblo >> $TEST
+echo \$? >> $TEST
 export = = = >> $TEST
-env >> $TEST #TODO
-unset SHELL PATH nhtueo>> $TEST
+echo \$? >> $TEST
+env >> $TEST
+echo \$? >> $TEST
+env nthuo >> $TEST
+echo \$? >> $TEST
+unset SHELL BLO nhtueo >> $TEST
+echo \$? >> $TEST
 exit >> $TEST
 yo
 
 
 TEST=test_bash
 /bin/bash << yo
-cd .. > $TEST
-cd MINISHELL/ >> $TEST
+echo BLABLA > $TEST
+cd .. >> $TEST
+echo \$? 0 >> $TEST
 cd ... >> $TEST
+echo \$? 1 >> $TEST
+cd MINISHELL/ >> $TEST
+echo \$? 2 >> $TEST
 pwd >> $TEST
-#export >> $TEST
+echo \$? 3 >> $TEST
+eexport >> $TEST
+echo \$? 4 >> $TEST
+echo \$SHELL >> $TEST
 export SHELL=blabla BLO=blablibloup >> $TEST
+echo \$SHELL >> $TEST
+echo \$? >> $TEST
 export BLO= bloblo >> $TEST
+echo \$BLO >> $TEST
+echo \$? >> $TEST
 export BLO =bloblo >> $TEST
+echo \$? >> $TEST
 export = = = >> $TEST
-env >> $TEST #TODO
-unset SHELL PATH nhtueo>> $TEST
+echo \$? >> $TEST
+env >> $TEST
+echo \$? >> $TEST
+env nthuo >> $TEST
+echo \$? >> $TEST
+unset SHELL BLO nhtueo >> $TEST
+echo \$? >> $TEST
 exit >> $TEST
 yo
 
@@ -232,4 +266,4 @@ echo $? >> $TEST
 echo
 diff -s test_minishell test_bash
 
-rm -rf test_minishell test_bash
+rm -rf test_minishell test_bash file
