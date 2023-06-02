@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 20:23:44 by lzito             #+#    #+#             */
-/*   Updated: 2023/06/01 16:07:47 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/02 16:35:03 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,10 @@ void	ft_freeall(t_pipex *ppx)
 		free(ppx->pid);
 	if (ppx->fd != NULL)
 		free(ppx->fd);
+	if (ppx->f_in != NULL)
+		free(ppx->f_in);
+	if (ppx->f_out != NULL)
+		free(ppx->f_out);
 	if (ppx->fd_hd != NULL)
 		free(ppx->fd_hd);
 }

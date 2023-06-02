@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 20:27:56 by lzito             #+#    #+#             */
-/*   Updated: 2023/06/02 01:22:19 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/02 18:06:20 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,10 +152,7 @@ char	*escape_spaces(char *ret)
 	i = 0;
 	newret = ft_calloc((escaped_size(ret) + 1), sizeof(char));
 	if (newret == NULL)
-	{
-		printf("alloc failed\n");
-		exit (100); // TODO protect, and bring it back up
-	}
+		return (NULL);
 	while (ret[j] != '\0')
 	{
 		if (ret[j] == ' ')

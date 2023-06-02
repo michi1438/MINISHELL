@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 11:09:32 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/02 02:26:42 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/02 16:03:13 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,34 +16,17 @@ void	*gc_malloc(size_t size)
 {
 	t_gc	*garb;
 
-	garb = ft_calloc(1, sizeof(t_gc) + size);
-	garb->flush = 0;
+	garb = ft_calloc(1, size);
 	ft_gc(garb, ADD);
-	return (garb + sizeof(t_gc));
-}
-
-void	gc_free(void *ptr)
-{
-	t_gc	*gc;
-
-	gc = ptr - sizeof(t_gc);
-	gc->flush = 1;
+	return (garb);
 }
 
 void	*ft_gc(void *garb, int status)
 {
 	static t_list	*gc_list;
-	void			*temp;
 
 	if (status == ADD)
 		ft_lstadd_front(&gc_list, ft_lstnew(garb));
-	else if (status == EXT)
-	{
-		temp = gc_malloc(sizeof(garb));
-		ft_memcpy(temp, garb, sizeof(garb));
-		free(garb);
-		return (temp);
-	}
 	else
 		gc_lstclear(&gc_list, free);
 	return (NULL);
@@ -52,13 +35,8 @@ void	*ft_gc(void *garb, int status)
 void	gc_lstdelone(t_list *lst, void (*del)(void*))
 {
 	void	*node;
-//	t_gc 	*gc;
 
 	node = lst->content;
-//	gc = (t_gc *)node;
-//	printf("gc flush = %d\n", gc->flush);
-//	if (gc->flush == 0)
-//		return ;
 	if (lst && del)
 	{
 		del(node);
@@ -82,22 +60,11 @@ void	gc_lstclear(t_list **lst, void (*del)(void*))
 	}
 }
 
-char	*gc_substr(char const *s, unsigned int start, size_t len)
-{
-	void	*temp;
-
-	temp = ft_substr(s, start, len);
-	ft_gc(temp, EXT);
-	gc_free(temp);
-	return (temp);
-}
-
-char	*gc_strjoin(const char *s1, const char *s2)
+char	*gc_strjoin(char *s1, char *s2)
 {
 	void	*temp;
 
 	temp = ft_strjoin(s1, s2);
-	ft_gc(temp, EXT);
-	gc_free(temp);
+	free(s1);
 	return (temp);
 }

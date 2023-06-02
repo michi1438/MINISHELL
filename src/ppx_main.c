@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:29:12 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/02 00:04:50 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/02 15:53:39 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	ft_feedppx(t_pipex *ppx, char **av, char **env)
 				return (ft_error(av[0], -1));
 		}
 		ppx->cmd[i] = ft_mod_split(av[i], ' ');
-//		free(av[i]);
+		free(av[i]);
 		if (ppx->cmd[i] == NULL)
 			return (ft_error(av[0], -1));
 		ppx->path[i] = ft_checkpath(env, ppx->cmd[i][0]);
@@ -70,7 +70,7 @@ int	ft_feedppx(t_pipex *ppx, char **av, char **env)
 			return (ft_error(av[0], -3));
 		i++;
 	}
-//	free(av);
+	free(av);
 	return (0);
 }
 

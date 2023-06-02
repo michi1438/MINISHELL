@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 16:57:22 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/02 02:25:58 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/02 18:09:03 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ int	is_not_tokenable(t_minish *minish, int i, const char *tok[])
 		str = ft_substr(&minish->line[i], 0, size);
 		if (is_all_space(str) == 1)
 		{
-			printf("str before trim = %s$\n", str);
+//			printf("str before trim = %s$\n", str);
 			node->str = ft_strtrim(str, " ");
-			printf("str after trim = %s$\n", node->str);
+			printf("str after trim = %p, %s$\n", node->str, node->str);
 			node->type = OTHER;
 			ft_lstadd_back(&minish->lst_line, ft_lstnew(node));
 		}
-//		free(str);
+		free(str);
 	}
 	return (i + size);
 }

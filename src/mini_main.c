@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/02 01:18:29 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/02 17:56:29 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	ft_add_history(t_minish *minish)
 		minish->prev_line = ft_strdup(minish->line);
 		if (minish->prev_line == NULL)
 			return ;
+		free(minish->prev_line);
 	}
 }
 
@@ -81,10 +82,7 @@ void	treating_line(t_minish *minish)
 {
 	ft_add_history(minish);
 	if (ft_token(minish) != -1)
-	{
 		g_exit_status = main_pipe(minish, &minish->ppx);
-		mini_lstclear(&minish->lst_line, free);
-	}
 	else
 	{
 		printf("unexpected token ERROR\n");
