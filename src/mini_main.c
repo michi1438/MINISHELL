@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/01 15:44:25 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/02 01:18:29 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	main(int ac, char *av[], char *env[])
 		}
 		if (minish.line[0] != '\0' && is_all_space(minish.line) == 1)
 			treating_line(&minish);
+		ft_gc(NULL, DEL);
 	}
 	return (0);
 }

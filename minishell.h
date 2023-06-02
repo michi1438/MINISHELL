@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/01 18:17:13 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/02 02:24:06 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,6 +183,10 @@ void		gc_free(void *ptr);
 void		*ft_gc(void *garb, int status);
 void		gc_lstdelone(t_list *lst, void (*del)(void*));
 void		gc_lstclear(t_list **lst, void (*del)(void*));
+
+// MINI_GC_WRAPS.C
+char		*gc_substr(char const *s, unsigned int start, size_t len);
+char		*gc_strjoin(const char *s1, const char *s2);
 
 // MINI_SIG_N_ATTR.C
 void		ft_signals_n_attr(int toggle);

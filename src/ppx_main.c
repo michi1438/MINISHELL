@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:29:12 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/01 17:18:54 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/02 00:04:50 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	ft_looppid(t_pipex *ppx, t_minish *minish, int idx)
 		ft_close_fds(ppx);
 		ft_signals_n_attr(UNSET);
 		check_for_builtin(ppx->cmd[idx], minish, idx);
-//		printf("cmd[%d] = %s$ limiter = %s$\n", idx, ppx->cmd[idx][0], ppx->limiter[idx]);
 		execve(ppx->path[idx], ppx->cmd[idx], minish->env);
 		perror(ppx->cmd[idx][0]);
 		if (errno == ENOENT || ppx->cmd[idx][0] == NULL)
@@ -48,6 +47,7 @@ int	ft_feedppx(t_pipex *ppx, char **av, char **env)
 	i = 0;
 	while (i < ppx->n_cmd)
 	{
+		//TODO create a function for this HD part
 		if (ppx->hd_on[i] == 1)
 		{
 			ppx->fd_hd[i] = ft_calloc(2, sizeof(int));
@@ -59,6 +59,7 @@ int	ft_feedppx(t_pipex *ppx, char **av, char **env)
 				return (ft_error(av[0], -1));
 		}
 		ppx->cmd[i] = ft_mod_split(av[i], ' ');
+//		free(av[i]);
 		if (ppx->cmd[i] == NULL)
 			return (ft_error(av[0], -1));
 		ppx->path[i] = ft_checkpath(env, ppx->cmd[i][0]);
@@ -69,6 +70,7 @@ int	ft_feedppx(t_pipex *ppx, char **av, char **env)
 			return (ft_error(av[0], -3));
 		i++;
 	}
+//	free(av);
 	return (0);
 }
 

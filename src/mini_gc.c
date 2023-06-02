@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 11:09:32 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/11 19:06:07 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/02 02:26:42 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	*gc_malloc(size_t size)
 {
 	t_gc	*garb;
 
-	garb = malloc(sizeof(t_gc) + size);
+	garb = ft_calloc(1, sizeof(t_gc) + size);
 	garb->flush = 0;
 	ft_gc(garb, ADD);
 	return (garb + sizeof(t_gc));
@@ -51,9 +51,14 @@ void	*ft_gc(void *garb, int status)
 
 void	gc_lstdelone(t_list *lst, void (*del)(void*))
 {
-	t_gc	*node;
+	void	*node;
+//	t_gc 	*gc;
 
 	node = lst->content;
+//	gc = (t_gc *)node;
+//	printf("gc flush = %d\n", gc->flush);
+//	if (gc->flush == 0)
+//		return ;
 	if (lst && del)
 	{
 		del(node);
@@ -75,4 +80,24 @@ void	gc_lstclear(t_list **lst, void (*del)(void*))
 			*lst = temp;
 		}
 	}
+}
+
+char	*gc_substr(char const *s, unsigned int start, size_t len)
+{
+	void	*temp;
+
+	temp = ft_substr(s, start, len);
+	ft_gc(temp, EXT);
+	gc_free(temp);
+	return (temp);
+}
+
+char	*gc_strjoin(const char *s1, const char *s2)
+{
+	void	*temp;
+
+	temp = ft_strjoin(s1, s2);
+	ft_gc(temp, EXT);
+	gc_free(temp);
+	return (temp);
 }

@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 18:33:23 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/31 14:14:59 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/02 02:27:47 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ int	init_cmds(t_minish *minish)
 	minish->ppx.filein = ft_calloc(minish->ppx.n_cmd, sizeof(char *));
 	minish->ppx.fileout = ft_calloc(minish->ppx.n_cmd, sizeof(char *));
 	minish->ppx.app_on = ft_calloc(minish->ppx.n_cmd, sizeof(int));
+//	minish->cmds = gc_malloc(minish->ppx.n_cmd * sizeof(char *));
+//	minish->ppx.limiter = gc_malloc(minish->ppx.n_cmd * sizeof(char *));
+//	minish->ppx.hd_on = gc_malloc(minish->ppx.n_cmd * sizeof(int));
+//	minish->ppx.filein = gc_malloc(minish->ppx.n_cmd * sizeof(char *));
+//	minish->ppx.fileout = gc_malloc(minish->ppx.n_cmd * sizeof(char *));
+//	minish->ppx.app_on = gc_malloc(minish->ppx.n_cmd * sizeof(int));
 	return (0);
 }
 
@@ -96,6 +102,7 @@ void	append_or_start(t_minish *minish, char *strseg, char *tok_delimiter, int i)
 				minish->cmds[i] = ft_strjoin(minish->cmds[i], strseg);
 		}
 		else
-			minish->cmds[i] = ft_strjoin(minish->cmds[i], ft_strtrim(strseg, tok_delimiter));
+			minish->cmds[i] = ft_strjoin(minish->cmds[i],
+				ft_strtrim(strseg, tok_delimiter));
 	}
 }
