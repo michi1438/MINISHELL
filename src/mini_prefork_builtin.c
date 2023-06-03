@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:46:16 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/01 14:23:05 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/03 00:36:32 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,18 @@ int	pre_fork_builtin(char **cmd, t_minish *minish)
 	else if (ft_strncmp(cmd[0], "unset\0", 6) == 0)
 		minish->env = builtin_unset(cmd, minish);
 	else if (ft_strncmp(cmd[0], "exit\0", 5) == 0)
-		g_exit_status = builtin_exit(cmd);
+		g_exit_status = builtin_exit(cmd, minish);
 	else
 		return (0);
 	return (1);
 }
 
-int	builtin_exit(char **cmd)
+int	builtin_exit(char **cmd, t_minish *minish)
 {
 	int	i;
 
 	i = 0;
+	(void) minish;
 	if (cmd[1] != NULL)
 	{
 		if (cmd[2] != NULL)
@@ -52,11 +53,13 @@ int	builtin_exit(char **cmd)
 				return (builtin_exit_err(cmd, 2));
 		}
 		printf("exit\n");
+//		mini_lstclear(&minish->lst_line, free);
 		exit (ft_atoi(cmd[1]));
 	}
 	else
 	{
 		printf("exit\n");
+//		mini_lstclear(&minish->lst_line, free);
 		exit (g_exit_status);
 	}
 }

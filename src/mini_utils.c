@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:46:25 by lzito             #+#    #+#             */
-/*   Updated: 2023/06/02 17:43:58 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/03 03:47:09 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,12 @@ void	mini_lstdelone(t_list *node, void (*del)(void*))
 	t_content	*cont;
 
 	cont = node->content;
-	printf("cont->str = %p, %s$\n", cont->str, cont->str);
 	if (node && cont && del)
 	{
+		printf("cont->str freed (mini-lst) = %p, %s$\n", cont->str, cont->str);
 		del(cont->str);
 		del(cont);
+		printf("node freed (mini-lst) = %p\n", node);
 		free(node);
 	}
 }

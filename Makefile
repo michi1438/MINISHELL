@@ -6,7 +6,7 @@
 #    By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/20 20:55:12 by mguerga           #+#    #+#              #
-#    Updated: 2023/06/02 14:50:42 by lzito            ###   ########.fr        #
+#    Updated: 2023/06/02 22:19:05 by lzito            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ NAME = minishell
 
 CC = gcc
 
-CFLAGS = -Werror -Wall -Wextra -I$(RL)/include -I. -g -fsanitize=leak
+CFLAGS = -Werror -Wall -Wextra -I$(RL)/include -I. -g -fsanitize=leak\
+		 -fsanitize=address -fsanitize=undefined
 
 SRC_MINISH = mini_main.c ppx_checks.c ppx_free.c ppx_main.c ppx_utils.c\
 			mini_gc.c mini_sig_n_attr.c mini_utils.c mini_tokenable.c \

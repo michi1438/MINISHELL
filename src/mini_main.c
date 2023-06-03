@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/02 17:56:29 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/03 03:51:04 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,18 @@ int	main(int ac, char *av[], char *env[])
 	while (1)
 	{
 		init_minish(&minish);
+		mini_lstclear(&minish.lst_line, free);
 		minish.line = readline("(ಠ.ಠ)¬ ");
 		if (minish.line == NULL)
 		{
-			printf ("exit\n");
+			printf ("exit yo\n");
+			mini_lstclear(&minish.lst_line, free);
 			exit (g_exit_status);
 		}
 		if (minish.line[0] != '\0' && is_all_space(minish.line) == 1)
 			treating_line(&minish);
 		ft_gc(NULL, DEL);
+		mini_lstclear(&minish.lst_line, free);
 	}
 	return (0);
 }
@@ -48,9 +51,9 @@ int	ft_initmain(t_minish *minish, char **env)
 
 int	init_minish(t_minish *minish)
 {
+	minish->lst_line = NULL;
 	ft_signals_n_attr(RESET);
 	minish->ppx.n_cmd = 1;
-	minish->lst_line = NULL;
 	return (0);
 }
 
@@ -103,7 +106,10 @@ int	ft_token(t_minish *minish)
 		i = is_not_tokenable(minish, i, tok);
 		i = is_tokenable(minish, i, tok);
 		if (i == -1)
+		{
+			mini_lstclear(&minish->lst_line, free);
 			return (-1);
+		}
 		if (minish->line[i] != '\0')
 			i++;
 	}

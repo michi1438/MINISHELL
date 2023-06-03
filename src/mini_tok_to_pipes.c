@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 18:33:23 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/02 17:57:45 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/03 04:15:00 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	add_cmds(t_minish *minish)
 	t_list		*lst;
 	t_content	*cont;
 	int			i;
+	char		*temp;
 
 	lst = minish->lst_line;
 	init_cmds(minish);
@@ -61,7 +62,10 @@ void	add_cmds(t_minish *minish)
 		{
 			if (ft_strncmp(cont->str, "", 1) != 0)
 			{
-				redir_fill(minish, cont->type, cont->str, i);
+				//TODO the node containing cont->str needs to be freed somewhere here
+				temp = ft_strdup(cont->str);
+				free(cont->str);
+				redir_fill(minish, cont->type, temp, i);
 				cont->str = ft_strdup("");
 				append_or_start(minish, cont->str, NULL, i);
 			}

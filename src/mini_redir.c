@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:44:21 by lzito             #+#    #+#             */
-/*   Updated: 2023/06/01 18:37:32 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/03 03:27:46 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ int	deal_with_redir(t_minish *minish, int type, int i)
 	if (i == -1)
 		return (i);
 	node->str = ft_substr(&line[j], 0, i - j);
+	printf("cont->str added = %p, %s$\n", node->str, node->str);
 	ft_lstadd_back(&minish->lst_line, ft_lstnew(node));
 	return (i);
 }

@@ -6,13 +6,13 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 20:23:44 by lzito             #+#    #+#             */
-/*   Updated: 2023/06/02 16:35:03 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/03 03:35:45 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_freeall(t_pipex *ppx)
+void	ft_freeloop(t_pipex *ppx)
 {
 	int	i;
 
@@ -27,8 +27,19 @@ void	ft_freeall(t_pipex *ppx)
 			free(ppx->fd[i]);
 		if (ppx->fd_hd != NULL && ppx->fd_hd[i] != NULL)
 			free(ppx->fd_hd[i]);
+		if (ppx->filein != NULL && ppx->filein[i] != NULL)
+			free(ppx->filein[i]);
+		if (ppx->fileout != NULL && ppx->fileout[i] != NULL)
+			free(ppx->fileout[i]);
+		if (ppx->limiter != NULL && ppx->limiter[i] != NULL)
+			free(ppx->limiter[i]);
 		i++;
 	}
+}
+
+void	ft_freeall(t_pipex *ppx)
+{
+	ft_freeloop(ppx);
 	if (ppx->cmd != NULL)
 		free(ppx->cmd);
 	if (ppx->path != NULL)

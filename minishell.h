@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/02 15:45:09 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/03 03:36:09 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void		echo_option(char **cmd, int *i, int *flg);
 
 // MINI_PREFORK_BUILTIN.C
 int			pre_fork_builtin(char **cmd, t_minish *minish);
-int			builtin_exit(char **cmd);
+int			builtin_exit(char **cmd, t_minish *minish);
 int			builtin_exit_err(char **cmd, int err_type);
 void		builtin_cd(char **cmd, t_minish *minish);
 
@@ -205,6 +205,7 @@ char		**ft_checkenv(char *env[]);
 char		*ft_checkpath(char *env[], char *cmd);
 
 //ppx_free.c
+void		ft_freeloop(t_pipex *ppx);
 void		ft_freeall(t_pipex *ppx);
 void		ft_free(char **av);
 int			ft_waitnclose(t_pipex *ppx);

@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 16:58:36 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/31 02:02:53 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/02 23:17:21 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	search_quotes(t_minish *minish, int type, int i)
 		i++;
 	}
 	node->str = ft_substr(&line[j], 0, (i + 1) - j);
+	printf("cont->str added = %p, %s$\n", node->str, node->str);
 	ft_lstadd_back(&minish->lst_line, ft_lstnew(node));
 	return (i);
 }
@@ -76,6 +77,7 @@ int	deal_with_pipes(t_minish *minish, int i)
 	minish->ppx.n_cmd++;
 	node->str = ft_substr(&line[j], 0, (i + 1) - j);
 	node->type = PIPE;
+	printf("cont->str added = %p, %s$\n", node->str, node->str);
 	ft_lstadd_back(&minish->lst_line, ft_lstnew(node));
 	return (i);
 }
@@ -91,6 +93,7 @@ int	deal_with_spaces(t_minish *minish, int i)
 	j = i;
 	node->str = ft_substr(&line[j], 0, (i + 1) - j);
 	node->type = SPCE;
+	printf("cont->str added = %p, %s$\n", node->str, node->str);
 	ft_lstadd_back(&minish->lst_line, ft_lstnew(node));
 	return (i);
 }
