@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 16:57:22 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/03 03:47:41 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/03 04:47:37 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int	is_not_tokenable(t_minish *minish, int i, const char *tok[])
 	char		*str;
 	t_content	*node;
 
-	node = malloc(sizeof(struct s_content));
+	node = malloc(sizeof(t_content));
+	printf("node added = %p\n", node);
 	size = not_token_size(minish, i, tok);
 	if (size > 0)
 	{
