@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:46:25 by lzito             #+#    #+#             */
-/*   Updated: 2023/06/03 04:33:21 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/03 21:48:43 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,7 @@ void	mini_lstdelone(t_list *node, void (*del)(void*))
 	cont = node->content;
 	if (node && del)
 	{
-		printf("cont->str freed (mini-lst) = %p, %s$\n", cont->str, cont->str);
 		del(cont->str);
-		printf("node freed (mini-lst) = %p\n", cont);
 		del(cont);
 		free(node);
 	}
@@ -93,29 +91,24 @@ int	num_of_line(char **env)
 	return (i + 2);
 }
 
-char	*ft_strjoin_n_free(char *s1, char *s2)
+int ft_pre_free(t_minish *minish)
 {
-	char	*ptr;
-	int		i;
-	int		j;
+	int i;
 
 	i = 0;
-	j = 0;
-	ptr = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (ptr == NULL)
-		return (NULL);
-	while (s1[i] != '\0')
+	if (!minish->cmds || !minish->cmds[i])
+		return(-1);
+	while (i < minish->ppx.n_cmd)
 	{
-		ptr[i] = s1[i];
+		free(minish->cmds[i]);
+		if (minish->ppx.filein != NULL && minish->ppx.filein[i] != NULL)
+			free(minish->ppx.filein[i]);
+		if (minish->ppx.fileout != NULL && minish->ppx.fileout[i] != NULL)
+			free(minish->ppx.fileout[i]);
+		if (minish->ppx.limiter != NULL && minish->ppx.limiter[i] != NULL)
+			free(minish->ppx.limiter[i]);
 		i++;
 	}
-	while (s2[j] != '\0')
-	{
-		ptr[i] = s2[j];
-		i++;
-		j++;
-	}
-	ptr[i] = '\0';
-	free (s1);
-	return (ptr);
+	return (-1);
 }
+	

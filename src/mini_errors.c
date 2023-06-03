@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:25:55 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/03 04:10:48 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/03 21:48:34 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,6 @@ int	ft_err_handling(t_minish *minish)
 	}
 	mini_lstclear(&minish->lst_line, free);
 	if (i != minish->ppx.n_cmd)
-		return (-1);
+		return (ft_pre_free(minish));
 	return (0);
 }

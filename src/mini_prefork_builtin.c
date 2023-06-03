@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:46:16 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/03 00:36:32 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/03 19:32:28 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,11 @@ int	builtin_exit(char **cmd, t_minish *minish)
 				return (builtin_exit_err(cmd, 2));
 		}
 		printf("exit\n");
-//		mini_lstclear(&minish->lst_line, free);
 		exit (ft_atoi(cmd[1]));
 	}
 	else
 	{
 		printf("exit\n");
-//		mini_lstclear(&minish->lst_line, free);
 		exit (g_exit_status);
 	}
 }
@@ -81,15 +79,25 @@ int	builtin_exit_err(char **cmd, int err_type)
 
 void	builtin_cd(char **cmd, t_minish *minish)
 {
+	char	*home;
+	char	*temp;
+
 	if (cmd[1] != NULL)
 	{
-		if (chdir(cmd[1]) == -1)
+		if (chdir(cmd[1]) == -1 || cmd[2] != NULL)
 		{
 			g_exit_status = 1;
-		//	printf("%s: No such file or directory\n", cmd[1]);
-			perror(cmd[1]);// TODO is it right to use perror here ?
+			if (cmd[2] != NULL)
+				printf("%s: too many arguments\n", cmd[0]);
+			else
+				perror(cmd[1]);
 		}
 	}
 	else
-		chdir(check_env_var(minish->env, "HOME="));
+	{
+		home = ft_strdup("HOME=");
+		temp = check_env_var(minish->env, home);
+		chdir(temp);
+		free(temp);
+	}
 }

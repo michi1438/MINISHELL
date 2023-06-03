@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/03 03:36:09 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/03 21:49:02 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,7 @@ void		mini_lstdelone(t_list *node, void (*del)(void*));
 void		mini_lstclear(t_list **lst, void (*del)(void*));
 int			is_prefork_builtin(char **cmd);
 int			num_of_line(char **env);
-char		*ft_strjoin_n_free(char *s1, char *s2);
+int			ft_pre_free(t_minish *minish);
 
 // MINI_ERRORS.C
 int			ft_err_handling(t_minish *minish);

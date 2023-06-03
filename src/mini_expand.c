@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 20:27:56 by lzito             #+#    #+#             */
-/*   Updated: 2023/06/02 18:06:20 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/03 21:53:03 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ char	*expand_variables(char *quote, t_minish *minish)
 
 	j = 0;
 	ret = ft_calloc(new_size(quote, minish) + 1, sizeof(char));
+	if (!ret)
+		return (NULL);
 	while (quote[j] != '\0')
 	{
 		if (quote[j] == '$' && quote[0] != '\'')
@@ -26,7 +28,7 @@ char	*expand_variables(char *quote, t_minish *minish)
 		else
 			ret[ft_strlen(ret)] = quote[j++];
 	}
-	free (quote);
+	free(quote);
 	ret = escape_spaces(ret);
 	return (ret);
 }
@@ -35,6 +37,7 @@ void	treating_expand(char *quote, t_minish *minish, int *j, char *ret)
 {
 	int		i;
 	char	*var;
+	char	*temp;
 	int		lendllr;
 
 	i = 0;
@@ -46,11 +49,15 @@ void	treating_expand(char *quote, t_minish *minish, int *j, char *ret)
 	var = ft_substr(&quote[i], 0, *j - i);
 	lendllr = ft_strlen(var) + 1;
 	if (ft_strncmp(var, "?", 2) == 0)
+	{
+		temp = var;
 		var = ft_itoa(g_exit_status);
+		free(temp);
+	}
 	else
 	{
-		var = ft_strjoin_n_free(var, "=");
-		var = check_env_var(minish->env, var); // TODO var, is going to cause leaks
+		temp = gc_strjoin(var, "=");
+		var = check_env_var(minish->env, temp);
 	}
 	*j = i - 1;
 	i = 0;
@@ -61,6 +68,7 @@ void	treating_expand(char *quote, t_minish *minish, int *j, char *ret)
 			ret[ft_strlen(ret)] = var[i++];
 			(*j)++;
 		}
+		free(var);
 	}
 	*j = (*j - i) + lendllr;
 }
@@ -81,10 +89,12 @@ int	new_size(char *quote, t_minish *minish)
 	int		j;
 	int		tot_size;
 	char	*var;
+	char	*temp;
 	char	*value;
 
 	j = 0;
 	tot_size = 0;
+	var = NULL;
 	while (quote[j] != '\0')
 	{
 		if (quote[j++] == '$' && quote[0] != '\'')
@@ -94,12 +104,21 @@ int	new_size(char *quote, t_minish *minish)
 				j++;
 			var = ft_substr(&quote[i], 0, j - (i));
 			if (ft_strncmp(var, "?", 2) == 0)
-				tot_size += ft_strlen(ft_itoa(g_exit_status));
+			{
+				temp = ft_itoa(g_exit_status);
+				tot_size += ft_strlen(temp);
+				free(var);
+				free(temp);
+			}
 			else
 			{	
-				value = check_env_var(minish->env, ft_strjoin(var, "=")); // TODO, var is going to cause leaks
+				temp = gc_strjoin(var, "=");
+				value = check_env_var(minish->env, temp);
 				if (value != NULL)
+				{
 					tot_size += ft_strlen(value);
+					free(value);
+				}
 			}
 		}
 		else
@@ -112,6 +131,7 @@ char	*check_env_var(char **env, char *var)
 {
 	int		i;	
 	char	*envline;
+	char	*temp;
 
 	i = 0;
 	envline = NULL;
@@ -119,9 +139,14 @@ char	*check_env_var(char **env, char *var)
 	{
 		envline = ft_strnstr(env[i], var, ft_strlen(var));
 		if (envline != NULL)
-			return (&envline[ft_strlen(var)]);
+		{
+			temp = ft_strdup(&envline[ft_strlen(var)]);
+			free(var);
+			return (temp);
+		}
 		i++;
 	}
+	free(var);
 	return (NULL);
 }
 

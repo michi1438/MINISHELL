@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 11:09:32 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/03 00:11:55 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/03 17:55:04 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	gc_lstdelone(t_list *lst, void (*del)(void*))
 	node = lst->content;
 	if (lst && del && node)
 	{
-		printf("cont->str freed (gc) = %p\n", node);
 		del(node);
 		free(lst);
 	}
