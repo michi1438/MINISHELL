@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 18:51:00 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/01 14:19:04 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/04 20:11:07 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ char	**new_env_maker(char **cmd, t_minish *minish, int j)
 	int		i;
 	char	**new_env;
 	char	*var;
+	char	*var_cpy;
+	char	*temp;
 
 	i = 0;
 	while (cmd[j][i] && cmd[j][i] != '=')
@@ -53,10 +55,14 @@ char	**new_env_maker(char **cmd, t_minish *minish, int j)
 	if (cmd[j][i] != '=')
 		return (NULL);
 	var = ft_substr(cmd[j], 0, ++i);
+	var_cpy = ft_strdup(var);
 	i = -1;
-	if (check_env_var(minish->env, var) != NULL)
+	temp = check_env_var(minish->env, var_cpy);
+	if (temp != NULL)
+	//TODO MALLOC A PROTEGER !!!
 		new_env = ft_calloc(num_of_line(minish->env), sizeof(char *));
 	else
+	//TODO MALLOC A PROTEGER !!!
 		new_env = ft_calloc(num_of_line(minish->env) + 1, sizeof(char *));
 	while (minish->env[++i] != NULL)
 	{
@@ -65,8 +71,10 @@ char	**new_env_maker(char **cmd, t_minish *minish, int j)
 		else
 			new_env[i] = ft_strdup(minish->env[i]);
 	}
-	if (check_env_var(minish->env, var) == NULL)
+	if (temp == NULL)
 		new_env[i] = ft_strdup(cmd[j]);
+	free(var);
+	free(temp);
 	return (new_env);
 }
 
@@ -88,7 +96,10 @@ char	**builtin_unset(char **cmd, t_minish *minish)
 	char	*var;
 	char	**new_env;
 
+	//TODO MALLOC A SUIVRE ET PROTEGER !!!
 	new_env = ft_calloc(new_env_size(cmd, minish), sizeof(char *));
+	if (!new_env)
+		return (NULL);
 	e = 0;
 	j = 0;
 	while (minish->env[j] != NULL)
@@ -98,8 +109,11 @@ char	**builtin_unset(char **cmd, t_minish *minish)
 		{
 			var = ft_strjoin(cmd[i], "=");
 			if (ft_strncmp(var, minish->env[j], ft_strlen(var)) == 0 && j++)
+			{
+				free(var);
 				break ;
-			free (var);
+			}
+			free(var);
 		}
 		if (cmd[i] == NULL && new_env_size(cmd, minish) > 2)
 			new_env[e++] = ft_strdup(minish->env[j++]);

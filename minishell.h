@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/01 18:17:13 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/04 20:10:10 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@
 # include <errno.h>
 # include <termios.h> 
 
-int	g_exit_status;
+extern int	g_exit_status;
+//int	g_exit_status;
 
 typedef struct s_pipex
 {
@@ -172,7 +173,7 @@ void		mini_lstdelone(t_list *node, void (*del)(void*));
 void		mini_lstclear(t_list **lst, void (*del)(void*));
 int			is_prefork_builtin(char **cmd);
 int			num_of_line(char **env);
-char		*ft_strjoin_n_free(char *s1, char *s2);
+int			ft_pre_free(t_minish *minish);
 
 // MINI_ERRORS.C
 int			ft_err_handling(t_minish *minish);
@@ -183,6 +184,9 @@ void		gc_free(void *ptr);
 void		*ft_gc(void *garb, int status);
 void		gc_lstdelone(t_list *lst, void (*del)(void*));
 void		gc_lstclear(t_list **lst, void (*del)(void*));
+
+// MINI_GC_WRAPS.C
+char		*gc_strjoin(char *s1, char *s2);
 
 // MINI_SIG_N_ATTR.C
 void		ft_signals_n_attr(int toggle);
@@ -202,6 +206,7 @@ char		**ft_checkenv(char *env[]);
 char		*ft_checkpath(char *env[], char *cmd);
 
 //ppx_free.c
+void		ft_freeloop(t_pipex *ppx);
 void		ft_freeall(t_pipex *ppx);
 void		ft_free(char **av);
 int			ft_waitnclose(t_pipex *ppx);

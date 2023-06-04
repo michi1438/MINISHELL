@@ -6,11 +6,13 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/01 15:44:25 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/04 20:10:41 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int	g_exit_status;
 
 int	main(int ac, char *av[], char *env[])
 {
@@ -22,14 +24,21 @@ int	main(int ac, char *av[], char *env[])
 	while (1)
 	{
 		init_minish(&minish);
+		mini_lstclear(&minish.lst_line, free);
 		minish.line = readline("(ಠ.ಠ)¬ ");
 		if (minish.line == NULL)
 		{
 			printf ("exit\n");
+			free(minish.line);
+			free(minish.prev_line);
+			mini_lstclear(&minish.lst_line, free);
 			exit (g_exit_status);
 		}
 		if (minish.line[0] != '\0' && is_all_space(minish.line) == 1)
 			treating_line(&minish);
+		ft_gc(NULL, DEL);
+		free(minish.line);
+		mini_lstclear(&minish.lst_line, free);
 	}
 	return (0);
 }
@@ -47,30 +56,30 @@ int	ft_initmain(t_minish *minish, char **env)
 
 int	init_minish(t_minish *minish)
 {
+	minish->lst_line = NULL;
 	ft_signals_n_attr(RESET);
 	minish->ppx.n_cmd = 1;
-	minish->lst_line = NULL;
 	return (0);
 }
 
 void	ft_add_history(t_minish *minish)
 {
 	size_t	l_line;
+	char	*temp;
 
 	l_line = ft_strlen(minish->line);
 	if (minish->prev_line != NULL)
 	{
 		if (ft_strlen(minish->prev_line) > ft_strlen(minish->line))
-		{
 			l_line = ft_strlen(minish->prev_line);
-			free(minish->prev_line);
-		}
 	}
 	if (minish->prev_line == NULL || ft_strncmp(minish->line,
 			minish->prev_line, l_line) != 0)
 	{
 		add_history(minish->line);
+		temp = minish->prev_line;
 		minish->prev_line = ft_strdup(minish->line);
+		free(temp);
 		if (minish->prev_line == NULL)
 			return ;
 	}
@@ -104,7 +113,10 @@ int	ft_token(t_minish *minish)
 		i = is_not_tokenable(minish, i, tok);
 		i = is_tokenable(minish, i, tok);
 		if (i == -1)
+		{
+			mini_lstclear(&minish->lst_line, free);
 			return (-1);
+		}
 		if (minish->line[i] != '\0')
 			i++;
 	}

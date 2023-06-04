@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:46:16 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/01 14:23:05 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/04 19:39:17 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,15 +78,28 @@ int	builtin_exit_err(char **cmd, int err_type)
 
 void	builtin_cd(char **cmd, t_minish *minish)
 {
+	char	*home;
+	char	*temp;
+
 	if (cmd[1] != NULL)
 	{
-		if (chdir(cmd[1]) == -1)
+		if (chdir(cmd[1]) == -1 || cmd[2] != NULL)
 		{
 			g_exit_status = 1;
-		//	printf("%s: No such file or directory\n", cmd[1]);
-			perror(cmd[1]);// TODO is it right to use perror here ?
+			if (cmd[2] != NULL)
+				printf("%s: too many arguments\n", cmd[0]);
+			else
+				perror(cmd[1]);
 		}
 	}
 	else
-		chdir(check_env_var(minish->env, "HOME="));
+	{
+		home = ft_strdup("HOME=");
+		temp = check_env_var(minish->env, home);
+		if (temp)
+		{
+			chdir(temp);
+			free(temp);
+		}
+	}
 }

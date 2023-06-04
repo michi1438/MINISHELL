@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 16:57:22 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/30 20:42:26 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/03 21:45:27 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int	is_not_tokenable(t_minish *minish, int i, const char *tok[])
 	char		*str;
 	t_content	*node;
 
-	node = malloc(sizeof(struct s_content));
+	//TODO MALLOC A PROTEGER !!!
+	node = malloc(sizeof(t_content));
 	size = not_token_size(minish, i, tok);
 	if (size > 0)
 	{
@@ -29,7 +30,10 @@ int	is_not_tokenable(t_minish *minish, int i, const char *tok[])
 			node->type = OTHER;
 			ft_lstadd_back(&minish->lst_line, ft_lstnew(node));
 		}
+		free(str);
 	}
+	else 
+		free(node);
 	return (i + size);
 }
 

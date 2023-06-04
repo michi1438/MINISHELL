@@ -6,13 +6,13 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 20:23:44 by lzito             #+#    #+#             */
-/*   Updated: 2023/06/01 16:07:47 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/04 19:45:59 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_freeall(t_pipex *ppx)
+void	ft_freeloop(t_pipex *ppx)
 {
 	int	i;
 
@@ -27,8 +27,19 @@ void	ft_freeall(t_pipex *ppx)
 			free(ppx->fd[i]);
 		if (ppx->fd_hd != NULL && ppx->fd_hd[i] != NULL)
 			free(ppx->fd_hd[i]);
+		if (ppx->filein != NULL && ppx->filein[i] != NULL)
+			free(ppx->filein[i]);
+		if (ppx->fileout != NULL && ppx->fileout[i] != NULL)
+			free(ppx->fileout[i]);
+		if (ppx->limiter != NULL && ppx->limiter[i] != NULL)
+			free(ppx->limiter[i]);
 		i++;
 	}
+}
+
+void	ft_freeall(t_pipex *ppx)
+{
+	ft_freeloop(ppx);
 	if (ppx->cmd != NULL)
 		free(ppx->cmd);
 	if (ppx->path != NULL)
@@ -37,6 +48,10 @@ void	ft_freeall(t_pipex *ppx)
 		free(ppx->pid);
 	if (ppx->fd != NULL)
 		free(ppx->fd);
+	if (ppx->f_in != NULL)
+		free(ppx->f_in);
+	if (ppx->f_out != NULL)
+		free(ppx->f_out);
 	if (ppx->fd_hd != NULL)
 		free(ppx->fd_hd);
 }
@@ -51,9 +66,11 @@ void	ft_free(char **av)
 		while (av[i])
 		{
 			free(av[i]);
+			av[i] = NULL;
 			i++;
 		}
 		free(av);
+		av = NULL;
 	}
 }
 

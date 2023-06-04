@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 10:00:56 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/01 09:55:24 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/04 14:42:23 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,14 @@ void	export_noarg(t_minish *minish)
 
 void	builtin_pwd(void)
 {
-	ft_putstr_fd(getcwd(NULL, 0), STDOUT_FILENO);
+	char	*ret;
+
+	ret = getcwd(NULL, 0);
+	if (!ret)
+		exit (1);
+	ft_putstr_fd(ret, STDOUT_FILENO);
 	ft_putchar_fd('\n', STDOUT_FILENO);
+	free(ret);
 	exit (0);
 }
 
