@@ -222,6 +222,9 @@ echo bla >> file | echo blaoubla >> file >> $TEST
 echo bla >> file | echo blaoubla >> file >> $TEST
 echo bla >> file | echo blaoubla >> file >> $TEST
 cat file >> $TEST
+> file >> $TEST
+> file >> $TEST
+> file >> $TEST
 exit >> $TEST
 yo
 
@@ -236,6 +239,9 @@ echo bla >> file | echo blaoubla >> file >> $TEST
 echo bla >> file | echo blaoubla >> file >> $TEST
 echo bla >> file | echo blaoubla >> file >> $TEST
 cat file >> $TEST
+> file >> $TEST
+> file >> $TEST
+> file >> $TEST
 exit >> $TEST
 yo
 
