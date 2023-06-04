@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/03 21:49:02 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/04 10:43:38 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <errno.h>
 # include <termios.h> 
 
-int	g_exit_status;
+extern int	g_exit_status;
 
 typedef struct s_pipex
 {
