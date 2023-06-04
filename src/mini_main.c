@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/03 21:17:51 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/04 15:10:35 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,14 @@ int	main(int ac, char *av[], char *env[])
 		minish.line = readline("(ಠ.ಠ)¬ ");
 		if (minish.line == NULL)
 		{
-			printf ("exit yo\n");
+			printf ("exit\n");
+			free(minish.line);
 			mini_lstclear(&minish.lst_line, free);
 			exit (g_exit_status);
 		}
 		if (minish.line[0] != '\0' && is_all_space(minish.line) == 1)
 			treating_line(&minish);
+		free(minish.line);
 		ft_gc(NULL, DEL);
 		mini_lstclear(&minish.lst_line, free);
 	}
