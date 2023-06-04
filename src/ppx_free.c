@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 20:23:44 by lzito             #+#    #+#             */
-/*   Updated: 2023/06/04 16:06:43 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/04 19:45:59 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	ft_freeloop(t_pipex *ppx)
 	i = 0;
 	while (i < ppx->n_cmd)
 	{
-		printf("ppx->cmd %p, %s$\n", ppx->cmd, ppx->cmd[i][0]);
 		if (ppx->cmd != NULL && ppx->cmd[i] != NULL)
 			ft_free(ppx->cmd[i]);
 		if (ppx->path != NULL && ppx->path[i] != NULL)
@@ -41,7 +40,6 @@ void	ft_freeloop(t_pipex *ppx)
 void	ft_freeall(t_pipex *ppx)
 {
 	ft_freeloop(ppx);
-//	printf("ppx->cmd freed %p, %s$\n", ppx->cmd, ppx->cmd[0][0]);
 	if (ppx->cmd != NULL)
 		free(ppx->cmd);
 	if (ppx->path != NULL)
@@ -67,10 +65,8 @@ void	ft_free(char **av)
 	{
 		while (av[i])
 		{
-			printf("cmd freed = %s$\n", av[i]);
 			free(av[i]);
 			av[i] = NULL;
-			printf("cmd after free = %s$\n", av[i]);
 			i++;
 		}
 		free(av);

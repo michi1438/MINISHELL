@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 20:27:56 by lzito             #+#    #+#             */
-/*   Updated: 2023/06/04 14:44:20 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/04 19:21:34 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,7 @@ char	*escape_spaces(char *ret)
 
 	j = 0;
 	i = 0;
+	//TODO MALLOC A PROTEGER !!!
 	newret = ft_calloc((escaped_size(ret) + 1), sizeof(char));
 	if (newret == NULL)
 		return (NULL);

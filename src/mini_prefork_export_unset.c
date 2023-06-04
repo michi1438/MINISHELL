@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 18:51:00 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/03 21:59:20 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/04 19:41:12 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ char	**new_env_maker(char **cmd, t_minish *minish, int j)
 	int		i;
 	char	**new_env;
 	char	*var;
+	char	*var_cpy;
 	char	*temp;
 
 	i = 0;
@@ -54,8 +55,9 @@ char	**new_env_maker(char **cmd, t_minish *minish, int j)
 	if (cmd[j][i] != '=')
 		return (NULL);
 	var = ft_substr(cmd[j], 0, ++i);
+	var_cpy = ft_strdup(var);
 	i = -1;
-	temp = check_env_var(minish->env, var);
+	temp = check_env_var(minish->env, var_cpy);
 	if (temp != NULL)
 	//TODO MALLOC A PROTEGER !!!
 		new_env = ft_calloc(num_of_line(minish->env), sizeof(char *));
@@ -71,6 +73,7 @@ char	**new_env_maker(char **cmd, t_minish *minish, int j)
 	}
 	if (temp == NULL)
 		new_env[i] = ft_strdup(cmd[j]);
+	free(var);
 	free(temp);
 	return (new_env);
 }

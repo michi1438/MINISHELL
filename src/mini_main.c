@@ -6,11 +6,13 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/04 15:10:35 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/04 19:49:56 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int	g_exit_status;
 
 int	main(int ac, char *av[], char *env[])
 {
@@ -28,13 +30,14 @@ int	main(int ac, char *av[], char *env[])
 		{
 			printf ("exit\n");
 			free(minish.line);
+			free(minish.prev_line);
 			mini_lstclear(&minish.lst_line, free);
 			exit (g_exit_status);
 		}
 		if (minish.line[0] != '\0' && is_all_space(minish.line) == 1)
 			treating_line(&minish);
-		free(minish.line);
 		ft_gc(NULL, DEL);
+		free(minish.line);
 		mini_lstclear(&minish.lst_line, free);
 	}
 	return (0);
@@ -62,24 +65,23 @@ int	init_minish(t_minish *minish)
 void	ft_add_history(t_minish *minish)
 {
 	size_t	l_line;
+	char	*temp;
 
 	l_line = ft_strlen(minish->line);
 	if (minish->prev_line != NULL)
 	{
 		if (ft_strlen(minish->prev_line) > ft_strlen(minish->line))
-		{
 			l_line = ft_strlen(minish->prev_line);
-			free(minish->prev_line);
-		}
 	}
 	if (minish->prev_line == NULL || ft_strncmp(minish->line,
 			minish->prev_line, l_line) != 0)
 	{
 		add_history(minish->line);
+		temp = minish->prev_line;
 		minish->prev_line = ft_strdup(minish->line);
+		free(temp);
 		if (minish->prev_line == NULL)
 			return ;
-		free(minish->prev_line);
 	}
 }
 
@@ -87,7 +89,10 @@ void	treating_line(t_minish *minish)
 {
 	ft_add_history(minish);
 	if (ft_token(minish) != -1)
+	{
 		g_exit_status = main_pipe(minish, &minish->ppx);
+		mini_lstclear(&minish->lst_line, free);
+	}
 	else
 	{
 		printf("unexpected token ERROR\n");

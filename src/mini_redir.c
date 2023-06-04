@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:44:21 by lzito             #+#    #+#             */
-/*   Updated: 2023/06/03 21:46:05 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/04 19:43:28 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void	redir_fill(t_minish *minish, int type, char *res, int i)
 		}
 	}
 	else
+	{
 		if (minish->ppx.filein[i] == NULL)
 			minish->ppx.filein[i] = res;
 		else
@@ -100,6 +101,7 @@ void	redir_fill(t_minish *minish, int type, char *res, int i)
 			free(minish->ppx.filein[i]);
 			minish->ppx.filein[i] = res;
 		}
+	}
 }
 
 int	deal_with_redir(t_minish *minish, int type, int i)

@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:46:16 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/03 19:32:28 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/04 19:39:17 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,17 @@ int	pre_fork_builtin(char **cmd, t_minish *minish)
 	else if (ft_strncmp(cmd[0], "unset\0", 6) == 0)
 		minish->env = builtin_unset(cmd, minish);
 	else if (ft_strncmp(cmd[0], "exit\0", 5) == 0)
-		g_exit_status = builtin_exit(cmd, minish);
+		g_exit_status = builtin_exit(cmd);
 	else
 		return (0);
 	return (1);
 }
 
-int	builtin_exit(char **cmd, t_minish *minish)
+int	builtin_exit(char **cmd)
 {
 	int	i;
 
 	i = 0;
-	(void) minish;
 	if (cmd[1] != NULL)
 	{
 		if (cmd[2] != NULL)
@@ -97,7 +96,10 @@ void	builtin_cd(char **cmd, t_minish *minish)
 	{
 		home = ft_strdup("HOME=");
 		temp = check_env_var(minish->env, home);
-		chdir(temp);
-		free(temp);
+		if (temp)
+		{
+			chdir(temp);
+			free(temp);
+		}
 	}
 }

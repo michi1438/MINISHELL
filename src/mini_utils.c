@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:46:25 by lzito             #+#    #+#             */
-/*   Updated: 2023/06/03 21:48:43 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/04 19:45:20 by lzito            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,13 @@ int	num_of_line(char **env)
 	return (i + 2);
 }
 
-int ft_pre_free(t_minish *minish)
+int	ft_pre_free(t_minish *minish)
 {
 	int i;
 
 	i = 0;
 	if (!minish->cmds || !minish->cmds[i])
-		return(-1);
+		return (-1);
 	while (i < minish->ppx.n_cmd)
 	{
 		free(minish->cmds[i]);
