@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/04 20:10:10 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/05 09:58:04 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,7 @@ char		*check_env_var(char **env, char *var);
 char		*escape_spaces(char *ret);
 int			escaped_size(char *ret);
 int			is_dol_end(char *quote, int j);
+char		*find_var(t_minish *minish, char *quote, int i[2], int *j);
 
 // MINI_UTILS.C
 char		**ft_copy_env(char *env[]);
@@ -174,9 +175,11 @@ void		mini_lstclear(t_list **lst, void (*del)(void*));
 int			is_prefork_builtin(char **cmd);
 int			num_of_line(char **env);
 int			ft_pre_free(t_minish *minish);
+char		*gc_itoa(char *var);
 
 // MINI_ERRORS.C
 int			ft_err_handling(t_minish *minish);
+t_list		*counting_cmd(int *i, t_list *lst);
 
 // MINI_GC.C
 void		*gc_malloc(size_t size);

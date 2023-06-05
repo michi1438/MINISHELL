@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:46:25 by lzito             #+#    #+#             */
-/*   Updated: 2023/06/04 19:45:20 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/05 09:23:37 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,4 +111,13 @@ int	ft_pre_free(t_minish *minish)
 	}
 	return (-1);
 }
-	
+
+char	*gc_itoa(char *var)
+{
+	char	*temp;
+
+	temp = var;
+	var = ft_itoa(g_exit_status);
+	free(temp);
+	return (var);
+}

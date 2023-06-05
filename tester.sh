@@ -278,6 +278,9 @@ echo
 TEST=test_minishell
 env -i ~/MINISHELL/minishell << yo
 env > $TEST
+env nnthuoe >> $TEST
+env nnth uoe >> $TEST
+env ./tags >> $TEST
 unset nuthou >> $TEST
 export SHELL=/bin/bash >> $TEST
 env >> $TEST
@@ -296,6 +299,9 @@ echo $? >> $TEST
 TEST=test_bash
 env -i /bin/bash << yo
 env > $TEST
+env nnthuoe >> $TEST
+env nnth uoe >> $TEST
+env ./tags >> $TEST
 unset nuthou >> $TEST
 export SHELL=/bin/bash >> $TEST
 env >> $TEST

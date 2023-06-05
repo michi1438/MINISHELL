@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 20:27:56 by lzito             #+#    #+#             */
-/*   Updated: 2023/06/04 19:21:34 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/05 10:10:35 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,47 +35,51 @@ char	*expand_variables(char *quote, t_minish *minish)
 
 void	treating_expand(char *quote, t_minish *minish, int *j, char *ret)
 {
-	int		i;
+	int		i[2];
 	char	*var;
-	char	*temp;
-	int		lendllr;
 
-	i = 0;
-	lendllr = 0;
+	i[0] = 0;
 	(*j)++;
-	i = *j;
+	i[0] = *j;
 	while (is_dol_end(quote, *j))
 		(*j)++;
-	var = ft_substr(&quote[i], 0, *j - i);
-	lendllr = ft_strlen(var) + 1;
-	if (ft_strncmp(var, "?", 2) == 0)
+	var = find_var(minish, quote, i, j);
+	i[0] = 0;
+	if (var != NULL)
 	{
-		temp = var;
-		var = ft_itoa(g_exit_status);
-		free(temp);
+		while (var[i[0]] != '\0')
+		{
+			ret[ft_strlen(ret)] = var[i[0]++];
+			(*j)++;
+		}
+		free(var);
 	}
+	*j = (*j - i[0]) + i[1];
+}
+
+char	*find_var(t_minish *minish, char *quote, int i[2], int *j)
+{
+	char	*var;
+	char	*temp;
+
+	i[1] = 0;
+	var = ft_substr(&quote[i[0]], 0, *j - i[0]);
+	i[1] = ft_strlen(var) + 1;
+	if (ft_strncmp(var, "?", 2) == 0)
+		var = gc_itoa(var);
 	else
 	{
 		temp = gc_strjoin(var, "=");
 		var = check_env_var(minish->env, temp);
 	}
-	*j = i - 1;
-	i = 0;
-	if (var != NULL)
-	{
-		while (var[i] != '\0')
-		{
-			ret[ft_strlen(ret)] = var[i++];
-			(*j)++;
-		}
-		free(var);
-	}
-	*j = (*j - i) + lendllr;
+	*j = i[0] - 1;
+	return (var);
 }
 
 int	is_dol_end(char *quote, int j)
 {
-	if ((ft_isdigit(quote[j - 1]) || quote[j - 1] == '?') && quote[j - 2] == '$')
+	if ((ft_isdigit(quote[j - 1])
+			|| quote[j - 1] == '?') && quote[j - 2] == '$')
 		return (0);
 	if (quote[j] != ' ' && quote[j] != '\"' && quote[j] != '\0'
 		&& quote[j] != '$')
