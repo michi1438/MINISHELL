@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/05 17:55:42 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/05 18:39:37 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,8 @@ void		check_for_builtin(char **cmd, t_minish *minish, int i);
 void		builtin_env(t_minish *minish, char **cmd);
 void		builtin_pwd(void);
 void		export_noarg(t_minish *minish);
+
+// MINI_BUILTINS_ECHO.C
 void		builtin_echo(char **cmd);
 void		echo_option(char **cmd, int *i, int *flg);
 
@@ -128,7 +130,6 @@ void		builtin_export(char **cmd, t_minish *minish);
 char		**new_env_maker(char **cmd, t_minish *minish, int j);
 char		**builtin_unset(char **cmd, t_minish *minish);
 int			new_env_size(char **cmd, t_minish *minish);
-void		free_double(char **env);
 
 //FOR_TESTING_ONLY.C
 void		print_lst_line(t_minish minish);
@@ -182,7 +183,6 @@ void		mini_lstclear(t_list **lst, void (*del)(void*));
 int			is_prefork_builtin(char **cmd);
 int			num_of_line(char **env);
 int			ft_pre_free(t_minish *minish);
-char		*gc_itoa(char *var);
 
 // MINI_ERRORS.C
 int			ft_err_handling(t_minish *minish);
@@ -190,13 +190,14 @@ t_list		*counting_cmd(int *i, t_list *lst);
 
 // MINI_GC.C
 void		*gc_malloc(size_t size);
-void		gc_free(void *ptr);
 void		*ft_gc(void *garb, int status);
 void		gc_lstdelone(t_list *lst, void (*del)(void*));
 void		gc_lstclear(t_list **lst, void (*del)(void*));
+void		free_double(char **env);
 
 // MINI_WRAPS.C
 char		*w_strjoin_rm_arg1(char *s1, char *s2);
+char		*w_itoa_rm(char *var);
 
 // MINI_SIG_N_ATTR.C
 void		ft_signals_n_attr(int toggle);

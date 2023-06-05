@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 11:09:32 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/05 14:32:37 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/05 18:40:33 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,14 @@ void	gc_lstclear(t_list **lst, void (*del)(void*))
 			*lst = temp;
 		}
 	}
+}
+
+void	free_double(char **env)
+{
+	int	i;
+
+	i = 0;
+	while (env[i] != NULL)
+		free(env[i++]);
+	free (env);
 }

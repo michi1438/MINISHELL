@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 20:27:56 by lzito             #+#    #+#             */
-/*   Updated: 2023/06/05 14:37:53 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/05 18:34:59 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	*find_var(t_minish *minish, char *quote, int i[2], int *j)
 	var = ft_substr(&quote[i[0]], 0, *j - i[0]);
 	i[1] = ft_strlen(var) + 1;
 	if (ft_strncmp(var, "?", 2) == 0)
-		var = gc_itoa(var);
+		var = w_itoa_rm(var);
 	else
 	{
 		temp = w_strjoin_rm_arg1(var, "=");

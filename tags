@@ -81,7 +81,7 @@ AR	libft/Makefile	/^AR = ar rc$/;"	m
 BUFFER_SIZE	libft/ft_gnl/get_next_line_bonus.h	/^#  define BUFFER_SIZE /;"	d
 CC	Makefile	/^CC = gcc$/;"	m
 CC	libft/Makefile	/^CC = gcc$/;"	m
-CFLAGS	Makefile	/^CFLAGS = -Werror -Wall -Wextra -I$(RL)\/include -I. -g #-fsanitize=leak #\\$/;"	m
+CFLAGS	Makefile	/^CFLAGS = -Werror -Wall -Wextra -I$(RL)\/include -I. -g3 -fsanitize=leak #\\$/;"	m
 CFLAGS	libft/Makefile	/^CFLAGS = -Werror -Wall -Wextra$/;"	m
 DBLQUOTE	minishell.h	/^	DBLQUOTE,$/;"	e	enum:e_tolkien
 DEL	minishell.h	/^	DEL,$/;"	e	enum:e_gcstatus
@@ -179,7 +179,7 @@ find_var	src/mini_expand.c	/^char	*find_var(t_minish *minish, char *quote, int i
 flag_parser	libft/ft_printf/printparser.c	/^char	*flag_parser(const char *str, int i)$/;"	f	typeref:typename:char *
 flglying	libft/ft_printf/optionctrl.c	/^void	*flglying(char *flag, t_toggler *flg)$/;"	f	typeref:typename:void *
 flush	minishell.h	/^	int	flush;$/;"	m	struct:s_gc	typeref:typename:int
-free_double	src/mini_prefork_export_unset.c	/^void	free_double(char **env)$/;"	f	typeref:typename:void
+free_double	src/mini_gc.c	/^void	free_double(char **env)$/;"	f	typeref:typename:void
 freeandreplace	libft/ft_gnl/get_next_line_utils_bonus.c	/^char	*freeandreplace(char *oldstr, char *stradd, int ind)$/;"	f	typeref:typename:char *
 ft_add_history	src/mini_main.c	/^void	ft_add_history(t_minish *minish)$/;"	f	typeref:typename:void
 ft_atoi	libft/ft_main/ft_atoi.c	/^int	ft_atoi(const char *nptr)$/;"	f	typeref:typename:int
@@ -258,7 +258,6 @@ ft_toupper	libft/ft_main/ft_toupper.c	/^int	ft_toupper(int c)$/;"	f	typeref:type
 ft_waitnclose	src/ppx_free.c	/^int	ft_waitnclose(t_pipex *ppx)$/;"	f	typeref:typename:int
 ftrim	libft/ft_main/ft_strtrim.c	/^int	ftrim(char const *s1, char const *set)$/;"	f	typeref:typename:int
 g_exit_status	src/mini_main.c	/^int	g_exit_status;$/;"	v	typeref:typename:int
-gc_itoa	src/mini_utils.c	/^char	*gc_itoa(char *var)$/;"	f	typeref:typename:char *
 gc_lstclear	src/mini_gc.c	/^void	gc_lstclear(t_list **lst, void (*del)(void*))$/;"	f	typeref:typename:void
 gc_lstdelone	src/mini_gc.c	/^void	gc_lstdelone(t_list *lst, void (*del)(void*))$/;"	f	typeref:typename:void
 gc_malloc	src/mini_gc.c	/^void	*gc_malloc(size_t size)$/;"	f	typeref:typename:void *
@@ -371,6 +370,7 @@ trimatoi	libft/ft_main/ft_atoi.c	/^int	trimatoi(const char *nptr, int *neg)$/;"	
 type	libft/ft_printf/printf.h	/^	char	type;$/;"	m	struct:sct	typeref:typename:char
 type	minishell.h	/^	int		type;$/;"	m	struct:s_content	typeref:typename:int
 type_reader	libft/ft_printf/printparser.c	/^char	type_reader(const char *str, int i)$/;"	f	typeref:typename:char
+w_itoa_rm	src/mini_wraps.c	/^char	*w_itoa_rm(char *var)$/;"	f	typeref:typename:char *
 w_strjoin_rm_arg1	src/mini_wraps.c	/^char	*w_strjoin_rm_arg1(char *s1, char *s2)$/;"	f	typeref:typename:char *
 wid	libft/ft_printf/printf.h	/^	int		wid;$/;"	m	struct:sct	typeref:typename:int
 width_counter	libft/ft_printf/printparser.c	/^int	width_counter(const char *str, int i)$/;"	f	typeref:typename:int

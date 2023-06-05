@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 18:51:00 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/04 20:11:07 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/05 18:40:36 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,16 +76,6 @@ char	**new_env_maker(char **cmd, t_minish *minish, int j)
 	free(var);
 	free(temp);
 	return (new_env);
-}
-
-void	free_double(char **env)
-{
-	int	i;
-
-	i = 0;
-	while (env[i] != NULL)
-		free(env[i++]);
-	free (env);
 }
 
 char	**builtin_unset(char **cmd, t_minish *minish)
