@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:56:43 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/04 20:10:41 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/05 13:57:26 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,6 @@ int	main(int ac, char *av[], char *env[])
 		free(minish.line);
 		mini_lstclear(&minish.lst_line, free);
 	}
-	return (0);
-}
-
-int	ft_initmain(t_minish *minish, char **env)
-{
-	ft_signals_n_attr(SET);
-	g_exit_status = 0;
-	minish->prev_line = NULL;
-	minish->env = ft_copy_env(env);
-	if (minish->env == NULL)
-		return (1);
-	return (0);
-}
-
-int	init_minish(t_minish *minish)
-{
-	minish->lst_line = NULL;
-	ft_signals_n_attr(RESET);
-	minish->ppx.n_cmd = 1;
 	return (0);
 }
 

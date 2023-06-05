@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 16:57:22 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/03 21:45:27 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/05 14:18:28 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	is_not_tokenable(t_minish *minish, int i, const char *tok[])
 		}
 		free(str);
 	}
-	else 
+	else
 		free(node);
 	return (i + size);
 }

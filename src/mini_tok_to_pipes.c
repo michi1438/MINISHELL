@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 18:33:23 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/03 21:39:38 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/05 14:38:15 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,14 +94,14 @@ void	append_or_start(t_minish *minish, char *strseg, char *tok_delimiter, int i)
 		if (tok_delimiter == NULL)
 		{
 			if (is_all_space(strseg) == 0)
-				minish->cmds[i] = gc_strjoin(minish->cmds[i], " ");
+				minish->cmds[i] = w_strjoin_rm_arg1(minish->cmds[i], " ");
 			else
-				minish->cmds[i] = gc_strjoin(minish->cmds[i], strseg);
+				minish->cmds[i] = w_strjoin_rm_arg1(minish->cmds[i], strseg);
 		}
 		else
 		{
 			temp = ft_strtrim(strseg, tok_delimiter);
-			minish->cmds[i] = gc_strjoin(minish->cmds[i], temp);
+			minish->cmds[i] = w_strjoin_rm_arg1(minish->cmds[i], temp);
 			free(temp);
 		}
 	}

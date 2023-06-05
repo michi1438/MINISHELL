@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 13:21:55 by mguerga           #+#    #+#             */
-/*   Updated: 2023/05/17 16:01:26 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/05 14:15:25 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,7 @@ void	*mini_implfing(char const *s, char c, char **ptrptr, int *i)
 
 	buf = 0;
 	space = 0;
-	while ((s[i[0]] == c && i[0] == 0) || (s[i[0]] == c && s[i[0] - 1] != '\\'))
-		i[0]++;
-	while (s[i[0]] != c && s[i[0]] != '\0')
-	{
-		if (s[i[0]] == '\\' && s[i[0] + 1] == c)
-		{
-			i[0]++;
-			space++;
-		}
-		buf++;
-		i[0]++;
-	}
+	count_spaces_n_buf(s, i, &buf, &space);
 	*ptrptr = malloc((buf + 1) * sizeof(char));
 	if (*ptrptr == NULL)
 		return (NULL);
@@ -81,6 +70,22 @@ void	*mini_implfing(char const *s, char c, char **ptrptr, int *i)
 	}
 	(*ptrptr)[e] = '\0';
 	return (*ptrptr);
+}
+
+void	count_spaces_n_buf(const char *s, int *i, int *buf, int *space)
+{
+	char	c;
+
+	c = ' ';
+	while ((s[i[0]] == c && i[0] == 0)
+		|| (s[i[0]] == c && s[i[0] - 1] != '\\'))
+		i[0]++;
+	while (s[i[0]] != c && s[i[0]] != '\0' && (*buf)++ != -1)
+	{
+		if (s[i[0]] == '\\' && s[i[0]++ + 1] == c)
+			(*space)++;
+		i[0]++;
+	}
 }
 
 int	mini_counter(char const *s, char c)

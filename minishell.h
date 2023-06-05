@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/05 09:58:04 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/05 14:36:58 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,16 +94,19 @@ enum e_signal
 };
 
 // MINI_MAIN.C
-int			init_minish(t_minish *minish);
-int			ft_initmain(t_minish *minish, char **env);
 int			ft_token(t_minish *minish);
 void		treating_line(t_minish *minish);
 void		ft_add_history(t_minish *minish);
+
+// MINI_INIT.C
+int			ft_initmain(t_minish *minish, char **env);
+int			init_minish(t_minish *minish);
 
 // MINI_MOD_SPLIT.C
 char		**ft_mod_split(char const *s, char c);
 int			mini_counter(char const *s, char c);
 void		*mini_implfing(char const *s, char c, char **ptrptr, int *i);
+void		count_spaces_n_buf(const char *s, int *i, int *buf, int *space);
 int			mini_clear_fing(char **ptrptr, int j);
 
 // MINI_BUILTINS.C
@@ -161,12 +164,15 @@ void		append_or_start(t_minish *minish, char *strseg, char *tok_delimiter, int i
 // MINI_EXPAND.C
 char		*expand_variables(char *dblquote, t_minish *minish);
 void		treating_expand(char *quote, t_minish *minish, int *j, char *ret);
-int			new_size(char *quote, t_minish *minish);
+char		*find_var(t_minish *minish, char *quote, int i[2], int *j);
 char		*check_env_var(char **env, char *var);
 char		*escape_spaces(char *ret);
-int			escaped_size(char *ret);
+
+// MINI_EXPAND_SIZE.C
 int			is_dol_end(char *quote, int j);
-char		*find_var(t_minish *minish, char *quote, int i[2], int *j);
+int			new_size(char *quote, t_minish *minish);
+void		size_dol_or_var(char *var, int *size, t_minish *minish);
+int			escaped_size(char *ret);
 
 // MINI_UTILS.C
 char		**ft_copy_env(char *env[]);
@@ -188,8 +194,8 @@ void		*ft_gc(void *garb, int status);
 void		gc_lstdelone(t_list *lst, void (*del)(void*));
 void		gc_lstclear(t_list **lst, void (*del)(void*));
 
-// MINI_GC_WRAPS.C
-char		*gc_strjoin(char *s1, char *s2);
+// MINI_WRAPS.C
+char		*w_strjoin_rm_arg1(char *s1, char *s2);
 
 // MINI_SIG_N_ATTR.C
 void		ft_signals_n_attr(int toggle);
