@@ -320,4 +320,42 @@ echo $? >> $TEST
 echo
 diff -s test_minishell test_bash
 
+echo
+echo ---------TESTING CORRECTION -I---------
+echo 
+TEST=test_minishell
+env -i ~/MINISHELL/minishell << yo
+/bin/ls > $TEST
+/bin/cat * >> $TEST
+			>> $TEST
+ls >> $TEST
+exit nt >> $TEST
+yo
+
+echo $? >> $TEST
+
+TEST=test_bash
+env -i /bin/bash << yo
+env > $TEST
+env nnthuoe >> $TEST
+env nnth uoe >> $TEST
+env ./tags >> $TEST
+unset nuthou >> $TEST
+export SHELL=/bin/bash >> $TEST
+env >> $TEST
+export >> $TEST
+unset SHELL >> $TEST
+export >> $TEST
+pwd >> $TEST
+cd >> $TEST
+/bin/ls >> $TEST
+echo $? >> $TEST
+exit nt >> $TEST
+yo
+
+echo $? >> $TEST
+
+echo
+diff -s test_minishell test_bash
+
 rm -rf test_minishell test_bash file

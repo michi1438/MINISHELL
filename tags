@@ -133,6 +133,7 @@ builtin_export	src/mini_prefork_export_unset.c	/^void	builtin_export(char **cmd,
 builtin_pwd	src/mini_builtins.c	/^void	builtin_pwd(void)$/;"	f	typeref:typename:void
 builtin_unset	src/mini_prefork_export_unset.c	/^char	**builtin_unset(char **cmd, t_minish *minish)$/;"	f	typeref:typename:char **
 calc	libft/ft_main/ft_atoi.c	/^int	calc(int i, const char *nptr)$/;"	f	typeref:typename:int
+change_shlvl	src/mini_utils.c	/^char	*change_shlvl(char *envline)$/;"	f	typeref:typename:char *
 check_env_var	src/mini_expand.c	/^char	*check_env_var(char **env, char *var)$/;"	f	typeref:typename:char *
 check_for_builtin	src/mini_builtins.c	/^void	check_for_builtin(char **cmd, t_minish *minish, int i)$/;"	f	typeref:typename:void
 clean	Makefile	/^clean:$/;"	t

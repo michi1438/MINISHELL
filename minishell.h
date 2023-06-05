@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/05 14:36:58 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/05 17:55:42 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,7 @@ int			escaped_size(char *ret);
 
 // MINI_UTILS.C
 char		**ft_copy_env(char *env[]);
+char		*change_shlvl(char *env);
 void		mini_lstdelone(t_list *node, void (*del)(void*));
 void		mini_lstclear(t_list **lst, void (*del)(void*));
 int			is_prefork_builtin(char **cmd);
