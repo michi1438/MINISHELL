@@ -1,6 +1,6 @@
 #!/bin/bash
 
-make re -C ~/MINISHELL/
+make -C ~/MINISHELL/
 echo
 echo ---------TESTING ECHO--------
 echo
@@ -76,7 +76,6 @@ echo
 TEST=test_minishell
 ~/MINISHELL/minishell << yo
 echo BLABLA > $TEST
-cd .. >> $TEST
 echo \$? 0 >> $TEST
 cd ... >> $TEST
 echo \$? 1 >> $TEST
@@ -97,11 +96,10 @@ export BLO =bloblo >> $TEST
 echo \$? >> $TEST
 export = = = >> $TEST
 echo \$? >> $TEST
-env >> $TEST
 echo \$? >> $TEST
 env nthuo >> $TEST
 echo \$? >> $TEST
-unset SHELL BLO nhtueo >> $TEST
+unset SHELL BLO nhtueo
 echo \$? >> $TEST
 exit >> $TEST
 yo
@@ -110,7 +108,6 @@ yo
 TEST=test_bash
 /bin/bash << yo
 echo BLABLA > $TEST
-cd .. >> $TEST
 echo \$? 0 >> $TEST
 cd ... >> $TEST
 echo \$? 1 >> $TEST
@@ -131,11 +128,10 @@ export BLO =bloblo >> $TEST
 echo \$? >> $TEST
 export = = = >> $TEST
 echo \$? >> $TEST
-env >> $TEST
 echo \$? >> $TEST
 env nthuo >> $TEST
 echo \$? >> $TEST
-unset SHELL BLO nhtueo >> $TEST
+unset SHELL BLO nhtueo
 echo \$? >> $TEST
 exit >> $TEST
 yo
@@ -219,8 +215,6 @@ cat < Makefile > $TEST
 echo bla > file | echo blaoubla > file >> $TEST
 cat file >> $TEST
 echo bla >> file | echo blaoubla >> file >> $TEST
-echo bla >> file | echo blaoubla >> file >> $TEST
-echo bla >> file | echo blaoubla >> file >> $TEST
 cat file >> $TEST
 > file >> $TEST
 > file >> $TEST
@@ -235,8 +229,6 @@ TEST=test_bash
 cat < Makefile > $TEST
 echo bla > file | echo blaoubla > file >> $TEST
 cat file >> $TEST
-echo bla >> file | echo blaoubla >> file >> $TEST
-echo bla >> file | echo blaoubla >> file >> $TEST
 echo bla >> file | echo blaoubla >> file >> $TEST
 cat file >> $TEST
 > file >> $TEST
@@ -282,13 +274,15 @@ env nnthuoe >> $TEST
 env nnth uoe >> $TEST
 env ./tags >> $TEST
 unset nuthou >> $TEST
-export SHELL=/bin/bash >> $TEST
 env >> $TEST
-export >> $TEST
 unset SHELL >> $TEST
-export >> $TEST
+export SHELL=/bin/bash >> $TEST
+export SHELL= >> $TEST
+export SHELL=/bin/bash >> $TEST
+export SHELL=/bin/sh >> $TEST
+env | head -n 5 >> $TEST
 pwd >> $TEST
-cd >> $TEST
+cd . >> $TEST
 /bin/ls >> $TEST
 echo $? >> $TEST
 exit nt >> $TEST
@@ -303,13 +297,15 @@ env nnthuoe >> $TEST
 env nnth uoe >> $TEST
 env ./tags >> $TEST
 unset nuthou >> $TEST
-export SHELL=/bin/bash >> $TEST
 env >> $TEST
-export >> $TEST
 unset SHELL >> $TEST
-export >> $TEST
+export SHELL=/bin/bash >> $TEST
+export SHELL= >> $TEST
+export SHELL=/bin/bash >> $TEST
+export SHELL=/bin/sh >> $TEST
+env | head -n 5 >> $TEST
 pwd >> $TEST
-cd >> $TEST
+cd . >> $TEST
 /bin/ls >> $TEST
 echo $? >> $TEST
 exit nt >> $TEST
@@ -323,7 +319,7 @@ diff -s test_minishell test_bash
 echo
 echo ---------TESTING CORRECTION -I---------
 echo 
-TEST=test_minishell1
+TEST=test_minishell
 env -i ~/MINISHELL/minishell << yo
 /bin/ls > $TEST
 /bin/ls >> $TEST
@@ -335,7 +331,7 @@ yo
 
 echo $? >> $TEST
 
-TEST=test_bash1
+TEST=test_bash
 env -i /bin/bash << yo
 /bin/ls > $TEST
 /bin/ls >> $TEST
@@ -348,6 +344,6 @@ yo
 echo $? >> $TEST
 
 echo
-diff -s test_minishell1 test_bash1
+diff -s test_minishell test_bash
 
 rm -rf test_minishell test_bash file

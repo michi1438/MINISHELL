@@ -6,7 +6,7 @@
 #    By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/20 20:55:12 by mguerga           #+#    #+#              #
-#    Updated: 2023/06/06 11:53:51 by mguerga          ###   ########.fr        #
+#    Updated: 2023/06/06 14:53:05 by mguerga          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,11 +20,11 @@ CFLAGS = -Werror -Wall -Wextra -I$(RL)/include -I. -g3 #-fsanitize=leak #\
 SRC_MINISH = mini_main.c ppx_checks.c ppx_free.c ppx_main.c ppx_utils.c\
 			mini_gc.c mini_sig_n_attr.c mini_utils.c mini_tokenable.c \
 			mini_not_tokenable.c mini_errors.c mini_expand.c For_testing_only.c \
-			mini_tok_to_pipes.c mini_builtins.c mini_mod_split.c mini_redir.c \
+			mini_append_or_start.c mini_builtins.c mini_mod_split.c mini_redir.c \
 			mini_prefork_builtin.c mini_prefork_unset.c mini_prefork_export.c \
 			mini_redir_cmds.c mini_builtins_echo.c mini_expand_size.c \
 		   	mini_init.c mini_wraps.c mini_sa_handlers.c mini_utils_env.c \
-			mini_utils_lst.c
+			mini_utils_lst.c ppx_init.c mini_init_add_cmds.c
 
 AR = ar rcs
 

@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/06 11:48:57 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/06 14:59:39 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ int			deal_with_spaces(t_minish *minish, int i);
 int			ft_heredoc(t_pipex *ppx, int i);
 int			redir_quotes(int i, char *line);
 void		redir_fill(t_minish *minish, int type, char *res, int i);
-void		redondant_op(char *op, char *res);
+void		redondant_op(char **op, int i, char *res);
 int			deal_with_redir(t_minish *minish, int type, int i);
 
 // MINI_REDIR_CMDS.C
@@ -167,6 +167,8 @@ int			is_all_space(char *str);
 int			init_cmds(t_minish *minish);
 void		impl_cmds(char *str, int i, t_minish *minish, char *delim);
 void		add_cmds(t_minish *minish);
+void		add_redirs(t_content *cont, t_minish *minish, int i);
+void		words_concat(t_content *cont, t_minish *minish, int i);
 void		append_or_start(t_minish *minish, char *strseg, char *delim, int i);
 void		append(t_minish *minish, char *strseg, char *delim, int i);
 
@@ -239,10 +241,16 @@ void		ft_dup(int in, int out);
 int			ft_stralnum(char *str);
 
 //ppx_main.c
-int			main_pipe(t_minish *minish, t_pipex *ppx);
 void		ft_looppid(t_pipex *ppx, t_minish *minish, int idx);
 int			ft_feedppx(t_pipex *ppx, char **av, char **env);
+int			feed_err(char **av, t_pipex *ppx, char **env, int *i);
+int			main_pipe(t_minish *minish, t_pipex *ppx);
+
+//ppx_init.c
 int			ft_initppx(t_pipex *ppx, t_minish *minish);
+int			ft_initppx_p2(t_pipex *ppx, t_minish *minish);
+int			ft_initppx_io(t_pipex *ppx);
+int			init_f_out(t_pipex *ppx, int i);
 
 //RL respecified proto for norminette 
 //(not actually used because of the -I in Makefile CFLAGS)

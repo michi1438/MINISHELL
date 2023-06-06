@@ -6,13 +6,13 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 20:21:48 by lzito             #+#    #+#             */
-/*   Updated: 2023/05/31 14:16:42 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/06 11:59:53 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char		*ft_checkexe(char **paths, char *cmd)
+char	*ft_checkexe(char **paths, char *cmd)
 {
 	int		i;
 	char	*newpath;
@@ -62,7 +62,7 @@ char	**ft_checkenv(char *env[])
 	return (paths);
 }
 
-char		*ft_checkpath(char *env[], char *cmd)
+char	*ft_checkpath(char *env[], char *cmd)
 {
 	char	**paths;
 	char	*fullpath;
