@@ -4,7 +4,7 @@ make -C ~/MINISHELL/
 echo
 echo ---------TESTING ECHO--------
 echo
-TEST=test_minishell
+TEST=.test_minishell
 ~/MINISHELL/minishell << yo
 echo bla > $TEST 
 echo bla bla >> $TEST  
@@ -36,7 +36,7 @@ exit >> $TEST
 yo
 
 
-TEST=test_bash
+TEST=.test_bash
 /bin/bash << yo
 echo bla > $TEST 
 echo bla bla >> $TEST  
@@ -68,12 +68,12 @@ exit >> $TEST
 yo
 
 echo
-diff -s test_minishell test_bash
+diff -s .test_minishell .test_bash
 
 echo
 echo ---------TESTING OTHER BUILTIN--------
 echo 
-TEST=test_minishell
+TEST=.test_minishell
 ~/MINISHELL/minishell << yo
 echo BLABLA > $TEST
 echo \$? 0 >> $TEST
@@ -100,12 +100,13 @@ echo \$? >> $TEST
 env nthuo >> $TEST
 echo \$? >> $TEST
 unset SHELL BLO nhtueo
+env | head -n 5 >> $TEST
 echo \$? >> $TEST
 exit >> $TEST
 yo
 
 
-TEST=test_bash
+TEST=.test_bash
 /bin/bash << yo
 echo BLABLA > $TEST
 echo \$? 0 >> $TEST
@@ -132,17 +133,18 @@ echo \$? >> $TEST
 env nthuo >> $TEST
 echo \$? >> $TEST
 unset SHELL BLO nhtueo
+env | head -n 5 >> $TEST
 echo \$? >> $TEST
 exit >> $TEST
 yo
 
 echo
-diff -s test_minishell test_bash
+diff -s .test_minishell .test_bash
 
 echo
 echo ---------TESTING PIPES--------
 echo 
-TEST=test_minishell
+TEST=.test_minishell
 ~/MINISHELL/minishell << yo
 echo bla | wc > $TEST 
 echo blanetuoh | wc -c >> $TEST  
@@ -153,7 +155,7 @@ exit >> $TEST
 yo
 
 
-TEST=test_bash
+TEST=.test_bash
 /bin/bash << yo
 echo bla | wc > $TEST 
 echo blanetuoh | wc -c >> $TEST  
@@ -164,12 +166,12 @@ exit >> $TEST
 yo
 
 echo
-diff -s test_minishell test_bash
+diff -s .test_minishell .test_bash
 
 echo
 echo ---------TESTING EXIT STATUS--------
 echo
-TEST=test_minishell
+TEST=.test_minishell
 ~/MINISHELL/minishell << yo
 echo \$? > $TEST
 echo bla >>	$TEST
@@ -186,7 +188,7 @@ yo
 
 echo $? >> $TEST
 
-TEST=test_bash
+TEST=.test_bash
 /bin/bash << yo
 echo \$? > $TEST
 echo bla >>	$TEST
@@ -204,12 +206,12 @@ yo
 echo $? >> $TEST
 
 echo
-diff -s test_minishell test_bash
+diff -s .test_minishell .test_bash
 
 echo
 echo ---------TESTING REDIR---------
 echo 
-TEST=test_minishell
+TEST=.test_minishell
 ~/MINISHELL/minishell << yo
 cat < Makefile > $TEST
 echo bla > file | echo blaoubla > file >> $TEST
@@ -224,7 +226,7 @@ yo
 
 echo $? >> $TEST
 
-TEST=test_bash
+TEST=.test_bash
 /bin/bash << yo
 cat < Makefile > $TEST
 echo bla > file | echo blaoubla > file >> $TEST
@@ -240,12 +242,12 @@ yo
 echo $? >> $TEST
 
 echo
-diff -s test_minishell test_bash
+diff -s .test_minishell .test_bash
 
 echo
 echo ---------TESTING MISC---------
 echo 
-TEST=test_minishell
+TEST=.test_minishell
 ~/MINISHELL/minishell << yo
 cat | cat | ls > $TEST
 exit nt >> $TEST
@@ -253,7 +255,7 @@ yo
 
 echo $? >> $TEST
 
-TEST=test_bash
+TEST=.test_bash
 /bin/bash << yo
 cat | cat | ls > $TEST
 exit nt >> $TEST
@@ -262,12 +264,12 @@ yo
 echo $? >> $TEST
 
 echo
-diff -s test_minishell test_bash
+diff -s .test_minishell .test_bash
 
 echo
 echo ---------TESTING ENV -I---------
 echo 
-TEST=test_minishell
+TEST=.test_minishell
 env -i ~/MINISHELL/minishell << yo
 env > $TEST
 env nnthuoe >> $TEST
@@ -290,7 +292,7 @@ yo
 
 echo $? >> $TEST
 
-TEST=test_bash
+TEST=.test_bash
 env -i /bin/bash << yo
 env > $TEST
 env nnthuoe >> $TEST
@@ -314,29 +316,29 @@ yo
 echo $? >> $TEST
 
 echo
-diff -s test_minishell test_bash
+diff -s .test_minishell .test_bash
 
 echo
 echo ---------TESTING CORRECTION -I---------
 echo 
-TEST=test_minishell
+TEST=.test_minishell
 env -i ~/MINISHELL/minishell << yo
 /bin/ls > $TEST
 /bin/ls >> $TEST
 /bin/ls -a >> $TEST
-/bin/ls -la >> $TEST
+/bin/ls -l >> $TEST
 /bin/who >> $TEST
 exit nt >> $TEST
 yo
 
 echo $? >> $TEST
 
-TEST=test_bash
+TEST=.test_bash
 env -i /bin/bash << yo
 /bin/ls > $TEST
 /bin/ls >> $TEST
 /bin/ls -a >> $TEST
-/bin/ls -la >> $TEST
+/bin/ls -l >> $TEST
 /bin/who >> $TEST
 exit nt >> $TEST
 yo
@@ -344,6 +346,6 @@ yo
 echo $? >> $TEST
 
 echo
-diff -s test_minishell test_bash
+diff -s .test_minishell .test_bash
 
-rm -rf test_minishell test_bash file
+rm -rf .test_minishell .test_bash file

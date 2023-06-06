@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 11:51:57 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/06 11:52:40 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/06 16:36:26 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ char	**ft_copy_env(char *env[])
 			cpy_env[i] = ft_strdup(env[i]);
 		i++;
 	}
+	if (flg != 1)
+		cpy_env[i++] = ft_strdup("SHLVL=1");
 	cpy_env[i] = NULL;
 	return (cpy_env);
 }
