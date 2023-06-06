@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:44:21 by lzito             #+#    #+#             */
-/*   Updated: 2023/06/04 19:43:28 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/06 10:46:57 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,35 @@ void	redir_fill(t_minish *minish, int type, char *res, int i)
 		}
 	}
 }
+/*
+void	redir_fill(t_minish *minish, int type, char *res, int i)
+{
+	if (type == APP_OUT || type == REDIR_OUT)
+	{
+		redondant_op(minish->ppx.fileout[i], res);
+		if (type == APP_OUT)
+			minish->ppx.app_on[i] = 1;
+	}
+	else if (type == HERE_DOC)
+	{
+		minish->ppx.hd_on[i] = 1;
+		redondant_op(minish->ppx.limiter[i], res);
+	}
+	else
+		redondant_op(minish->ppx.filein[i], res);
+}
+
+void	redondant_op(char *op, char *res)
+{
+	if (op == NULL)
+		op = res;
+	else
+	{
+		free(op);
+		op = res;
+	}
+}
+*/
 
 int	deal_with_redir(t_minish *minish, int type, int i)
 {

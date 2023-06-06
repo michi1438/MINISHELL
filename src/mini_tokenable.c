@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 16:58:36 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/03 21:46:50 by lzito            ###   ########.fr       */
+/*   Updated: 2023/06/06 11:49:43 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,19 +53,26 @@ int	search_quotes(t_minish *minish, int type, int i)
 		node->type = QUOTE;
 		c = '\'';
 	}		
-	i++;
-	while (line[i] != c)
+	if (no_other_quote(line, &i, c) == -1)
 	{
-		if (line[i] == '\0')
-		{
-			free(node);
-			return (-1);
-		}
-		i++;
+		free (node);
+		return (-1);
 	}
 	node->str = ft_substr(&line[j], 0, (i + 1) - j);
 	ft_lstadd_back(&minish->lst_line, ft_lstnew(node));
 	return (i);
+}
+
+int	no_other_quote(char *line, int *i, char c)
+{
+	(*i)++;
+	while (line[*i] != c)
+	{
+		if (line[*i] == '\0')
+			return (-1);
+		(*i)++;
+	}
+	return (0);
 }
 
 int	deal_with_pipes(t_minish *minish, int i)

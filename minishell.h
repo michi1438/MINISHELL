@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/05 18:39:37 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/06 11:48:57 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,10 +125,14 @@ int			builtin_exit(char **cmd);
 int			builtin_exit_err(char **cmd, int err_type);
 void		builtin_cd(char **cmd, t_minish *minish);
 
-// MINI_PREFORK_EXPORT_UNSET.C
+// MINI_PREFORK_EXPORT.C
 void		builtin_export(char **cmd, t_minish *minish);
 char		**new_env_maker(char **cmd, t_minish *minish, int j);
+char		**alloc_env(t_minish *minish, char *cmd, int *i, char *temp[2]);
+
+// MINI_PREFORK_UNSET.C
 char		**builtin_unset(char **cmd, t_minish *minish);
+int			testing_var(t_minish *minish, char **cmd, int *j);
 int			new_env_size(char **cmd, t_minish *minish);
 
 //FOR_TESTING_ONLY.C
@@ -137,6 +141,7 @@ void		print_lst_line(t_minish minish);
 // MINI_TOKENABLE.C
 int			is_tokenable(t_minish *minish, int i, const char *tok[]);
 int			search_quotes(t_minish *minish, int type, int i);
+int			no_other_quote(char *line, int *i, char c);
 int			deal_with_pipes(t_minish *minish, int i);
 int			deal_with_spaces(t_minish *minish, int i);
 
@@ -144,6 +149,7 @@ int			deal_with_spaces(t_minish *minish, int i);
 int			ft_heredoc(t_pipex *ppx, int i);
 int			redir_quotes(int i, char *line);
 void		redir_fill(t_minish *minish, int type, char *res, int i);
+void		redondant_op(char *op, char *res);
 int			deal_with_redir(t_minish *minish, int type, int i);
 
 // MINI_REDIR_CMDS.C
@@ -159,8 +165,10 @@ int			is_all_space(char *str);
 
 // MINI_TOK_TO_PIPES.C
 int			init_cmds(t_minish *minish);
+void		impl_cmds(char *str, int i, t_minish *minish, char *delim);
 void		add_cmds(t_minish *minish);
-void		append_or_start(t_minish *minish, char *strseg, char *tok_delimiter, int i);
+void		append_or_start(t_minish *minish, char *strseg, char *delim, int i);
+void		append(t_minish *minish, char *strseg, char *delim, int i);
 
 // MINI_EXPAND.C
 char		*expand_variables(char *dblquote, t_minish *minish);
@@ -203,6 +211,8 @@ char		*w_itoa_rm(char *var);
 void		ft_signals_n_attr(int toggle);
 void		set_act_int(struct sigaction *act_int, int toggle);
 void		set_act_quit(struct sigaction *act_quit, int toggle);
+
+// MINI_SA_HANDLER.C
 void		no_re_prompt_bs(int useless);
 void		no_re_prompt(int useless);
 void		re_prompt(int useless);

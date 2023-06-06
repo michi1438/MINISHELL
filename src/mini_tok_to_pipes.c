@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 18:33:23 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/05 14:38:15 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/06 11:41:27 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,11 @@ void	add_cmds(t_minish *minish)
 	}
 }
 
-void	append_or_start(t_minish *minish, char *strseg, char *tok_delimiter, int i)
+void	append_or_start(t_minish *minish, char *strseg, char *delim, int i)
 {
-	char	*temp;
-
 	if (minish->cmds[i] == NULL)
 	{
-		if (tok_delimiter == NULL)
+		if (delim == NULL)
 		{
 			if (is_all_space(strseg) == 0)
 				minish->cmds[i] = ft_strdup(" ");
@@ -87,22 +85,27 @@ void	append_or_start(t_minish *minish, char *strseg, char *tok_delimiter, int i)
 				minish->cmds[i] = ft_strdup(strseg);
 		}
 		else
-			minish->cmds[i] = ft_strtrim(strseg, tok_delimiter);
+			minish->cmds[i] = ft_strtrim(strseg, delim);
+	}
+	else
+		append(minish, strseg, delim, i);
+}
+
+void	append(t_minish *minish, char *strseg, char *delim, int i)
+{
+	char	*temp;
+
+	if (delim == NULL)
+	{
+		if (is_all_space(strseg) == 0)
+			minish->cmds[i] = w_strjoin_rm_arg1(minish->cmds[i], " ");
+		else
+			minish->cmds[i] = w_strjoin_rm_arg1(minish->cmds[i], strseg);
 	}
 	else
 	{
-		if (tok_delimiter == NULL)
-		{
-			if (is_all_space(strseg) == 0)
-				minish->cmds[i] = w_strjoin_rm_arg1(minish->cmds[i], " ");
-			else
-				minish->cmds[i] = w_strjoin_rm_arg1(minish->cmds[i], strseg);
-		}
-		else
-		{
-			temp = ft_strtrim(strseg, tok_delimiter);
-			minish->cmds[i] = w_strjoin_rm_arg1(minish->cmds[i], temp);
-			free(temp);
-		}
+		temp = ft_strtrim(strseg, delim);
+		minish->cmds[i] = w_strjoin_rm_arg1(minish->cmds[i], temp);
+		free(temp);
 	}
 }

@@ -323,39 +323,31 @@ diff -s test_minishell test_bash
 echo
 echo ---------TESTING CORRECTION -I---------
 echo 
-TEST=test_minishell
+TEST=test_minishell1
 env -i ~/MINISHELL/minishell << yo
 /bin/ls > $TEST
-/bin/cat * >> $TEST
-			>> $TEST
-ls >> $TEST
+/bin/ls >> $TEST
+/bin/ls -a >> $TEST
+/bin/ls -la >> $TEST
+/bin/who >> $TEST
 exit nt >> $TEST
 yo
 
 echo $? >> $TEST
 
-TEST=test_bash
+TEST=test_bash1
 env -i /bin/bash << yo
-env > $TEST
-env nnthuoe >> $TEST
-env nnth uoe >> $TEST
-env ./tags >> $TEST
-unset nuthou >> $TEST
-export SHELL=/bin/bash >> $TEST
-env >> $TEST
-export >> $TEST
-unset SHELL >> $TEST
-export >> $TEST
-pwd >> $TEST
-cd >> $TEST
+/bin/ls > $TEST
 /bin/ls >> $TEST
-echo $? >> $TEST
+/bin/ls -a >> $TEST
+/bin/ls -la >> $TEST
+/bin/who >> $TEST
 exit nt >> $TEST
 yo
 
 echo $? >> $TEST
 
 echo
-diff -s test_minishell test_bash
+diff -s test_minishell1 test_bash1
 
 rm -rf test_minishell test_bash file
