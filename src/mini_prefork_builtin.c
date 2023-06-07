@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:46:16 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/07 16:51:26 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/07 18:30:41 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ int	builtin_exit(char **cmd)
 	i = 0;
 	if (cmd[1] != NULL)
 	{
-		if (cmd[2] != NULL)
-			return (builtin_exit_err(cmd, 1));
 		while (cmd[1][i] != '\0')
 		{
 			if (!(ft_isdigit(cmd[1][i++])))
 				return (builtin_exit_err(cmd, 2));
 		}
+		if (cmd[2] != NULL)
+			return (builtin_exit_err(cmd, 1));
 		printf("exit\n");
 		exit (ft_atoi(cmd[1]));
 	}
@@ -66,12 +66,12 @@ int	builtin_exit_err(char **cmd, int err_type)
 	if (err_type == 1)
 	{
 		printf("%s: too many arguments\n", cmd[0]);
-		return (1);
+		exit (1);
 	}
 	else if (err_type == 2)
 	{
 		printf("%s: numeric argument required\n", cmd[1]);
-		exit (2);
+		exit (255);
 	}
 	return (0);
 }
