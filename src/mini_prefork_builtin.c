@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:46:16 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/07 18:30:41 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/07 18:40:00 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	builtin_exit(char **cmd)
 	i = 0;
 	if (cmd[1] != NULL)
 	{
+		printf("exit\n");
 		while (cmd[1][i] != '\0')
 		{
 			if (!(ft_isdigit(cmd[1][i++])))
@@ -51,7 +52,6 @@ int	builtin_exit(char **cmd)
 		}
 		if (cmd[2] != NULL)
 			return (builtin_exit_err(cmd, 1));
-		printf("exit\n");
 		exit (ft_atoi(cmd[1]));
 	}
 	else
