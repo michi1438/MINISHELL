@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 13:21:55 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/05 14:15:25 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/07 15:51:01 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	**ft_mod_split(char const *s, char c)
 	int		i[1];
 
 	i[0] = 0;
-	ptrptr = malloc((mini_counter(s, c) + 1) * sizeof(ptrptr));
+	ptrptr = w_malloc_protect((mini_counter(s, c) + 1) * sizeof(ptrptr));
 	if (ptrptr == NULL)
 		return (NULL);
 	j = 0;
@@ -57,7 +57,7 @@ void	*mini_implfing(char const *s, char c, char **ptrptr, int *i)
 	buf = 0;
 	space = 0;
 	count_spaces_n_buf(s, i, &buf, &space);
-	*ptrptr = malloc((buf + 1) * sizeof(char));
+	*ptrptr = w_malloc_protect((buf + 1) * sizeof(char));
 	if (*ptrptr == NULL)
 		return (NULL);
 	i[0] -= buf + space;

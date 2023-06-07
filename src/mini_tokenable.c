@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 16:58:36 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/06 11:49:43 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/07 15:55:58 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,7 @@ int	search_quotes(t_minish *minish, int type, int i)
 	char		*line;
 	t_content	*node;
 
-	//TODO MALLOC A PROTEGER !!!
-	node = malloc(sizeof(struct s_content));
+	node = w_malloc_protect(sizeof(struct s_content));
 	line = minish->line;
 	j = i;
 	c = '"';
@@ -81,8 +80,7 @@ int	deal_with_pipes(t_minish *minish, int i)
 	char		*line;
 	t_content	*node;
 
-	//TODO MALLOC A PROTEGER !!!
-	node = malloc(sizeof(struct s_content));
+	node = w_malloc_protect(sizeof(struct s_content));
 	line = minish->line;
 	j = i;
 	minish->ppx.n_cmd++;
@@ -98,8 +96,7 @@ int	deal_with_spaces(t_minish *minish, int i)
 	char		*line;
 	t_content	*node;
 
-	//TODO MALLOC A PROTEGER !!!
-	node = malloc(sizeof(struct s_content));
+	node = w_malloc_protect(sizeof(struct s_content));
 	line = minish->line;
 	j = i;
 	node->str = ft_substr(&line[j], 0, (i + 1) - j);

@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 11:51:57 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/06 16:36:26 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/07 16:06:27 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ char	**ft_copy_env(char *env[])
 	i = 0;
 	while (env[i])
 		i++;
-	cpy_env = malloc((i + 2) * sizeof(char *));
+	cpy_env = w_malloc_protect((i + 2) * sizeof(char *));
 	if (cpy_env == NULL)
 		return (NULL);
-	i = 0;
-	while (env[i])
+	i = -1;
+	while (env[++i])
 	{
 		if (ft_strncmp(env[i], "SHLVL=", 6) == 0 && flg == 0)
 		{
@@ -34,7 +34,6 @@ char	**ft_copy_env(char *env[])
 		}
 		else
 			cpy_env[i] = ft_strdup(env[i]);
-		i++;
 	}
 	if (flg != 1)
 		cpy_env[i++] = ft_strdup("SHLVL=1");

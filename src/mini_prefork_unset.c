@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 10:11:26 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/06 10:12:55 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/07 15:54:13 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ char	**builtin_unset(char **cmd, t_minish *minish)
 	int		e;
 	char	**new_env;
 
-	//TODO MALLOC A SUIVRE ET PROTEGER !!!
-	new_env = ft_calloc(new_env_size(cmd, minish), sizeof(char *));
+	new_env = w_ft_calloc_prot(new_env_size(cmd, minish), sizeof(char *));
 	if (!new_env)
 		return (NULL);
 	e = 0;

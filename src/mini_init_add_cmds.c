@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 14:49:04 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/06 14:51:10 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/07 16:02:30 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	init_cmds(t_minish *minish)
 {
-	//TODO MALLOC A PROTEGER !!!
 	minish->cmds = gc_malloc(minish->ppx.n_cmd * sizeof(char *));
 	minish->ppx.limiter = gc_malloc(minish->ppx.n_cmd * sizeof(char *));
 	minish->ppx.hd_on = gc_malloc(minish->ppx.n_cmd * sizeof(int));

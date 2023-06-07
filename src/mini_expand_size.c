@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/05 13:45:42 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/05 14:38:31 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/07 15:23:15 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	is_dol_end(char *quote, int j)
 			|| quote[j - 1] == '?') && quote[j - 2] == '$')
 		return (0);
 	if (quote[j] != ' ' && quote[j] != '\"' && quote[j] != '\0'
-		&& quote[j] != '$')
+		&& quote[j] != '$' && quote[j] != '\'')
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 20:27:56 by lzito             #+#    #+#             */
-/*   Updated: 2023/06/05 18:34:59 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/07 15:53:41 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ char	*expand_variables(char *quote, t_minish *minish)
 	char	*ret;
 
 	j = 0;
-	ret = ft_calloc(new_size(quote, minish) + 1, sizeof(char));
-	if (!ret)
-		return (NULL);
+	ret = w_ft_calloc_prot(new_size(quote, minish) + 1, sizeof(char));
 	while (quote[j] != '\0')
 	{
 		if (quote[j] == '$' && quote[0] != '\'')
@@ -107,8 +105,7 @@ char	*escape_spaces(char *ret)
 
 	j = 0;
 	i = 0;
-	//TODO MALLOC A PROTEGER !!!
-	newret = ft_calloc((escaped_size(ret) + 1), sizeof(char));
+	newret = w_ft_calloc_prot((escaped_size(ret) + 1), sizeof(char));
 	if (newret == NULL)
 		return (NULL);
 	while (ret[j] != '\0')

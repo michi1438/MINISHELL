@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 11:09:32 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/05 18:40:33 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/07 15:57:21 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	*gc_malloc(size_t size)
 {
 	void	*garb;
 
-	garb = ft_calloc(1, size);
+	garb = w_ft_calloc_prot(1, size);
 	ft_gc(garb, ADD);
 	return (garb);
 }

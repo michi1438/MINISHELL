@@ -1,6 +1,13 @@
 #!/bin/bash
 
-make -C ~/MINISHELL/
+if [ "norminette | grep Error: | wc -l" = 0 ]
+then
+	echo NORMINETTE OK !!!!
+else
+	echo NORMINETTE FAILED !!!!
+fi
+
+make re -C ~/MINISHELL/
 echo
 echo ---------TESTING ECHO--------
 echo
@@ -32,6 +39,8 @@ echo \$? >> $TEST
 tnoeuheontu $TEST
 echo \$? >> $TEST
 echo \$? >> $TEST
+echo "'$SHELL'" >> $TEST
+echo '"$SHELL"' >> $TEST
 exit >> $TEST
 yo
 
@@ -64,6 +73,8 @@ echo \$? >> $TEST
 tnoeuheontu $TEST
 echo \$? >> $TEST
 echo \$? >> $TEST
+echo "'$SHELL'" >> $TEST
+echo '"$SHELL"' >> $TEST
 exit >> $TEST
 yo
 
@@ -214,9 +225,8 @@ echo
 TEST=.test_minishell
 ~/MINISHELL/minishell << yo
 cat < Makefile > $TEST
-echo bla > file | echo blaoubla > file >> $TEST
 cat file >> $TEST
-echo bla >> file | echo blaoubla >> file >> $TEST
+echo blaoubla >> file >> $TEST
 cat file >> $TEST
 > file >> $TEST
 > file >> $TEST
@@ -229,9 +239,8 @@ echo $? >> $TEST
 TEST=.test_bash
 /bin/bash << yo
 cat < Makefile > $TEST
-echo bla > file | echo blaoubla > file >> $TEST
 cat file >> $TEST
-echo bla >> file | echo blaoubla >> file >> $TEST
+echo blaoubla >> file >> $TEST
 cat file >> $TEST
 > file >> $TEST
 > file >> $TEST

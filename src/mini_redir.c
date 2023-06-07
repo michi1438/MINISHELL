@@ -6,7 +6,7 @@
 /*   By: lzito <lzito@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:44:21 by lzito             #+#    #+#             */
-/*   Updated: 2023/06/06 15:01:27 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/07 15:54:47 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,7 @@ int	deal_with_redir(t_minish *minish, int type, int i)
 	char		*line;
 	t_content	*node;
 
-	//TODO MALLOC A PROTEGER !!!
-	node = malloc(sizeof(struct s_content));
+	node = w_malloc_protect(sizeof(struct s_content));
 	line = minish->line;
 	node->type = type;
 	while (line[i] == ' ' || line[i] == '<' || line[i] == '>')

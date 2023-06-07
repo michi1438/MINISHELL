@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/06 14:59:39 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/07 15:53:03 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,14 +163,15 @@ int			is_not_tokenable(t_minish *minish, int i, const char *tok[]);
 int			not_token_size(t_minish *minish, int i, const char *tok[]);
 int			is_all_space(char *str);
 
-// MINI_TOK_TO_PIPES.C
+// MINI_APPEND_OR_START.C
+void		append_or_start(t_minish *minish, char *strseg, char *delim, int i);
+void		append(t_minish *minish, char *strseg, char *delim, int i);
+
+// MINI_INIT_ADD_CMDS.C
 int			init_cmds(t_minish *minish);
-void		impl_cmds(char *str, int i, t_minish *minish, char *delim);
 void		add_cmds(t_minish *minish);
 void		add_redirs(t_content *cont, t_minish *minish, int i);
 void		words_concat(t_content *cont, t_minish *minish, int i);
-void		append_or_start(t_minish *minish, char *strseg, char *delim, int i);
-void		append(t_minish *minish, char *strseg, char *delim, int i);
 
 // MINI_EXPAND.C
 char		*expand_variables(char *dblquote, t_minish *minish);
@@ -208,6 +209,8 @@ void		free_double(char **env);
 // MINI_WRAPS.C
 char		*w_strjoin_rm_arg1(char *s1, char *s2);
 char		*w_itoa_rm(char *var);
+void		*w_malloc_protect(size_t size);
+void		*w_ft_calloc_prot(int nmemb, size_t size);
 
 // MINI_SIG_N_ATTR.C
 void		ft_signals_n_attr(int toggle);

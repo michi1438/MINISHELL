@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 13:27:08 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/06 13:33:53 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/07 17:18:24 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ int	ft_initppx(t_pipex *ppx, t_minish *minish)
 {
 	int	ret;
 
+	ppx->fd = ft_calloc(ppx->n_cmd, sizeof(int *));
+	if (ppx->fd == NULL)
+		return (ft_error(minish->cmds[0], -1));
 	ppx->pid = ft_calloc(ppx->n_cmd, sizeof(int));
 	if (ppx->pid == NULL)
 		return (ft_error(minish->cmds[0], -1));
@@ -63,9 +66,6 @@ int	ft_initppx(t_pipex *ppx, t_minish *minish)
 		return (ft_error(minish->cmds[0], -1));
 	ppx->path = ft_calloc(ppx->n_cmd, sizeof(char *));
 	if (ppx->path == NULL)
-		return (ft_error(minish->cmds[0], -1));
-	ppx->fd = ft_calloc(ppx->n_cmd, sizeof(int *));
-	if (ppx->fd == NULL)
 		return (ft_error(minish->cmds[0], -1));
 	ret = ft_initppx_p2(ppx, minish);
 	if (ret != 0)

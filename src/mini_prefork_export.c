@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 10:10:51 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/06 10:22:19 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/07 15:52:57 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,7 @@ char	**alloc_env(t_minish *minish, char *cmd, int *i, char *temp[2])
 	*i = -1;
 	temp[1] = check_env_var(minish->env, var_cpy);
 	if (temp[1] != NULL)
-	//TODO MALLOC A PROTEGER !!!
-		return (ft_calloc(num_of_line(minish->env), sizeof(char *)));
+		return (w_ft_calloc_prot(num_of_line(minish->env), sizeof(char *)));
 	else
-	//TODO MALLOC A PROTEGER !!!
-		return (ft_calloc(num_of_line(minish->env) + 1, sizeof(char *)));
+		return (w_ft_calloc_prot(num_of_line(minish->env) + 1, sizeof(char *)));
 }

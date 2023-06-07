@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:29:12 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/06 13:46:48 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/07 16:03:14 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int	ft_feedppx(t_pipex *ppx, char **av, char **env)
 	i = 0;
 	while (i < ppx->n_cmd)
 	{
-		//TODO create a function for this HD part
 		if (ppx->hd_on[i] == 1)
 		{
 			ppx->fd_hd[i] = ft_calloc(2, sizeof(int));
