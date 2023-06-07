@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 15:29:12 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/07 16:03:14 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/07 17:34:27 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,7 @@ int	ft_feedppx(t_pipex *ppx, char **av, char **env)
 	{
 		if (ppx->hd_on[i] == 1)
 		{
-			ppx->fd_hd[i] = ft_calloc(2, sizeof(int));
-			if (ppx->fd_hd[i] == NULL)
-				return (ft_error(av[0], -1));
+			ppx->fd_hd[i] = w_ft_calloc_prot(2, sizeof(int));
 			if (pipe(ppx->fd_hd[i]) == -1)
 				ft_error(av[0], -3);
 			if (ft_heredoc(ppx, i) == -1)
@@ -72,9 +70,7 @@ int	feed_err(char **av, t_pipex *ppx, char **env, int *i)
 {
 	free(av[*i]);
 	ppx->path[*i] = ft_checkpath(env, ppx->cmd[*i][0]);
-	ppx->fd[*i] = ft_calloc(2, sizeof(int));
-	if (ppx->fd[*i] == NULL)
-		return (ft_error(av[0], -1));
+	ppx->fd[*i] = w_ft_calloc_prot(2, sizeof(int));
 	if (pipe(ppx->fd[*i]) == -1)
 		return (ft_error(av[0], -3));
 	(*i)++;

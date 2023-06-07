@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 20:58:25 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/07 15:53:03 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/07 17:36:07 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,7 +251,6 @@ int			main_pipe(t_minish *minish, t_pipex *ppx);
 
 //ppx_init.c
 int			ft_initppx(t_pipex *ppx, t_minish *minish);
-int			ft_initppx_p2(t_pipex *ppx, t_minish *minish);
 int			ft_initppx_io(t_pipex *ppx);
 int			init_f_out(t_pipex *ppx, int i);
 

@@ -6,7 +6,7 @@
 /*   By: mguerga <mguerga@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 13:27:08 by mguerga           #+#    #+#             */
-/*   Updated: 2023/06/07 17:18:24 by mguerga          ###   ########.fr       */
+/*   Updated: 2023/06/07 17:39:19 by mguerga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,37 +53,13 @@ int	init_f_out(t_pipex *ppx, int i)
 
 int	ft_initppx(t_pipex *ppx, t_minish *minish)
 {
-	int	ret;
-
-	ppx->fd = ft_calloc(ppx->n_cmd, sizeof(int *));
-	if (ppx->fd == NULL)
-		return (ft_error(minish->cmds[0], -1));
-	ppx->pid = ft_calloc(ppx->n_cmd, sizeof(int));
-	if (ppx->pid == NULL)
-		return (ft_error(minish->cmds[0], -1));
-	ppx->cmd = ft_calloc(ppx->n_cmd, sizeof(char **));
-	if (ppx->cmd == NULL)
-		return (ft_error(minish->cmds[0], -1));
-	ppx->path = ft_calloc(ppx->n_cmd, sizeof(char *));
-	if (ppx->path == NULL)
-		return (ft_error(minish->cmds[0], -1));
-	ret = ft_initppx_p2(ppx, minish);
-	if (ret != 0)
-		return (ret);
-	return (0);
-}
-
-int	ft_initppx_p2(t_pipex *ppx, t_minish *minish)
-{
-	ppx->fd_hd = ft_calloc(ppx->n_cmd, sizeof(int *));
-	if (ppx->fd_hd == NULL)
-		return (ft_error(minish->cmds[0], -1));
-	ppx->f_in = ft_calloc(ppx->n_cmd, sizeof(int));
-	if (ppx->f_in == NULL)
-		return (ft_error(minish->cmds[0], -1));
-	ppx->f_out = ft_calloc(ppx->n_cmd, sizeof(int));
-	if (ppx->f_out == NULL)
-		return (ft_error(minish->cmds[0], -1));
+	ppx->fd = w_ft_calloc_prot(ppx->n_cmd, sizeof(int *));
+	ppx->pid = w_ft_calloc_prot(ppx->n_cmd, sizeof(int));
+	ppx->cmd = w_ft_calloc_prot(ppx->n_cmd, sizeof(char **));
+	ppx->path = w_ft_calloc_prot(ppx->n_cmd, sizeof(char *));
+	ppx->fd_hd = w_ft_calloc_prot(ppx->n_cmd, sizeof(int *));
+	ppx->f_in = w_ft_calloc_prot(ppx->n_cmd, sizeof(int));
+	ppx->f_out = w_ft_calloc_prot(ppx->n_cmd, sizeof(int));
 	if (ft_initppx_io(ppx) == -1)
 		return (-1);
 	if (ft_feedppx(ppx, minish->cmds, minish->env) == -1)
